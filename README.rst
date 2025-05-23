@@ -1,32 +1,37 @@
-pyproject
+under development...
+
+pycards
 ===================
 
-A template for a python project that can be build into a package and published on Pypi. It follows this `tutorial <https://packaging.python.org/en/latest/tutorials/packaging-projects/>`_ for packaging python projects.
+GUI to play your favorite card game. The rules are not coded, but it allows to manipulate a deck of card, shuffle them, discover, destroy or lock single cards. You can import any set of cards.
+The idea is to reset a legacy card game, instead of buying a new one and you still keep the legacy part.
+
 
 Installation
 ============
 
 .. code-block:: bash
 
-    pip install pyproject
+    pip install pycards
 
 Usage
 =====
 
-
-This is an example:
-
-.. code-block:: python
-
-    import pyproject
-    pyproject.main()  # comments are usefull here
-
+.. code-block:: bash
+    pycards
 
 Features
 ========
 
-* this
-* and that...
+* import a set cards (image files, recto verso), as if you "buy" them
+* save/load a game
+* discover card from the deck
+* forget cards 
+* destroy cards
+* move cards on a table
+* rotate cards
+* shuffle
+* make permanent card (will no be shuffled)
 
 
 License
