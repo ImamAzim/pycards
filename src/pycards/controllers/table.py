@@ -1,4 +1,5 @@
 from pycards.models import Game
+from pycards.views import GUI
 
 
 class Table(object):
@@ -14,10 +15,12 @@ class Table(object):
     def game(self, value: Game | None):
         self._game = value
 
-    def __init__(self):
+    def __init__(self, gui: GUI):
         """TODO: Docstring for __init__.
 
         """
+
+        self._gui = gui
         self.game = None
 
     def new_game(self, name: str):
