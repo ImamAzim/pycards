@@ -10,7 +10,12 @@ class GUI(ABC):
         ABC.__init__(self)
 
     @abstractmethod
-    def add_card_on_table(self, card_name: str, img_path: str, pile: str, rotated=False: bool):
+    def add_card_on_table(
+            self,
+            card_name: str,
+            img_path: str,
+            pile: str = 'deck',
+            rotated: bool = False):
         """TODO: Docstring for add_card_on_table.
 
         :card_name: from file name withou recto or verso
@@ -34,6 +39,16 @@ class GUI(ABC):
         """update a single card, for example when image is rotated
 
         :card_name: identify card, which should have a object in the GUI
+
+        """
+        pass
+
+    @abstractmethod
+    def remove_card(self, card_name: str):
+        """remove card from table, because destroyed or forgotten
+
+        :card_name: identify the card
+        :returns:
 
         """
         pass
@@ -66,4 +81,3 @@ class TkinterGUI(GUI):
     def __init__(self):
         """TODO: to be defined. """
         GUI.__init__(self)
-
