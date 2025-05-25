@@ -5,6 +5,9 @@ test card models
 import unittest
 
 
+from pycards.models import Card
+
+
 class TestCard(unittest.TestCase):
 
     """all test concerning Card. """
