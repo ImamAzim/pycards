@@ -72,6 +72,15 @@ class Table(object):
         """
         pass
 
+    def forget_card(self, card_name: str):
+        """put back the card in box
+
+        :card_name: identify the card
+        :returns: TODO
+
+        """
+        pass
+
 
 if __name__ == '__main__':
     pass
