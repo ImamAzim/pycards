@@ -47,6 +47,15 @@ class Table(object):
         """
         pass
 
+    def discover_card(self, card_name: str):
+        """move the cards from box to deck
+
+        :card_name:
+        :returns:
+
+        """
+        pass
+
 
 if __name__ == '__main__':
     pass

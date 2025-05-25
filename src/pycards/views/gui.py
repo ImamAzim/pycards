@@ -10,6 +10,18 @@ class GUI(ABC):
         ABC.__init__(self)
 
     @abstractmethod
+    def add_card_on_table(self, card_name: str, img_path: str, pile: str, rotated=False: bool):
+        """TODO: Docstring for add_card_on_table.
+
+        :card_name: from file name withou recto or verso
+        :img_path: path to card image
+        :location: either 'deck' or 'discard'
+        :rotated: True if you want to rotate by 108 deg
+
+        """
+        pass
+
+    @abstractmethod
     def update_title(self, name: str):
         """put the name of the game on title of table
 
