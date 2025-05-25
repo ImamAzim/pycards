@@ -39,7 +39,8 @@ class Table(object):
         pass
 
     def import_cards(self, folder_path: str):
-        """import or buy cards. folder needs to contain for each card 2 img files, with names XXX_recto.jpg
+        """import or buy cards. folder needs to contain for each card 2 img
+        files, with names XXX_recto.jpg
         and XXX_verso.jpg
 
         :folder_path: contains the img file of the cards

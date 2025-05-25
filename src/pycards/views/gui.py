@@ -27,7 +27,7 @@ class GUI(ABC):
         pass
 
     @abstractmethod
-    def is_card_on_table(self, card_name: str): -> bool
+    def is_card_on_table(self, card_name: str) -> bool:
         """check if the card is present on the table
 
         :card_name: identify card
