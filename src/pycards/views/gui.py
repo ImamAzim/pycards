@@ -10,11 +10,18 @@ class GUI(ABC):
         ABC.__init__(self)
 
     @abstractmethod
-    def refresh(self, arg1):
-        """TODO: Docstring for refresh.
+    def update_title(self, name: str):
+        """put the name of the game on title of table
 
-        :arg1: TODO
-        :returns: TODO
+        :name: of the game
+        """
+        pass
+
+    @abstractmethod
+    def update_card_image(self, card_name: str):
+        """update a single card, for example when image is rotated
+
+        :card_name: identify card, which should have a object in the GUI
 
         """
         pass
