@@ -56,6 +56,15 @@ class Table(object):
         """
         pass
 
+    def destroy_card(self, card_name: str):
+        """remove from box or deck and rm img file
+
+        :card_name: identify card
+        :returns:
+
+        """
+        pass
+
 
 if __name__ == '__main__':
     pass

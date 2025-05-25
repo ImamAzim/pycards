@@ -27,6 +27,16 @@ class GUI(ABC):
         pass
 
     @abstractmethod
+    def is_card_on_table(self, card_name: str): -> bool
+        """check if the card is present on the table
+
+        :card_name: identify card
+        :returns: True if card is on table, else False
+
+        """
+        pass
+
+    @abstractmethod
     def update_title(self, name: str):
         """put the name of the game on title of table
 
