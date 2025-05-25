@@ -65,6 +65,13 @@ class Table(object):
         """
         pass
 
+    def rotate_card(self, direction: str = 'right'):
+        """flip or rotate card (progress)
+
+        :direction: either right or down
+        """
+        pass
+
 
 if __name__ == '__main__':
     pass
