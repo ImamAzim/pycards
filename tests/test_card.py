@@ -1,23 +1,20 @@
-#!/usr/bin/env python
-
-
 """
-test all the tools in...
+test card models
 """
 
-import os
 import unittest
 
 
-class TestMyClass(unittest.TestCase):
+class TestCard(unittest.TestCase):
 
-    """all test concerning my class. """
+    """all test concerning Card. """
 
     @classmethod
     def setUpClass(cls):
         pass
 
     pass
+
 
 """ script tests """
 
