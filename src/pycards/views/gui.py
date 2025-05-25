@@ -26,6 +26,26 @@ class GUI(ABC):
         """
         pass
 
+    @abstractmethod
+    def update_box_cards_list(self, card_names: list[str]):
+        """update the gui to show available cards in box
+
+        :card_names:
+        :returns:
+
+        """
+        pass
+
+    @abstractmethod
+    def update_deck_cards_list(self, card_names: list[str]):
+        """update the gui to show available cards in player's deck
+
+        :card_names:
+        :returns:
+
+        """
+        pass
+
 
 class TkinterGUI(GUI):
 
