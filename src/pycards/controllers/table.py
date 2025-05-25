@@ -81,6 +81,22 @@ class Table(object):
         """
         pass
 
+    def lock_card(self, card_name: str):
+        """lock a card, make it permanent. Will not be reshuffled in deck
+
+        :card_name: identify card
+        :returns: TODO
+
+        """
+        pass
+
+    def shuffle_deck(self):
+        """shuffle the cards that are not permanent and place them in the deck
+        :returns: TODO
+
+        """
+        pass
+
 
 if __name__ == '__main__':
     pass
