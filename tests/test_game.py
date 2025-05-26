@@ -14,9 +14,9 @@ from pycards.config import DATA_FOLDER
 
 RANDOM_FN_LENGH = 8
 
-class TestGame(unittest.TestCase):
+class TestGameHandler(unittest.TestCase):
 
-    """all test concerning Game. """
+    """all test concerning GameHandler. """
 
     @classmethod
     def setUpClass(cls):
@@ -28,7 +28,8 @@ class TestGame(unittest.TestCase):
         """check if instance of Game is created and present
 
         """
-        pass
+        self.game_handler.new_game(self.random_name)
+        self.assertIsNotNone(self.game_handler.game)
 
     @classmethod
     def tearDownClass(cls):
