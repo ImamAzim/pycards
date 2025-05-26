@@ -1,2 +1,2 @@
 from .card import Card
-from .game import Game
+from .game import Game, GameHandler

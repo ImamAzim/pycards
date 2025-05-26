@@ -3,9 +3,11 @@ test game models
 """
 
 import unittest
+import os
 
 
-from pycards.models import Game
+from pycards.models import Game,
+from pycards.config import DATA_FOLDER
 
 
 class TestGame(unittest.TestCase):
@@ -14,13 +16,14 @@ class TestGame(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.game = Game()
+        pass
 
     def test_init(self):
         """check if instance is created and a file is saved
 
         """
-        pass
+        files_before = os.listdir(DATA_FOLDER)
+        
 
 
 """ script tests """
