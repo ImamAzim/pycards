@@ -1,4 +1,3 @@
-
 """
 test game models
 """
@@ -16,6 +15,12 @@ class TestGame(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.game = Game()
+
+    def test_init(self):
+        """check if instance is created and a file is saved
+
+        """
+        pass
 
 
 """ script tests """
