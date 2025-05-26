@@ -2,9 +2,14 @@ class Game(object):
 
     """Game class to handle the deck and the cards box"""
 
-    def __init__(self):
+    @property
+    def name(self) -> str:
+        """doc"""
+        return self._name
+
+    def __init__(self, name: str):
         """TODO: to be defined. """
-        pass
+        self._name = name
 
     def function(self, arg1):
         """TODO: Docstring for function.
@@ -35,7 +40,7 @@ class GameHandler(object):
         :name: identify name
 
         """
-        pass
+        self._game = Game(name)
 
     def load_game(self, name: str):
         """load game and put it in attribute
