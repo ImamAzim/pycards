@@ -6,9 +6,11 @@ import unittest
 import os
 import random
 import string
+import shutil
 
 
 from pycards.models import Game, GameHandler
+from pycards.models.game import SAVED_GAME_FILE_SUFFIX
 from pycards.config import DATA_FOLDER
 
 
@@ -32,6 +34,24 @@ class TestGameHandler(unittest.TestCase):
         self.assertIsNotNone(self.game_handler.game)
         self.assertIsInstance(self.game_handler.game, Game)
 
+    def test_delete_game(self):
+        """create files and dir to delete it
+        :returns: TODO
+
+        """
+        name = f'{TESTNAME}_delete'
+        path = os.path.join(DATA_FOLDER, f'{name}.{SAVED_GAME_FILE_SUFFIX}')
+        open(path, 'w').close()
+        folder_path = os.path.join(DATA_FOLDER, name)
+        os.mkdir(folder_path)
+        sub_path = os.path.join(folder_path, 'test')
+        open(sub_path, 'w').close()
+
+        filenames = os.listdir(DATA_FOLDER)
+        for filename in filenames:
+            self.assertNotIn(name, filename)
+
+
     # def test_new_save(self):
         # """check if a file and a folder is created for the new game
 
@@ -44,7 +64,10 @@ class TestGameHandler(unittest.TestCase):
         for filename in files:
             if TESTNAME in filename:
                 path = os.path.join(DATA_FOLDER, filename)
-                os.remove(path)
+                if os.path.isfile(path):
+                    os.remove(path)
+                else:
+                    shutil.rmtree(path)
 
 
 """ script tests """
