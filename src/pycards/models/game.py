@@ -1,4 +1,5 @@
 import os
+import shutil
 
 
 from pycards.config import DATA_FOLDER
@@ -70,12 +71,9 @@ class GameHandler(object):
         if savefile in filenames:
             path = os.path.join(DATA_FOLDER, savefile)
             os.remove(path)
-        if name in filename:
+        if name in filenames:
             path = os.path.join(DATA_FOLDER, name)
-            for sub_fn in os.listdir(path):
-                subpath = os.path.join(path, sub_fn)
-                os.remove(subpath)
-            os.rmdir(path)
+            shutil.rmtree(path)
 
 
 if __name__ == '__main__':

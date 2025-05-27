@@ -47,6 +47,8 @@ class TestGameHandler(unittest.TestCase):
         sub_path = os.path.join(folder_path, 'test')
         open(sub_path, 'w').close()
 
+        self.game_handler.delete_game(name)
+
         filenames = os.listdir(DATA_FOLDER)
         for filename in filenames:
             self.assertNotIn(name, filename)
