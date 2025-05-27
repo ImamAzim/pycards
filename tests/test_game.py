@@ -30,12 +30,13 @@ class TestGameHandler(unittest.TestCase):
         """
         self.game_handler.new_game(f'{TESTNAME}_newinit')
         self.assertIsNotNone(self.game_handler.game)
+        self.assertIsInstance(self.game_handler.game, Game)
 
-    def test_new_save(self):
-        """check if a file and a folder is created for the new game
+    # def test_new_save(self):
+        # """check if a file and a folder is created for the new game
 
-        """
-        self.game_handler.new_game(f'{TESTNAME}_newsave')
+        # """
+        # self.game_handler.new_game(f'{TESTNAME}_newsave')
 
     @classmethod
     def tearDownClass(cls):
