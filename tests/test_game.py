@@ -4,8 +4,6 @@ test game models
 
 import unittest
 import os
-import random
-import string
 import shutil
 
 
@@ -15,9 +13,10 @@ from pycards.config import DATA_FOLDER
 
 
 TESTNAME = 'test_game'
-card_folder = os.path.dirname(__file__)
+CARD_FOLDER = 'cards'
+CARD_FOLDER_PATH = os.path.join(os.path.dirname(__file__), CARD_FOLDER)
 RECTO_CARD = 'carreau.png'
-VERSO_CARD = 'coeur.png'
+VERSO_CARD = 'pic.png'
 
 
 class TestGame(unittest.TestCase):
@@ -34,8 +33,8 @@ class TestGame(unittest.TestCase):
 
         """
         testname_import = f'{TESTNAME}_import'
-        recto = os.path.join(card_folder, RECTO_CARD)
-        verso = os.path.join(card_folder, VERSO_CARD)
+        recto = os.path.join(CARD_FOLDER_PATH, RECTO_CARD)
+        verso = os.path.join(CARD_FOLDER_PATH, VERSO_CARD)
         self.game.import_card(recto, verso, testname_import)
 
         path = os.path.join(DATA_FOLDER, TESTNAME)
@@ -87,7 +86,6 @@ class TestGameHandler(unittest.TestCase):
         filenames = os.listdir(DATA_FOLDER)
         for filename in filenames:
             self.assertNotIn(name, filename)
-
 
     # def test_new_save(self):
         # """check if a file and a folder is created for the new game

@@ -21,14 +21,32 @@ class Game(object):
         """TODO: to be defined. """
         self._name = name
 
-    def import_card(self, recto_path: str, verso_path: str, card_name: str = None):
+    def import_card(
+            self,
+            recto_path: str,
+            verso_path: str,
+            card_name: str = None,
+            ):
         """import a card and put it in the game folder.
 
         :recto_path: img file of recto
         :verso_path: img file of verso
         :card_name: if None take value of recto filename
         """
-        pass
+        "TODO: check file are images, new filename, new name"
+        filename, ext = os.path.splitext(recto_path)
+        if card_name is None:
+            card_name = os.path.basename(filename)
+        game_folder = os.path.join(DATA_FOLDER, self.name)
+        os.makedirs(game_folder, exist_ok=True)
+        recto_name = f'{card_name}_recto{ext}'
+        verso_name = f'{card_name}_verso{ext}'
+        src = recto_path
+        dst = os.path.join(game_folder, recto_name)
+        shutil.copy(src, dst)
+        src = verso_path
+        dst = os.path.join(game_folder, verso_name)
+        shutil.copy(src, dst)
 
 
 class GameHandler(object):
