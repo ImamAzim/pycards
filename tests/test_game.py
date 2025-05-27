@@ -15,6 +15,43 @@ from pycards.config import DATA_FOLDER
 
 
 TESTNAME = 'test_game'
+card_folder = os.path.dirname(__file__)
+RECTO_CARD = 'carreau.png'
+VERSO_CARD = 'coeur.png'
+
+
+class TestGame(unittest.TestCase):
+
+    """all test concerning Game. """
+
+    @classmethod
+    def setUpClass(cls):
+        cls.game = Game(TESTNAME)
+        cls.gamehandler = GameHandler()
+
+    def test_import(self):
+        """test if image file is imported
+
+        """
+        testname_import = f'{TESTNAME}_import'
+        recto = os.path.join(card_folder, RECTO_CARD)
+        verso = os.path.join(card_folder, VERSO_CARD)
+        self.game.import_card(recto, verso, testname_import)
+
+        path = os.path.join(DATA_FOLDER, TESTNAME)
+        try:
+            filenames = os.listdir(path)
+        except FileNotFoundError:
+            filenames = list()
+        suffix = RECTO_CARD.split('.')[-1]
+        card_name = f'{testname_import}_recto.{suffix}'
+        self.assertIn(card_name, filenames)
+        filenames = os.listdir(path)
+        suffix = VERSO_CARD.split('.')[-1]
+        card_name = f'{testname_import}_verso.{suffix}'
+        self.assertIn(card_name, filenames)
+        self.gamehandler.delete_game(TESTNAME)
+
 
 class TestGameHandler(unittest.TestCase):
 
@@ -23,8 +60,6 @@ class TestGameHandler(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.game_handler = GameHandler()
-        letters = string.ascii_lowercase
-        cls.random_name = ''.join(random.choice(letters) for i in letters)
 
     def test_new_init(self):
         """check if instance of Game is created and present

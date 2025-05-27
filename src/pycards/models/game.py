@@ -21,14 +21,14 @@ class Game(object):
         """TODO: to be defined. """
         self._name = name
 
-    def function(self, arg1):
-        """TODO: Docstring for function.
+    def import_card(self, recto_path: str, verso_path: str, card_name: str = None):
+        """import a card and put it in the game folder.
 
-        :arg1: TODO
-        :returns: TODO
-
+        :recto_path: img file of recto
+        :verso_path: img file of verso
+        :card_name: if None take value of recto filename
         """
-        self._arg = arg1
+        pass
 
 
 class GameHandler(object):
