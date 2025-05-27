@@ -9,8 +9,8 @@ import string
 import shutil
 
 
-from pycards.models import Game, GameHandler
-from pycards.models.game import SAVED_GAME_FILE_SUFFIX
+from pycards.game import Game, GameHandler
+from pycards.game import SAVED_GAME_FILE_SUFFIX
 from pycards.config import DATA_FOLDER
 
 

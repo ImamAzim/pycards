@@ -1,5 +1,5 @@
-from pycards.models import Game
-from pycards.views import GUI
+from pycards.game import Game
+from pycards.gui import GUI
 
 
 class Table(object):
