@@ -1,3 +1,12 @@
+import os
+
+
+from pycards.config import DATA_FOLDER
+
+
+SAVED_GAME_FILE_SUFFIX = 'json'
+
+
 class Game(object):
 
     """Game class to handle the deck and the cards box"""
@@ -56,7 +65,17 @@ class GameHandler(object):
         :name: same as it was saved
 
         """
-        pass
+        savefile = f'{name}.{SAVED_GAME_FILE_SUFFIX}'
+        filenames = os.listdir(DATA_FOLDER)
+        if savefile in filenames:
+            path = os.path.join(DATA_FOLDER, savefile)
+            os.remove(path)
+        if name in filename:
+            path = os.path.join(DATA_FOLDER, name)
+            for sub_fn in os.listdir(path):
+                subpath = os.path.join(path, sub_fn)
+                os.remove(subpath)
+            os.rmdir(path)
 
 
 if __name__ == '__main__':
