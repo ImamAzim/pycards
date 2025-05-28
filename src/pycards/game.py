@@ -6,6 +6,8 @@ from pycards.config import DATA_FOLDER
 
 
 SAVED_GAME_FILE_SUFFIX = 'json'
+BOX_FOLDER = 'box'
+DECK_FOLDER = 'deck'
 
 
 class Game(object):

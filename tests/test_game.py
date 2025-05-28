@@ -8,7 +8,7 @@ import shutil
 
 
 from pycards.game import Game, GameHandler
-from pycards.game import SAVED_GAME_FILE_SUFFIX
+from pycards.game import SAVED_GAME_FILE_SUFFIX, BOX_FOLDER, DECK_FOLDER
 from pycards.config import DATA_FOLDER
 
 
@@ -37,18 +37,15 @@ class TestGame(unittest.TestCase):
         verso = os.path.join(CARD_FOLDER_PATH, VERSO_CARD)
         self.game.import_card(recto, verso, testname_import)
 
-        path = os.path.join(DATA_FOLDER, TESTNAME)
-        try:
-            filenames = os.listdir(path)
-        except FileNotFoundError:
-            filenames = list()
+        folder = os.path.join(DATA_FOLDER, TESTNAME, BOX_FOLDER)
         suffix = RECTO_CARD.split('.')[-1]
         card_name = f'{testname_import}_recto.{suffix}'
-        self.assertIn(card_name, filenames)
-        filenames = os.listdir(path)
+        path = os.path.join(folder, card_name)
+        self.assertTrue(os.path.exists(path))
         suffix = VERSO_CARD.split('.')[-1]
         card_name = f'{testname_import}_verso.{suffix}'
-        self.assertIn(card_name, filenames)
+        path = os.path.join(folder, card_name)
+        self.assertTrue(os.path.exists(path))
         self.gamehandler.delete_game(TESTNAME)
 
 
