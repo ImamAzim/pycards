@@ -57,6 +57,9 @@ class TestGame(unittest.TestCase):
         card_name = f'{testname_import}_verso.{suffix}'
         path = os.path.join(folder, card_name)
         self.assertTrue(os.path.exists(path))
+
+        self.assertIn(testname_import, game.box_card_names)
+
         self.gamehandler.delete_game(TESTNAME)
 
     def test_import_error(self):
