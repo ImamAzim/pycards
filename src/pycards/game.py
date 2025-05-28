@@ -49,11 +49,11 @@ class Card(object):
 
         """
         self._name = name
-        if (orientation==0) | (orientation==1):
+        if (orientation == 0) | (orientation == 1):
             self._path = path_recto
         else:
             self._path = path_verso
-        if (orientation==1) | (orientation==2):
+        if (orientation == 1) | (orientation == 2):
             self._rotate = True
         else:
             self._rotate = False
@@ -99,7 +99,6 @@ class Game(object):
         :verso_path: img file of verso
         :card_name: if None take value of recto filename
         """
-        "TODO: check new name"
 
         if not filetype.is_image(recto_path):
             raise GameError('recto file is not an image')
@@ -109,6 +108,8 @@ class Game(object):
         filename, ext = os.path.splitext(recto_path)
         if card_name is None:
             card_name = os.path.basename(filename)
+        self._check_card_in_game(card_name)
+
         folder = os.path.join(DATA_FOLDER, self.name, BOX_FOLDER)
         os.makedirs(folder, exist_ok=True)
         recto_name = f'{card_name}_recto{ext}'
@@ -121,6 +122,17 @@ class Game(object):
             raise GameError('there is already an img file for this card')
         shutil.copy(src_recto, dst_recto)
         shutil.copy(src_verso, dst_verso)
+
+    def _check_card_in_game(self, card_name):
+        """look in deck or box if card present
+
+        :card_name:
+
+        """
+        if (
+                (card_name in self.box_card_names) |
+                (card_name in self.deck_card_names)):
+            raise GameError('card already in box or in deck')
 
     def import_cards_folder(self, folder_path):
         """import all img file in the folder as cards. Every two file
