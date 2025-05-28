@@ -13,7 +13,8 @@ BOX_FOLDER = 'box'
 DECK_FOLDER = 'deck'
 
 
-class GameError(Exception): pass
+class GameError(Exception):
+    pass
 
 
 class Game(object):
@@ -28,6 +29,16 @@ class Game(object):
     def __init__(self, name: str):
         """TODO: to be defined. """
         self._name = name
+
+    @property
+    def box_card_names(self) -> list:
+        """return an ordered list of the card names in the box"""
+        return self._box_card_names
+
+    @property
+    def deck_card_names(self) -> list:
+        """return an ordered list of the card names in the deck"""
+        return self.deck_card_names
 
     def import_card(
             self,
@@ -63,6 +74,15 @@ class Game(object):
             raise GameError('there is already an img file for this card')
         shutil.copy(src_recto, dst_recto)
         shutil.copy(src_verso, dst_verso)
+
+    def get_card(self, card_name: str) -> (str, bool):
+        """get any card present in the game
+
+        :card_name: identify the card
+        :returns: (path: point to img file, rotate: True if img need to be rotated by 180deg),
+
+        """
+        pass
 
 
 class GameHandler(object):
