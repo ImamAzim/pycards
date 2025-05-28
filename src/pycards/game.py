@@ -75,15 +75,17 @@ class Game(object):
     @property
     def box_card_names(self) -> tuple:
         """return an ordered list of the card names in the box"""
-        return self._box_card_names
+        return self._box.keys()
 
     @property
     def deck_card_names(self) -> tuple:
         """return an ordered list of the card names in the deck"""
-        return self.deck_card_names
+        return self._deck.keys()
 
     def __init__(self, name: str):
         self._name = name
+        self._box = dict()
+        self._deck = dict()
 
     def import_card(
             self,
