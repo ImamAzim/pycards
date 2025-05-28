@@ -39,15 +39,15 @@ class Game(object):
         filename, ext = os.path.splitext(recto_path)
         if card_name is None:
             card_name = os.path.basename(filename)
-        game_folder = os.path.join(DATA_FOLDER, self.name)
-        os.makedirs(game_folder, exist_ok=True)
+        folder = os.path.join(DATA_FOLDER, self.name, BOX_FOLDER)
+        os.makedirs(folder, exist_ok=True)
         recto_name = f'{card_name}_recto{ext}'
         verso_name = f'{card_name}_verso{ext}'
         src = recto_path
-        dst = os.path.join(game_folder, recto_name)
+        dst = os.path.join(folder, recto_name)
         shutil.copy(src, dst)
         src = verso_path
-        dst = os.path.join(game_folder, verso_name)
+        dst = os.path.join(folder, verso_name)
         shutil.copy(src, dst)
 
 
