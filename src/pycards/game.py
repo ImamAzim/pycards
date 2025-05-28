@@ -10,6 +10,9 @@ BOX_FOLDER = 'box'
 DECK_FOLDER = 'deck'
 
 
+class GameError(Exception): pass
+
+
 class Game(object):
 
     """Game class to handle the deck and the cards box"""
@@ -36,6 +39,12 @@ class Game(object):
         :card_name: if None take value of recto filename
         """
         "TODO: check file are images, new filename, new name"
+
+        if not self._check_file_is_img(recto_path):
+            raise GameError('recto file is not an image')
+        if not self._check_file_is_img(verso_path):
+            raise GameError('recto file is not an image')
+
         filename, ext = os.path.splitext(recto_path)
         if card_name is None:
             card_name = os.path.basename(filename)
@@ -49,6 +58,15 @@ class Game(object):
         src = verso_path
         dst = os.path.join(folder, verso_name)
         shutil.copy(src, dst)
+
+    def _check_file_is_img(self, path: str) -> bool:
+        """verify that the path point to an image file
+
+        :path: point to supposed img file
+        :returns: True if file is img, else False
+
+        """
+        return True
 
 
 class GameHandler(object):

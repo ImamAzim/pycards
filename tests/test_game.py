@@ -7,7 +7,7 @@ import os
 import shutil
 
 
-from pycards.game import Game, GameHandler
+from pycards.game import Game, GameHandler, GameError
 from pycards.game import SAVED_GAME_FILE_SUFFIX, BOX_FOLDER, DECK_FOLDER
 from pycards.config import DATA_FOLDER
 
@@ -17,6 +17,7 @@ CARD_FOLDER = 'cards'
 CARD_FOLDER_PATH = os.path.join(os.path.dirname(__file__), CARD_FOLDER)
 RECTO_CARD = 'carreau.png'
 VERSO_CARD = 'pic.png'
+FALSE_CARD = 'falsecard'
 
 
 class TestGame(unittest.TestCase):
@@ -47,6 +48,12 @@ class TestGame(unittest.TestCase):
         path = os.path.join(folder, card_name)
         self.assertTrue(os.path.exists(path))
         self.gamehandler.delete_game(TESTNAME)
+
+    def test_import_error(self):
+        """ check raise error if file is not an img """
+        path = os.path.join(CARD_FOLDER_PATH, FALSE_CARD)
+        with self.assertRaises(GameError):
+            self.game.import_card(path, path)
 
 
 class TestGameHandler(unittest.TestCase):
