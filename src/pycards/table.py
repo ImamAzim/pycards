@@ -57,9 +57,10 @@ class Table(object):
         """
         pass
 
-    def rotate_card(self, direction: str = 'right'):
+    def rotate_card(self, card_name, direction: str = 'right'):
         """flip or rotate card (progress)
 
+        :card_name: identify the card
         :direction: either right or down
         """
         pass

@@ -75,11 +75,77 @@ class Game(object):
         shutil.copy(src_recto, dst_recto)
         shutil.copy(src_verso, dst_verso)
 
+    def import_cards_folder(self, folder_path):
+        """import all img file in the folder as cards. Every two file
+        (in alhabetic order) will be the verso of the precedent card
+
+        :folder_path: point to a folder of img file
+
+        """
+        pass
+
     def get_card(self, card_name: str) -> (str, bool):
         """get any card present in the game
 
         :card_name: identify the card
-        :returns: (path: point to img file, rotate: True if img need to be rotated by 180deg),
+        :returns: (path: point to img file, rotate: True if img need to be
+        rotated by 180deg),
+
+        """
+        pass
+
+    def shuffle_deck(self) -> [(str, bool)]:
+        """shuffle cards from deck
+        :returns: list of all non-permanent cards (img_path, rotate)
+        in the deck in random order
+
+        """
+        pass
+
+    def get_permanent_cards(self) -> [(str, bool)]:
+        """get a list (img_path, rotate) of permanent cards from the deck
+
+        :returns: list of permanent cards
+
+        """
+        pass
+
+    def discover_card(self, card_name):
+        """move a card from box to the deck (also the img file)
+
+        :card_name:
+
+        """
+        pass
+
+    def forget_card(self, card_name):
+        """move a card from deck to box
+
+        :card_name:
+
+        """
+        pass
+
+    def destroy_card(self, card_name):
+        """remove card from deck or box and rm img file
+
+        :card_name:
+
+        """
+        pass
+
+    def rotate_card(self, card_name, direction: str = 'right'):
+        """flip or rotate card (progress)
+
+        :card_name: identify the card
+        :direction: either right or down
+        """
+        pass
+
+    def lock_card(self, card_name: str):
+        """lock a card, make it permanent. Will not be reshuffled in deck
+
+        :card_name: identify card
 
         """
         pass
