@@ -214,7 +214,7 @@ class Card(object):
         return self._rotate
 
     def __init__(self, name: str, path_recto: str, path_verso: str, orientation: int):
-        """create a card obj and get img_file to use and rotation 
+        """create a card obj and get img_file to use and rotation
 
         :name: identy card
         :path_recto: path to recto img

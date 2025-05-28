@@ -7,7 +7,7 @@ import os
 import shutil
 
 
-from pycards.game import Game, GameHandler, GameError
+from pycards.game import Game, GameHandler, GameError, Card
 from pycards.game import SAVED_GAME_FILE_SUFFIX, BOX_FOLDER, DECK_FOLDER
 from pycards.config import DATA_FOLDER
 
@@ -108,6 +108,37 @@ class TestGameHandler(unittest.TestCase):
                 else:
                     shutil.rmtree(path)
 
+
+class TestCard(unittest.TestCase):
+
+    """all test concerning Card. """
+
+    def test_init(self):
+        """test if it create Card object with correct parameters
+        """
+        recto = os.path.join(CARD_FOLDER_PATH, RECTO_CARD)
+        verso = os.path.join(CARD_FOLDER_PATH, VERSO_CARD)
+        name = 'test_card'
+
+        card = Card(name, recto, verso, 0)
+        self.assertEqual(card.name, name)
+        self.assertEqual(card.path, recto_path)
+        self.assertFalse(card.rotate)
+
+        card = Card(name, recto, verso, 1)
+        self.assertEqual(card.name, name)
+        self.assertEqual(card.path, recto_path)
+        self.assertTrue(card.rotate)
+
+        card = Card(name, recto, verso, 2)
+        self.assertEqual(card.name, name)
+        self.assertEqual(card.path, verso_path)
+        self.assertTrue(card.rotate)
+
+        card = Card(name, recto, verso, 3)
+        self.assertEqual(card.name, name)
+        self.assertEqual(card.path, verso_path)
+        self.assertFalse(card.rotate)
 
 """ script tests """
 
