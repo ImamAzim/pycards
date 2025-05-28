@@ -122,22 +122,22 @@ class TestCard(unittest.TestCase):
 
         card = Card(name, recto, verso, 0)
         self.assertEqual(card.name, name)
-        self.assertEqual(card.path, recto_path)
+        self.assertEqual(card.path, recto)
         self.assertFalse(card.rotate)
 
         card = Card(name, recto, verso, 1)
         self.assertEqual(card.name, name)
-        self.assertEqual(card.path, recto_path)
+        self.assertEqual(card.path, recto)
         self.assertTrue(card.rotate)
 
         card = Card(name, recto, verso, 2)
         self.assertEqual(card.name, name)
-        self.assertEqual(card.path, verso_path)
+        self.assertEqual(card.path, verso)
         self.assertTrue(card.rotate)
 
         card = Card(name, recto, verso, 3)
         self.assertEqual(card.name, name)
-        self.assertEqual(card.path, verso_path)
+        self.assertEqual(card.path, verso)
         self.assertFalse(card.rotate)
 
 """ script tests """
