@@ -41,7 +41,7 @@ class Game(object):
         :verso_path: img file of verso
         :card_name: if None take value of recto filename
         """
-        "TODO: check file are images, new filename, new name"
+        "TODO: check new name"
 
         if not filetype.is_image(recto_path):
             raise GameError('recto file is not an image')
@@ -55,12 +55,14 @@ class Game(object):
         os.makedirs(folder, exist_ok=True)
         recto_name = f'{card_name}_recto{ext}'
         verso_name = f'{card_name}_verso{ext}'
-        src = recto_path
-        dst = os.path.join(folder, recto_name)
-        shutil.copy(src, dst)
-        src = verso_path
-        dst = os.path.join(folder, verso_name)
-        shutil.copy(src, dst)
+        src_recto = recto_path
+        dst_recto = os.path.join(folder, recto_name)
+        src_verso = verso_path
+        dst_verso = os.path.join(folder, verso_name)
+        if os.path.exists(dst_recto) | os.path.exists(dst_verso):
+            raise GameError('there is already an img file for this card')
+        shutil.copy(src_recto, dst_recto)
+        shutil.copy(src_verso, dst_verso)
 
 
 class GameHandler(object):
