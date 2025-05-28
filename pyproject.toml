@@ -20,6 +20,7 @@ classifiers = [
 description = "GUI for your favorite deck card game"
 dependencies = [
 	'xdg',
+	'filetype',
 ]
 
 [project.optional-dependencies]
