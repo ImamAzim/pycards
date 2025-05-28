@@ -23,12 +23,8 @@ class Game(object):
 
     @property
     def name(self) -> str:
-        """doc"""
+        """name of the game"""
         return self._name
-
-    def __init__(self, name: str):
-        """TODO: to be defined. """
-        self._name = name
 
     @property
     def box_card_names(self) -> list:
@@ -39,6 +35,9 @@ class Game(object):
     def deck_card_names(self) -> list:
         """return an ordered list of the card names in the deck"""
         return self.deck_card_names
+
+    def __init__(self, name: str):
+        self._name = name
 
     def import_card(
             self,
@@ -84,26 +83,25 @@ class Game(object):
         """
         pass
 
-    def get_card(self, card_name: str) -> (str, bool):
+    def get_card(self, card_name: str) -> Card:
         """get any card present in the game
 
         :card_name: identify the card
-        :returns: (path: point to img file, rotate: True if img need to be
-        rotated by 180deg),
+        :returns: card to be displayed,
 
         """
         pass
 
-    def shuffle_deck(self) -> [(str, bool)]:
+    def shuffle_deck(self) -> [Card]:
         """shuffle cards from deck
-        :returns: list of all non-permanent cards (img_path, rotate)
+        :returns: list of all non-permanent cards
         in the deck in random order
 
         """
         pass
 
-    def get_permanent_cards(self) -> [(str, bool)]:
-        """get a list (img_path, rotate) of permanent cards from the deck
+    def get_permanent_cards(self) -> [Card]:
+        """get a list of permanent cards from the deck
 
         :returns: list of permanent cards
 
@@ -194,6 +192,37 @@ class GameHandler(object):
         if name in filenames:
             path = os.path.join(DATA_FOLDER, name)
             shutil.rmtree(path)
+
+
+class Card(object):
+
+    """card object for a given orientation"""
+
+    @property
+    def name(self) -> str:
+        """card name"""
+        return self._name
+
+    @property
+    def path(self) -> str:
+        """path to img file"""
+        return self._path
+
+    @property
+    def rotate(self) -> bool:
+        """specify if img need to be rotated by 180 deg"""
+        return self._rotate
+
+    def __init__(self, name: str, path_recto: str, path_verso: str, orientation: int):
+        """create a card obj and get img_file to use and rotation 
+
+        :name: identy card
+        :path_recto: path to recto img
+        :path_verso: path to verso img
+        :orientation: 0(top recto), 1(down recto), 2(down verso), or 3(top verso)
+
+        """
+        self._name = name
 
 
 if __name__ == '__main__':
