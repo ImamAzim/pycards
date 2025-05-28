@@ -49,11 +49,11 @@ class Card(object):
 
         """
         self._name = name
-        if orientation==0 | orientation==1:
+        if (orientation==0) | (orientation==1):
             self._path = path_recto
         else:
             self._path = path_verso
-        if orientation==1 | orientation==2:
+        if (orientation==1) | (orientation==2):
             self._rotate = True
         else:
             self._rotate = False
