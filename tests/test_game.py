@@ -26,17 +26,25 @@ class TestGame(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.game = Game(TESTNAME)
         cls.gamehandler = GameHandler()
+
+    def test_property(self):
+        """check attibutes of games
+        :returns: TODO
+
+        """
+        game = Game(TESTNAME)
+        self.assertEqual(game.name, TESTNAME)
 
     def test_import(self):
         """test if image file is imported
 
         """
+        game = Game(TESTNAME)
         testname_import = f'{TESTNAME}_import'
         recto = os.path.join(CARD_FOLDER_PATH, RECTO_CARD)
         verso = os.path.join(CARD_FOLDER_PATH, VERSO_CARD)
-        self.game.import_card(recto, verso, testname_import)
+        game.import_card(recto, verso, testname_import)
 
         folder = os.path.join(DATA_FOLDER, TESTNAME, BOX_FOLDER)
         suffix = RECTO_CARD.split('.')[-1]
@@ -51,9 +59,10 @@ class TestGame(unittest.TestCase):
 
     def test_import_error(self):
         """ check raise error if file is not an img """
+        game = Game(TESTNAME)
         path = os.path.join(CARD_FOLDER_PATH, FALSE_CARD)
         with self.assertRaises(GameError):
-            self.game.import_card(path, path)
+            game.import_card(path, path)
 
 
 class TestGameHandler(unittest.TestCase):

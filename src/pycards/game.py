@@ -73,12 +73,12 @@ class Game(object):
         return self._name
 
     @property
-    def box_card_names(self) -> list:
+    def box_card_names(self) -> tuple:
         """return an ordered list of the card names in the box"""
         return self._box_card_names
 
     @property
-    def deck_card_names(self) -> list:
+    def deck_card_names(self) -> tuple:
         """return an ordered list of the card names in the deck"""
         return self.deck_card_names
 
