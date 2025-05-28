@@ -13,6 +13,44 @@ BOX_FOLDER = 'box'
 DECK_FOLDER = 'deck'
 
 
+class Card(object):
+
+    """card object for a given orientation"""
+
+    @property
+    def name(self) -> str:
+        """card name"""
+        return self._name
+
+    @property
+    def path(self) -> str:
+        """path to img file"""
+        return self._path
+
+    @property
+    def rotate(self) -> bool:
+        """specify if img need to be rotated by 180 deg"""
+        return self._rotate
+
+    def __init__(
+            self,
+            name: str,
+            path_recto: str,
+            path_verso: str,
+            orientation: int,
+            ):
+        """create a card obj and get img_file to use and rotation
+
+        :name: identy card
+        :path_recto: path to recto img
+        :path_verso: path to verso img
+        :orientation: 0(top recto), 1(down recto), 2(down verso), or
+        3(top verso)
+
+        """
+        self._name = name
+
+
 class GameError(Exception):
     pass
 
@@ -192,37 +230,6 @@ class GameHandler(object):
         if name in filenames:
             path = os.path.join(DATA_FOLDER, name)
             shutil.rmtree(path)
-
-
-class Card(object):
-
-    """card object for a given orientation"""
-
-    @property
-    def name(self) -> str:
-        """card name"""
-        return self._name
-
-    @property
-    def path(self) -> str:
-        """path to img file"""
-        return self._path
-
-    @property
-    def rotate(self) -> bool:
-        """specify if img need to be rotated by 180 deg"""
-        return self._rotate
-
-    def __init__(self, name: str, path_recto: str, path_verso: str, orientation: int):
-        """create a card obj and get img_file to use and rotation
-
-        :name: identy card
-        :path_recto: path to recto img
-        :path_verso: path to verso img
-        :orientation: 0(top recto), 1(down recto), 2(down verso), or 3(top verso)
-
-        """
-        self._name = name
 
 
 if __name__ == '__main__':
