@@ -34,25 +34,25 @@ class Card(object):
 
     def __init__(
             self,
-            name: str,
-            path_recto: str,
-            path_verso: str,
+            card_name: str,
+            recto_path: str,
+            verso_path: str,
             orientation: int,
             ):
         """create a card obj and get img_file to use and rotation
 
-        :name: identy card
-        :path_recto: path to recto img
-        :path_verso: path to verso img
+        :card_name: identy card
+        :recto_path: path to recto img
+        :verso_path: path to verso img
         :orientation: 0(top recto), 1(down recto), 2(down verso), or
         3(top verso)
 
         """
-        self._name = name
+        self._name = card_name
         if (orientation == 0) | (orientation == 1):
-            self._path = path_recto
+            self._path = recto_path
         else:
-            self._path = path_verso
+            self._path = verso_path
         if (orientation == 1) | (orientation == 2):
             self._rotate = True
         else:
@@ -122,6 +122,13 @@ class Game(object):
             raise GameError('there is already an img file for this card')
         shutil.copy(src_recto, dst_recto)
         shutil.copy(src_verso, dst_verso)
+
+        card = dict(recto_path=recto_path,
+                    verso_path=verso_path,
+                    orientation=0,
+                    card_name=card_name,
+                    )
+        self._box[card_name] = card
 
     def _check_card_in_game(self, card_name):
         """look in deck or box if card present
