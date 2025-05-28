@@ -2,6 +2,9 @@ import os
 import shutil
 
 
+import filetype
+
+
 from pycards.config import DATA_FOLDER
 
 
@@ -40,9 +43,9 @@ class Game(object):
         """
         "TODO: check file are images, new filename, new name"
 
-        if not self._check_file_is_img(recto_path):
+        if not filetype.is_image(recto_path):
             raise GameError('recto file is not an image')
-        if not self._check_file_is_img(verso_path):
+        if not filetype.is_image(verso_path):
             raise GameError('recto file is not an image')
 
         filename, ext = os.path.splitext(recto_path)
@@ -58,15 +61,6 @@ class Game(object):
         src = verso_path
         dst = os.path.join(folder, verso_name)
         shutil.copy(src, dst)
-
-    def _check_file_is_img(self, path: str) -> bool:
-        """verify that the path point to an image file
-
-        :path: point to supposed img file
-        :returns: True if file is img, else False
-
-        """
-        return True
 
 
 class GameHandler(object):
