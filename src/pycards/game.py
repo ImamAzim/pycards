@@ -140,12 +140,10 @@ class Game(object):
         :card_name:
 
         """
-        if (
-                (card_name in self.box_card_names) |
-                (card_name in self.deck_card_names)):
-            return True
-        else:
-            return False
+        for box_name, cards in self._all_cards.items():
+            if card_name in cards:
+                return True
+        return False
 
     def import_cards_folder(self, folder_path):
         """import all img file in the folder as cards. Every two file
