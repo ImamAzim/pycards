@@ -69,6 +69,15 @@ class TestGame(unittest.TestCase):
         with self.assertRaises(GameError):
             game.import_card(path, path)
 
+    def test_import_folder(self):
+        """test import folder
+
+        """
+        game = Game(TESTNAME)
+        folder = os.path.join(DATA_FOLDER, TESTNAME, BOX_FOLDER)
+        game.import_cards_folder(folder)
+        self.assertEqual(len(game.box_card_names), 1)
+
 
 class TestGameHandler(unittest.TestCase):
 

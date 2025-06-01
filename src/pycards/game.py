@@ -148,6 +148,10 @@ class Game(object):
         :folder_path: point to a folder of img file
 
         """
+        filenames = os.listdir(folder_path)
+        img_files = [
+                fn for fn in filenames
+                if filetype.is_image(os.path.join(folder_path, fn))]
         pass
 
     def get_card(self, card_name: str) -> Card:
