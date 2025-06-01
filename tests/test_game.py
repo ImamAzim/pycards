@@ -79,6 +79,19 @@ class TestGame(unittest.TestCase):
         self.assertEqual(len(game.box_card_names), 1)
         self.gamehandler.delete_game(TESTNAME)
 
+    def test_getcard(self):
+        """test get card
+        :returns: TODO
+
+        """
+        game = Game(TESTNAME)
+        folder = CARD_FOLDER_PATH
+        game.import_cards_folder(folder)
+        for card_name in game.box_card_names:
+            card = game.get_card(card_name)
+            self.assertIsInstance(card, Card)
+        self.gamehandler.delete_game(TESTNAME)
+
 
 class TestGameHandler(unittest.TestCase):
 
