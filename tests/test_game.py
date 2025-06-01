@@ -74,7 +74,7 @@ class TestGame(unittest.TestCase):
 
         """
         game = Game(TESTNAME)
-        folder = os.path.join(DATA_FOLDER, TESTNAME, BOX_FOLDER)
+        folder = CARD_FOLDER_PATH
         game.import_cards_folder(folder)
         self.assertEqual(len(game.box_card_names), 1)
 
