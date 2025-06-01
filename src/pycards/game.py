@@ -87,6 +87,7 @@ class Game(object):
         self._name = name
         self._box = dict()
         self._deck = dict()
+        self._all_cards = dict(box=self._box, deck=self._deck)
 
     def import_card(
             self,
@@ -109,7 +110,9 @@ class Game(object):
         filename, ext = os.path.splitext(recto_path)
         if card_name is None:
             card_name = os.path.basename(filename)
-        self._check_card_in_game(card_name)
+
+        if self._check_card_in_game(card_name):
+            raise GameError('card already in box or in deck')
 
         folder = os.path.join(DATA_FOLDER, self.name, BOX_FOLDER)
         os.makedirs(folder, exist_ok=True)
@@ -140,7 +143,9 @@ class Game(object):
         if (
                 (card_name in self.box_card_names) |
                 (card_name in self.deck_card_names)):
-            raise GameError('card already in box or in deck')
+            return True
+        else:
+            return False
 
     def import_cards_folder(self, folder_path):
         """import all img file in the folder as cards. Every two file
@@ -169,7 +174,14 @@ class Game(object):
         :returns: card to be displayed,
 
         """
-        pass
+        if self._check_card_in_game(card_name):
+            for box_name, cards in self._all_cards.items():
+                card_dict = cards.get(card_name)
+                if card_dict is not None:
+                    card = Card(**card_dict)
+                    return card
+        else:
+            raise GameError('missing from the game')
 
     def shuffle_deck(self) -> [Card]:
         """shuffle cards from deck
