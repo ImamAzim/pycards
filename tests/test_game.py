@@ -77,6 +77,7 @@ class TestGame(unittest.TestCase):
         folder = CARD_FOLDER_PATH
         game.import_cards_folder(folder)
         self.assertEqual(len(game.box_card_names), 1)
+        self.gamehandler.delete_game(TESTNAME)
 
 
 class TestGameHandler(unittest.TestCase):
