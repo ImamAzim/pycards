@@ -105,13 +105,22 @@ class TestGame(unittest.TestCase):
         # """test permanent property
 
         # """
-        # game = Game(TESTNAME)
-        # folder = CARD_FOLDER_PATH
-        # game.import_cards_folder(folder)
-        # for card_name in game.box_card_names:
-            # card = game.get_card(card_name)
-            # self.assertIsInstance(card, Card)
-        # self.gamehandler.delete_game(TESTNAME)
+        # game = self.game
+        # card_name = 'testcard'
+        # recto = os.path.join(CARD_FOLDER_PATH, RECTO_CARD)
+        # verso = os.path.join(CARD_FOLDER_PATH, VERSO_CARD)
+        # game.import_card(recto, verso, card_name)
+        # game.discover_card(card_name)
+        # game.lock_card(card_name)
+
+        # permanent_cards = game.permanent_cards
+        # self.assertEqual(1, len(permanent_cards))
+        # card = permanent_cards[0]
+        # self.assertIsInstance(card, Card)
+        # self.assertEqual(card.name, card_name)
+        # game.unlock_card(card_name)
+        # permanent_cards = game.permanent_cards
+        # self.assertEqual(0, len(permanent_cards))
 
 
 class TestGameHandler(unittest.TestCase):
