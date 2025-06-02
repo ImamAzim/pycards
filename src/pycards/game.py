@@ -216,7 +216,10 @@ class Game(object):
 
         """
         if card_name in self.deck_card_names:
-            self._permanent_cards.append(card_name)
+            if card_name not in self._permanent_cards:
+                self._permanent_cards.append(card_name)
+            else:
+                raise GameError('card is already marked as permanent')
         else:
             raise GameError('card is not present in the deck')
 
