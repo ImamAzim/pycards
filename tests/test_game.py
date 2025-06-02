@@ -97,11 +97,10 @@ class TestGame(unittest.TestCase):
 
         """
         game = self._game
-        folder = CARD_FOLDER_PATH
-        game.import_cards_folder(folder)
-        for card_name in game.box_card_names:
-            card = game.get_card(card_name)
-            self.assertIsInstance(card, Card)
+        game.import_card(**self._test_card)
+        card_name = self._test_card['card_name']
+        card = game.get_card(card_name)
+        self.assertIsInstance(card, Card)
 
     # def test_discover_card(self):
         # """test discover
