@@ -119,7 +119,7 @@ class Game(object):
 
         filename, ext = os.path.splitext(recto_path)
         if card_name is None:
-            card_name = os.path.basename(filename)
+            card_name = Path(recto_path).stem
 
         if self._check_card_in_game(card_name):
             raise GameError('card already in box or in deck')
