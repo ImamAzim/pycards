@@ -28,12 +28,25 @@ class TestGame(unittest.TestCase):
     def setUpClass(cls):
         cls.gamehandler = GameHandler()
 
+    def setUp(self):
+        """create game instance
+
+        """
+        self.game = Game(TESTNAME)
+
+    def tearDown(self):
+        """delete test game from disk
+        :returns: TODO
+
+        """
+        self.gamehandler.delete_game(TESTNAME)
+
     def test_property(self):
         """check attibutes of games
         :returns: TODO
 
         """
-        game = Game(TESTNAME)
+        game = self.game
         self.assertEqual(game.name, TESTNAME)
         self.assertSequenceEqual(game.box_card_names, ())
         self.assertSequenceEqual(game.deck_card_names, ())
@@ -42,7 +55,7 @@ class TestGame(unittest.TestCase):
         """test if image file is imported
 
         """
-        game = Game(TESTNAME)
+        game = self.game
         testname_import = f'{TESTNAME}_import'
         recto = os.path.join(CARD_FOLDER_PATH, RECTO_CARD)
         verso = os.path.join(CARD_FOLDER_PATH, VERSO_CARD)
@@ -60,11 +73,9 @@ class TestGame(unittest.TestCase):
 
         self.assertIn(testname_import, game.box_card_names)
 
-        self.gamehandler.delete_game(TESTNAME)
-
     def test_import_error(self):
         """ check raise error if file is not an img """
-        game = Game(TESTNAME)
+        game = self.game
         path = os.path.join(CARD_FOLDER_PATH, FALSE_CARD)
         with self.assertRaises(GameError):
             game.import_card(path, path)
@@ -73,24 +84,34 @@ class TestGame(unittest.TestCase):
         """test import folder
 
         """
-        game = Game(TESTNAME)
+        game = self.game
         folder = CARD_FOLDER_PATH
         game.import_cards_folder(folder)
         self.assertEqual(len(game.box_card_names), 1)
-        self.gamehandler.delete_game(TESTNAME)
 
     def test_getcard(self):
         """test get card
         :returns: TODO
 
         """
-        game = Game(TESTNAME)
+        game = self.game
         folder = CARD_FOLDER_PATH
         game.import_cards_folder(folder)
         for card_name in game.box_card_names:
             card = game.get_card(card_name)
             self.assertIsInstance(card, Card)
-        self.gamehandler.delete_game(TESTNAME)
+
+    # def test_permanent_cards(self):
+        # """test permanent property
+
+        # """
+        # game = Game(TESTNAME)
+        # folder = CARD_FOLDER_PATH
+        # game.import_cards_folder(folder)
+        # for card_name in game.box_card_names:
+            # card = game.get_card(card_name)
+            # self.assertIsInstance(card, Card)
+        # self.gamehandler.delete_game(TESTNAME)
 
 
 class TestGameHandler(unittest.TestCase):

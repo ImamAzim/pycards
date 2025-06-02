@@ -83,11 +83,17 @@ class Game(object):
         """return an ordered list of the card names in the deck"""
         return self._deck.keys()
 
+    @property
+    def permanent_cards(self) -> [Card]:
+        """get a list of permanent cards from the deck"""
+        return self._permanent_cards
+
     def __init__(self, name: str):
         self._name = name
         self._box = dict()
         self._deck = dict()
         self._all_cards = dict(box=self._box, deck=self._deck)
+        self._permanent_cards = list()
 
     def import_card(
             self,
@@ -181,18 +187,30 @@ class Game(object):
         else:
             raise GameError('missing from the game')
 
-    def shuffle_deck(self) -> [Card]:
-        """shuffle cards from deck
-        :returns: list of all non-permanent cards
-        in the deck in random order
+    def lock_card(self, card_name: str):
+        """lock a card, make it permanent. Will not be reshuffled in deck
+
+        :card_name: identify card
+
+        """
+        if card_name in self.deck_card_names:
+            self._permanent_cards.append(card_name)
+        else:
+            raise GameError('card is not present in the deck')
+
+    def unlock_card(self, card_name: str):
+        """unlock a card, make it no longer permanent. Will part of the next
+        shuffle
+
+        :card_name: identify card
 
         """
         pass
 
-    def get_permanent_cards(self) -> [Card]:
-        """get a list of permanent cards from the deck
-
-        :returns: list of permanent cards
+    def shuffle_deck(self) -> [Card]:
+        """shuffle cards from deck
+        :returns: list of all non-permanent cards
+        in the deck in random order
 
         """
         pass
@@ -226,14 +244,6 @@ class Game(object):
 
         :card_name: identify the card
         :direction: either right or down
-        """
-        pass
-
-    def lock_card(self, card_name: str):
-        """lock a card, make it permanent. Will not be reshuffled in deck
-
-        :card_name: identify card
-
         """
         pass
 
