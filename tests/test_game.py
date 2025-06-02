@@ -106,7 +106,7 @@ class TestGame(unittest.TestCase):
 
         folder = os.path.join(DATA_FOLDER, TESTNAME, BOX_FOLDER)
         suffix = Path(RECTO_CARD).suffix
-        card_fn = f'{card_name}_recto.{suffix}'
+        card_fn = f'{card_name}_recto{suffix}'
         path = os.path.join(folder, card_fn)
         self.assertEqual(path, card.path)
 

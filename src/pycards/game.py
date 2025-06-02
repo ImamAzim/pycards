@@ -135,8 +135,8 @@ class Game(object):
         shutil.copy(src_recto, dst_recto)
         shutil.copy(src_verso, dst_verso)
 
-        card = dict(recto_path=recto_path,
-                    verso_path=verso_path,
+        card = dict(recto_path=dst_recto,
+                    verso_path=dst_verso,
                     orientation=0,
                     card_name=card_name,
                     )
