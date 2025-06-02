@@ -68,7 +68,6 @@ class TestGame(unittest.TestCase):
         suffix = Path(RECTO_CARD).suffix
         card_fn = f'{card_name}_recto{suffix}'
         path = os.path.join(folder, card_fn)
-        print(path)
         self.assertTrue(os.path.exists(path))
         suffix = Path(VERSO_CARD).suffix
         card_fn = f'{card_name}_verso{suffix}'
@@ -121,23 +120,23 @@ class TestGame(unittest.TestCase):
         game.discover_card(card_name)
 
         folder = os.path.join(DATA_FOLDER, TESTNAME, BOX_FOLDER)
-        suffix = RECTO_CARD.split('.')[-1]
-        card_fn = f'{card_name}_recto.{suffix}'
+        suffix = Path(RECTO_CARD).suffix
+        card_fn = f'{card_name}_recto{suffix}'
         path = os.path.join(folder, card_fn)
         self.assertFalse(os.path.exists(path))
-        suffix = VERSO_CARD.split('.')[-1]
-        card_fn = f'{card_name}_verso.{suffix}'
+        suffix = Path(VERSO_CARD).suffix
+        card_fn = f'{card_name}_verso{suffix}'
         path = os.path.join(folder, card_fn)
         self.assertFalse(os.path.exists(path))
         self.assertNotIn(card_name, game.box_card_names)
 
         folder = os.path.join(DATA_FOLDER, TESTNAME, DECK_FOLDER)
-        suffix = RECTO_CARD.split('.')[-1]
-        card_fn = f'{card_name}_recto.{suffix}'
+        suffix = Path(RECTO_CARD).suffix
+        card_fn = f'{card_name}_recto{suffix}'
         path = os.path.join(folder, card_fn)
         self.assertTrue(os.path.exists(path))
-        suffix = VERSO_CARD.split('.')[-1]
-        card_fn = f'{card_name}_verso.{suffix}'
+        suffix = Path(VERSO_CARD).suffix
+        card_fn = f'{card_name}_verso{suffix}'
         path = os.path.join(folder, card_fn)
         self.assertTrue(os.path.exists(path))
         self.assertIn(card_name, game.deck_card_names)
@@ -147,10 +146,8 @@ class TestGame(unittest.TestCase):
 
         # """
         # game = self.game
-        # card_name = 'testcard'
-        # recto = os.path.join(CARD_FOLDER_PATH, RECTO_CARD)
-        # verso = os.path.join(CARD_FOLDER_PATH, VERSO_CARD)
-        # game.import_card(recto, verso, card_name)
+        # game.import_card(**self._test_card)
+        # card_name = self._test_card['card_name']
         # game.discover_card(card_name)
         # game.lock_card(card_name)
 
