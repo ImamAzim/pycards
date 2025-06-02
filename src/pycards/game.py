@@ -94,6 +94,10 @@ class Game(object):
         self._deck = dict()
         self._all_cards = dict(box=self._box, deck=self._deck)
         self._permanent_cards = list()
+        self._box_folder = os.path.join(DATA_FOLDER, self.name, BOX_FOLDER)
+        os.makedirs(self._box_folder, exist_ok=True)
+        self._deck_folder = os.path.join(DATA_FOLDER, self.name, DECK_FOLDER)
+        os.makedirs(self._deck_folder, exist_ok=True)
 
     def import_card(
             self,
@@ -120,14 +124,12 @@ class Game(object):
         if self._check_card_in_game(card_name):
             raise GameError('card already in box or in deck')
 
-        folder = os.path.join(DATA_FOLDER, self.name, BOX_FOLDER)
-        os.makedirs(folder, exist_ok=True)
         recto_name = f'{card_name}_recto{ext}'
         verso_name = f'{card_name}_verso{ext}'
         src_recto = recto_path
-        dst_recto = os.path.join(folder, recto_name)
+        dst_recto = os.path.join(self._box_folder, recto_name)
         src_verso = verso_path
-        dst_verso = os.path.join(folder, verso_name)
+        dst_verso = os.path.join(self._box_folder, verso_name)
         if os.path.exists(dst_recto) | os.path.exists(dst_verso):
             raise GameError('there is already an img file for this card')
         shutil.copy(src_recto, dst_recto)
@@ -193,7 +195,11 @@ class Game(object):
         :card_name:
 
         """
-        pass
+        if card_name in self.box_card_names:
+            card = self._box[card_name]
+            src = card['recto_path']
+        else:
+            raise GameError('card is not present in the box')
 
     def lock_card(self, card_name: str):
         """lock a card, make it permanent. Will not be reshuffled in deck
