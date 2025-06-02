@@ -141,24 +141,24 @@ class TestGame(unittest.TestCase):
         self.assertTrue(os.path.exists(path))
         self.assertIn(card_name, game.deck_card_names)
 
-    # def test_permanent_cards(self):
-        # """test permanent property
+    def test_permanent_cards(self):
+        """test permanent property
 
-        # """
-        # game = self.game
-        # game.import_card(**self._test_card)
-        # card_name = self._test_card['card_name']
-        # game.discover_card(card_name)
-        # game.lock_card(card_name)
+        """
+        game = self._game
+        game.import_card(**self._test_card)
+        card_name = self._test_card['card_name']
+        game.discover_card(card_name)
+        game.lock_card(card_name)
 
-        # permanent_cards = game.permanent_cards
-        # self.assertEqual(1, len(permanent_cards))
-        # card = permanent_cards[0]
-        # self.assertIsInstance(card, Card)
-        # self.assertEqual(card.name, card_name)
-        # game.unlock_card(card_name)
-        # permanent_cards = game.permanent_cards
-        # self.assertEqual(0, len(permanent_cards))
+        permanent_cards = game.permanent_cards
+        self.assertEqual(1, len(permanent_cards))
+        card = permanent_cards[0]
+        self.assertIsInstance(card, Card)
+        self.assertEqual(card.name, card_name)
+        game.unlock_card(card_name)
+        permanent_cards = game.permanent_cards
+        self.assertEqual(0, len(permanent_cards))
 
 
 class TestGameHandler(unittest.TestCase):
