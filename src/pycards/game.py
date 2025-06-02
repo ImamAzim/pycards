@@ -86,7 +86,8 @@ class Game(object):
     @property
     def permanent_cards(self) -> [Card]:
         """get a list of permanent cards from the deck"""
-        return tuple(self._permanent_cards)
+        permanent_cards = [self.get_card(card_name) for card_name in self._permanent_cards]
+        return tuple(permanent_cards)
 
     def __init__(self, name: str):
         self._name = name
