@@ -86,7 +86,7 @@ class Game(object):
     @property
     def permanent_cards(self) -> [Card]:
         """get a list of permanent cards from the deck"""
-        return self._permanent_cards
+        return tuple(self._permanent_cards)
 
     def __init__(self, name: str):
         self._name = name
@@ -187,6 +187,14 @@ class Game(object):
         else:
             raise GameError('missing from the game')
 
+    def discover_card(self, card_name):
+        """move a card from box to the deck (also the img file)
+
+        :card_name:
+
+        """
+        pass
+
     def lock_card(self, card_name: str):
         """lock a card, make it permanent. Will not be reshuffled in deck
 
@@ -211,14 +219,6 @@ class Game(object):
         """shuffle cards from deck
         :returns: list of all non-permanent cards
         in the deck in random order
-
-        """
-        pass
-
-    def discover_card(self, card_name):
-        """move a card from box to the deck (also the img file)
-
-        :card_name:
 
         """
         pass

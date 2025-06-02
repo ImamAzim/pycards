@@ -26,27 +26,31 @@ class TestGame(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.gamehandler = GameHandler()
+        cls._gamehandler = GameHandler()
 
     def setUp(self):
         """create game instance
 
         """
-        self.game = Game(TESTNAME)
+        self._game = Game(TESTNAME)
+        card_name = 'testcard'
+        recto = os.path.join(CARD_FOLDER_PATH, RECTO_CARD)
+        verso = os.path.join(CARD_FOLDER_PATH, VERSO_CARD)
+        self._test_card = dict(recto_path=recto, verso_path=verso, card_name=card_name)
 
     def tearDown(self):
         """delete test game from disk
         :returns: TODO
 
         """
-        self.gamehandler.delete_game(TESTNAME)
+        self._gamehandler.delete_game(TESTNAME)
 
     def test_property(self):
         """check attibutes of games
         :returns: TODO
 
         """
-        game = self.game
+        game = self._game
         self.assertEqual(game.name, TESTNAME)
         self.assertSequenceEqual(game.box_card_names, ())
         self.assertSequenceEqual(game.deck_card_names, ())
@@ -55,27 +59,25 @@ class TestGame(unittest.TestCase):
         """test if image file is imported
 
         """
-        game = self.game
-        testname_import = f'{TESTNAME}_import'
-        recto = os.path.join(CARD_FOLDER_PATH, RECTO_CARD)
-        verso = os.path.join(CARD_FOLDER_PATH, VERSO_CARD)
-        game.import_card(recto, verso, testname_import)
+        game = self._game
+        game.import_card(**self._test_card)
+        card_name = self._test_card['card_name']
 
         folder = os.path.join(DATA_FOLDER, TESTNAME, BOX_FOLDER)
         suffix = RECTO_CARD.split('.')[-1]
-        card_name = f'{testname_import}_recto.{suffix}'
-        path = os.path.join(folder, card_name)
+        card_fn = f'{card_name}_recto.{suffix}'
+        path = os.path.join(folder, card_fn)
         self.assertTrue(os.path.exists(path))
         suffix = VERSO_CARD.split('.')[-1]
-        card_name = f'{testname_import}_verso.{suffix}'
-        path = os.path.join(folder, card_name)
+        card_fn = f'{card_name}_verso.{suffix}'
+        path = os.path.join(folder, card_fn)
         self.assertTrue(os.path.exists(path))
 
-        self.assertIn(testname_import, game.box_card_names)
+        self.assertIn(card_name, game.box_card_names)
 
     def test_import_error(self):
         """ check raise error if file is not an img """
-        game = self.game
+        game = self._game
         path = os.path.join(CARD_FOLDER_PATH, FALSE_CARD)
         with self.assertRaises(GameError):
             game.import_card(path, path)
@@ -84,7 +86,7 @@ class TestGame(unittest.TestCase):
         """test import folder
 
         """
-        game = self.game
+        game = self._game
         folder = CARD_FOLDER_PATH
         game.import_cards_folder(folder)
         self.assertEqual(len(game.box_card_names), 1)
@@ -94,12 +96,24 @@ class TestGame(unittest.TestCase):
         :returns: TODO
 
         """
-        game = self.game
+        game = self._game
         folder = CARD_FOLDER_PATH
         game.import_cards_folder(folder)
         for card_name in game.box_card_names:
             card = game.get_card(card_name)
             self.assertIsInstance(card, Card)
+
+    # def test_discover_card(self):
+        # """test discover
+        # :returns: TODO
+
+        # """
+        # game = self._game
+        # card_name = 'testcard'
+        # recto = os.path.join(CARD_FOLDER_PATH, RECTO_CARD)
+        # verso = os.path.join(CARD_FOLDER_PATH, VERSO_CARD)
+        # game.import_card(recto, verso, card_name)
+        # game.discover_card(card_name)
 
     # def test_permanent_cards(self):
         # """test permanent property
