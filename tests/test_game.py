@@ -65,12 +65,13 @@ class TestGame(unittest.TestCase):
         card_name = self._test_card['card_name']
 
         folder = os.path.join(DATA_FOLDER, TESTNAME, BOX_FOLDER)
-        suffix = RECTO_CARD.split('.')[-1]
-        card_fn = f'{card_name}_recto.{suffix}'
+        suffix = Path(RECTO_CARD).suffix
+        card_fn = f'{card_name}_recto{suffix}'
         path = os.path.join(folder, card_fn)
+        print(path)
         self.assertTrue(os.path.exists(path))
-        suffix = VERSO_CARD.split('.')[-1]
-        card_fn = f'{card_name}_verso.{suffix}'
+        suffix = Path(VERSO_CARD).suffix
+        card_fn = f'{card_name}_verso{suffix}'
         path = os.path.join(folder, card_fn)
         self.assertTrue(os.path.exists(path))
 
