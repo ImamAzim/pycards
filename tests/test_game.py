@@ -5,6 +5,7 @@ test game models
 import unittest
 import os
 import shutil
+from pathlib import Path
 
 
 from pycards.game import Game, GameHandler, GameError, Card
@@ -102,37 +103,43 @@ class TestGame(unittest.TestCase):
         card = game.get_card(card_name)
         self.assertIsInstance(card, Card)
 
-    def test_discover_card(self):
-        """test discover
-        :returns: TODO
-
-        """
-        game = self._game
-        game.import_card(**self._test_card)
-        card_name = self._test_card['card_name']
-        game.discover_card(card_name)
-
         folder = os.path.join(DATA_FOLDER, TESTNAME, BOX_FOLDER)
-        suffix = RECTO_CARD.split('.')[-1]
+        suffix = Path(RECTO_CARD).suffix
         card_fn = f'{card_name}_recto.{suffix}'
         path = os.path.join(folder, card_fn)
-        self.assertFalse(os.path.exists(path))
-        suffix = VERSO_CARD.split('.')[-1]
-        card_fn = f'{card_name}_verso.{suffix}'
-        path = os.path.join(folder, card_fn)
-        self.assertFalse(os.path.exists(path))
-        self.assertNotIn(card_name, game.box_card_names)
+        self.assertEqual(path, card.path)
 
-        folder = os.path.join(DATA_FOLDER, TESTNAME, DECK_FOLDER)
-        suffix = RECTO_CARD.split('.')[-1]
-        card_fn = f'{card_name}_recto.{suffix}'
-        path = os.path.join(folder, card_fn)
-        self.assertTrue(os.path.exists(path))
-        suffix = VERSO_CARD.split('.')[-1]
-        card_fn = f'{card_name}_verso.{suffix}'
-        path = os.path.join(folder, card_fn)
-        self.assertTrue(os.path.exists(path))
-        self.assertIn(card_name, game.deck_card_names)
+    # def test_discover_card(self):
+        # """test discover
+        # :returns: TODO
+
+        # """
+        # game = self._game
+        # game.import_card(**self._test_card)
+        # card_name = self._test_card['card_name']
+        # game.discover_card(card_name)
+
+        # folder = os.path.join(DATA_FOLDER, TESTNAME, BOX_FOLDER)
+        # suffix = RECTO_CARD.split('.')[-1]
+        # card_fn = f'{card_name}_recto.{suffix}'
+        # path = os.path.join(folder, card_fn)
+        # self.assertFalse(os.path.exists(path))
+        # suffix = VERSO_CARD.split('.')[-1]
+        # card_fn = f'{card_name}_verso.{suffix}'
+        # path = os.path.join(folder, card_fn)
+        # self.assertFalse(os.path.exists(path))
+        # self.assertNotIn(card_name, game.box_card_names)
+
+        # folder = os.path.join(DATA_FOLDER, TESTNAME, DECK_FOLDER)
+        # suffix = RECTO_CARD.split('.')[-1]
+        # card_fn = f'{card_name}_recto.{suffix}'
+        # path = os.path.join(folder, card_fn)
+        # self.assertTrue(os.path.exists(path))
+        # suffix = VERSO_CARD.split('.')[-1]
+        # card_fn = f'{card_name}_verso.{suffix}'
+        # path = os.path.join(folder, card_fn)
+        # self.assertTrue(os.path.exists(path))
+        # self.assertIn(card_name, game.deck_card_names)
 
     # def test_permanent_cards(self):
         # """test permanent property

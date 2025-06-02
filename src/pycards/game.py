@@ -196,8 +196,15 @@ class Game(object):
 
         """
         if card_name in self.box_card_names:
-            card = self._box[card_name]
+            card = self._box.pop(card_name)
             src = card['recto_path']
+            dst = self._deck_folder
+            new_recto_path = shutil.move(src, dst)
+            src = card['verso_path']
+            new_verso_path = shutil.move(src, dst)
+            card['recto_path'] = new_recto_path
+            card['verso_path'] = new_verso_path
+            self._deck[card_name] = card
         else:
             raise GameError('card is not present in the box')
 
