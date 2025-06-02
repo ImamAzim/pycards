@@ -117,7 +117,7 @@ class Game(object):
         if not filetype.is_image(verso_path):
             raise GameError('recto file is not an image')
 
-        filename, ext = os.path.splitext(recto_path)
+        ext = Path(recto_path).suffix
         if card_name is None:
             card_name = Path(recto_path).stem
 
