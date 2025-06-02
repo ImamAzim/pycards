@@ -230,7 +230,10 @@ class Game(object):
         :card_name: identify card
 
         """
-        pass
+        if card_name in self._permanent_cards:
+            self._permanent_cards.remove(card_name)
+        else:
+            raise GameError('card is already not marked as non-permanent')
 
     def shuffle_deck(self) -> [Card]:
         """shuffle cards from deck
