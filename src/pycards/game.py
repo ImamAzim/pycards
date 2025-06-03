@@ -257,7 +257,19 @@ class Game(object):
         :card_name:
 
         """
-        pass
+        if card_name in self.deck_card_names:
+            card = self._deck.pop(card_name)
+            src = card['recto_path']
+            dst = self._box_folder
+            new_recto_path = shutil.move(src, dst)
+            src = card['verso_path']
+            new_verso_path = shutil.move(src, dst)
+            card['recto_path'] = new_recto_path
+            card['verso_path'] = new_verso_path
+            card['orientation'] = 0
+            self._box[card_name] = card
+        else:
+            raise GameError('card is not present in the deck')
 
     def destroy_card(self, card_name):
         """remove card from deck or box and rm img file
