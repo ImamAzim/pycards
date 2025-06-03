@@ -174,6 +174,38 @@ class TestGame(unittest.TestCase):
         top_card = deck.pop()
         self.assertIsInstance(top_card, Card)
 
+    def test_forget_card(self):
+        """test forget
+
+        """
+        game = self._game
+        game.import_card(**self._test_card)
+        card_name = self._test_card['card_name']
+        game.discover_card(card_name)
+        game.forget_card(card_name)
+
+        folder = os.path.join(DATA_FOLDER, TESTNAME, BOX_FOLDER)
+        suffix = Path(RECTO_CARD).suffix
+        card_fn = f'{card_name}_recto{suffix}'
+        path = os.path.join(folder, card_fn)
+        self.assertTrue(os.path.exists(path))
+        suffix = Path(VERSO_CARD).suffix
+        card_fn = f'{card_name}_verso{suffix}'
+        path = os.path.join(folder, card_fn)
+        self.assertTrue(os.path.exists(path))
+        self.assertIn(card_name, game.box_card_names)
+
+        folder = os.path.join(DATA_FOLDER, TESTNAME, DECK_FOLDER)
+        suffix = Path(RECTO_CARD).suffix
+        card_fn = f'{card_name}_recto{suffix}'
+        path = os.path.join(folder, card_fn)
+        self.assertFalse(os.path.exists(path))
+        suffix = Path(VERSO_CARD).suffix
+        card_fn = f'{card_name}_verso{suffix}'
+        path = os.path.join(folder, card_fn)
+        self.assertFalse(os.path.exists(path))
+        self.assertNotIn(card_name, game.deck_card_names)
+
 
 class TestGameHandler(unittest.TestCase):
 
