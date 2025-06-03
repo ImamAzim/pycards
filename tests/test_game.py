@@ -160,6 +160,20 @@ class TestGame(unittest.TestCase):
         permanent_cards = game.permanent_cards
         self.assertEqual(0, len(permanent_cards))
 
+    def test_shuffle(self):
+        """test shuffle
+        :returns: TODO
+
+        """
+        game = self._game
+        game.import_card(**self._test_card)
+        card_name = self._test_card['card_name']
+        game.discover_card(card_name)
+
+        deck = game.shuffle_deck()
+        top_card = deck.pop()
+        self.assertIsInstance(top_card, Card)
+
 
 class TestGameHandler(unittest.TestCase):
 
