@@ -206,6 +206,26 @@ class TestGame(unittest.TestCase):
         self.assertFalse(os.path.exists(path))
         self.assertNotIn(card_name, game.deck_card_names)
 
+    def test_destroy(self):
+        """test destroy
+
+        """
+        game = self._game
+        game.import_card(**self._test_card)
+        card_name = self._test_card['card_name']
+        game.destroy_card(card_name)
+
+        folder = os.path.join(DATA_FOLDER, TESTNAME, BOX_FOLDER)
+        suffix = Path(RECTO_CARD).suffix
+        card_fn = f'{card_name}_recto{suffix}'
+        path = os.path.join(folder, card_fn)
+        self.assertFalse(os.path.exists(path))
+        suffix = Path(VERSO_CARD).suffix
+        card_fn = f'{card_name}_verso{suffix}'
+        path = os.path.join(folder, card_fn)
+        self.assertFalse(os.path.exists(path))
+        self.assertNotIn(card_name, game.box_card_names)
+
 
 class TestGameHandler(unittest.TestCase):
 
