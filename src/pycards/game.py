@@ -75,14 +75,14 @@ class Game(object):
         return self._name
 
     @property
-    def box_card_names(self) -> tuple:
+    def box_card_names(self) -> list:
         """return an ordered list of the card names in the box"""
-        return tuple(sorted(self._box.keys()))
+        return sorted(self._box.keys())
 
     @property
-    def deck_card_names(self) -> tuple:
+    def deck_card_names(self) -> list:
         """return an ordered list of the card names in the deck"""
-        return tuple(sorted(self._deck.keys()))
+        return sorted(self._deck.keys())
 
     @property
     def permanent_cards(self) -> (Card):
