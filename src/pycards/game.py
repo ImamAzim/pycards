@@ -1,6 +1,7 @@
 import os
 import shutil
 from pathlib import Path
+import random
 
 
 import filetype
@@ -239,15 +240,16 @@ class Game(object):
 
     def shuffle_deck(self) -> [Card]:
         """shuffle cards from deck
-        :returns: list of all non-permanent cards
+        :returns: tuple of all non-permanent cards
         in the deck in random order
 
         """
         pile = [
-                self._deck[card_name]
+                Card(**self._deck[card_name])
                 for card_name in self.deck_card_names
                 if card_name not in self._permanent_cards]
-        pass
+        random.shuffle(pile)
+        return pile
 
     def forget_card(self, card_name):
         """move a card from deck to box
