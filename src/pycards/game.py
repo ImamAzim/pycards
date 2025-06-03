@@ -76,17 +76,19 @@ class Game(object):
     @property
     def box_card_names(self) -> tuple:
         """return an ordered list of the card names in the box"""
-        return self._box.keys()
+        return tuple(sorted(self._box.keys()))
 
     @property
     def deck_card_names(self) -> tuple:
         """return an ordered list of the card names in the deck"""
-        return self._deck.keys()
+        return tuple(sorted(self._deck.keys()))
 
     @property
-    def permanent_cards(self) -> [Card]:
+    def permanent_cards(self) -> (Card):
         """get a list of permanent cards from the deck"""
-        permanent_cards = [self.get_card(card_name) for card_name in self._permanent_cards]
+        permanent_cards = [
+                self.get_card(card_name)
+                for card_name in self._permanent_cards]
         return tuple(permanent_cards)
 
     def __init__(self, name: str):
@@ -241,6 +243,10 @@ class Game(object):
         in the deck in random order
 
         """
+        pile = [
+                self._deck[card_name]
+                for card_name in self.deck_card_names
+                if card_name not in self._permanent_cards]
         pass
 
     def forget_card(self, card_name):
