@@ -243,6 +243,23 @@ class TestGame(unittest.TestCase):
         path = os.path.join(folder, card_fn)
         self.assertEqual(path, card.path)
 
+    def test_flip(self):
+        """test flip card
+
+        """
+        game = self._game
+        game.import_card(**self._test_card)
+        card_name = self._test_card['card_name']
+        game.flip_card(card_name)
+        card = game.get_card(card_name)
+        self.assertFalse(card.rotate)
+
+        folder = os.path.join(DATA_FOLDER, TESTNAME, BOX_FOLDER)
+        suffix = Path(VERSO_CARD).suffix
+        card_fn = f'{card_name}_verso{suffix}'
+        path = os.path.join(folder, card_fn)
+        self.assertEqual(path, card.path)
+
 
 class TestGameHandler(unittest.TestCase):
 
