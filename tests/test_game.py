@@ -237,7 +237,7 @@ class TestGame(unittest.TestCase):
         card = game.get_card(card_name)
         self.assertTrue(card.rotate)
 
-        folder = os.path.join(DATA_FOLDER, TESTNAME, DECK_FOLDER)
+        folder = os.path.join(DATA_FOLDER, TESTNAME, BOX_FOLDER)
         suffix = Path(RECTO_CARD).suffix
         card_fn = f'{card_name}_recto{suffix}'
         path = os.path.join(folder, card_fn)
