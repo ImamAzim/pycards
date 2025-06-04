@@ -308,8 +308,8 @@ class Game(object):
         cards = self._check_card_in_game(card_name)
         card_dict: dict = cards[card_name]
         orientation = card_dict['orientation']
-        # new_orientation = 2 * (orientation // 2) + (orientation + 1) % 2
-        # card_dict['orientation'] = new_orientation
+        new_orientation = 3 - orientation
+        card_dict['orientation'] = new_orientation
 
 
 class GameHandler(object):
