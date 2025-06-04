@@ -278,15 +278,13 @@ class Game(object):
         :card_name:
 
         """
-        if self._check_card_in_game(card_name):
-            for box_name, cards in self._all_cards.items():
-                if card_name in cards:
-                    card = cards.pop(card_name)
-                    path = card['recto_path']
-                    os.remove(path)
-                    path = card['verso_path']
-                    os.remove(path)
-                    break
+        cards = self._check_card_in_game(card_name)
+        if cards:
+            card = cards.pop(card_name)
+            path = card['recto_path']
+            os.remove(path)
+            path = card['verso_path']
+            os.remove(path)
         else:
             raise GameError('card is neither in deck, nor in box')
 
