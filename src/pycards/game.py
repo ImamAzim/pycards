@@ -185,12 +185,11 @@ class Game(object):
         :returns: card to be displayed,
 
         """
-        if self._check_card_in_game(card_name):
-            for box_name, cards in self._all_cards.items():
-                card_dict = cards.get(card_name)
-                if card_dict is not None:
-                    card = Card(**card_dict)
-                    return card
+        cards = self._check_card_in_game(card_name)
+        if cards:
+            card_dict = cards.get(card_name)
+            card = Card(**card_dict)
+            return card
         else:
             raise GameError('missing from the game')
 
