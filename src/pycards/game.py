@@ -146,15 +146,16 @@ class Game(object):
                     )
         self._box[card_name] = card
 
-    def _check_card_in_game(self, card_name):
+    def _check_card_in_game(self, card_name) -> dict:
         """look in deck or box if card present
 
         :card_name:
+        :return: dict in which the card is contained or False if absent
 
         """
         for box_name, cards in self._all_cards.items():
             if card_name in cards:
-                return True
+                return cards
         return False
 
     def import_cards_folder(self, folder_path):
