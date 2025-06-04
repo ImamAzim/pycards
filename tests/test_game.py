@@ -226,6 +226,23 @@ class TestGame(unittest.TestCase):
         self.assertFalse(os.path.exists(path))
         self.assertNotIn(card_name, game.box_card_names)
 
+    def test_rotate(self):
+        """test rotate card
+
+        """
+        game = self._game
+        game.import_card(**self._test_card)
+        card_name = self._test_card['card_name']
+        game.rotate_card(card_name)
+        card = game.get_card(card_name)
+        self.assertTrue(card.rotate)
+
+        folder = os.path.join(DATA_FOLDER, TESTNAME, DECK_FOLDER)
+        suffix = Path(RECTO_CARD).suffix
+        card_fn = f'{card_name}_recto{suffix}'
+        path = os.path.join(folder, card_fn)
+        self.assertEqual(path, card.path)
+
 
 class TestGameHandler(unittest.TestCase):
 

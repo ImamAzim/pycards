@@ -287,12 +287,13 @@ class Game(object):
         else:
             raise GameError('card is neither in deck, nor in box')
 
-    def rotate_card(self, card_name, direction: str = 'right'):
-        """flip or rotate card (progress)
+    def rotate_card(self, card_name):
+        """rotate card  by 180 deg(progress)
 
         :card_name: identify the card
-        :direction: either right or down
         """
+
+        cards = self._check_card_in_game(card_name)
         pass
 
 
