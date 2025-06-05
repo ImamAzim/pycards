@@ -270,6 +270,17 @@ class TestGame(unittest.TestCase):
         folder = os.path.join(DATA_FOLDER, TESTNAME)
         self.assertFalse(os.path.exists(folder))
 
+    def test_data_persistance(self):
+        """ test if data are preserved between session (autosave) """
+
+        game: Game = self._game
+        game.import_card(**self._test_card)
+        card_name = self._test_card['card_name']
+        self.assertIn(card_name, game.box_card_names)
+
+        same_game = Game(game.name)
+        self.assertIn(card_name, same_game.box_card_names)
+
 
 class TestCard(unittest.TestCase):
 
