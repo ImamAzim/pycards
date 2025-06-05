@@ -70,6 +70,13 @@ class Game(object):
 
     """Game class to handle the deck and the cards box"""
 
+    def get_saved_game() -> [str]:
+        """look for all saved games on disk
+        :returns: list of saved games names
+
+        """
+        pass
+
     @property
     def name(self) -> str:
         """name of the game"""

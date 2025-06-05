@@ -295,6 +295,14 @@ class TestGame(unittest.TestCase):
         with self.assertRaises(GameError):
             same_game.get_card(card_name)
 
+    def test_get_saved_games(self):
+        """test get saved games
+
+        """
+        game = self._game
+        saved_games = Game.get_saved_game()
+        self.assertIn(TESTNAME, saved_games)
+
 
 class TestCard(unittest.TestCase):
 
