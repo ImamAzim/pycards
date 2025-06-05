@@ -104,6 +104,18 @@ class Game(object):
         self._deck_folder = os.path.join(self._game_data_folder, DECK_FOLDER)
         os.makedirs(self._deck_folder, exist_ok=True)
 
+    def is_card_permanent(self, card_name) -> bool:
+        """determine if card is in the list of permanent cards
+
+        :card_name:
+        :returns: True if in list of permanents
+
+        """
+        if card_name in self._permanent_cards:
+            return True
+        else:
+            return False
+
     def delete_game(self):
         """remove all saved cards and folders from disk. a config file will
         still be present.
@@ -229,7 +241,7 @@ class Game(object):
 
         """
         if card_name in self.deck_card_names:
-            if card_name not in self._permanent_cards:
+            if not self.is_card_permanent(card_name):
                 self._permanent_cards.append(card_name)
             else:
                 raise GameError('card is already marked as permanent')
@@ -243,7 +255,7 @@ class Game(object):
         :card_name: identify card
 
         """
-        if card_name in self._permanent_cards:
+        if self.is_card_permanent(card_name):
             self._permanent_cards.remove(card_name)
         else:
             raise GameError('card is already not marked as non-permanent')
