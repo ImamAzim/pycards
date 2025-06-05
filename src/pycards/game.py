@@ -121,9 +121,9 @@ class Game(object):
         still be present.
 
         """
-        pass
-        # path = os.path.join(DATA_FOLDER, name)
-        # shutil.rmtree(path)
+        path = self._game_data_folder
+        if os.path.exists(path):
+            shutil.rmtree(path)
 
     def import_card(
             self,

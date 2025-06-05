@@ -44,7 +44,7 @@ class TestGame(unittest.TestCase):
         :returns: TODO
 
         """
-        self._gamehandler.delete_game(TESTNAME)
+        self._game.delete_game()
 
     def test_property(self):
         """check attibutes of games
@@ -259,6 +259,17 @@ class TestGame(unittest.TestCase):
         card_fn = f'{card_name}_verso{suffix}'
         path = os.path.join(folder, card_fn)
         self.assertEqual(path, card.path)
+
+    def test_delete(self):
+        """test delete
+
+        """
+        game = self._game
+        game.import_card(**self._test_card)
+        game.delete_game()
+
+        folder = os.path.join(DATA_FOLDER, TESTNAME)
+        self.assertFalse(os.path.exists(folder))
 
 
 class TestGameHandler(unittest.TestCase):
