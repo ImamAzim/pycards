@@ -134,6 +134,15 @@ class Game(object):
             varbox.permanent_cards = list()
         return varbox
 
+    def _reset_varbox(self):
+        """reset all the data of the current varbox
+
+        """
+        varbox = self._varbox
+        varbox.box = dict()
+        varbox.deck = dict()
+        varbox.permanent_cards = list()
+
     def is_card_permanent(self, card_name) -> bool:
         """determine if card is in the list of permanent cards
 
@@ -146,14 +155,16 @@ class Game(object):
         else:
             return False
 
-    def delete_game(self):
+    def delete_game(self) -> str:
         """remove all saved cards and folders from disk. a config file will
         still be present.
+        :return: path of the empty config file
 
         """
         path = self._game_data_folder
         if os.path.exists(path):
             shutil.rmtree(path)
+        self._reset_varbox()
 
     def import_card(
             self,
