@@ -5,6 +5,7 @@ import random
 
 
 import filetype
+from varboxes import VarBox
 
 
 from pycards.config import DATA_FOLDER
@@ -93,10 +94,6 @@ class Game(object):
         return tuple(permanent_cards)
 
     def __init__(self, name: str):
-        self._box = dict()
-        self._deck = dict()
-        self._all_cards = dict(box=self._box, deck=self._deck)
-        self._permanent_cards = list()
         self._change_name(name)
 
     def _change_name(self, name: str):
@@ -111,6 +108,31 @@ class Game(object):
         os.makedirs(self._box_folder, exist_ok=True)
         self._deck_folder = os.path.join(self._game_data_folder, DECK_FOLDER)
         os.makedirs(self._deck_folder, exist_ok=True)
+
+        self._varbox = self._create_varbox(name)
+
+        self._box = self._varbox.box
+        self._deck = self._varbox.deck
+        self._all_cards = dict(box=self._box, deck=self._deck)
+        self._permanent_cards = self._varbox.permanent_cards
+
+    def _create_varbox(self, name) -> Varbox:
+        """create varbox or load an existing one and add
+        attributes (if not presents) to store permanent data
+
+        :name: game
+        :returns: varbox
+
+        """
+        varbox = VarBox(app_name=name)
+
+        if not hasattr(varbox, 'box'):
+            varbox.box = dict()
+        if not hasattr(varbox, 'deck'):
+            varbox.deck = dict()
+        if not hasattr(varbox, 'permanent_cards'):
+            varbox.permanent_cards = list()
+        return varbox
 
     def is_card_permanent(self, card_name) -> bool:
         """determine if card is in the list of permanent cards
