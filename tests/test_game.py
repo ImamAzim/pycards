@@ -4,12 +4,11 @@ test game models
 
 import unittest
 import os
-import shutil
 from pathlib import Path
 
 
-from pycards.game import Game, GameHandler, GameError, Card
-from pycards.game import SAVED_GAME_FILE_SUFFIX, BOX_FOLDER, DECK_FOLDER
+from pycards.game import Game, GameError, Card
+from pycards.game import BOX_FOLDER, DECK_FOLDER
 from pycards.config import DATA_FOLDER
 
 
@@ -25,10 +24,6 @@ class TestGame(unittest.TestCase):
 
     """all test concerning Game. """
 
-    @classmethod
-    def setUpClass(cls):
-        cls._gamehandler = GameHandler()
-
     def setUp(self):
         """create game instance
 
@@ -37,7 +32,11 @@ class TestGame(unittest.TestCase):
         card_name = 'testcard'
         recto = os.path.join(CARD_FOLDER_PATH, RECTO_CARD)
         verso = os.path.join(CARD_FOLDER_PATH, VERSO_CARD)
-        self._test_card = dict(recto_path=recto, verso_path=verso, card_name=card_name)
+        self._test_card = dict(
+                recto_path=recto,
+                verso_path=verso,
+                card_name=card_name,
+                )
 
     def tearDown(self):
         """delete test game from disk
@@ -272,59 +271,6 @@ class TestGame(unittest.TestCase):
         self.assertFalse(os.path.exists(folder))
 
 
-class TestGameHandler(unittest.TestCase):
-
-    """all test concerning GameHandler. """
-
-    @classmethod
-    def setUpClass(cls):
-        cls.game_handler = GameHandler()
-
-    def test_new_init(self):
-        """check if instance of Game is created and present
-
-        """
-        self.game_handler.new_game(f'{TESTNAME}_newinit')
-        self.assertIsNotNone(self.game_handler.game)
-        self.assertIsInstance(self.game_handler.game, Game)
-
-    def test_delete_game(self):
-        """create files and dir to delete it
-        :returns: TODO
-
-        """
-        name = f'{TESTNAME}_delete'
-        path = os.path.join(DATA_FOLDER, f'{name}.{SAVED_GAME_FILE_SUFFIX}')
-        open(path, 'w').close()
-        folder_path = os.path.join(DATA_FOLDER, name)
-        os.mkdir(folder_path)
-        sub_path = os.path.join(folder_path, 'test')
-        open(sub_path, 'w').close()
-
-        self.game_handler.delete_game(name)
-
-        filenames = os.listdir(DATA_FOLDER)
-        for filename in filenames:
-            self.assertNotIn(name, filename)
-
-    # def test_new_save(self):
-        # """check if a file and a folder is created for the new game
-
-        # """
-        # self.game_handler.new_game(f'{TESTNAME}_newsave')
-
-    @classmethod
-    def tearDownClass(cls):
-        files = os.listdir(DATA_FOLDER)
-        for filename in files:
-            if TESTNAME in filename:
-                path = os.path.join(DATA_FOLDER, filename)
-                if os.path.isfile(path):
-                    os.remove(path)
-                else:
-                    shutil.rmtree(path)
-
-
 class TestCard(unittest.TestCase):
 
     """all test concerning Card. """
@@ -355,6 +301,7 @@ class TestCard(unittest.TestCase):
         self.assertEqual(card.name, name)
         self.assertEqual(card.path, verso)
         self.assertFalse(card.rotate)
+
 
 """ script tests """
 

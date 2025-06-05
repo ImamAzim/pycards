@@ -336,50 +336,5 @@ class Game(object):
         card_dict['orientation'] = new_orientation
 
 
-class GameHandler(object):
-
-    """class to create, load or save games"""
-
-    @property
-    def game(self) -> None | Game:
-        """doc"""
-        return self._game
-
-    def __init__(self):
-        """TODO: to be defined. """
-        self._game = None
-
-    def new_game(self, name: str):
-        """create an instance of a new game and save it
-
-        :name: identify name
-
-        """
-        self._game = Game(name)
-
-    def load_game(self, name: str):
-        """load game and put it in attribute
-
-        :name: same str as it was saved
-
-        """
-        pass
-
-    def delete_game(self, name: str):
-        """remove game from disk
-
-        :name: same as it was saved
-
-        """
-        savefile = f'{name}.{SAVED_GAME_FILE_SUFFIX}'
-        filenames = os.listdir(DATA_FOLDER)
-        if savefile in filenames:
-            path = os.path.join(DATA_FOLDER, savefile)
-            os.remove(path)
-        if name in filenames:
-            path = os.path.join(DATA_FOLDER, name)
-            shutil.rmtree(path)
-
-
 if __name__ == '__main__':
     pass
