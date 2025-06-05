@@ -98,10 +98,20 @@ class Game(object):
         self._deck = dict()
         self._all_cards = dict(box=self._box, deck=self._deck)
         self._permanent_cards = list()
-        self._box_folder = os.path.join(DATA_FOLDER, self.name, BOX_FOLDER)
+        self._game_data_folder = os.path.join(DATA_FOLDER, self.name)
+        self._box_folder = os.path.join(self._game_data_folder, BOX_FOLDER)
         os.makedirs(self._box_folder, exist_ok=True)
-        self._deck_folder = os.path.join(DATA_FOLDER, self.name, DECK_FOLDER)
+        self._deck_folder = os.path.join(self._game_data_folder, DECK_FOLDER)
         os.makedirs(self._deck_folder, exist_ok=True)
+
+    def delete_game(self):
+        """remove all saved cards and folders from disk. a config file will
+        still be present.
+
+        """
+        pass
+        # path = os.path.join(DATA_FOLDER, name)
+        # shutil.rmtree(path)
 
     def import_card(
             self,
