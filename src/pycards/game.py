@@ -301,6 +301,8 @@ class Game(object):
         """
         cards = self._check_card_in_game(card_name)
         if cards:
+            if self.is_card_permanent(card_name):
+                self.unlock_card(card_name)
             card = cards.pop(card_name)
             path = card['recto_path']
             os.remove(path)
