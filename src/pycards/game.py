@@ -165,6 +165,8 @@ class Game(object):
         if os.path.exists(path):
             shutil.rmtree(path)
         self._reset_varbox()
+        varbox_path = self._varbox.get_path()
+        return varbox_path
 
     def import_card(
             self,
