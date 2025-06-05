@@ -71,7 +71,7 @@ class Game(object):
 
     """Game class to handle the deck and the cards box"""
 
-    _saved_games = VarBox('saved_games')
+    _saved_games = VarBox(app_name='saved_games')
     if not hasattr(_saved_games, 'names'):
         _saved_games.names = list()
 
@@ -206,6 +206,11 @@ class Game(object):
         self._reset_varbox()
         varbox_path = self._varbox.get_path()
         os.remove(varbox_path)
+        saved_games: list = self._saved_games.names
+        if self.name in saved_games:
+            saved_games.remove(self.name)
+        else:
+            print('hello', self.name)
         self._change_name(TEMP_NAME)
 
     def import_card(
