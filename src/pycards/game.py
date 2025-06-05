@@ -93,11 +93,19 @@ class Game(object):
         return tuple(permanent_cards)
 
     def __init__(self, name: str):
-        self._name = name
         self._box = dict()
         self._deck = dict()
         self._all_cards = dict(box=self._box, deck=self._deck)
         self._permanent_cards = list()
+        self._change_name(name)
+
+    def _change_name(self, name: str):
+        """update folder and other data from game name
+
+        :name:
+
+        """
+        self._name = name
         self._game_data_folder = os.path.join(DATA_FOLDER, self.name)
         self._box_folder = os.path.join(self._game_data_folder, BOX_FOLDER)
         os.makedirs(self._box_folder, exist_ok=True)
