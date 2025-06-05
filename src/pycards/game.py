@@ -116,7 +116,7 @@ class Game(object):
         self._all_cards = dict(box=self._box, deck=self._deck)
         self._permanent_cards = self._varbox.permanent_cards
 
-    def _create_varbox(self, name) -> Varbox:
+    def _create_varbox(self, name) -> VarBox:
         """create varbox or load an existing one and add
         attributes (if not presents) to store permanent data
 
