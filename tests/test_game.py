@@ -283,12 +283,15 @@ class TestGame(unittest.TestCase):
         self.assertIn(card_name, same_game.box_card_names)
 
         game.discover_card(card_name)
+        same_game = Game(game.name)
         self.assertIn(card_name, same_game.deck_card_names)
 
         game.lock_card(card_name)
+        same_game = Game(game.name)
         self.assertTrue(same_game.is_card_permanent(card_name))
 
         game.destroy_card(card_name)
+        same_game = Game(game.name)
         with self.assertRaises(GameError):
             same_game.get_card(card_name)
 
