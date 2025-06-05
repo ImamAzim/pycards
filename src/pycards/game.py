@@ -72,6 +72,8 @@ class Game(object):
     """Game class to handle the deck and the cards box"""
 
     _saved_games = VarBox('saved_games')
+    if not hasattr(_saved_games, 'names'):
+        _saved_games.names = list()
 
     def get_saved_game() -> [str]:
         """look for all saved games on disk
@@ -104,7 +106,34 @@ class Game(object):
         return tuple(permanent_cards)
 
     def __init__(self, name: str):
-        self._change_name(name)
+        if name in self._saved_games.names:
+            self.load(name)
+        else:
+            self.new(name)
+
+    def new(self, name: str):
+        """create a new game
+
+        :name: should not be already present, else will raise error
+
+        """
+        if name not in self._saved_games.names:
+            self._saved_games.names.append(name)
+            self._saved_games.save()
+            self._change_name(name)
+        else:
+            raise GameError('there is already a saved game with this name')
+
+    def load(self, name: str):
+        """load a previousely saved game
+
+        :name: there must be a game that was saved with that name
+
+        """
+        if name in self._saved_games.names:
+            self._change_name(name)
+        else:
+            raise GameError('there is no saved game with this name')
 
     def _change_name(self, name: str):
         """update folder and other data from game name
