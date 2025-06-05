@@ -43,8 +43,7 @@ class TestGame(unittest.TestCase):
         :returns: TODO
 
         """
-        path = self._game.delete_game()
-        os.remove(path)
+        self._game.delete_game()
 
     def test_property(self):
         """check attibutes of games

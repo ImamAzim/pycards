@@ -14,6 +14,7 @@ from pycards.config import DATA_FOLDER
 SAVED_GAME_FILE_SUFFIX = 'json'
 BOX_FOLDER = 'box'
 DECK_FOLDER = 'deck'
+TEMP_NAME = 'tmp'
 
 
 class Card(object):
@@ -69,6 +70,8 @@ class GameError(Exception):
 class Game(object):
 
     """Game class to handle the deck and the cards box"""
+
+    _saved_games = VarBox('saved_games')
 
     def get_saved_game() -> [str]:
         """look for all saved games on disk
@@ -173,7 +176,8 @@ class Game(object):
             shutil.rmtree(path)
         self._reset_varbox()
         varbox_path = self._varbox.get_path()
-        return varbox_path
+        os.remove(varbox_path)
+        self._change_name(TEMP_NAME)
 
     def import_card(
             self,
