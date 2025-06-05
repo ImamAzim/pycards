@@ -197,6 +197,7 @@ class Game(object):
                     card_name=card_name,
                     )
         self._box[card_name] = card
+        self._varbox.save()
 
     def _check_card_in_game(self, card_name) -> dict:
         """look in deck or box if card present
@@ -261,6 +262,7 @@ class Game(object):
             card['recto_path'] = new_recto_path
             card['verso_path'] = new_verso_path
             self._deck[card_name] = card
+            self._varbox.save()
         else:
             raise GameError('card is not present in the box')
 
@@ -273,6 +275,7 @@ class Game(object):
         if card_name in self.deck_card_names:
             if not self.is_card_permanent(card_name):
                 self._permanent_cards.append(card_name)
+                self._varbox.save()
             else:
                 raise GameError('card is already marked as permanent')
         else:
@@ -287,6 +290,7 @@ class Game(object):
         """
         if self.is_card_permanent(card_name):
             self._permanent_cards.remove(card_name)
+            self._varbox.save()
         else:
             raise GameError('card is already not marked as non-permanent')
 
@@ -320,6 +324,7 @@ class Game(object):
             card['verso_path'] = new_verso_path
             card['orientation'] = 0
             self._box[card_name] = card
+            self._varbox.save()
         else:
             raise GameError('card is not present in the deck')
 
@@ -338,6 +343,7 @@ class Game(object):
             os.remove(path)
             path = card['verso_path']
             os.remove(path)
+            self._varbox.save()
         else:
             raise GameError('card is neither in deck, nor in box')
 
@@ -352,6 +358,7 @@ class Game(object):
         orientation = card_dict['orientation']
         new_orientation = 2 * (orientation // 2) + (orientation + 1) % 2
         card_dict['orientation'] = new_orientation
+        self._varbox.save()
 
     def flip_card(self, card_name):
         """flip recto-verso the card
@@ -364,6 +371,7 @@ class Game(object):
         orientation = card_dict['orientation']
         new_orientation = 3 - orientation
         card_dict['orientation'] = new_orientation
+        self._varbox.save()
 
 
 if __name__ == '__main__':
