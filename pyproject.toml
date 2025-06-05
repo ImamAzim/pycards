@@ -21,6 +21,7 @@ description = "GUI for your favorite deck card game"
 dependencies = [
 	'xdg',
 	'filetype',
+	'varboxes',
 ]
 
 [project.optional-dependencies]
