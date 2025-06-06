@@ -52,14 +52,19 @@ class Table(object):
             self._gui.update_deck_cards_list(deck_cards_names)
 
     def import_cards(self, folder_path: str):
-        """import or buy cards. folder needs to contain for each card 2 img
-        files, with names XXX_recto.jpg
-        and XXX_verso.jpg
+        """import ('buy') cards. folder needs to contain for each card 2 img
+        files
 
         :folder_path: contains the img file of the cards
 
         """
-        pass
+        try:
+            self._game.import_cards_folder(folder_path)
+        except GameError as e:
+            self._gui.display_msg(e)
+        else:
+            box_cards_names = self._game.box_card_names
+            self._gui.update_box_cards_list(box_cards_names)
 
     def discover_card(self, card_name: str):
         """move the cards from box to deck
