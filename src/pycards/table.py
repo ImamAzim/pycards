@@ -98,13 +98,20 @@ class Table(object):
             box_cards_names = self._game.box_card_names
             self._gui.update_box_cards_list(box_cards_names)
 
-    def rotate_card(self, card_name, direction: str = 'right'):
-        """flip or rotate card (progress)
+    def rotate_card(self, card_name):
+        """rotate card
 
         :card_name: identify the card
-        :direction: either right or down
         """
-        pass
+        try:
+            self._game.rotate_card(card_name)
+        except GameError as e:
+            self._gui.display_msg(e)
+        else:
+            deck_card_names = self._game.deck_card_names
+            self._gui.update_deck_cards_list(deck_card_names)
+            box_cards_names = self._game.box_card_names
+            self._gui.update_box_cards_list(box_cards_names)
 
     def forget_card(self, card_name: str):
         """put back the card in box
