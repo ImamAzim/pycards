@@ -118,8 +118,9 @@ class Game(object):
 
         """
         if name not in self._saved_games.names:
-            self._saved_games.names.append(name)
-            self._saved_games.save()
+            if name != TEMP_NAME:
+                self._saved_games.names.append(name)
+                self._saved_games.save()
             self._change_name(name)
         else:
             raise GameError('there is already a saved game with this name')
@@ -207,10 +208,9 @@ class Game(object):
         varbox_path = self._varbox.get_path()
         os.remove(varbox_path)
         saved_games: list = self._saved_games.names
-        if self.name in saved_games:
+        if self.name != TEMP_NAME:
             saved_games.remove(self.name)
-        else:
-            print('hello', self.name)
+            self._saved_games.save()
         self._change_name(TEMP_NAME)
 
     def import_card(
