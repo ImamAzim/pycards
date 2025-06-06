@@ -50,6 +50,7 @@ class Table(object):
             self._gui.update_box_cards_list(box_cards_names)
             deck_cards_names = self._game.deck_card_names
             self._gui.update_deck_cards_list(deck_cards_names)
+            self.shuffle_deck()
 
     def import_cards(self, folder_path: str):
         """import ('buy') cards. folder needs to contain for each card 2 img
@@ -63,8 +64,6 @@ class Table(object):
         except GameError as e:
             self._gui.display_msg(e)
         else:
-            deck_card_names = self._game.deck_card_names
-            self._gui.update_deck_cards_list(deck_card_names)
             box_cards_names = self._game.box_card_names
             self._gui.update_box_cards_list(box_cards_names)
 
@@ -84,6 +83,12 @@ class Table(object):
             self._gui.update_box_cards_list(box_cards_names)
             deck_card_names = self._game.deck_card_names
             self._gui.update_deck_cards_list(deck_card_names)
+            card = self._game.get_card(card_name)
+            self._gui.add_card_on_table(
+                    card_name,
+                    card.path,
+                    'discard',
+                    card.rotate)
 
     def destroy_card(self, card_name: str):
         """remove from box or deck and rm img file
