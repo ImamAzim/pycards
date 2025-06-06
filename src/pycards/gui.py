@@ -9,7 +9,6 @@ class GUI(ABC):
         """TODO: to be defined. """
         ABC.__init__(self)
 
-    @abstractmethod
     def add_card_on_table(
             self,
             card_name: str,
@@ -26,7 +25,6 @@ class GUI(ABC):
         """
         pass
 
-    @abstractmethod
     def is_card_on_table(self, card_name: str) -> bool:
         """check if the card is present on the table
 
@@ -36,7 +34,6 @@ class GUI(ABC):
         """
         pass
 
-    @abstractmethod
     def update_title(self, name: str):
         """put the name of the game on title of table
 
@@ -44,7 +41,6 @@ class GUI(ABC):
         """
         pass
 
-    @abstractmethod
     def update_card_image(self, card_name: str):
         """update a single card, for example when image is rotated
 
@@ -53,7 +49,6 @@ class GUI(ABC):
         """
         pass
 
-    @abstractmethod
     def remove_card(self, card_name: str):
         """remove card from table, because destroyed or forgotten
 
@@ -63,7 +58,6 @@ class GUI(ABC):
         """
         pass
 
-    @abstractmethod
     def update_box_cards_list(self, card_names: list[str]):
         """update the gui to show available cards in box
 
@@ -73,7 +67,6 @@ class GUI(ABC):
         """
         pass
 
-    @abstractmethod
     def update_deck_cards_list(self, card_names: list[str]):
         """update the gui to show available cards in player's deck
 
@@ -82,12 +75,3 @@ class GUI(ABC):
 
         """
         pass
-
-
-class TkinterGUI(GUI):
-
-    """Docstring for TkinterGUI. """
-
-    def __init__(self):
-        """TODO: to be defined. """
-        GUI.__init__(self)
