@@ -13,6 +13,7 @@ from pycards.config import DATA_FOLDER
 
 
 TESTNAME = 'test_game'
+TESTNAME2 = 'test_game2'
 CARD_FOLDER = 'cards'
 CARD_FOLDER_PATH = os.path.join(os.path.dirname(__file__), CARD_FOLDER)
 RECTO_CARD = 'carreau.png'
@@ -301,6 +302,25 @@ class TestGame(unittest.TestCase):
         game = self._game
         saved_games = Game.get_saved_game()
         self.assertIn(TESTNAME, saved_games)
+
+    def test_new_load_game(self):
+        """test new and load
+
+        """
+        game = self._game
+        game.import_card(**self._test_card)
+        card_name = self._test_card['card_name']
+        game.new(TESTNAME2)
+        self.assertEqual(game.name, TESTNAME2)
+        self.assertNotIn(card_name, game.box_card_names)
+        game.load(TESTNAME)
+
+        self.assertEqual(game.name, TESTNAME)
+        self.assertIn(card_name, game.box_card_names)
+
+        game.load(TESTNAME2)
+        game.delete_game()
+        game.load(TESTNAME)
 
 
 class TestCard(unittest.TestCase):
