@@ -38,7 +38,18 @@ class Table(object):
 
         :name: name of the game under it was saved
         """
-        pass
+        try:
+            self._game.load(name)
+        except GameError as e:
+            self._gui.display_msg(e)
+        else:
+            self._gui.clean_table()
+            name = self._game.name
+            self._gui.update_title(name)
+            box_cards_names = self._game.box_card_names
+            self._gui.update_box_cards_list(box_cards_names)
+            deck_cards_names = self._game.deck_card_names
+            self._gui.update_deck_cards_list(deck_cards_names)
 
     def import_cards(self, folder_path: str):
         """import or buy cards. folder needs to contain for each card 2 img
