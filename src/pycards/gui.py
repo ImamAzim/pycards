@@ -1,13 +1,10 @@
-from abc import ABC, abstractmethod
-
-
-class GUI(ABC):
+class GUI():
 
     """GUI for a pycards game"""
 
     def __init__(self):
         """TODO: to be defined. """
-        ABC.__init__(self)
+        pass
 
     def display_msg(self, msg: str):
         """display a msg, for example from controller
@@ -42,9 +39,9 @@ class GUI(ABC):
         """
         pass
 
-    def update_game(self, name: str):
-        """update title, deck card list, box card list
-
+    def update_title(
+            self, name: str):
+        """update title
         :name: of the game
         """
         pass
