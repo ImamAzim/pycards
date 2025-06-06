@@ -75,12 +75,14 @@ class Game(object):
     if not hasattr(_saved_games, 'names'):
         _saved_games.names = list()
 
-    def get_saved_game() -> [str]:
+    @classmethod
+    def get_saved_game(cls) -> (str):
         """look for all saved games on disk
         :returns: list of saved games names
 
         """
-        pass
+        saved_games = tuple(cls._saved_games.names)
+        return saved_games
 
     @property
     def name(self) -> str:
