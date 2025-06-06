@@ -105,7 +105,7 @@ class Game(object):
                 for card_name in self._permanent_cards]
         return tuple(permanent_cards)
 
-    def __init__(self, name: str):
+    def __init__(self, name: str = TEMP_NAME):
         if name in self._saved_games.names:
             self.load(name)
         else:
