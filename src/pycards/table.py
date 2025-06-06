@@ -22,7 +22,7 @@ class Table(object):
         try:
             self._game.new(name)
         except GameError as e:
-            pass
+            self._gui.display_msg(e)
         else:
             self._gui.clean_table()
             name = self._game.name
