@@ -135,7 +135,15 @@ class Table(object):
         :returns: TODO
 
         """
-        pass
+        try:
+            self._game.forget_card(card_name)
+        except GameError as e:
+            self._gui.display_msg(e)
+        else:
+            deck_card_names = self._game.deck_card_names
+            self._gui.update_deck_cards_list(deck_card_names)
+            box_cards_names = self._game.box_card_names
+            self._gui.update_box_cards_list(box_cards_names)
 
     def lock_card(self, card_name: str):
         """lock a card, make it permanent. Will not be reshuffled in deck
