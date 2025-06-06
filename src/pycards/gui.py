@@ -9,6 +9,14 @@ class GUI(ABC):
         """TODO: to be defined. """
         ABC.__init__(self)
 
+    def display_msg(self, msg: str):
+        """display a msg, for example from controller
+
+        :msg: message from controller
+
+        """
+        pass
+
     def add_card_on_table(
             self,
             card_name: str,
@@ -34,10 +42,17 @@ class GUI(ABC):
         """
         pass
 
-    def update_title(self, name: str):
-        """put the name of the game on title of table
+    def update_game(self, name: str):
+        """update title, deck card list, box card list
 
         :name: of the game
+        """
+        pass
+
+    def clean_table(self):
+        """remove all cards from the table
+        :returns: TODO
+
         """
         pass
 

@@ -1,4 +1,4 @@
-from pycards.game import Game
+from pycards.game import Game, GameError
 from pycards.gui import GUI
 
 
@@ -12,14 +12,19 @@ class Table(object):
         """
 
         self._gui = gui
-        self._game = None
+        self._game = Game()
 
     def new_game(self, name: str):
-        """create an instance of a game, activate it on the table and save it
+        """create a new game and update gui with it
 
         :name: instance will be saved with this name
         """
-        pass
+        try:
+            self._game.new(name)
+        except GameError as e:
+            pass
+        else:
+            self._gui.clean_table()
 
     def load_game(self, name: str):
         """make a game that was previousely saved active
