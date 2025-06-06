@@ -73,7 +73,13 @@ class Table(object):
         :returns:
 
         """
-        pass
+        try:
+            self._game.discover_card(card_name)
+        except GameError as e:
+            self._gui.display_msg(e)
+        else:
+            deck_card_names = self._game.deck_card_names
+            self._gui.update_deck_cards_list(deck_card_names)
 
     def destroy_card(self, card_name: str):
         """remove from box or deck and rm img file
