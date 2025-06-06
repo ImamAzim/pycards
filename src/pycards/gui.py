@@ -53,7 +53,11 @@ class GUI():
         """
         pass
 
-    def update_card_image(self, card_name: str):
+    def update_card_image(
+            self,
+            card_name: str,
+            img_path: str,
+            rotated: bool = False):
         """update a single card, for example when image is rotated
 
         :card_name: identify card, which should have a object in the GUI

@@ -119,10 +119,12 @@ class Table(object):
         except GameError as e:
             self._gui.display_msg(e)
         else:
-            deck_card_names = self._game.deck_card_names
-            self._gui.update_deck_cards_list(deck_card_names)
-            box_cards_names = self._game.box_card_names
-            self._gui.update_box_cards_list(box_cards_names)
+            if self._gui.is_card_on_table(card_name):
+                self._gui.update_card_image(
+                        card_name,
+                        card.path,
+                        card.rotate,
+                        )
 
     def flip(self, card_name):
         """flip card
@@ -134,10 +136,12 @@ class Table(object):
         except GameError as e:
             self._gui.display_msg(e)
         else:
-            deck_card_names = self._game.deck_card_names
-            self._gui.update_deck_cards_list(deck_card_names)
-            box_cards_names = self._game.box_card_names
-            self._gui.update_box_cards_list(box_cards_names)
+            if self._gui.is_card_on_table(card_name):
+                self._gui.update_card_image(
+                        card_name,
+                        card.path,
+                        card.rotate,
+                        )
 
     def forget_card(self, card_name: str):
         """put back the card in box
