@@ -36,12 +36,18 @@ class Card(object):
         """specify if img need to be rotated by 180 deg"""
         return self._rotate
 
+    @property
+    def is_locked(self) -> bool:
+        """spec if it is a permanent card (locked)"""
+        return self._is_locked
+
     def __init__(
             self,
             card_name: str,
             recto_path: str,
             verso_path: str,
             orientation: int,
+            is_locked: bool = False,
             ):
         """create a card obj and get img_file to use and rotation
 
@@ -61,6 +67,7 @@ class Card(object):
             self._rotate = True
         else:
             self._rotate = False
+        self._is_locked = is_locked
 
 
 class GameError(Exception):
