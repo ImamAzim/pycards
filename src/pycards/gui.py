@@ -11,6 +11,51 @@ class TkinterGUI(GUI, tkinter.Tk):
         self.title('pycards')
         self._table = None
 
+        self._menu_frame = tkinter.LabelFrame(self, text='menu')
+        self._cardlist_frame = tkinter.LabelFrame(self, text='cards')
+        self._inspect_frame = tkinter.LabelFrame(self, text='inspector')
+        self._table_frame = tkinter.LabelFrame(self, text='table')
+
+        self._fill_menu()
+        self._fill_cardlist()
+        self._fill_inspect_frame()
+        self._fill_table_frame()
+
+        self._place_all_frames()
+
+    def _place_all_frames(self):
+        """position all frames in root window
+
+        """
+        self._menu_frame.grid(row=0, column=0)
+        self._cardlist_frame.grid(row=1, column=0)
+        self._inspect_frame.grid(row=2, column=0, columnspan=2)
+        self._table_frame.grid(row=0, column=1, rowspan=4, columnspan=4)
+
+    def _fill_menu(self):
+        """put option in menu
+
+        """
+        pass
+
+    def _fill_cardlist(self):
+        """list of box and deck cards, options with cards
+
+        """
+        pass
+
+    def _fill_inspect_frame(self):
+        """canvas and options
+
+        """
+        pass
+
+    def _fill_table_frame(self):
+        """ prepare table where cards will be put
+
+        """
+        pass
+
     def set_table(self, table: BaseTable):
         self._table = table
 
