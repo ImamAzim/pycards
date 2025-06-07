@@ -30,6 +30,19 @@ class GUI():
         """
         pass
 
+    def inspect_card(self, ,
+                     card_name, str,
+                     img_path: str,
+                     rotated: bool = False,):
+        """display card in larger frame and allow operations on it
+
+        :card_name: from file name withou recto or verso
+        :img_path: path to card image
+        :rotated: True if you want to rotate by 108 deg
+
+        """
+        pass
+
     def is_card_on_table(self, card_name: str) -> bool:
         """check if the card is present on the table
 
