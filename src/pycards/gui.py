@@ -13,12 +13,12 @@ class TkinterGUI(GUI, tkinter.Tk):
         self._table = None
         width = self.winfo_screenwidth()
         height = self.winfo_screenheight()
-        self._menu_width = int(width * 1 / 5)
-        self._table_width = int(width * 4 / 5)
+        # self._menu_width = int(width * 1 / 5)
+        # self._table_width = int(width * 4 / 5)
         geometry = f'{width}x{height}'
         self.geometry(geometry)
-        self._window_width = width
-        self._window_height = height
+        # self._window_width = width
+        # self._window_height = height
 
         self._menu_frame = ttk.LabelFrame(self, text='menu')
         self._cardlist_frame = ttk.LabelFrame(self, text='cards')
@@ -36,10 +36,15 @@ class TkinterGUI(GUI, tkinter.Tk):
         """position all frames in root window
 
         """
+        self.columnconfigure(0, weight=1)
+        self.columnconfigure(1, weight=4)
+        self.rowconfigure(0, weight=1)
+        self.rowconfigure(1, weight=1)
+        self.rowconfigure(2, weight=2)
         self._menu_frame.grid(row=0, column=0)
         self._cardlist_frame.grid(row=1, column=0)
-        self._inspect_frame.grid(row=2, column=0, columnspan=2)
-        self._table_frame.grid(row=0, column=1, rowspan=4, columnspan=4)
+        self._inspect_frame.grid(row=2, column=0)
+        self._table_frame.grid(row=0, column=1)
 
     def _fill_menu(self):
         """put option in menu
@@ -65,8 +70,8 @@ class TkinterGUI(GUI, tkinter.Tk):
         canvas = tkinter.Canvas(
                 self._inspect_frame,
                 bg='green',
-                width=self._menu_width,
-                height=self._window_height/2,
+                # width=self._menu_width,
+                # height=self._window_height/2,
                 )
         canvas.pack()
         button = ttk.Button(
@@ -83,8 +88,8 @@ class TkinterGUI(GUI, tkinter.Tk):
         canvas = tkinter.Canvas(
                 self._table_frame,
                 bg='green',
-                width=self._table_width,
-                height=self._window_height,
+                # width=self._table_width,
+                # height=self._window_height,
                 )
         canvas.pack()
 
