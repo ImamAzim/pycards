@@ -18,6 +18,7 @@ class GUI():
             self,
             card_name: str,
             img_path: str,
+            is_locked: bool,
             pile: str = 'deck',
             rotated: bool = False):
         """TODO: Docstring for add_card_on_table.

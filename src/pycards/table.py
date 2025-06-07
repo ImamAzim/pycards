@@ -87,6 +87,7 @@ class Table(object):
             self._gui.add_card_on_table(
                     card_name,
                     card.path,
+                    self._game.is_card_permanent(card_name),
                     'discard',
                     card.rotate)
 
