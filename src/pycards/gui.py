@@ -10,6 +10,7 @@ class TkinterGUI(GUI, tkinter.Tk):
         tkinter.Tk.__init__(self)
         self.title('pycards')
         self._table = None
+        self.attributes('-fullscreen', True)
 
         self._menu_frame = tkinter.LabelFrame(self, text='menu')
         self._cardlist_frame = tkinter.LabelFrame(self, text='cards')
@@ -36,7 +37,7 @@ class TkinterGUI(GUI, tkinter.Tk):
         """put option in menu
 
         """
-        button = tkinter.Button(self._menu_frame, text='quit', width=25, command=self.destroy)
+        button = tkinter.Button(self._menu_frame, text='quit', command=self.destroy)
         button.pack()
 
     def _fill_cardlist(self):
