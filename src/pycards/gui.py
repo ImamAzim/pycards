@@ -5,10 +5,18 @@ class GUI():
 
     """GUI for a pycards game"""
 
-    def __init__(self, table: Table):
-        """gui interface for pycard game
+    def __init__(self):
+        """gui interface for pycard game. a controller must be set after init
         :table: controller of the app"""
 
+        self._table = None
+
+    def set_table(self, table: Table):
+        """set the controller of the view
+
+        :table: controller of pycards
+
+        """
         self._table = table
 
     def display_msg(self, msg: str):
