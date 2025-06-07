@@ -6,8 +6,8 @@ from tkinter import ttk
 class TkinterGUI(GUI, tkinter.Tk):
 
     """tkinter GUI for a pycards game"""
-    TABLE_WIDTH_WEIGHT = 4 #relative wieght to menu column
-    TABLE_REL_HEIGHT = 3 # unit of screen height
+    TABLE_WIDTH_WEIGHT = 4  # relative wieght to menu column
+    TABLE_REL_HEIGHT = 3  # unit of screen height
 
     def __init__(self):
         tkinter.Tk.__init__(self)
@@ -25,6 +25,7 @@ class TkinterGUI(GUI, tkinter.Tk):
         self.geometry(geometry)
         self._width = width
         self._height = height
+        self._inspector_height = self._height / 2
 
         self._menu_frame = ttk.LabelFrame(self, text='menu')
         self._cardlist_frame = ttk.LabelFrame(self, text='cards')
@@ -40,7 +41,7 @@ class TkinterGUI(GUI, tkinter.Tk):
 
         self.update()
         self._table_width = self._canvas_table.winfo_width()
-        self._canvas_table.create_line((0,0), (self._table_width, self._table_height), width=4, fill='red')
+        self._inspector_width = self._canvas_inspector.winfo_width()
 
     def _place_all_frames(self):
         """position all frames in root window
@@ -77,19 +78,15 @@ class TkinterGUI(GUI, tkinter.Tk):
         """canvas and options
 
         """
+        pass
         canvas = tkinter.Canvas(
                 self._inspect_frame,
                 bg='green',
-                # width=self._menu_width,
-                height=self._height/2,
+                width=1,
+                height=self._inspector_height,
                 )
-        canvas.pack()
-        # button = ttk.Button(
-                # self._inspect_frame,
-                # text='quit',
-                # command=self.destroy,
-                # )
-        # button.pack()
+        canvas.pack(expand=True, fill=tkinter.X)
+        self._canvas_inspector = canvas
 
     def _fill_table_frame(self):
         """ prepare table where cards will be put
