@@ -6,7 +6,8 @@ from tkinter import ttk
 class TkinterGUI(GUI, tkinter.Tk):
 
     """tkinter GUI for a pycards game"""
-    TABLE_WIDTH_WEIGHT = 4
+    TABLE_WIDTH_WEIGHT = 4 #relative wieght to menu column
+    TABLE_REL_HEIGHT = 3 # unit of screen height
 
     def __init__(self):
         tkinter.Tk.__init__(self)
@@ -17,6 +18,7 @@ class TkinterGUI(GUI, tkinter.Tk):
         self._table_width = int(
                 width * self.TABLE_WIDTH_WEIGHT / (self.TABLE_WIDTH_WEIGHT + 1)
                 )
+        self._table_height = self.TABLE_REL_HEIGHT * height
         geometry = f'{width}x{height}'
         self.geometry(geometry)
         self._width = width
@@ -100,9 +102,7 @@ class TkinterGUI(GUI, tkinter.Tk):
         vbar.config(command=canvas.yview)
         canvas.config(yscrollcommand=vbar.set)
         canvas.pack(side=tkinter.LEFT, expand=True, fill=tkinter.X)
-        print(canvas['width'])
-        print(canvas['height'])
-        canvas.create_line((0,0), (500, 3240), width=4, fill='red')
+        canvas.create_line((0,0), (self._table_width, self._table_height), width=4, fill='red')
 
     def set_table(self, table: BaseTable):
         self._table = table
