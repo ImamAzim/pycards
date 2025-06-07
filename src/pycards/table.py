@@ -114,6 +114,7 @@ class Table(object):
             self._gui.update_box_cards_list(box_cards_names)
             if self._gui.is_card_on_table(card_name):
                 self._gui.remove_card(card_name)
+            self._gui.clean_inspect_area()
 
     def rotate_card(self, card_name):
         """rotate card
@@ -125,14 +126,19 @@ class Table(object):
         except GameError as e:
             self._gui.display_msg(e)
         else:
+            card = self._game.get_card(card_name)
             if self._gui.is_card_on_table(card_name):
-                card = self._game.get_card(card_name)
                 self._gui.update_card_image(
                         card_name,
                         card.path,
                         self._game.is_card_permanent(card_name),
                         card.rotate,
                         )
+            self._gui.inspect_card(
+                    card_name,
+                    card.path,
+                    self._game.is_card_permanent(card_name),
+                    card.rotate)
 
     def flip(self, card_name):
         """flip card
@@ -144,14 +150,19 @@ class Table(object):
         except GameError as e:
             self._gui.display_msg(e)
         else:
+            card = self._game.get_card(card_name)
             if self._gui.is_card_on_table(card_name):
-                card = self._game.get_card(card_name)
                 self._gui.update_card_image(
                         card_name,
                         card.path,
                         self._game.is_card_permanent(card_name),
                         card.rotate,
                         )
+            self._gui.inspect_card(
+                    card_name,
+                    card.path,
+                    self._game.is_card_permanent(card_name),
+                    card.rotate)
 
     def forget_card(self, card_name: str):
         """put back the card in box
@@ -169,7 +180,9 @@ class Table(object):
             self._gui.update_deck_cards_list(deck_card_names)
             box_cards_names = self._game.box_card_names
             self._gui.update_box_cards_list(box_cards_names)
-            self._gui.remove_card(card_name)
+            if self._gui.is_card_on_table(card_name):
+                self._gui.remove_card(card_name)
+            self._gui.clean_inspect_area()
 
     def lock_card(self, card_name: str):
         """lock a card, make it permanent. Will not be reshuffled in deck
@@ -182,6 +195,20 @@ class Table(object):
             self._game.lock_card(card_name)
         except GameError as e:
             self._gui.display_msg(e)
+        else:
+            card = self._game.get_card(card_name)
+            if self._gui.is_card_on_table(card_name):
+                self._gui.update_card_image(
+                        card_name,
+                        card.path,
+                        self._game.is_card_permanent(card_name),
+                        card.rotate,
+                        )
+            self._gui.inspect_card(
+                    card_name,
+                    card.path,
+                    self._game.is_card_permanent(card_name),
+                    card.rotate)
 
     def unlock_card(self, card_name: str):
         """unlock a card, make it permanent. Will not be reshuffled in deck
@@ -194,6 +221,20 @@ class Table(object):
             self._game.unlock_card(card_name)
         except GameError as e:
             self._gui.display_msg(e)
+        else:
+            card = self._game.get_card(card_name)
+            if self._gui.is_card_on_table(card_name):
+                self._gui.update_card_image(
+                        card_name,
+                        card.path,
+                        self._game.is_card_permanent(card_name),
+                        card.rotate,
+                        )
+            self._gui.inspect_card(
+                    card_name,
+                    card.path,
+                    self._game.is_card_permanent(card_name),
+                    card.rotate)
 
     def inspect_card(self, card_name: str):
         """call inspect method of gui with card info to display
