@@ -16,7 +16,7 @@ class TkinterGUI(GUI, tkinter.Tk):
         self._table_width = int(width * 4 / 5)
         self.geometry("%dx%d" % (width, height))
         self._window_width = width
-        self._windo_height = height
+        self._window_height = height
 
         self._menu_frame = tkinter.LabelFrame(self, text='menu')
         self._cardlist_frame = tkinter.LabelFrame(self, text='cards')
@@ -60,7 +60,19 @@ class TkinterGUI(GUI, tkinter.Tk):
         """canvas and options
 
         """
-        pass
+        canvas = tkinter.Canvas(
+                self._inspect_frame,
+                bg='green',
+                width=self._menu_width,
+                height=self._window_height/2,
+                )
+        canvas.pack()
+        button = tkinter.Button(
+                self._inspect_frame,
+                text='quit',
+                command=self.destroy,
+                )
+        button.pack()
 
     def _fill_table_frame(self):
         """ prepare table where cards will be put
@@ -70,7 +82,7 @@ class TkinterGUI(GUI, tkinter.Tk):
                 self._table_frame,
                 bg='green',
                 width=self._table_width,
-                height=self._windo_height,
+                height=self._window_height,
                 )
         canvas.pack()
 
