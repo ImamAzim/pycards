@@ -14,14 +14,15 @@ class GUI():
         """
         pass
 
-    def add_card_on_table(
+    def place_card_on_table(
             self,
             card_name: str,
             img_path: str,
             is_locked: bool,
             pile: str = 'deck',
             rotated: bool = False):
-        """TODO: Docstring for add_card_on_table.
+        """place the card on the table. if card is already present it will only move it without updating
+        the image
 
         :card_name: from file name withou recto or verso
         :img_path: path to card image

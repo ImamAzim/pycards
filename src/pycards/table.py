@@ -84,7 +84,7 @@ class Table(object):
             deck_card_names = self._game.deck_card_names
             self._gui.update_deck_cards_list(deck_card_names)
             card = self._game.get_card(card_name)
-            self._gui.add_card_on_table(
+            self._gui.place_card_on_table(
                     card_name,
                     card.path,
                     self._game.is_card_permanent(card_name),
@@ -254,7 +254,14 @@ class Table(object):
         :returns: TODO
 
         """
-        pass
+        cards = self._game.shuffle_deck()
+        for card in cards:
+            self._gui.place_card_on_table(
+                    card_name,
+                    card.path,
+                    self._game.is_card_permanent(card_name),
+                    'discard',
+                    card.rotate)
 
 
 if __name__ == '__main__':
