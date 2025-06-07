@@ -91,10 +91,17 @@ class TkinterGUI(GUI, tkinter.Tk):
         canvas = tkinter.Canvas(
                 self._table_frame,
                 bg='green',
-                # width=self._table_width,
                 height=self._height,
+                # width=self._width,
+                scrollregion=(0, 0, self._width, 3 * self._height),
                 )
-        canvas.pack(fill=tkinter.X)
+        vbar = ttk.Scrollbar(self._table_frame, orient=tkinter.VERTICAL)
+        vbar.pack(side=tkinter.RIGHT, fill=tkinter.Y)
+        vbar.config(command=canvas.yview)
+        canvas.config(yscrollcommand=vbar.set)
+        canvas.pack(side=tkinter.LEFT, expand=True, fill=tkinter.X)
+        print(canvas['width'])
+        print(canvas['height'])
 
     def set_table(self, table: BaseTable):
         self._table = table
