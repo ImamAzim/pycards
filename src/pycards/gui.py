@@ -1,7 +1,4 @@
-from __future__ import annotations
-
-
-from pycards.interfaces import GUI
+from pycards.interfaces import GUI, BaseTable
 
 
 class TkinterGUI(GUI):
@@ -14,7 +11,7 @@ class TkinterGUI(GUI):
     def run(self):
         pass
 
-    def set_table(self, table: Table):
+    def set_table(self, table: BaseTable):
         self._table = table
 
     def display_msg(self, msg: str):

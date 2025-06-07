@@ -1,5 +1,6 @@
+from pycards.table import Table
 from pycards.gui import TkinterGUI
-from pycards.interfaces import GUI
+from pycards.interfaces import GUI, BaseTable
 
 
 class PycarApp(object):
@@ -8,8 +9,8 @@ class PycarApp(object):
 
     def __init__(self):
         """init mvc model """
-        self._gui:  GUI|TkinterGUI = TkinterGUI()
-        table = Table(self._gui)
+        self._gui:  GUI | TkinterGUI = TkinterGUI()
+        table: BaseTable = Table(self._gui)
         self._gui.set_table(table)
         self._gui.place_card_on_table
 
