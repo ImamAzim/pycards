@@ -37,14 +37,14 @@ class TkinterGUI(GUI, tkinter.Tk):
 
         """
         self.columnconfigure(0, weight=1)
-        self.columnconfigure(1, weight=4)
+        self.columnconfigure(1, weight=5)
         self.rowconfigure(0, weight=1)
         self.rowconfigure(1, weight=1)
         self.rowconfigure(2, weight=2)
-        self._menu_frame.grid(row=0, column=0)
-        self._cardlist_frame.grid(row=1, column=0)
-        self._inspect_frame.grid(row=2, column=0)
-        self._table_frame.grid(row=0, column=1)
+        self._menu_frame.grid(row=0, column=0, sticky=tkinter.EW)
+        self._cardlist_frame.grid(row=1, column=0, sticky=tkinter.EW)
+        self._inspect_frame.grid(row=2, column=0, sticky=tkinter.EW)
+        self._table_frame.grid(row=0, column=1, rowspan=3, sticky=tkinter.NSEW)
 
     def _fill_menu(self):
         """put option in menu
@@ -67,19 +67,20 @@ class TkinterGUI(GUI, tkinter.Tk):
         """canvas and options
 
         """
-        canvas = tkinter.Canvas(
-                self._inspect_frame,
-                bg='green',
-                # width=self._menu_width,
-                # height=self._window_height/2,
-                )
-        canvas.pack()
-        button = ttk.Button(
-                self._inspect_frame,
-                text='quit',
-                command=self.destroy,
-                )
-        button.pack()
+        pass
+        # canvas = tkinter.Canvas(
+                # self._inspect_frame,
+                # bg='green',
+                # # width=self._menu_width,
+                # # height=self._window_height/2,
+                # )
+        # canvas.pack()
+        # button = ttk.Button(
+                # self._inspect_frame,
+                # text='quit',
+                # command=self.destroy,
+                # )
+        # button.pack()
 
     def _fill_table_frame(self):
         """ prepare table where cards will be put
