@@ -13,12 +13,14 @@ class TkinterGUI(GUI, tkinter.Tk):
         tkinter.Tk.__init__(self)
         self.title('pycards')
         self._table = None
+
         width = self.winfo_screenwidth()
         height = self.winfo_screenheight()
         self._table_width = int(
                 width * self.TABLE_WIDTH_WEIGHT / (self.TABLE_WIDTH_WEIGHT + 1)
                 )
         self._table_height = self.TABLE_REL_HEIGHT * height
+        self._menu_width = width / (self.TABLE_REL_HEIGHT + 1)
         geometry = f'{width}x{height}'
         self.geometry(geometry)
         self._width = width
@@ -36,6 +38,10 @@ class TkinterGUI(GUI, tkinter.Tk):
 
         self._place_all_frames()
 
+        self.update()
+        self._table_width = self._canvas_table.winfo_width()
+        self._canvas_table.create_line((0,0), (self._table_width, self._table_height), width=4, fill='red')
+
     def _place_all_frames(self):
         """position all frames in root window
 
@@ -47,7 +53,7 @@ class TkinterGUI(GUI, tkinter.Tk):
         self.rowconfigure(2, weight=2)
         self._menu_frame.grid(row=0, column=0, sticky=tkinter.EW)
         self._cardlist_frame.grid(row=1, column=0, sticky=tkinter.EW)
-        self._inspect_frame.grid(row=2, column=0, sticky=tkinter.EW)
+        self._inspect_frame.grid(row=2, column=0, sticky=tkinter.NSEW)
         self._table_frame.grid(row=0, column=1, rowspan=3, sticky=tkinter.NSEW)
 
     def _fill_menu(self):
@@ -71,14 +77,13 @@ class TkinterGUI(GUI, tkinter.Tk):
         """canvas and options
 
         """
-        pass
-        # canvas = tkinter.Canvas(
-                # self._inspect_frame,
-                # bg='green',
-                # # width=self._menu_width,
-                # # height=self._window_height/2,
-                # )
-        # canvas.pack()
+        canvas = tkinter.Canvas(
+                self._inspect_frame,
+                bg='green',
+                # width=self._menu_width,
+                height=self._height/2,
+                )
+        canvas.pack()
         # button = ttk.Button(
                 # self._inspect_frame,
                 # text='quit',
@@ -93,8 +98,8 @@ class TkinterGUI(GUI, tkinter.Tk):
         canvas = tkinter.Canvas(
                 self._table_frame,
                 bg='green',
-                height=3*self._height,
-                # width=self._width,
+                height=self._table_height,
+                # width=self._table_width,
                 scrollregion=(0, 0, self._width, 3 * self._height),
                 )
         vbar = ttk.Scrollbar(self._table_frame, orient=tkinter.VERTICAL)
@@ -102,7 +107,7 @@ class TkinterGUI(GUI, tkinter.Tk):
         vbar.config(command=canvas.yview)
         canvas.config(yscrollcommand=vbar.set)
         canvas.pack(side=tkinter.LEFT, expand=True, fill=tkinter.X)
-        canvas.create_line((0,0), (self._table_width, self._table_height), width=4, fill='red')
+        self._canvas_table = canvas
 
     def set_table(self, table: BaseTable):
         self._table = table
