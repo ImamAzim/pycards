@@ -2,25 +2,7 @@ from pycards.interfaces import GUI, BaseTable
 import tkinter
 
 
-class BaseGUI(GUI):
-
-    """base GUI. incorporate basic callbacks that use controller. Can be base for any GUI,
-    wether based on tkinter, pygames, etc... the method from GUI interface must be written
-    in the children class"""
-
-    def _new_game(self, name: str):
-        """create a new game
-
-        :name: TODO
-        :returns: TODO
-
-        """
-
-    def set_table(self, table: BaseTable):
-        self._table = table
-
-
-class TkinterGUI(BaseGUI, tkinter.Tk):
+class TkinterGUI(GUI, tkinter.Tk):
 
     """tkinter GUI for a pycards game"""
 
@@ -29,9 +11,11 @@ class TkinterGUI(BaseGUI, tkinter.Tk):
         self.title('pycards')
         self._table = None
 
+    def set_table(self, table: BaseTable):
+        self._table = table
+
     def run(self):
         self.mainloop()
-
 
     def display_msg(self, msg: str):
         pass
