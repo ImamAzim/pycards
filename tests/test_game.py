@@ -338,21 +338,25 @@ class TestCard(unittest.TestCase):
         self.assertEqual(card.name, name)
         self.assertEqual(card.path, recto)
         self.assertFalse(card.rotate)
+        self.assertFalse(card.is_locked)
 
         card = Card(name, recto, verso, 1)
         self.assertEqual(card.name, name)
         self.assertEqual(card.path, recto)
         self.assertTrue(card.rotate)
+        self.assertFalse(card.is_locked)
 
-        card = Card(name, recto, verso, 2)
+        card = Card(name, recto, verso, 2, is_locked=True)
         self.assertEqual(card.name, name)
         self.assertEqual(card.path, verso)
         self.assertTrue(card.rotate)
+        self.assertTrue(card.is_locked)
 
-        card = Card(name, recto, verso, 3)
+        card = Card(name, recto, verso, 3, is_locked=True)
         self.assertEqual(card.name, name)
         self.assertEqual(card.path, verso)
         self.assertFalse(card.rotate)
+        self.assertTrue(card.is_locked)
 
 
 """ script tests """
