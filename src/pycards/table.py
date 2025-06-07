@@ -257,11 +257,20 @@ class Table(object):
         cards = self._game.shuffle_deck()
         for card in cards:
             self._gui.place_card_on_table(
-                    card_name,
+                    card.name,
                     card.path,
-                    self._game.is_card_permanent(card_name),
-                    'discard',
+                    'deck',
                     card.rotate)
+        permanent_cards = self._game.permanent_cards()
+        for card in permanent_cards:
+            if not self._gui.is_card_on_table(card.name):
+                self._gui.place_card_on_table(
+                        card.name,
+                        card.path,
+                        True,
+                        'gamezone',
+                        card.rotate)
+        self._gui.clean_inspect_area()
 
 
 if __name__ == '__main__':

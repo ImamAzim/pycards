@@ -21,12 +21,14 @@ class GUI():
             is_locked: bool,
             pile: str = 'deck',
             rotated: bool = False):
-        """place the card on the table. if card is already present it will only move it without updating
+        """place the card on the table. if card is already present it will only
+        move it without updating
         the image
 
         :card_name: from file name withou recto or verso
         :img_path: path to card image
-        :location: either 'deck' or 'discard'
+        :is_locked: for permanent card
+        :pile: one of 'deck', 'discard' or 'gamezone'
         :rotated: True if you want to rotate by 108 deg
 
         """
@@ -48,7 +50,8 @@ class GUI():
         pass
 
     def clean_inspect_area(self):
-        """remove the image from the inspect area and deactivate operations in it
+        """remove the image from the inspect area and deactivate operations
+        in it
         :returns: TODO
 
         """
