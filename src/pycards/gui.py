@@ -11,6 +11,14 @@ class GUI():
 
         self._table = None
 
+    def run(self):
+        """start the gui (in a loop)
+
+        :returns: TODO
+
+        """
+        pass
+
     def set_table(self, table: Table):
         """set the controller of the view
 
