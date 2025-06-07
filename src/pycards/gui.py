@@ -14,7 +14,8 @@ class TkinterGUI(GUI, tkinter.Tk):
         height = self.winfo_screenheight()
         self._menu_width = int(width * 1 / 5)
         self._table_width = int(width * 4 / 5)
-        self.geometry("%dx%d" % (width, height))
+        geometry = f'{width}x{height}'
+        self.geometry(geometry)
         self._window_width = width
         self._window_height = height
 
