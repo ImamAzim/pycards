@@ -36,7 +36,8 @@ class TkinterGUI(GUI, tkinter.Tk):
         """put option in menu
 
         """
-        pass
+        button = tkinter.Button(self._menu_frame, text='quit', width=25, command=self.destroy)
+        button.pack()
 
     def _fill_cardlist(self):
         """list of box and deck cards, options with cards
