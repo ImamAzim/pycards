@@ -299,7 +299,6 @@ class TestGame(unittest.TestCase):
         """test get saved games
 
         """
-        game = self._game
         saved_games = Game.get_saved_game()
         self.assertIn(TESTNAME, saved_games)
 
