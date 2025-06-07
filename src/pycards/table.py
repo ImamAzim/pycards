@@ -1,7 +1,5 @@
-from __future__ import annotations
-
-
 from pycards.game import Game, GameError
+from pycards.interfaces import GUI
 
 
 class Table(object):

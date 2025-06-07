@@ -1,3 +1,4 @@
+from __future__ import annotations
 from abc import ABCMeta, abstractmethod
 
 
@@ -21,7 +22,7 @@ class GUI(metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def set_table(self, table: 'Table'):
+    def set_table(self, table: Table):
         """set the controller of the view
 
         :table: controller of pycards

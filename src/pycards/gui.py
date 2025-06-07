@@ -1,9 +1,12 @@
 from __future__ import annotations
 
 
-class GUI():
+from pycards.interfaces import GUI
 
-    """GUI for a pycards game"""
+
+class TkinterGUI(GUI):
+
+    """tkinter GUI for a pycards game"""
 
     def __init__(self):
         """gui interface for pycard game. a controller must be set after init
