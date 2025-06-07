@@ -34,6 +34,7 @@ class GUI():
     def inspect_card(self, ,
                      card_name, str,
                      img_path: str,
+                     is_locked: bool,
                      rotated: bool = False,):
         """display card in larger frame and allow operations on it
 
