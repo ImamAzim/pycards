@@ -40,6 +40,7 @@ class GUI():
 
         :card_name: from file name withou recto or verso
         :img_path: path to card image
+        :is_locked: for permanent card. should be visible in the gui
         :rotated: True if you want to rotate by 108 deg
 
         """
@@ -72,10 +73,14 @@ class GUI():
             self,
             card_name: str,
             img_path: str,
+            is_locked: bool,
             rotated: bool = False):
         """update a single card, for example when image is rotated
 
-        :card_name: identify card, which should have a object in the GUI
+        :card_name: identify card
+        :img_path: path to card image
+        :is_locked: for permanent card. should be visible in the gui
+        :rotated: True if you want to rotate by 108 deg
 
         """
         pass

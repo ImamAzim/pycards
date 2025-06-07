@@ -125,6 +125,7 @@ class Table(object):
                 self._gui.update_card_image(
                         card_name,
                         card.path,
+                        self._game.is_card_permanent(card_name),
                         card.rotate,
                         )
 
@@ -143,6 +144,7 @@ class Table(object):
                 self._gui.update_card_image(
                         card_name,
                         card.path,
+                        self._game.is_card_permanent(card_name),
                         card.rotate,
                         )
 
