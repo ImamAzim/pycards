@@ -1,5 +1,4 @@
-from pycards.gui import GUI
-from pycards.table import Table
+from pycards import GUI, Table
 
 
 class PycarApp(object):

@@ -1,4 +1,7 @@
-from pycards.table import Table
+from __future__ import annotations
+
+
+# from pycards.apps import Table
 
 
 class GUI():
