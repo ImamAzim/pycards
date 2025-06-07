@@ -1,5 +1,6 @@
 from pycards.interfaces import GUI, BaseTable
 import tkinter
+from tkinter import ttk
 
 
 class TkinterGUI(GUI, tkinter.Tk):
@@ -19,10 +20,10 @@ class TkinterGUI(GUI, tkinter.Tk):
         self._window_width = width
         self._window_height = height
 
-        self._menu_frame = tkinter.LabelFrame(self, text='menu')
-        self._cardlist_frame = tkinter.LabelFrame(self, text='cards')
-        self._inspect_frame = tkinter.LabelFrame(self, text='inspector')
-        self._table_frame = tkinter.LabelFrame(self, text='table')
+        self._menu_frame = ttk.LabelFrame(self, text='menu')
+        self._cardlist_frame = ttk.LabelFrame(self, text='cards')
+        self._inspect_frame = ttk.LabelFrame(self, text='inspector')
+        self._table_frame = ttk.LabelFrame(self, text='table')
 
         self._fill_menu()
         self._fill_cardlist()
@@ -44,7 +45,7 @@ class TkinterGUI(GUI, tkinter.Tk):
         """put option in menu
 
         """
-        button = tkinter.Button(
+        button = ttk.Button(
                 self._menu_frame,
                 text='quit',
                 command=self.destroy,
@@ -68,7 +69,7 @@ class TkinterGUI(GUI, tkinter.Tk):
                 height=self._window_height/2,
                 )
         canvas.pack()
-        button = tkinter.Button(
+        button = ttk.Button(
                 self._inspect_frame,
                 text='quit',
                 command=self.destroy,
