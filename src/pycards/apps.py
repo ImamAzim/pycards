@@ -16,4 +16,4 @@ class PycarApp(object):
         """start the pycard app
 
         """
-        pass
+        self._gui.run()
