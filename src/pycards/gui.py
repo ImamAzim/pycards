@@ -6,6 +6,7 @@ from tkinter import ttk
 class TkinterGUI(GUI, tkinter.Tk):
 
     """tkinter GUI for a pycards game"""
+    TABLE_WIDTH_WEIGHT = 4
 
     def __init__(self):
         tkinter.Tk.__init__(self)
@@ -13,12 +14,13 @@ class TkinterGUI(GUI, tkinter.Tk):
         self._table = None
         width = self.winfo_screenwidth()
         height = self.winfo_screenheight()
-        # self._menu_width = int(width * 1 / 5)
-        # self._table_width = int(width * 4 / 5)
+        self._table_width = int(
+                width * self.TABLE_WIDTH_WEIGHT / (self.TABLE_WIDTH_WEIGHT + 1)
+                )
         geometry = f'{width}x{height}'
         self.geometry(geometry)
-        # self._window_width = width
-        # self._window_height = height
+        self._width = width
+        self._height = height
 
         self._menu_frame = ttk.LabelFrame(self, text='menu')
         self._cardlist_frame = ttk.LabelFrame(self, text='cards')
@@ -37,7 +39,7 @@ class TkinterGUI(GUI, tkinter.Tk):
 
         """
         self.columnconfigure(0, weight=1)
-        self.columnconfigure(1, weight=5)
+        self.columnconfigure(1, weight=self.TABLE_WIDTH_WEIGHT)
         self.rowconfigure(0, weight=1)
         self.rowconfigure(1, weight=1)
         self.rowconfigure(2, weight=2)
@@ -90,9 +92,9 @@ class TkinterGUI(GUI, tkinter.Tk):
                 self._table_frame,
                 bg='green',
                 # width=self._table_width,
-                # height=self._window_height,
+                height=self._height,
                 )
-        canvas.pack()
+        canvas.pack(fill=tkinter.X)
 
     def set_table(self, table: BaseTable):
         self._table = table
