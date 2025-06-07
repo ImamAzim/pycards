@@ -63,3 +63,8 @@ class TkinterGUI(GUI):
 
     def update_deck_cards_list(self, card_names: list[str]):
         pass
+
+
+if __name__ == '__main__':
+    gui = TkinterGUI()
+    gui.run()
