@@ -1,4 +1,3 @@
-from __future__ import annotations
 from abc import ABCMeta, abstractmethod
 
 
@@ -22,7 +21,7 @@ class GUI(metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def set_table(self, table: Table):
+    def set_table(self, table):
         """set the controller of the view
 
         :table: controller of pycards
@@ -154,6 +153,128 @@ class GUI(metaclass=ABCMeta):
 
         :card_names:
         :returns:
+
+        """
+        pass
+
+
+class BaseTable(object, metaclass=ABCMeta):
+
+    """Table class to create and load games"""
+
+    @abstractmethod
+    def __init__(self, gui):
+        """TODO: Docstring for __init__.
+
+        """
+        pass
+
+    @abstractmethod
+    def new_game(self, name: str):
+        """create a new game and update gui with it
+
+        :name: instance will be saved with this name
+        """
+        pass
+
+    @abstractmethod
+    def load_game(self, name: str):
+        """make a game that was previousely saved active
+        on the table
+
+        :name: name of the game under it was saved
+        """
+        pass
+
+    @abstractmethod
+    def import_cards(self, folder_path: str):
+        """import ('buy') cards. folder needs to contain for each card 2 img
+        files
+
+        :folder_path: contains the img file of the cards
+
+        """
+        pass
+
+    @abstractmethod
+    def discover_card(self, card_name: str):
+        """move the cards from box to deck
+
+        :card_name:
+        :returns:
+
+        """
+        pass
+
+    @abstractmethod
+    def destroy_card(self, card_name: str):
+        """remove from box or deck and rm img file
+
+        :card_name: identify card
+        :returns:
+
+        """
+        pass
+
+    @abstractmethod
+    def rotate_card(self, card_name):
+        """rotate card
+
+        :card_name: identify the card
+        """
+        pass
+
+    @abstractmethod
+    def flip(self, card_name):
+        """flip card
+
+        :card_name: identify the card
+        """
+        pass
+
+    @abstractmethod
+    def forget_card(self, card_name: str):
+        """put back the card in box
+
+        :card_name: identify the card
+        :returns: TODO
+
+        """
+        pass
+
+    @abstractmethod
+    def lock_card(self, card_name: str):
+        """lock a card, make it permanent. Will not be reshuffled in deck
+
+        :card_name: identify card
+        :returns: TODO
+
+        """
+        pass
+
+    @abstractmethod
+    def unlock_card(self, card_name: str):
+        """unlock a card, make it permanent. Will not be reshuffled in deck
+
+        :card_name: identify card
+        :returns: TODO
+
+        """
+        pass
+
+    @abstractmethod
+    def inspect_card(self, card_name: str):
+        """call inspect method of gui with card info to display
+
+        :card_name:
+
+        """
+        pass
+
+    @abstractmethod
+    def shuffle_deck(self):
+        """shuffle the cards that are not permanent and place them in the deck
+        :returns: TODO
 
         """
         pass
