@@ -14,8 +14,9 @@ class TkinterGUI(GUI, tkinter.Tk):
         height = self.winfo_screenheight()
         self._menu_width = int(width * 1 / 5)
         self._table_width = int(width * 4 / 5)
-        # self.attributes('-fullscreen', True)
         self.geometry("%dx%d" % (width, height))
+        self._window_width = width
+        self._windo_height = height
 
         self._menu_frame = tkinter.LabelFrame(self, text='menu')
         self._cardlist_frame = tkinter.LabelFrame(self, text='cards')
@@ -65,7 +66,13 @@ class TkinterGUI(GUI, tkinter.Tk):
         """ prepare table where cards will be put
 
         """
-        pass
+        canvas = tkinter.Canvas(
+                self._table_frame,
+                bg='green',
+                width=self._table_width,
+                height=self._windo_height,
+                )
+        canvas.pack()
 
     def set_table(self, table: BaseTable):
         self._table = table
