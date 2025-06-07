@@ -31,7 +31,7 @@ class GUI():
         """
         pass
 
-    def inspect_card(self, ,
+    def inspect_card(self,
                      card_name, str,
                      img_path: str,
                      is_locked: bool,
