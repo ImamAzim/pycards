@@ -1,10 +1,15 @@
+from pycards.table import Table
+
+
 class GUI():
 
     """GUI for a pycards game"""
 
-    def __init__(self):
-        """TODO: to be defined. """
-        pass
+    def __init__(self, table: Table):
+        """gui interface for pycard game
+        :table: controller of the app"""
+
+        self._table = table
 
     def display_msg(self, msg: str):
         """display a msg, for example from controller
