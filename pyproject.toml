@@ -35,6 +35,9 @@ dev = [
 	'sphinx-rtd-theme'
 ]
 
+[project.scripts]
+pycards = "pycards.launchers:run_pycards"
+
 [project.urls]
 #"Source Code" = "https://github.com/ImamAzim/pyproject"
 #"Documentation" = "https://pyproject.readthedocs.io/en/latest/index.html"
