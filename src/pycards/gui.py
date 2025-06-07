@@ -91,7 +91,7 @@ class TkinterGUI(GUI, tkinter.Tk):
         canvas = tkinter.Canvas(
                 self._table_frame,
                 bg='green',
-                height=self._height,
+                height=3*self._height,
                 # width=self._width,
                 scrollregion=(0, 0, self._width, 3 * self._height),
                 )
@@ -102,6 +102,7 @@ class TkinterGUI(GUI, tkinter.Tk):
         canvas.pack(side=tkinter.LEFT, expand=True, fill=tkinter.X)
         print(canvas['width'])
         print(canvas['height'])
+        canvas.create_line((0,0), (500, 3240), width=4, fill='red')
 
     def set_table(self, table: BaseTable):
         self._table = table
