@@ -1,9 +1,6 @@
 from __future__ import annotations
 
 
-# from pycards.apps import Table
-
-
 class GUI():
 
     """GUI for a pycards game"""
