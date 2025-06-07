@@ -46,6 +46,13 @@ class GUI():
         """
         pass
 
+    def clean_inspect_area(self):
+        """remove the image from the inspect area and deactivate operations in it
+        :returns: TODO
+
+        """
+        pass
+
     def is_card_on_table(self, card_name: str) -> bool:
         """check if the card is present on the table
 
@@ -68,6 +75,7 @@ class GUI():
 
         """
         pass
+        self.clean_inspect_area()
 
     def update_card_image(
             self,

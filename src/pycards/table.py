@@ -90,6 +90,11 @@ class Table(object):
                     self._game.is_card_permanent(card_name),
                     'discard',
                     card.rotate)
+            self._gui.inspect_card(
+                    card_name,
+                    card.path,
+                    self._game.is_card_permanent(card_name),
+                    card.rotate)
 
     def destroy_card(self, card_name: str):
         """remove from box or deck and rm img file
