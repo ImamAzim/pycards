@@ -130,7 +130,7 @@ class TkinterGUI(GUI, tkinter.Tk):
 
         """
         games = self._table.get_saved_games()
-        prompt = LoadPrompt(games)
+        prompt = LoadPrompt(self, games)
         game = prompt.game_name
         if game:
             self._table.load_game(game)
