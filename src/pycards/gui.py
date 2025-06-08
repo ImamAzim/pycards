@@ -4,6 +4,27 @@ from tkinter import simpledialog, filedialog
 from tkinter import ttk
 
 
+class LoadPrompt(filedialog.Dialog):
+
+    """prompt to show games that can be loaded. use a dropdown menu
+    (combobox) """
+
+    def __init__(self, saved_games: [str]):
+        self._saved_games = saved_games
+        filedialog.Dialog.__init__(self)
+
+    def body(self, master):
+        """
+        """
+        self._save_games_list = ttk.Combobox(
+                master,
+                state='readonly',
+                *self._saved_games)
+
+    def apply(self):
+        self.game_name = self._save_games_list.get()
+
+
 class TkinterGUI(GUI, tkinter.Tk):
 
     """tkinter GUI for a pycards game"""
