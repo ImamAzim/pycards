@@ -20,7 +20,18 @@ class Table(BaseTable):
         return self._game.name
 
     def delete_game(self):
-        return self._game.delete_game()
+        try:
+            self._game.delete_game()
+        except GameError as e:
+            self._gui.showerror(e)
+        else:
+            self._gui.clean_table()
+            name = self._game.name
+            self._gui.update_title(name)
+            box_cards_names = self._game.box_card_names
+            self._gui.update_box_cards_list(box_cards_names)
+            deck_cards_names = self._game.deck_card_names
+            self._gui.update_deck_cards_list(deck_cards_names)
 
     def new_game(self, name: str):
         try:
