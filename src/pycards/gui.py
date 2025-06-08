@@ -23,7 +23,7 @@ class TkinterGUI(GUI, tkinter.Tk):
                 width * self.TABLE_WIDTH_WEIGHT / (self.TABLE_WIDTH_WEIGHT + 1)
                 )
         self._table_height = self.TABLE_REL_HEIGHT * height
-        self._menu_width = width / (self.TABLE_REL_HEIGHT + 1)
+        self._menu_width = width / (self.TABLE_WIDTH_WEIGHT + 1)
         geometry = f'{width}x{height}'
         self.geometry(geometry)
         self._width = width
