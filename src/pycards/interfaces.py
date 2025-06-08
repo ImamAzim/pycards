@@ -184,10 +184,23 @@ class BaseTable(object, metaclass=ABCMeta):
         pass
 
     @abstractmethod
+    def get_current_game(self) -> [str]:
+        """return the name of the active game"""
+        pass
+
+    @abstractmethod
     def new_game(self, name: str):
         """create a new game and update gui with it
 
         :name: instance will be saved with this name
+        """
+        pass
+
+    @abstractmethod
+    def delete_game(self, name: str):
+        """delete img and saved config files of game
+
+        :name:
         """
         pass
 

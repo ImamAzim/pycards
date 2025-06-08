@@ -1,6 +1,6 @@
 from pycards.interfaces import GUI, BaseTable
 import tkinter
-from tkinter import simpledialog, filedialog
+from tkinter import simpledialog, filedialog, messagebox
 from tkinter import ttk
 
 
@@ -38,6 +38,7 @@ class TkinterGUI(GUI, tkinter.Tk):
         tkinter.Tk.__init__(self)
         self.title('pycards')
         self._table = None
+        self._game_name: str = None
         self._table_frame: tkinter.Frame
         self._cardlist_frame: tkinter.Frame
         self._inspect_frame: tkinter.Frame
@@ -142,7 +143,14 @@ class TkinterGUI(GUI, tkinter.Tk):
         """ask if you are sure to delete this game
 
         """
-        pass
+        gamename = self._game_name
+        message = f'are you sure you want to delete the current game ({gamename})'
+        answer = messagebox.askyesno(
+                title='delete',
+                message=message,
+                )
+        if answer:
+            pass
 
     def _create_cardlist_frame(self):
         """list of box and deck cards, options with cards
@@ -252,6 +260,7 @@ class TkinterGUI(GUI, tkinter.Tk):
     def update_title(
             self, name: str):
         self._table_frame['text'] = f'current game: {name}'
+        self._game_name = name
 
     def clean_table(self):
         pass
