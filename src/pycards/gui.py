@@ -143,14 +143,14 @@ class TkinterGUI(GUI, tkinter.Tk):
         """ask if you are sure to delete this game
 
         """
-        gamename = self._game_name
+        gamename = self._table.get_current_game()
         message = f'are you sure you want to delete the current game ({gamename})'
         answer = messagebox.askyesno(
                 title='delete',
                 message=message,
                 )
         if answer:
-            pass
+            self._table.delete_game()
 
     def _create_cardlist_frame(self):
         """list of box and deck cards, options with cards
@@ -260,7 +260,6 @@ class TkinterGUI(GUI, tkinter.Tk):
     def update_title(
             self, name: str):
         self._table_frame['text'] = f'current game: {name}'
-        self._game_name = name
 
     def clean_table(self):
         pass
