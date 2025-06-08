@@ -1,6 +1,6 @@
 from pycards.interfaces import GUI, BaseTable
 import tkinter
-from tkinter import simpledialog
+from tkinter import simpledialog, filedialog
 from tkinter import ttk
 
 
@@ -74,6 +74,10 @@ class TkinterGUI(GUI, tkinter.Tk):
                 command=self._prompt_delete,
                 )
         file_menu.add_command(
+                label='import cards',
+                command=self._prompt_import,
+                )
+        file_menu.add_command(
                 label='quit',
                 command=self.destroy,
                 )
@@ -91,6 +95,14 @@ class TkinterGUI(GUI, tkinter.Tk):
                 'new game', 'enter the name of your game:')
         if game_name:
             self._table.new_game(game_name)
+
+    def _prompt_import(self):
+        """ask for a folder to import
+
+        """
+        path = filedialog.askdirectory(title='select a folder with cards')
+        if path:
+            self._table.import_cards(path)
 
     def _prompt_load_game(self):
         """present games that can be loaded
