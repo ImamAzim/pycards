@@ -189,7 +189,7 @@ class TkinterGUI(GUI, tkinter.Tk):
 
     def update_title(
             self, name: str):
-        pass
+        self._table_frame['text'] = f'current game: {name}'
 
     def clean_table(self):
         pass
