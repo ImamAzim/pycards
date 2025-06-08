@@ -13,6 +13,9 @@ class TkinterGUI(GUI, tkinter.Tk):
         tkinter.Tk.__init__(self)
         self.title('pycards')
         self._table = None
+        self._table_frame: tkinter.Frame
+        self._cardlist_frame: tkinter.Frame
+        self._inspect_frame: tkinter.Frame
 
         width = self.winfo_screenwidth()
         height = self.winfo_screenheight()
@@ -27,15 +30,10 @@ class TkinterGUI(GUI, tkinter.Tk):
         self._height = height
         self._inspector_height = self._height / 2
 
-        self._menu_frame = ttk.LabelFrame(self, text='menu')
-        self._cardlist_frame = ttk.LabelFrame(self, text='cards')
-        self._inspect_frame = ttk.LabelFrame(self, text='inspector')
-        self._table_frame = ttk.LabelFrame(self, text='table')
-
-        self._fill_menu()
-        self._fill_cardlist()
-        self._fill_inspect_frame()
-        self._fill_table_frame()
+        self._create_menu()
+        self._create_cardlist_frame()
+        self._create_inspect_frame()
+        self._create_table_frame()
 
         self._place_all_frames()
 
@@ -57,10 +55,11 @@ class TkinterGUI(GUI, tkinter.Tk):
         self._inspect_frame.grid(row=2, column=0, sticky=tkinter.NSEW)
         self._table_frame.grid(row=0, column=1, rowspan=3, sticky=tkinter.NSEW)
 
-    def _fill_menu(self):
+    def _create_menu(self):
         """put option in menu
 
         """
+        self._menu_frame = ttk.LabelFrame(self, text='menu')
         button = ttk.Button(
                 self._menu_frame,
                 text='quit',
@@ -68,17 +67,17 @@ class TkinterGUI(GUI, tkinter.Tk):
                 )
         button.pack()
 
-    def _fill_cardlist(self):
+    def _create_cardlist_frame(self):
         """list of box and deck cards, options with cards
 
         """
-        pass
+        self._cardlist_frame = ttk.LabelFrame(self, text='cards')
 
-    def _fill_inspect_frame(self):
+    def _create_inspect_frame(self):
         """canvas and options
 
         """
-        pass
+        self._inspect_frame = ttk.LabelFrame(self, text='inspector')
         canvas = tkinter.Canvas(
                 self._inspect_frame,
                 bg='green',
@@ -88,10 +87,11 @@ class TkinterGUI(GUI, tkinter.Tk):
         canvas.pack(expand=True, fill=tkinter.X)
         self._canvas_inspector = canvas
 
-    def _fill_table_frame(self):
+    def _create_table_frame(self):
         """ prepare table where cards will be put
 
         """
+        self._table_frame = ttk.LabelFrame(self, text='table')
         canvas = tkinter.Canvas(
                 self._table_frame,
                 bg='green',
