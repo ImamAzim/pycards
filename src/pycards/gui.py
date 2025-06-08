@@ -17,8 +17,6 @@ class TkinterGUI(GUI, tkinter.Tk):
         self._table_frame: tkinter.Frame
         self._cardlist_frame: tkinter.Frame
         self._inspect_frame: tkinter.Frame
-        self._boxcards_strvar = tkinter.StringVar(self)
-        self._deckcards_strvar = tkinter.StringVar(self)
 
         width = self.winfo_screenwidth()
         height = self.winfo_screenheight()
@@ -117,9 +115,9 @@ class TkinterGUI(GUI, tkinter.Tk):
                 text='box cards',
                 )
         box_cards_frame.pack(fill=tkinter.X)
-        self._boxcards_list = ttk.OptionMenu(
+        self._boxcards_list = ttk.Combobox(
                 box_cards_frame,
-                variable=self._boxcards_strvar,
+                state='readonly'
                 )
         self._boxcards_list.pack(fill=tkinter.X)
 
@@ -128,11 +126,13 @@ class TkinterGUI(GUI, tkinter.Tk):
                 text='deck cards',
                 )
         deck_cards_frame.pack(fill=tkinter.X)
-        self._deckcards_list = ttk.OptionMenu(
+        self._deckcards_list = ttk.Combobox(
                 deck_cards_frame,
-                variable=self._deckcards_strvar,
-                command=lambda: self._table.inspect_card(
-                    self._deckcards_strvar.get()),
+                state='readonly',
+                )
+        self._deckcards_list.bind(
+                '<<ComboboxSelected>>',
+                lambda: self._table.inspect_card(self._deckcards_list.get()),
                 )
         self._deckcards_list.pack(fill=tkinter.X)
 
@@ -229,7 +229,8 @@ class TkinterGUI(GUI, tkinter.Tk):
         pass
 
     def update_box_cards_list(self, card_names: list[str]):
-        pass
+        card_names = ['a', 'b', 'c']
+        self._boxcards_list['values'] = card_names
 
     def update_deck_cards_list(self, card_names: list[str]):
         pass
