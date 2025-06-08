@@ -75,6 +75,8 @@ class TkinterGUI(GUI, tkinter.Tk):
 
         """
         self._cardlist_frame = ttk.LabelFrame(self, text='cards')
+        ttk.Label(self._cardlist_frame, text='TODO: option menus for cards lists').pack(fill=tkinter.X)
+
 
     def _create_inspect_frame(self):
         """canvas and options
