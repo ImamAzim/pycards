@@ -9,9 +9,9 @@ class LoadPrompt(filedialog.Dialog):
     """prompt to show games that can be loaded. use a dropdown menu
     (combobox) """
 
-    def __init__(self, saved_games: [str]):
+    def __init__(self, parent, saved_games: [str]):
         self._saved_games = saved_games
-        filedialog.Dialog.__init__(self)
+        super().__init__(parent)
 
     def body(self, master):
         """
