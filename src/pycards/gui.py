@@ -21,6 +21,7 @@ class LoadPrompt(simpledialog.Dialog):
                 state='readonly',
                 values=self._saved_games,
                 )
+        self._save_games_list.pack()
         self.game_name = False
 
     def apply(self):

@@ -205,7 +205,7 @@ class Table(BaseTable):
                     card.path,
                     'deck',
                     card.rotate)
-        permanent_cards = self._game.permanent_cards()
+        permanent_cards = self._game.permanent_cards
         for card in permanent_cards:
             if not self._gui.is_card_on_table(card.name):
                 self._gui.place_card_on_table(
