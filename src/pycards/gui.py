@@ -19,7 +19,8 @@ class LoadPrompt(simpledialog.Dialog):
         self._save_games_list = ttk.Combobox(
                 master,
                 state='readonly',
-                *self._saved_games)
+                values=self._saved_games,
+                )
 
     def apply(self):
         self.game_name = self._save_games_list.get()
