@@ -4,7 +4,7 @@ from tkinter import simpledialog, filedialog
 from tkinter import ttk
 
 
-class LoadPrompt(filedialog.Dialog):
+class LoadPrompt(simpledialog.Dialog):
 
     """prompt to show games that can be loaded. use a dropdown menu
     (combobox) """
