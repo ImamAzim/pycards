@@ -8,6 +8,14 @@ class Table(BaseTable):
         self._gui = gui
         self._game = Game()
 
+    def get_saved_games(self) -> [str]:
+        """get a list of saved games on disk
+        :returns: list of saved games on disk
+
+        """
+        games = Game.get_saved_game()
+        return games
+
     def new_game(self, name: str):
         try:
             self._game.new(name)

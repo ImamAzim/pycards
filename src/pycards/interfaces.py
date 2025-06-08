@@ -179,6 +179,11 @@ class BaseTable(object, metaclass=ABCMeta):
         pass
 
     @abstractmethod
+    def get_saved_games(self) -> [str]:
+        """get a list of saved games on disk"""
+        pass
+
+    @abstractmethod
     def new_game(self, name: str):
         """create a new game and update gui with it
 

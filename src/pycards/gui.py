@@ -129,6 +129,8 @@ class TkinterGUI(GUI, tkinter.Tk):
         """present games that can be loaded
 
         """
+        games = self._table.get
+        # prompt = LoadPrompt(self._table.)
         pass
 
     def _prompt_delete(self):
