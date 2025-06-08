@@ -12,7 +12,7 @@ class Table(BaseTable):
         try:
             self._game.new(name)
         except GameError as e:
-            self._gui.display_msg(e)
+            self._gui.showerror(e)
         else:
             self._gui.clean_table()
             name = self._game.name
@@ -26,7 +26,7 @@ class Table(BaseTable):
         try:
             self._game.load(name)
         except GameError as e:
-            self._gui.display_msg(e)
+            self._gui.showerror(e)
         else:
             self._gui.clean_table()
             name = self._game.name
@@ -41,7 +41,7 @@ class Table(BaseTable):
         try:
             self._game.import_cards_folder(folder_path)
         except GameError as e:
-            self._gui.display_msg(e)
+            self._gui.showerror(e)
         else:
             box_cards_names = self._game.box_card_names
             self._gui.update_box_cards_list(box_cards_names)
@@ -50,7 +50,7 @@ class Table(BaseTable):
         try:
             self._game.discover_card(card_name)
         except GameError as e:
-            self._gui.display_msg(e)
+            self._gui.showerror(e)
         else:
             box_cards_names = self._game.box_card_names
             self._gui.update_box_cards_list(box_cards_names)
@@ -73,7 +73,7 @@ class Table(BaseTable):
         try:
             self._game.destroy_card(card_name)
         except GameError as e:
-            self._gui.display_msg(e)
+            self._gui.showerror(e)
         else:
             deck_card_names = self._game.deck_card_names
             self._gui.update_deck_cards_list(deck_card_names)
@@ -87,7 +87,7 @@ class Table(BaseTable):
         try:
             self._game.rotate_card(card_name)
         except GameError as e:
-            self._gui.display_msg(e)
+            self._gui.showerror(e)
         else:
             card = self._game.get_card(card_name)
             if self._gui.is_card_on_table(card_name):
@@ -107,7 +107,7 @@ class Table(BaseTable):
         try:
             self._game.flip_card(card_name)
         except GameError as e:
-            self._gui.display_msg(e)
+            self._gui.showerror(e)
         else:
             card = self._game.get_card(card_name)
             if self._gui.is_card_on_table(card_name):
@@ -127,7 +127,7 @@ class Table(BaseTable):
         try:
             self._game.forget_card(card_name)
         except GameError as e:
-            self._gui.display_msg(e)
+            self._gui.showerror(e)
         else:
             deck_card_names = self._game.deck_card_names
             self._gui.update_deck_cards_list(deck_card_names)
@@ -141,7 +141,7 @@ class Table(BaseTable):
         try:
             self._game.lock_card(card_name)
         except GameError as e:
-            self._gui.display_msg(e)
+            self._gui.showerror(e)
         else:
             card = self._game.get_card(card_name)
             if self._gui.is_card_on_table(card_name):
@@ -161,7 +161,7 @@ class Table(BaseTable):
         try:
             self._game.unlock_card(card_name)
         except GameError as e:
-            self._gui.display_msg(e)
+            self._gui.showerror(e)
         else:
             card = self._game.get_card(card_name)
             if self._gui.is_card_on_table(card_name):

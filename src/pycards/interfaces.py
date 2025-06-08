@@ -30,8 +30,17 @@ class GUI(metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def display_msg(self, msg: str):
+    def showinfo(self, msg: str):
         """display a msg, for example from controller
+
+        :msg: message from controller
+
+        """
+        pass
+
+    @abstractmethod
+    def showerror(self, msg: str):
+        """display an error msg, for example from controller
 
         :msg: message from controller
 
