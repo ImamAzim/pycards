@@ -49,17 +49,14 @@ class TkinterGUI(GUI, tkinter.Tk):
         self.columnconfigure(1, weight=self.TABLE_WIDTH_WEIGHT)
         self.rowconfigure(0, weight=1)
         self.rowconfigure(1, weight=1)
-        self.rowconfigure(2, weight=2)
-        self._menu_frame.grid(row=0, column=0, sticky=tkinter.EW)
-        self._cardlist_frame.grid(row=1, column=0, sticky=tkinter.EW)
-        self._inspect_frame.grid(row=2, column=0, sticky=tkinter.NSEW)
-        self._table_frame.grid(row=0, column=1, rowspan=3, sticky=tkinter.NSEW)
+        self._cardlist_frame.grid(row=0, column=0, sticky=tkinter.EW)
+        self._inspect_frame.grid(row=1, column=0, sticky=tkinter.NSEW)
+        self._table_frame.grid(row=0, column=1, rowspan=2, sticky=tkinter.NSEW)
 
     def _create_menu(self):
         """put option in menu
 
         """
-        self._menu_frame = ttk.LabelFrame(self, text='menu')
         menubar = tkinter.Menu(self)
         self.config(menu=menubar)
         file_menu = tkinter.Menu(menubar)
