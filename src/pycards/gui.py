@@ -1,5 +1,6 @@
 from pycards.interfaces import GUI, BaseTable
 import tkinter
+from tkinter import simpledialog
 from tkinter import ttk
 
 
@@ -86,7 +87,10 @@ class TkinterGUI(GUI, tkinter.Tk):
         """ask for a new game name
 
         """
-        pass
+        game_name = simpledialog.askstring(
+                'new game', 'enter the name of your game:')
+        if game_name:
+            self._table.new_game(game_name)
 
     def _prompt_load_game(self):
         """present games that can be loaded
@@ -210,5 +214,7 @@ class TkinterGUI(GUI, tkinter.Tk):
 
 
 if __name__ == '__main__':
-    gui = TkinterGUI()
-    gui.run()
+    # gui = TkinterGUI()
+    # gui.run()
+    import launchers
+    launchers.run_pycards()
