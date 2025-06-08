@@ -60,12 +60,6 @@ class TkinterGUI(GUI, tkinter.Tk):
 
         """
         self._menu_frame = ttk.LabelFrame(self, text='menu')
-        button = ttk.Button(
-                self._menu_frame,
-                text='quit',
-                command=self.destroy,
-                )
-        button.pack()
         menubar = tkinter.Menu(self)
         self.config(menu=menubar)
         file_menu = tkinter.Menu(menubar)
