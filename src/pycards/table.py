@@ -16,6 +16,12 @@ class Table(BaseTable):
         games = Game.get_saved_game()
         return games
 
+    def get_current_game(self) -> [str]:
+        return self._game.name
+
+    def delete_game(self):
+        return self._game.delete_game()
+
     def new_game(self, name: str):
         try:
             self._game.new(name)
