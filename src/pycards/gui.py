@@ -17,6 +17,8 @@ class TkinterGUI(GUI, tkinter.Tk):
         self._table_frame: tkinter.Frame
         self._cardlist_frame: tkinter.Frame
         self._inspect_frame: tkinter.Frame
+        self._boxcards_strvar = tkinter.StringVar(self)
+        self._deckcards_strvar = tkinter.StringVar(self)
 
         width = self.winfo_screenwidth()
         height = self.winfo_screenheight()
@@ -109,10 +111,30 @@ class TkinterGUI(GUI, tkinter.Tk):
 
         """
         self._cardlist_frame = ttk.LabelFrame(self, text='cards')
-        ttk.Label(
+
+        box_cards_frame = ttk.LabelFrame(
                 self._cardlist_frame,
-                text='TODO: option menus for cards lists',
-                ).pack(fill=tkinter.X)
+                text='box cards',
+                )
+        box_cards_frame.pack(fill=tkinter.X)
+        self._boxcards_list = ttk.OptionMenu(
+                box_cards_frame,
+                variable=self._boxcards_strvar,
+                )
+        self._boxcards_list.pack(fill=tkinter.X)
+
+        deck_cards_frame = ttk.LabelFrame(
+                self._cardlist_frame,
+                text='deck cards',
+                )
+        deck_cards_frame.pack(fill=tkinter.X)
+        self._deckcards_list = ttk.OptionMenu(
+                deck_cards_frame,
+                variable=self._deckcards_strvar,
+                command=lambda: self._table.inspect_card(
+                    self._deckcards_strvar.get()),
+                )
+        self._deckcards_list.pack(fill=tkinter.X)
 
     def _create_inspect_frame(self):
         """canvas and options
