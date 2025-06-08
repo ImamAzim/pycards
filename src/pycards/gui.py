@@ -66,6 +66,18 @@ class TkinterGUI(GUI, tkinter.Tk):
                 command=self.destroy,
                 )
         button.pack()
+        menubar = tkinter.Menu(self)
+        self.config(menu=menubar)
+        file_menu = tkinter.Menu(menubar)
+        file_menu.add_command(
+                label='quit',
+                command=self.destroy,
+                )
+        menubar.add_cascade(
+                label='File',
+                menu=file_menu,
+                underline=0,
+                )
 
     def _create_cardlist_frame(self):
         """list of box and deck cards, options with cards
