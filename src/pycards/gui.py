@@ -105,8 +105,10 @@ class TkinterGUI(GUI, tkinter.Tk):
 
         """
         self._cardlist_frame = ttk.LabelFrame(self, text='cards')
-        ttk.Label(self._cardlist_frame, text='TODO: option menus for cards lists').pack(fill=tkinter.X)
-
+        ttk.Label(
+                self._cardlist_frame,
+                text='TODO: option menus for cards lists',
+                ).pack(fill=tkinter.X)
 
     def _create_inspect_frame(self):
         """canvas and options
@@ -141,14 +143,23 @@ class TkinterGUI(GUI, tkinter.Tk):
         canvas.pack(side=tkinter.LEFT, expand=True, fill=tkinter.X)
         self._canvas_table = canvas
 
+    def showerror(self, msg: str):
+        tkinter.messagebox.showerror(
+                title='error',
+                message=msg,
+                )
+
+    def showinfo(self, msg: str):
+        tkinter.messagebox.showinfo(
+                title='info',
+                message=msg,
+                )
+
     def set_table(self, table: BaseTable):
         self._table = table
 
     def run(self):
         self.mainloop()
-
-    def display_msg(self, msg: str):
-        pass
 
     def place_card_on_table(
             self,
