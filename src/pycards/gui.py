@@ -61,6 +61,18 @@ class TkinterGUI(GUI, tkinter.Tk):
         self.config(menu=menubar)
         file_menu = tkinter.Menu(menubar)
         file_menu.add_command(
+                label='new game',
+                command=self._prompt_new_game,
+                )
+        file_menu.add_command(
+                label='load game',
+                command=self._prompt_load_game,
+                )
+        file_menu.add_command(
+                label='delete active game',
+                command=self._prompt_delete,
+                )
+        file_menu.add_command(
                 label='quit',
                 command=self.destroy,
                 )
@@ -69,6 +81,24 @@ class TkinterGUI(GUI, tkinter.Tk):
                 menu=file_menu,
                 underline=0,
                 )
+
+    def _prompt_new_game(self):
+        """ask for a new game name
+
+        """
+        pass
+
+    def _prompt_load_game(self):
+        """present games that can be loaded
+
+        """
+        pass
+
+    def _prompt_delete(self):
+        """ask if you are sure to delete this game
+
+        """
+        pass
 
     def _create_cardlist_frame(self):
         """list of box and deck cards, options with cards
