@@ -221,6 +221,7 @@ class Table(BaseTable):
             self._gui.place_card_on_table(
                     card.name,
                     card.path,
+                    False,
                     'deck',
                     card.rotate)
         permanent_cards = self._game.permanent_cards

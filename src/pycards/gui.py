@@ -309,7 +309,7 @@ class TkinterGUI(GUI, tkinter.Tk):
             self,
             card_name: str,
             img_path: str,
-            is_locked: bool,
+            is_locked: bool = False,
             pile: str = 'deck',
             rotated: bool = False):
 
