@@ -250,6 +250,18 @@ class TkinterGUI(GUI, tkinter.Tk):
                 command=lambda: self._table.flip(
                     self._inspected_card.get()),
                 ).grid(row=1, column=1)
+        ttk.Button(
+                buttons_frame,
+                text='lock',
+                command=lambda: self._table.lock_card(
+                    self._inspected_card.get()),
+                ).grid(row=1, column=2)
+        ttk.Button(
+                buttons_frame,
+                text='unlock',
+                command=lambda: self._table.unlock_card(
+                    self._inspected_card.get()),
+                ).grid(row=1, column=3)
         self._canvas_inspector = canvas
 
     def _create_table_frame(self):
