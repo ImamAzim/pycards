@@ -225,19 +225,31 @@ class TkinterGUI(GUI, tkinter.Tk):
                 text='discover',
                 command=lambda: self._table.discover_card(
                     self._inspected_card.get()),
-                ).pack(side=tkinter.LEFT)
+                ).grid(row=0, column=0)
         ttk.Button(
                 buttons_frame,
                 text='forget',
                 command=lambda: self._table.forget_card(
                     self._inspected_card.get()),
-                ).pack(side=tkinter.LEFT)
+                ).grid(row=0, column=1)
         ttk.Button(
                 buttons_frame,
                 text='destroy',
                 command=lambda: self._table.destroy_card(
                     self._inspected_card.get()),
-                ).pack(side=tkinter.LEFT)
+                ).grid(row=0, column=2)
+        ttk.Button(
+                buttons_frame,
+                text='rotate',
+                command=lambda: self._table.rotate_card(
+                    self._inspected_card.get()),
+                ).grid(row=1, column=0)
+        ttk.Button(
+                buttons_frame,
+                text='flip',
+                command=lambda: self._table.flip(
+                    self._inspected_card.get()),
+                ).grid(row=1, column=1)
         self._canvas_inspector = canvas
 
     def _create_table_frame(self):
