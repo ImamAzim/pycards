@@ -323,13 +323,12 @@ class TkinterGUI(GUI, tkinter.Tk):
                 image=self._inspected_card_img,
                 )
         print(self._inspected_card_img_item)
-        print(type(self._inspected_card_img))
 
     def clean_inspect_area(self):
         self._inspected_card.set(None)
         self._inspect_frame['text'] = 'inspect:'
         if self._inspected_card_img_item:
-            self._inspected_card_img_item.delete()
+            self._canvas_inspector.delete(self._inspected_card_img_item)
 
     def is_card_on_table(self, card_name: str) -> bool:
         pass
