@@ -208,11 +208,12 @@ class Table(BaseTable):
                 card = self._game.get_card(card_name)
             except GameError as e:
                 self._gui.showerror(e)
-            self._gui.inspect_card(
-                    card_name,
-                    card.path,
-                    self._game.is_card_permanent(card_name),
-                    card.rotate)
+            else:
+                self._gui.inspect_card(
+                        card_name,
+                        card.path,
+                        self._game.is_card_permanent(card_name),
+                        card.rotate)
 
     def shuffle_deck(self):
         cards = self._game.shuffle_deck()

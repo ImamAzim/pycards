@@ -309,16 +309,6 @@ class TkinterGUI(GUI, tkinter.Tk):
             pile: str = 'deck',
             rotated: bool = False):
         pass
-        # img = tkinter.PhotoImage(file=img_path)
-        # img_item = self._canvas_table.create_image(
-                # (0, 0),
-                # image=img,
-                # )
-        # self._canvas_table.bind(
-                # img_item,
-                # '<Button-1>',
-                # lambda e: self._canvas_table.delete(img_item),
-                # )
 
     def inspect_card(self,
                      card_name, str,
@@ -327,6 +317,11 @@ class TkinterGUI(GUI, tkinter.Tk):
                      rotated: bool = False,):
         self._inspected_card.set(card_name)
         self._inspect_frame['text'] = f'inspect: {card_name}'
+        python_img = tkinter.PhotoImage(file=img_path)
+        self._canvas_inspector.create_image(
+                (100, 100),
+                image=python_img,
+                )
 
     def clean_inspect_area(self):
         self._inspected_card.set(None)
