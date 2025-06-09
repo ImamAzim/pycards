@@ -315,9 +315,9 @@ class TkinterGUI(GUI, tkinter.Tk):
 
         card_width = self._table_width / self._TABLE_WIDTH_IN_CARDS
         y = self._height / 2
-        if pile=='deck':
+        if pile == 'deck':
             x = 0
-        elif pile=='discard':
+        elif pile == 'discard':
             x = self._table_width - card_width
         else:
             x = self._table_width / 2
@@ -338,8 +338,8 @@ class TkinterGUI(GUI, tkinter.Tk):
             if is_locked:
                 w, h = img.size
                 canvas.create_rectangle(
-                        (x-w/2, y-h/2),
-                        (x+w/2, y+h/2),
+                        (x, y),
+                        (x+w, y+h),
                         outline='blue',
                         width=2,
                         )
