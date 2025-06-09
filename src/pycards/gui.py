@@ -315,7 +315,6 @@ class TkinterGUI(GUI, tkinter.Tk):
                      img_path: str,
                      is_locked: bool,
                      rotated: bool = False,):
-        print(card_name, img_path, is_locked, rotated)
         self._inspected_card.set(card_name)
         self._inspect_frame['text'] = f'inspect: {card_name}'
         python_img = tkinter.PhotoImage(file=img_path)
