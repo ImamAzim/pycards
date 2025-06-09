@@ -333,7 +333,7 @@ class TkinterGUI(GUI, tkinter.Tk):
         y = self._inspector_height / 2
         canvas.create_image(
                 x, y,
-                image = canvas.img,
+                image=canvas.img,
                 )
         if is_locked:
             w, h = img.size
