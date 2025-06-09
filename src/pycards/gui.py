@@ -232,6 +232,12 @@ class TkinterGUI(GUI, tkinter.Tk):
                 command=lambda: self._table.forget_card(
                     self._inspected_card.get()),
                 ).pack(side=tkinter.LEFT)
+        ttk.Button(
+                buttons_frame,
+                text='destroy',
+                command=lambda: self._table.destroy_card(
+                    self._inspected_card.get()),
+                ).pack(side=tkinter.LEFT)
         self._canvas_inspector = canvas
 
     def _create_table_frame(self):
