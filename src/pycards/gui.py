@@ -37,6 +37,7 @@ class TkinterGUI(GUI, tkinter.Tk):
     """tkinter GUI for a pycards game"""
     TABLE_WIDTH_WEIGHT = 4  # relative wieght to menu column
     TABLE_REL_HEIGHT = 3  # unit of screen height
+    _TABLE_WIDTH_IN_CARDS = 6
 
     def __init__(self):
         tkinter.Tk.__init__(self)
@@ -311,7 +312,39 @@ class TkinterGUI(GUI, tkinter.Tk):
             is_locked: bool,
             pile: str = 'deck',
             rotated: bool = False):
-        pass
+
+        card_width = self._table_width / self._TABLE_WIDTH_IN_CARDS
+        y = self._height / 2
+        if pile=='deck':
+            x = 0
+        elif pile=='discard':
+            x = self._table_width - img.size[0]
+        else:
+            x = self._table_width / 2
+
+        canvas = self._canvas_table
+        if card_name not in self._cards_on_table:
+            img: ImageFile.ImageFile = Image.open(img_path)
+            maxsize = (card_width, self._table_height)
+            img.thumbnail(maxsize)
+            if rotated:
+                img = img.rotate(180)
+            canvas.img = ImageTk.PhotoImage(img)
+            card_img_id = canvas.create_image(
+                    x, y,
+                    image=canvas.img,
+                    anchor=tkinter.NW,
+                    )
+            if is_locked:
+                w, h = img.size
+                canvas.create_rectangle(
+                        (x-w/2, y-h/2),
+                        (x+w/2, y+h/2),
+                        outline='blue',
+                        width=2,
+                        )
+            self._cards_on_table[card_name] = card_img_id
+            print(card_img_id)
 
     def inspect_card(self,
                      card_name: str,
@@ -338,7 +371,7 @@ class TkinterGUI(GUI, tkinter.Tk):
                 )
         if is_locked:
             w, h = img.size
-            self._canvas_inspector.create_rectangle(
+            canvas.create_rectangle(
                     (x-w/2, y-h/2),
                     (x+w/2, y+h/2),
                     outline='blue',
