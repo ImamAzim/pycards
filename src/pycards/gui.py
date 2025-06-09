@@ -289,6 +289,7 @@ class TkinterGUI(GUI, tkinter.Tk):
                      img_path: str,
                      is_locked: bool,
                      rotated: bool = False,):
+        self._inspected_card.set(card_name)
         self._inspect_frame['text'] = f'inspect: {card_name}'
 
     def clean_inspect_area(self):

@@ -308,7 +308,9 @@ class Game(object):
         cards = self._check_card_in_game(card_name)
         if cards:
             card_dict = cards.get(card_name)
-            card = Card(is_locked=self.is_card_permanent(card_name), **card_dict)
+            card = Card(
+                    is_locked=self.is_card_permanent(card_name),
+                    **card_dict)
             return card
         else:
             raise GameError('missing from the game')
@@ -331,7 +333,7 @@ class Game(object):
             self._deck[card_name] = card
             self._varbox.save()
         else:
-            raise GameError('card is not present in the box')
+            raise GameError(f'card {card_name} is not present in the box')
 
     def lock_card(self, card_name: str):
         """lock a card, make it permanent. Will not be reshuffled in deck
