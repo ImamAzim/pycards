@@ -180,7 +180,7 @@ class TkinterGUI(GUI, tkinter.Tk):
                 box_cards_frame,
                 text='<-inspect...',
                 command=lambda e: self._table.inspect_card(
-                    self._deckcards_list.get()),
+                    self._boxcards_list.get()),
                 ).pack(side=tkinter.LEFT)
 
         deck_cards_frame = ttk.LabelFrame(
