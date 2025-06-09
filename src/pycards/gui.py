@@ -318,7 +318,7 @@ class TkinterGUI(GUI, tkinter.Tk):
         if pile=='deck':
             x = 0
         elif pile=='discard':
-            x = self._table_width - img.size[0]
+            x = self._table_width - card_width
         else:
             x = self._table_width / 2
 
@@ -344,7 +344,6 @@ class TkinterGUI(GUI, tkinter.Tk):
                         width=2,
                         )
             self._cards_on_table[card_name] = card_img_id
-            print(card_img_id)
 
     def inspect_card(self,
                      card_name: str,
