@@ -42,7 +42,6 @@ class TkinterGUI(GUI, tkinter.Tk):
         self._game_name: str = None
         self._inspected_card = tkinter.StringVar(self)
         self._inspected_card.set(None)
-        self._inspected_card_img_item = None
         self._table_frame: tkinter.Frame
         self._cardlist_frame: tkinter.Frame
         self._inspect_frame: tkinter.Frame
@@ -315,20 +314,20 @@ class TkinterGUI(GUI, tkinter.Tk):
                      img_path: str,
                      is_locked: bool,
                      rotated: bool = False,):
+
         self._inspected_card.set(card_name)
         self._inspect_frame['text'] = f'inspect: {card_name}'
+
         self._inspected_card_img = tkinter.PhotoImage(file=img_path)
-        self._inspected_img_item = self._canvas_inspector.create_image(
+        self._canvas_inspector.create_rectangle(
                 (0, 0),
-                image=self._inspected_card_img,
+                (100, 100),
                 )
-        print(self._inspected_card_img_item)
 
     def clean_inspect_area(self):
         self._inspected_card.set(None)
         self._inspect_frame['text'] = 'inspect:'
-        if self._inspected_card_img_item:
-            self._canvas_inspector.delete(self._inspected_card_img_item)
+        self._canvas_inspector.delete(tkinter.ALL)
 
     def is_card_on_table(self, card_name: str) -> bool:
         pass
