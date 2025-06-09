@@ -423,6 +423,8 @@ class Game(object):
         """
 
         cards = self._check_card_in_game(card_name)
+        if not cards:
+            raise GameError('card not found')
         card_dict: dict = cards[card_name]
         orientation = card_dict['orientation']
         new_orientation = 2 * (orientation // 2) + (orientation + 1) % 2
@@ -436,6 +438,8 @@ class Game(object):
         """
 
         cards = self._check_card_in_game(card_name)
+        if not cards:
+            raise GameError('card not found')
         card_dict: dict = cards[card_name]
         orientation = card_dict['orientation']
         new_orientation = 3 - orientation
