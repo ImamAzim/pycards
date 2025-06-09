@@ -167,7 +167,12 @@ class TkinterGUI(GUI, tkinter.Tk):
                 box_cards_frame,
                 state='readonly'
                 )
-        self._boxcards_list.pack(fill=tkinter.X)
+        self._boxcards_list.pack(side=tkinter.LEFT, expand=True, fill=tkinter.X)
+        ttk.Button(
+                box_cards_frame,
+                text='<-discover...',
+                command=self._call_discover,
+                ).pack(side=tkinter.LEFT)
 
         deck_cards_frame = ttk.LabelFrame(
                 self._cardlist_frame,
@@ -183,6 +188,10 @@ class TkinterGUI(GUI, tkinter.Tk):
                 lambda: self._table.inspect_card(self._deckcards_list.get()),
                 )
         self._deckcards_list.pack(fill=tkinter.X)
+
+    def _call_discover(self):
+        card_name = self._boxcards_list.get()
+        self._table.discover_card(card_name)
 
     def _create_inspect_frame(self):
         """canvas and options
