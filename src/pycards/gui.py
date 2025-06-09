@@ -261,16 +261,17 @@ class TkinterGUI(GUI, tkinter.Tk):
             is_locked: bool,
             pile: str = 'deck',
             rotated: bool = False):
-        img = tkinter.PhotoImage(file=img_path)
-        img_item = self._canvas_table.create_image(
-                (0, 0),
-                image=img,
-                )
-        self._canvas_table.bind(
-                img_item,
-                '<Button-1>',
-                lambda e: self._canvas_table.delete(img_item),
-                )
+        pass
+        # img = tkinter.PhotoImage(file=img_path)
+        # img_item = self._canvas_table.create_image(
+                # (0, 0),
+                # image=img,
+                # )
+        # self._canvas_table.bind(
+                # img_item,
+                # '<Button-1>',
+                # lambda e: self._canvas_table.delete(img_item),
+                # )
 
     def inspect_card(self,
                      card_name, str,
