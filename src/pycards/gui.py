@@ -45,6 +45,7 @@ class TkinterGUI(GUI, tkinter.Tk):
         self._game_name: str = None
         self._inspected_card = tkinter.StringVar(self)
         self._inspected_card.set(None)
+        self._cards_on_table: dict[str, int] = dict()
         self._table_frame: tkinter.Frame
         self._cardlist_frame: tkinter.Frame
         self._inspect_frame: tkinter.Frame
@@ -350,7 +351,10 @@ class TkinterGUI(GUI, tkinter.Tk):
         self._canvas_inspector.delete(tkinter.ALL)
 
     def is_card_on_table(self, card_name: str) -> bool:
-        pass
+        if card_name in self._cards_on_table:
+            return True
+        else:
+            return False
 
     def update_title(
             self, name: str):
