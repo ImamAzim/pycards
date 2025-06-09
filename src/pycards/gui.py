@@ -317,15 +317,19 @@ class TkinterGUI(GUI, tkinter.Tk):
                      rotated: bool = False,):
         self._inspected_card.set(card_name)
         self._inspect_frame['text'] = f'inspect: {card_name}'
-        python_img = tkinter.PhotoImage(file=img_path)
-        self._canvas_inspector.create_image(
-                (100, 100),
-                image=python_img,
+        self._inspected_card_img = tkinter.PhotoImage(file=img_path)
+        self._inspected_img_item = self._canvas_inspector.create_image(
+                (0, 0),
+                image=self._inspected_card_img,
                 )
+        print(self._inspected_card_img_item)
+        print(type(self._inspected_card_img))
 
     def clean_inspect_area(self):
         self._inspected_card.set(None)
         self._inspect_frame['text'] = 'inspect:'
+        if self._inspected_card_img_item:
+            self._inspected_card_img_item.delete()
 
     def is_card_on_table(self, card_name: str) -> bool:
         pass
