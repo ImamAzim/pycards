@@ -357,8 +357,8 @@ class TkinterGUI(GUI, tkinter.Tk):
         self._table_frame['text'] = f'current game: {name}'
 
     def clean_table(self):
-        pass
         self.clean_inspect_area()
+        self._canvas_table.delete(tkinter.ALL)
 
     def update_card_image(
             self,
