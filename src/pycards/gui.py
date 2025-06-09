@@ -40,6 +40,9 @@ class TkinterGUI(GUI, tkinter.Tk):
         self.title('pycards')
         self._table = None
         self._game_name: str = None
+        self._inspected_card = tkinter.StringVar(self)
+        self._inspected_card.set(None)
+        self._inspected_card_img_item = None
         self._table_frame: tkinter.Frame
         self._cardlist_frame: tkinter.Frame
         self._inspect_frame: tkinter.Frame
@@ -179,7 +182,7 @@ class TkinterGUI(GUI, tkinter.Tk):
         ttk.Button(
                 box_cards_frame,
                 text='<-inspect...',
-                command=lambda e: self._table.inspect_card(
+                command=lambda: self._table.inspect_card(
                     self._boxcards_list.get()),
                 ).pack(side=tkinter.LEFT)
 
@@ -200,7 +203,7 @@ class TkinterGUI(GUI, tkinter.Tk):
         self._deckcards_list.pack(fill=tkinter.X)
 
     def _call_discover(self):
-        card_name = self._boxcards_list.get()
+        card_name = self._inspected_card.get()
         self._table.discover_card(card_name)
 
     def _create_inspect_frame(self):
@@ -215,6 +218,13 @@ class TkinterGUI(GUI, tkinter.Tk):
                 height=self._inspector_height,
                 )
         canvas.pack(expand=True, fill=tkinter.X)
+        # buttons_frame = ttk.Frame(self._inspect_frame)
+        # buttons_frame.pack()
+        # ttk.Button(
+                # buttons_frame,
+                # text='discover',
+                # command=self._call_discover,
+                # )
         self._canvas_inspector = canvas
 
     def _create_table_frame(self):
@@ -278,10 +288,11 @@ class TkinterGUI(GUI, tkinter.Tk):
                      img_path: str,
                      is_locked: bool,
                      rotated: bool = False,):
-        pass
+        self._inspect_frame['text'] = f'inspect: {card_name}'
 
     def clean_inspect_area(self):
-        pass
+        self._inspected_card.set(None)
+        self._inspect_frame['text'] = 'inspect:'
 
     def is_card_on_table(self, card_name: str) -> bool:
         pass
