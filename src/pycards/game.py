@@ -341,14 +341,14 @@ class Game(object):
         :card_name: identify card
 
         """
-        if card_name in self.deck_card_names:
+        if self._check_card_in_game(card_name):
             if not self.is_card_permanent(card_name):
                 self._permanent_cards.append(card_name)
                 self._varbox.save()
             else:
                 raise GameError('card is already marked as permanent')
         else:
-            raise GameError('card is not present in the deck')
+            raise GameError('card not found')
 
     def unlock_card(self, card_name: str):
         """unlock a card, make it no longer permanent. Will part of the next
@@ -357,11 +357,15 @@ class Game(object):
         :card_name: identify card
 
         """
-        if self.is_card_permanent(card_name):
-            self._permanent_cards.remove(card_name)
-            self._varbox.save()
+
+        if self._check_card_in_game(card_name):
+            if self.is_card_permanent(card_name):
+                self._permanent_cards.remove(card_name)
+                self._varbox.save()
+            else:
+                raise GameError('card is already not marked as non-permanent')
         else:
-            raise GameError('card is already not marked as non-permanent')
+            raise GameError('card not found')
 
     def shuffle_deck(self) -> [Card]:
         """shuffle cards from deck
