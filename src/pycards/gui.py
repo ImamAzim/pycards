@@ -144,7 +144,10 @@ class TkinterGUI(GUI, tkinter.Tk):
 
         """
         gamename = self._table.get_current_game()
-        message = f'are you sure you want to delete the current game ({gamename})'
+        message = (
+                'are you sure you want to delete '
+                f'the current game ({gamename})'
+                )
         answer = messagebox.askyesno(
                 title='delete',
                 message=message,
@@ -167,7 +170,11 @@ class TkinterGUI(GUI, tkinter.Tk):
                 box_cards_frame,
                 state='readonly'
                 )
-        self._boxcards_list.pack(side=tkinter.LEFT, expand=True, fill=tkinter.X)
+        self._boxcards_list.pack(
+                side=tkinter.LEFT,
+                expand=True,
+                fill=tkinter.X,
+                )
         ttk.Button(
                 box_cards_frame,
                 text='<-discover...',
@@ -185,7 +192,8 @@ class TkinterGUI(GUI, tkinter.Tk):
                 )
         self._deckcards_list.bind(
                 '<<ComboboxSelected>>',
-                lambda arg: self._table.inspect_card(self._deckcards_list.get()),
+                lambda event: self._table.inspect_card(
+                    self._deckcards_list.get()),
                 )
         self._deckcards_list.pack(fill=tkinter.X)
 
