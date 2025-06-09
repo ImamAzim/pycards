@@ -4,7 +4,7 @@ from tkinter import simpledialog, filedialog, messagebox
 from tkinter import ttk
 
 
-from PIL import Image, ImageTk
+from PIL import Image, ImageTk, ImageFile
 
 
 class LoadPrompt(simpledialog.Dialog):
@@ -322,7 +322,9 @@ class TkinterGUI(GUI, tkinter.Tk):
         self._inspect_frame['text'] = f'inspect: {card_name}'
 
         canvas = self._canvas_inspector
-        img = Image.open(img_path)
+        img: ImageFile.ImageFile = Image.open(img_path)
+        maxsize = (self._inspector_width, self._inspector_height)
+        img.thumbnail(maxsize)
         canvas.img = ImageTk.PhotoImage(img)
         x = self._inspector_width / 2
         y = self._inspector_height / 2
