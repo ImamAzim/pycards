@@ -178,8 +178,9 @@ class TkinterGUI(GUI, tkinter.Tk):
                 )
         ttk.Button(
                 box_cards_frame,
-                text='<-discover...',
-                command=self._call_discover,
+                text='<-inspect...',
+                command=lambda e: self._table.inspect_card(
+                    self._deckcards_list.get()),
                 ).pack(side=tkinter.LEFT)
 
         deck_cards_frame = ttk.LabelFrame(
@@ -262,7 +263,7 @@ class TkinterGUI(GUI, tkinter.Tk):
             rotated: bool = False):
         img = tkinter.PhotoImage(file=img_path)
         img_item = self._canvas_table.create_image(
-                (0,0),
+                (0, 0),
                 image=img,
                 )
         self._canvas_table.bind(
