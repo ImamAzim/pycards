@@ -226,13 +226,14 @@ class Table(BaseTable):
                     card.rotate)
         permanent_cards = self._game.permanent_cards
         for card in permanent_cards:
-            if not self._gui.is_card_on_table(card.name):
-                self._gui.place_card_on_table(
-                        card.name,
-                        card.path,
-                        True,
-                        'gamezone',
-                        card.rotate)
+            if card.name not in self._game.box_card_names:
+                if not self._gui.is_card_on_table(card.name):
+                    self._gui.place_card_on_table(
+                            card.name,
+                            card.path,
+                            True,
+                            'gamezone',
+                            card.rotate)
         self._gui.clean_inspect_area()
 
 
