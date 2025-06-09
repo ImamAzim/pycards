@@ -3,8 +3,6 @@ import tkinter
 from tkinter import simpledialog, filedialog, messagebox
 from tkinter import ttk
 
-from PIL import Image, ImageTk
-
 
 class LoadPrompt(simpledialog.Dialog):
 
@@ -262,12 +260,9 @@ class TkinterGUI(GUI, tkinter.Tk):
             is_locked: bool,
             pile: str = 'deck',
             rotated: bool = False):
-        # img = tkinter.PhotoImage(Image.open(img_path))
-        img = ImageTk.PhotoImage(Image.open(img_path))
+        img = tkinter.PhotoImage(file=img_path)
         img_item = self._canvas_table.create_image(
-                20,
-                20,
-                anchor=tkinter.NW,
+                (0,0),
                 image=img,
                 )
         self._canvas_table.bind(
