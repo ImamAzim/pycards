@@ -325,6 +325,8 @@ class TkinterGUI(GUI, tkinter.Tk):
         img: ImageFile.ImageFile = Image.open(img_path)
         maxsize = (self._inspector_width, self._inspector_height)
         img.thumbnail(maxsize)
+        if rotated:
+            img = img.rotate(180)
         canvas.img = ImageTk.PhotoImage(img)
         x = self._inspector_width / 2
         y = self._inspector_height / 2
