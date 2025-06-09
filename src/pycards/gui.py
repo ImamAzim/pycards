@@ -322,6 +322,7 @@ class TkinterGUI(GUI, tkinter.Tk):
         self._inspect_frame['text'] = f'inspect: {card_name}'
 
         canvas = self._canvas_inspector
+        canvas.delete(tkinter.ALL)
         img: ImageFile.ImageFile = Image.open(img_path)
         maxsize = (self._inspector_width, self._inspector_height)
         img.thumbnail(maxsize)
