@@ -22,6 +22,7 @@ dependencies = [
 	'xdg',
 	'filetype',
 	'varboxes>=1.1',
+	'pillow',
 ]
 
 [project.optional-dependencies]
