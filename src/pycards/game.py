@@ -395,7 +395,7 @@ class Game(object):
             self._box[card_name] = card
             self._varbox.save()
         else:
-            raise GameError('card is not present in the deck')
+            raise GameError(f'card {card_name} is not present in the deck')
 
     def destroy_card(self, card_name):
         """remove card from deck or box and rm img file
