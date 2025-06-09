@@ -218,13 +218,14 @@ class TkinterGUI(GUI, tkinter.Tk):
                 height=self._inspector_height,
                 )
         canvas.pack(expand=True, fill=tkinter.X)
-        # buttons_frame = ttk.Frame(self._inspect_frame)
-        # buttons_frame.pack()
-        # ttk.Button(
-                # buttons_frame,
-                # text='discover',
-                # command=self._call_discover,
-                # )
+        buttons_frame = ttk.Frame(self._inspect_frame)
+        buttons_frame.pack()
+        ttk.Button(
+                buttons_frame,
+                text='discover',
+                command=lambda: self._table.discover_card(
+                    self._inspected_card.get()),
+                ).pack(side=tkinter.LEFT)
         self._canvas_inspector = canvas
 
     def _create_table_frame(self):
