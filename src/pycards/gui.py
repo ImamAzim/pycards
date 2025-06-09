@@ -344,6 +344,11 @@ class TkinterGUI(GUI, tkinter.Tk):
                         width=2,
                         )
             self._cards_on_table[card_name] = card_img_id
+        else:
+            canvas.move(
+                    self._cards_on_table[card_name],
+                    x,
+                    y,)
 
     def inspect_card(self,
                      card_name: str,
