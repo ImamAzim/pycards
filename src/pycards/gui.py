@@ -311,7 +311,7 @@ class TkinterGUI(GUI, tkinter.Tk):
         pass
 
     def inspect_card(self,
-                     card_name, str,
+                     card_name: str,
                      img_path: str,
                      is_locked: bool,
                      rotated: bool = False,):
