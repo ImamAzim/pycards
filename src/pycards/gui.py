@@ -4,6 +4,9 @@ from tkinter import simpledialog, filedialog, messagebox
 from tkinter import ttk
 
 
+from PIL import Image, ImageTk
+
+
 class LoadPrompt(simpledialog.Dialog):
 
     """prompt to show games that can be loaded. use a dropdown menu
@@ -318,11 +321,20 @@ class TkinterGUI(GUI, tkinter.Tk):
         self._inspected_card.set(card_name)
         self._inspect_frame['text'] = f'inspect: {card_name}'
 
-        self._inspected_card_img = tkinter.PhotoImage(file=img_path)
-        self._canvas_inspector.create_rectangle(
-                (0, 0),
-                (100, 100),
+        canvas = self._canvas_inspector
+        img = Image.open(img_path)
+        canvas.img = ImageTk.PhotoImage(img)
+        x = self._inspector_width / 2
+        y = self._inspector_height / 2
+        canvas.create_image(
+                x, y,
+                image = canvas.img,
                 )
+        if is_locked:
+            self._canvas_inspector.create_rectangle(
+                    (0, 0),
+                    (100, 100),
+                    )
 
     def clean_inspect_area(self):
         self._inspected_card.set(None)
