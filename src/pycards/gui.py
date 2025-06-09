@@ -185,7 +185,7 @@ class TkinterGUI(GUI, tkinter.Tk):
                 )
         self._deckcards_list.bind(
                 '<<ComboboxSelected>>',
-                lambda: self._table.inspect_card(self._deckcards_list.get()),
+                lambda arg: self._table.inspect_card(self._deckcards_list.get()),
                 )
         self._deckcards_list.pack(fill=tkinter.X)
 
