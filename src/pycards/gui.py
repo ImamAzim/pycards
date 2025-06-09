@@ -347,7 +347,7 @@ class TkinterGUI(GUI, tkinter.Tk):
         self._boxcards_list['values'] = card_names
 
     def update_deck_cards_list(self, card_names: list[str]):
-        self._boxcards_list.set('')
+        self._deckcards_list.set('')
         self._deckcards_list['values'] = card_names
 
 
