@@ -333,9 +333,12 @@ class TkinterGUI(GUI, tkinter.Tk):
                 image = canvas.img,
                 )
         if is_locked:
+            w, h = img.size
             self._canvas_inspector.create_rectangle(
-                    (0, 0),
-                    (100, 100),
+                    (x-w/2, y-h/2),
+                    (x+w/2, y+h/2),
+                    outline='blue',
+                    width=2,
                     )
 
     def clean_inspect_area(self):
