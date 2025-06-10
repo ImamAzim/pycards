@@ -38,6 +38,9 @@ class TkinterGUI(GUI, tkinter.Tk):
     TABLE_WIDTH_WEIGHT = 4  # relative wieght to menu column
     TABLE_REL_HEIGHT = 3  # unit of screen height
     _TABLE_WIDTH_IN_CARDS = 6
+    _IMG_KEY = 'img'
+    _IMG_ID_KEY = 'img_id'
+    _FRAME_ID_KEY = 'frame_id'
 
     def __init__(self):
         tkinter.Tk.__init__(self)
@@ -46,7 +49,7 @@ class TkinterGUI(GUI, tkinter.Tk):
         self._game_name: str = None
         self._inspected_card = tkinter.StringVar(self)
         self._inspected_card.set(None)
-        self._cards_on_table: dict[str, int] = dict()
+        self._cards_on_table: dict[str, dict] = dict()
         self._table_frame: tkinter.Frame
         self._cardlist_frame: tkinter.Frame
         self._inspect_frame: tkinter.Frame
@@ -337,24 +340,29 @@ class TkinterGUI(GUI, tkinter.Tk):
             img.thumbnail(maxsize)
             if rotated:
                 img = img.rotate(180)
-            canvas.img = ImageTk.PhotoImage(img)
+            self._cards_on_table[card_name][self._IMG_KEY] = ImageTk.PhotoImage(img)
+            img = self._cards_on_table[card_name][self._IMG_KEY]
             card_img_id = canvas.create_image(
                     x, y,
-                    image=canvas.img,
+                    image=img,
                     anchor=tkinter.NW,
                     )
+            self._cards_on_table[card_name][self._IMG_ID_KEY] = card_img_id
             if is_locked:
+                color = 'blue'
+            else:
+                color = 'green'
                 w, h = img.size
-                canvas.create_rectangle(
+                frame_id = canvas.create_rectangle(
                         (x, y),
                         (x+w, y+h),
-                        outline='blue',
+                        outline=color,
                         width=2,
                         )
-            self._cards_on_table[card_name] = card_img_id
+            self._cards_on_table[card_name][self._FRAME_ID_KEY] = frame_id
         else:
             canvas.coords(
-                    self._cards_on_table[card_name],
+                    self._cards_on_table[card_name][self._IMG_ID_KEY],
                     x,
                     y,)
 
@@ -419,9 +427,9 @@ class TkinterGUI(GUI, tkinter.Tk):
         pass
 
     def remove_card(self, card_name: str):
-        card_id = self._cards_on_table.pop(card_name)
-        self._canvas_table.delete(card_id)
-        pass
+        card_on_table = self._cards_on_table.pop(card_name)
+        self._canvas_table.delete(card_on_table[self._IMG_ID_KEY])
+        self._canvas_table.delete(card_on_table[self._FRAME_ID_KEY])
 
     def update_box_cards_list(self, card_names: list[str]):
         self._boxcards_list.set('')
