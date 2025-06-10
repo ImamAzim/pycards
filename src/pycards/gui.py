@@ -431,7 +431,27 @@ class TkinterGUI(GUI, tkinter.Tk):
             img_path: str,
             is_locked: bool,
             rotated: bool = False):
-        pass
+        card: dict = self._cards_on_table.pop(card_name)
+        img: ImageFile.ImageFile = Image.open(img_path)
+        card_width = self._table_width / self._TABLE_WIDTH_IN_CARDS
+        maxsize = (card_width, self._table_height)
+        img.thumbnail(maxsize)
+        if rotated:
+            img = img.rotate(180)
+        card[self._IMG_KEY] = ImageTk.PhotoImage(img)
+        canvas.config(
+                card[self._IMG_ID_KEY],
+                image=card[self._IMG_KEY],
+                )
+        if is_locked:
+            color = 'blue'
+        else:
+            color = 'green'
+        canvas = self._canvas_table
+        canvas.config(
+                card[self._FRAME_ID_KEY],
+                color=color,
+                )
 
     def remove_card(self, card_name: str):
         card: dict = self._cards_on_table.pop(card_name)
