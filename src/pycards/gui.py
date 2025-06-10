@@ -408,6 +408,7 @@ class TkinterGUI(GUI, tkinter.Tk):
     def clean_table(self):
         self.clean_inspect_area()
         self._canvas_table.delete(tkinter.ALL)
+        self._cards_on_table = dict()
 
     def update_card_image(
             self,
@@ -418,6 +419,8 @@ class TkinterGUI(GUI, tkinter.Tk):
         pass
 
     def remove_card(self, card_name: str):
+        card_id = self._cards_on_table.pop(card_name)
+        self._canvas_table.delete(card_id)
         pass
 
     def update_box_cards_list(self, card_names: list[str]):

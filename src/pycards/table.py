@@ -218,6 +218,7 @@ class Table(BaseTable):
     def shuffle_deck(self):
         cards = self._game.shuffle_deck()
         for card in cards:
+            self._gui.remove_card(card.name)
             self._gui.place_card_on_table(
                     card.name,
                     card.path,
