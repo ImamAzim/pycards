@@ -440,7 +440,7 @@ class TkinterGUI(GUI, tkinter.Tk):
         if rotated:
             img = img.rotate(180)
         card[self._IMG_KEY] = ImageTk.PhotoImage(img)
-        canvas.config(
+        canvas.itemconfig(
                 card[self._IMG_ID_KEY],
                 image=card[self._IMG_KEY],
                 )
@@ -448,8 +448,7 @@ class TkinterGUI(GUI, tkinter.Tk):
             color = 'blue'
         else:
             color = 'green'
-        canvas = self._canvas_table
-        canvas.config(
+        canvas.itemconfig(
                 card[self._FRAME_ID_KEY],
                 color=color,
                 )
