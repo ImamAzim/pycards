@@ -117,6 +117,11 @@ class Table(BaseTable):
                         self._game.is_card_permanent(card_name),
                         card.rotate,
                         )
+            self._gui.inspect_card(
+                    card_name,
+                    card.path,
+                    self._game.is_card_permanent(card_name),
+                    card.rotate)
 
     def flip(self, card_name):
         try:
@@ -132,6 +137,11 @@ class Table(BaseTable):
                         self._game.is_card_permanent(card_name),
                         card.rotate,
                         )
+            self._gui.inspect_card(
+                    card_name,
+                    card.path,
+                    self._game.is_card_permanent(card_name),
+                    card.rotate)
 
     def forget_card(self, card_name: str):
         try:
@@ -161,6 +171,11 @@ class Table(BaseTable):
                         self._game.is_card_permanent(card_name),
                         card.rotate,
                         )
+            self._gui.inspect_card(
+                    card_name,
+                    card.path,
+                    self._game.is_card_permanent(card_name),
+                    card.rotate)
 
     def unlock_card(self, card_name: str):
         try:
@@ -176,6 +191,11 @@ class Table(BaseTable):
                         self._game.is_card_permanent(card_name),
                         card.rotate,
                         )
+            self._gui.inspect_card(
+                    card_name,
+                    card.path,
+                    self._game.is_card_permanent(card_name),
+                    card.rotate)
 
     def inspect_card(self, card_name: str):
         if card_name:
