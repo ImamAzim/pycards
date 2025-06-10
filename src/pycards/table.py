@@ -88,11 +88,6 @@ class Table(BaseTable):
                     self._game.is_card_permanent(card_name),
                     'discard',
                     card.rotate)
-            self._gui.inspect_card(
-                    card_name,
-                    card.path,
-                    self._game.is_card_permanent(card_name),
-                    card.rotate)
 
     def destroy_card(self, card_name: str):
         try:
@@ -122,11 +117,6 @@ class Table(BaseTable):
                         self._game.is_card_permanent(card_name),
                         card.rotate,
                         )
-            self._gui.inspect_card(
-                    card_name,
-                    card.path,
-                    self._game.is_card_permanent(card_name),
-                    card.rotate)
 
     def flip(self, card_name):
         try:
@@ -142,11 +132,6 @@ class Table(BaseTable):
                         self._game.is_card_permanent(card_name),
                         card.rotate,
                         )
-            self._gui.inspect_card(
-                    card_name,
-                    card.path,
-                    self._game.is_card_permanent(card_name),
-                    card.rotate)
 
     def forget_card(self, card_name: str):
         try:
@@ -176,11 +161,6 @@ class Table(BaseTable):
                         self._game.is_card_permanent(card_name),
                         card.rotate,
                         )
-            self._gui.inspect_card(
-                    card_name,
-                    card.path,
-                    self._game.is_card_permanent(card_name),
-                    card.rotate)
 
     def unlock_card(self, card_name: str):
         try:
@@ -196,11 +176,6 @@ class Table(BaseTable):
                         self._game.is_card_permanent(card_name),
                         card.rotate,
                         )
-            self._gui.inspect_card(
-                    card_name,
-                    card.path,
-                    self._game.is_card_permanent(card_name),
-                    card.rotate)
 
     def inspect_card(self, card_name: str):
         if card_name:
@@ -218,7 +193,8 @@ class Table(BaseTable):
     def shuffle_deck(self):
         cards = self._game.shuffle_deck()
         for card in cards:
-            self._gui.remove_card(card.name)
+            if self._gui.is_card_on_table(card.name):
+                self._gui.remove_card(card.name)
             self._gui.place_card_on_table(
                     card.name,
                     card.path,
