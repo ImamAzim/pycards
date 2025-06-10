@@ -205,6 +205,11 @@ class TkinterGUI(GUI, tkinter.Tk):
                     self._deckcards_list.get()),
                 )
         self._deckcards_list.pack(fill=tkinter.X)
+        ttk.Button(
+                deck_cards_frame,
+                text='shuffle',
+                command=lambda: self._table.shuffle_deck,
+                ).pack(side=tkinter.LEFT)
 
     def _call_discover(self):
         card_name = self._inspected_card.get()
