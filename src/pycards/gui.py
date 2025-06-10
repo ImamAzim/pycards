@@ -431,6 +431,7 @@ class TkinterGUI(GUI, tkinter.Tk):
             img_path: str,
             is_locked: bool,
             rotated: bool = False):
+        canvas = self._canvas_table
         card: dict = self._cards_on_table.pop(card_name)
         img: ImageFile.ImageFile = Image.open(img_path)
         card_width = self._table_width / self._TABLE_WIDTH_IN_CARDS
