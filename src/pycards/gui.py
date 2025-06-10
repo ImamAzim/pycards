@@ -334,20 +334,21 @@ class TkinterGUI(GUI, tkinter.Tk):
             x = self._table_width / 2
 
         canvas = self._canvas_table
-        if card_name not in self._cards_on_table:
+        if not self.is_card_on_table(card_name):
+            self._cards_on_table[card_name] = dict()
+            placed_card = self._cards_on_table[card_name]
             img: ImageFile.ImageFile = Image.open(img_path)
             maxsize = (card_width, self._table_height)
             img.thumbnail(maxsize)
             if rotated:
                 img = img.rotate(180)
-            self._cards_on_table[card_name][self._IMG_KEY] = ImageTk.PhotoImage(img)
-            img = self._cards_on_table[card_name][self._IMG_KEY]
+            placed_card[self._IMG_KEY] = ImageTk.PhotoImage(img)
             card_img_id = canvas.create_image(
                     x, y,
-                    image=img,
+                    image=placed_card[self._IMG_KEY],
                     anchor=tkinter.NW,
                     )
-            self._cards_on_table[card_name][self._IMG_ID_KEY] = card_img_id
+            placed_card[self._IMG_ID_KEY] = card_img_id
             if is_locked:
                 color = 'blue'
             else:
@@ -359,14 +360,15 @@ class TkinterGUI(GUI, tkinter.Tk):
                         outline=color,
                         width=2,
                         )
-            self._cards_on_table[card_name][self._FRAME_ID_KEY] = frame_id
+            placed_card[self._FRAME_ID_KEY] = frame_id
         else:
+            placed_card = self._cards_on_table[card_name]
             canvas.coords(
-                    self._cards_on_table[card_name][self._IMG_ID_KEY],
+                    placed_card[self._IMG_ID_KEY],
                     x,
                     y,)
             canvas.coords(
-                    self._cards_on_table[card_name][self._FRAME_ID_KEY],
+                    placed_card[self._FRAME_ID_KEY],
                     x,
                     y,
                     )
