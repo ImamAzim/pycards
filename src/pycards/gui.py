@@ -204,11 +204,14 @@ class TkinterGUI(GUI, tkinter.Tk):
                 lambda event: self._table.inspect_card(
                     self._deckcards_list.get()),
                 )
-        self._deckcards_list.pack(fill=tkinter.X)
+        self._deckcards_list.pack(
+                fill=tkinter.X,
+                expand=True,
+                side=tkinter.LEFT)
         ttk.Button(
                 deck_cards_frame,
                 text='shuffle',
-                command=lambda: self._table.shuffle_deck,
+                command=lambda: self._table.shuffle_deck(),
                 ).pack(side=tkinter.LEFT)
 
     def _call_discover(self):
