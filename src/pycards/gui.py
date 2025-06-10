@@ -450,7 +450,7 @@ class TkinterGUI(GUI, tkinter.Tk):
             color = 'green'
         canvas.itemconfig(
                 card[self._FRAME_ID_KEY],
-                color=color,
+                outline=color,
                 )
 
     def remove_card(self, card_name: str):
