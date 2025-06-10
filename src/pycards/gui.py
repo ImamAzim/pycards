@@ -345,7 +345,7 @@ class TkinterGUI(GUI, tkinter.Tk):
                         )
             self._cards_on_table[card_name] = card_img_id
         else:
-            canvas.move(
+            canvas.coords(
                     self._cards_on_table[card_name],
                     x,
                     y,)
