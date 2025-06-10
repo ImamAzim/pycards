@@ -353,14 +353,14 @@ class TkinterGUI(GUI, tkinter.Tk):
                 color = 'blue'
             else:
                 color = 'green'
-                w, h = img.size
-                frame_id = canvas.create_rectangle(
-                        (x, y),
-                        (x+w, y+h),
-                        outline=color,
-                        width=2,
-                        )
-                placed_card[self._FRAME_ID_KEY] = frame_id
+            w, h = img.size
+            frame_id = canvas.create_rectangle(
+                    (x, y),
+                    (x+w, y+h),
+                    outline=color,
+                    width=2,
+                    )
+            placed_card[self._FRAME_ID_KEY] = frame_id
         else:
             placed_card = self._cards_on_table[card_name]
             canvas.coords(
@@ -434,9 +434,9 @@ class TkinterGUI(GUI, tkinter.Tk):
         pass
 
     def remove_card(self, card_name: str):
-        card_on_table = self._cards_on_table.pop(card_name)
-        self._canvas_table.delete(card_on_table[self._IMG_ID_KEY])
-        self._canvas_table.delete(card_on_table[self._FRAME_ID_KEY])
+        card: dict = self._cards_on_table.pop(card_name)
+        self._canvas_table.delete(card[self._IMG_ID_KEY])
+        self._canvas_table.delete(card[self._FRAME_ID_KEY])
 
     def update_box_cards_list(self, card_names: list[str]):
         self._boxcards_list.set('')
