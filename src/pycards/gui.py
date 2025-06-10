@@ -365,6 +365,11 @@ class TkinterGUI(GUI, tkinter.Tk):
                     self._cards_on_table[card_name][self._IMG_ID_KEY],
                     x,
                     y,)
+            canvas.coords(
+                    self._cards_on_table[card_name][self._FRAME_ID_KEY],
+                    x,
+                    y,
+                    )
 
     def inspect_card(self,
                      card_name: str,
