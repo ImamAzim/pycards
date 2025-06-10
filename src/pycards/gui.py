@@ -360,7 +360,7 @@ class TkinterGUI(GUI, tkinter.Tk):
                         outline=color,
                         width=2,
                         )
-            placed_card[self._FRAME_ID_KEY] = frame_id
+                placed_card[self._FRAME_ID_KEY] = frame_id
         else:
             placed_card = self._cards_on_table[card_name]
             canvas.coords(
