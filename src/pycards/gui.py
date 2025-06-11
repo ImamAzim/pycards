@@ -69,7 +69,7 @@ class TkinterGUI(GUI, tkinter.Tk):
     TABLE_REL_HEIGHT = 3  # unit of screen height
     _TABLE_WIDTH_IN_CARDS = 6
     _IMG_KEY = 'img'
-    _IMG_ID_KEY = 'img_id'
+    _IMG_LABEL_KEY = 'img_label'
     _FRAME_ID_KEY = 'frame_id'
 
     def __init__(self):
@@ -376,7 +376,7 @@ class TkinterGUI(GUI, tkinter.Tk):
             placed_card[self._IMG_KEY] = ImageTk.PhotoImage(img)
             label = tkinter.Label(canvas, image=placed_card[self._IMG_KEY])
             label.place(x=x, y=y, anchor=tkinter.NW)
-            placed_card[self._IMG_ID_KEY] = label
+            placed_card[self._IMG_LABEL_KEY] = label
             dnd = DragManager()
             self._dnd.add_draggable(label)
             if is_locked:
@@ -394,7 +394,7 @@ class TkinterGUI(GUI, tkinter.Tk):
 
         else:
             placed_card = self._cards_on_table[card_name]
-            label = placed_card[self._IMG_ID_KEY]
+            label = placed_card[self._IMG_LABEL_KEY]
             label.place(x=x, y=y, anchor=tkinter.NW)
             canvas.coords(
                     placed_card[self._FRAME_ID_KEY],
@@ -469,7 +469,7 @@ class TkinterGUI(GUI, tkinter.Tk):
         if rotated:
             img = img.rotate(180)
         card[self._IMG_KEY] = ImageTk.PhotoImage(img)
-        label = card[self._IMG_ID_KEY]
+        label = card[self._IMG_LABEL_KEY]
         label.configure(image=card[self._IMG_KEY])
         if is_locked:
             color = 'blue'
@@ -482,7 +482,7 @@ class TkinterGUI(GUI, tkinter.Tk):
 
     def remove_card(self, card_name: str):
         card: dict = self._cards_on_table.pop(card_name)
-        label: tkinter.Label = card[self._IMG_ID_KEY]
+        label: tkinter.Label = card[self._IMG_LABEL_KEY]
         label.destroy()
         self._canvas_table.delete(card[self._FRAME_ID_KEY])
 
