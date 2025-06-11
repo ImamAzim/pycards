@@ -7,6 +7,36 @@ from tkinter import ttk
 from PIL import Image, ImageTk, ImageFile
 
 
+class DragManager():
+    def add_draggable(self, widget):
+        widget.bind("<ButtonPress-1>", self.on_start)
+        widget.bind("<B1-Motion>", self.on_drag)
+        # widget.bind("<ButtonRelease-1>", self.on_drop)
+        widget.configure(cursor="hand1")
+
+    def on_start(self, event: tkinter.Event):
+        # you could use this method to create a floating window
+        # that represents what is being dragged.
+        event.widget.startX = event.x
+        event.widget.startY = event.y
+
+    def on_drag(self, event: tkinter.Event):
+        # you could use this method to move a floating window that
+        # represents what you're dragging
+        x = event.widget.winfo_x() + event.x-event.widget.startX
+        y = event.widget.winfo_y() + event.y-event.widget.startY
+        event.widget.place(x=x, y=y)
+
+    def on_drop(self, event):
+        # find the widget under the cursor
+        x,y = event.widget.winfo_pointerxy()
+        target = event.widget.winfo_containing(x,y)
+        try:
+            target.configure(image=event.widget.cget("image"))
+        except:
+            pass
+
+
 class LoadPrompt(simpledialog.Dialog):
 
     """prompt to show games that can be loaded. use a dropdown menu
@@ -53,6 +83,7 @@ class TkinterGUI(GUI, tkinter.Tk):
         self._table_frame: tkinter.Frame
         self._cardlist_frame: tkinter.Frame
         self._inspect_frame: tkinter.Frame
+        self._dnd = DragManager()
 
         width = self.winfo_screenwidth()
         height = self.winfo_screenheight()
@@ -346,6 +377,8 @@ class TkinterGUI(GUI, tkinter.Tk):
             label = tkinter.Label(canvas, image=placed_card[self._IMG_KEY])
             label.place(x=x, y=y, anchor=tkinter.NW)
             placed_card[self._IMG_ID_KEY] = label
+            dnd = DragManager()
+            self._dnd.add_draggable(label)
             if is_locked:
                 color = 'blue'
             else:
@@ -449,8 +482,8 @@ class TkinterGUI(GUI, tkinter.Tk):
 
     def remove_card(self, card_name: str):
         card: dict = self._cards_on_table.pop(card_name)
-        label = card[self._IMG_ID_KEY]
-        label.delete()
+        label: tkinter.Label = card[self._IMG_ID_KEY]
+        label.destroy()
         self._canvas_table.delete(card[self._FRAME_ID_KEY])
 
     def update_box_cards_list(self, card_names: list[str]):
