@@ -17,6 +17,8 @@ class DragManager():
     def on_start(self, event: tkinter.Event):
         self._cursor_x0 = event.x
         self._cursor_y0 = event.y
+        widget: tkinter.Label = event.widget
+        widget.lift()
 
     def on_drag(self, event: tkinter.Event):
         cursor_x = event.x
@@ -60,7 +62,6 @@ class LoadPrompt(simpledialog.Dialog):
 
     def apply(self):
         self.game_name = self._save_games_list.get()
-
 
 class TkinterGUI(GUI, tkinter.Tk):
 
