@@ -60,7 +60,6 @@ class TkinterGUI(GUI, tkinter.Tk):
     _TABLE_WIDTH_IN_CARDS = 6
     _IMG_KEY = 'img'
     _IMG_LABEL_KEY = 'img_label'
-    _FRAME_ID_KEY = 'frame_id'
 
     def __init__(self):
         tkinter.Tk.__init__(self)
@@ -373,27 +372,13 @@ class TkinterGUI(GUI, tkinter.Tk):
             placed_card[self._IMG_LABEL_KEY] = label
             self._dnd.add_draggable(label)
             if is_locked:
-                color = 'blue'
+                label['background'] = 'blue'
             else:
-                color = 'green'
-            w, h = img.size
-            frame_id = canvas.create_rectangle(
-                    (x, y),
-                    (x+w, y+h),
-                    outline=color,
-                    width=2,
-                    )
-            placed_card[self._FRAME_ID_KEY] = frame_id
-
+                label['background'] = 'green'
         else:
             placed_card = self._cards_on_table[card_name]
             label = placed_card[self._IMG_LABEL_KEY]
             label.place(x=x, y=y, anchor=tkinter.NW)
-            canvas.coords(
-                    placed_card[self._FRAME_ID_KEY],
-                    x,
-                    y,
-                    )
 
     def inspect_card(self,
                      card_name: str,
@@ -466,18 +451,14 @@ class TkinterGUI(GUI, tkinter.Tk):
         label.configure(image=card[self._IMG_KEY])
         if is_locked:
             color = 'blue'
+            label['background'] = 'blue'
         else:
-            color = 'green'
-        canvas.itemconfig(
-                card[self._FRAME_ID_KEY],
-                outline=color,
-                )
+            label['background'] = 'green'
 
     def remove_card(self, card_name: str):
         card: dict = self._cards_on_table.pop(card_name)
         label: tkinter.Label = card[self._IMG_LABEL_KEY]
         label.destroy()
-        self._canvas_table.delete(card[self._FRAME_ID_KEY])
 
     def update_box_cards_list(self, card_names: list[str]):
         self._boxcards_list.set('')
