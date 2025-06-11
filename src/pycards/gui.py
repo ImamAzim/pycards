@@ -343,12 +343,9 @@ class TkinterGUI(GUI, tkinter.Tk):
             if rotated:
                 img = img.rotate(180)
             placed_card[self._IMG_KEY] = ImageTk.PhotoImage(img)
-            card_img_id = canvas.create_image(
-                    x, y,
-                    image=placed_card[self._IMG_KEY],
-                    anchor=tkinter.NW,
-                    )
-            placed_card[self._IMG_ID_KEY] = card_img_id
+            label = tkinter.Label(canvas, image=placed_card[self._IMG_KEY])
+            label.place(x=x, y=y, anchor=tkinter.NW)
+            placed_card[self._IMG_ID_KEY] = label
             if is_locked:
                 color = 'blue'
             else:
@@ -361,12 +358,11 @@ class TkinterGUI(GUI, tkinter.Tk):
                     width=2,
                     )
             placed_card[self._FRAME_ID_KEY] = frame_id
+
         else:
             placed_card = self._cards_on_table[card_name]
-            canvas.coords(
-                    placed_card[self._IMG_ID_KEY],
-                    x,
-                    y,)
+            label = placed_card[self._IMG_ID_KEY]
+            label.place(x=x, y=y, anchor=tkinter.NW)
             canvas.coords(
                     placed_card[self._FRAME_ID_KEY],
                     x,
@@ -440,10 +436,8 @@ class TkinterGUI(GUI, tkinter.Tk):
         if rotated:
             img = img.rotate(180)
         card[self._IMG_KEY] = ImageTk.PhotoImage(img)
-        canvas.itemconfig(
-                card[self._IMG_ID_KEY],
-                image=card[self._IMG_KEY],
-                )
+        label = card[self._IMG_ID_KEY]
+        label.configure(image=card[self._IMG_KEY])
         if is_locked:
             color = 'blue'
         else:
@@ -455,7 +449,8 @@ class TkinterGUI(GUI, tkinter.Tk):
 
     def remove_card(self, card_name: str):
         card: dict = self._cards_on_table.pop(card_name)
-        self._canvas_table.delete(card[self._IMG_ID_KEY])
+        label = card[self._IMG_ID_KEY]
+        label.delete()
         self._canvas_table.delete(card[self._FRAME_ID_KEY])
 
     def update_box_cards_list(self, card_names: list[str]):
