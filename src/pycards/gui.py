@@ -11,8 +11,6 @@ class DragManager():
     def add_draggable(self, widget):
         widget.bind("<ButtonPress-1>", self.on_start)
         widget.bind("<B1-Motion>", self.on_drag)
-        # widget.bind("<ButtonRelease-1>", self.on_drop)
-        widget.configure(cursor="hand1")
 
     def on_start(self, event: tkinter.Event):
         self._cursor_x0 = event.x
@@ -28,15 +26,6 @@ class DragManager():
         x = event.widget.winfo_x() + dx
         y = event.widget.winfo_y() + dy
         event.widget.place(x=x, y=y)
-
-    def on_drop(self, event):
-        # find the widget under the cursor
-        x,y = event.widget.winfo_pointerxy()
-        target = event.widget.winfo_containing(x,y)
-        try:
-            target.configure(image=event.widget.cget("image"))
-        except:
-            pass
 
 
 class LoadPrompt(simpledialog.Dialog):
@@ -375,10 +364,13 @@ class TkinterGUI(GUI, tkinter.Tk):
             if rotated:
                 img = img.rotate(180)
             placed_card[self._IMG_KEY] = ImageTk.PhotoImage(img)
-            label = tkinter.Label(canvas, image=placed_card[self._IMG_KEY])
+            label = tkinter.Label(
+                    canvas,
+                    image=placed_card[self._IMG_KEY],
+                    cursor='hand1',
+                    )
             label.place(x=x, y=y, anchor=tkinter.NW)
             placed_card[self._IMG_LABEL_KEY] = label
-            dnd = DragManager()
             self._dnd.add_draggable(label)
             if is_locked:
                 color = 'blue'
