@@ -15,16 +15,16 @@ class DragManager():
         widget.configure(cursor="hand1")
 
     def on_start(self, event: tkinter.Event):
-        # you could use this method to create a floating window
-        # that represents what is being dragged.
-        event.widget.startX = event.x
-        event.widget.startY = event.y
+        self._cursor_x0 = event.x
+        self._cursor_y0 = event.y
 
     def on_drag(self, event: tkinter.Event):
-        # you could use this method to move a floating window that
-        # represents what you're dragging
-        x = event.widget.winfo_x() + event.x-event.widget.startX
-        y = event.widget.winfo_y() + event.y-event.widget.startY
+        cursor_x = event.x
+        cursor_y = event.y
+        dx = cursor_x - self._cursor_x0
+        dy = cursor_y - self._cursor_y0
+        x = event.widget.winfo_x() + dx
+        y = event.widget.winfo_y() + dy
         event.widget.place(x=x, y=y)
 
     def on_drop(self, event):
