@@ -7,27 +7,6 @@ from tkinter import ttk
 from PIL import Image, ImageTk, ImageFile
 
 
-class DragManager():
-    def add_draggable(self, widget):
-        widget.bind("<ButtonPress-1>", self.on_start)
-        widget.bind("<B1-Motion>", self.on_drag)
-
-    def on_start(self, event: tkinter.Event):
-        self._cursor_x0 = event.x
-        self._cursor_y0 = event.y
-        widget: tkinter.Label = event.widget
-        widget.lift()
-
-    def on_drag(self, event: tkinter.Event):
-        cursor_x = event.x
-        cursor_y = event.y
-        dx = cursor_x - self._cursor_x0
-        dy = cursor_y - self._cursor_y0
-        x = event.widget.winfo_x() + dx
-        y = event.widget.winfo_y() + dy
-        event.widget.place(x=x, y=y)
-
-
 class LoadPrompt(simpledialog.Dialog):
 
     """prompt to show games that can be loaded. use a dropdown menu
@@ -72,7 +51,6 @@ class TkinterGUI(GUI, tkinter.Tk):
         self._table_frame: tkinter.Frame
         self._cardlist_frame: tkinter.Frame
         self._inspect_frame: tkinter.Frame
-        self._dnd = DragManager()
 
         width = self.winfo_screenwidth()
         height = self.winfo_screenheight()
@@ -370,7 +348,8 @@ class TkinterGUI(GUI, tkinter.Tk):
                     )
             label.place(x=x, y=y, anchor=tkinter.NW)
             placed_card[self._IMG_LABEL_KEY] = label
-            self._dnd.add_draggable(label)
+            label.bind("<ButtonPress-1>", lambda e: self._on_card_click(e, card_name))
+            label.bind("<B1-Motion>", lambda e: self._on_card_drop(e, card_name))
             if is_locked:
                 label['background'] = 'blue'
             else:
@@ -379,6 +358,21 @@ class TkinterGUI(GUI, tkinter.Tk):
             placed_card = self._cards_on_table[card_name]
             label = placed_card[self._IMG_LABEL_KEY]
             label.place(x=x, y=y, anchor=tkinter.NW)
+
+    def _on_card_click(self, event: tkinter.Event, card_name: str):
+        self._cursor_x0 = event.x
+        self._cursor_y0 = event.y
+        card_label: tkinter.Label = event.widget
+        card_label.lift()
+
+    def _on_card_drop(self, event: tkinter.Event, card_name: str):
+        cursor_x = event.x
+        cursor_y = event.y
+        dx = cursor_x - self._cursor_x0
+        dy = cursor_y - self._cursor_y0
+        x = event.widget.winfo_x() + dx
+        y = event.widget.winfo_y() + dy
+        event.widget.place(x=x, y=y)
 
     def inspect_card(self,
                      card_name: str,
