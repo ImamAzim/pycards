@@ -360,6 +360,7 @@ class TkinterGUI(GUI, tkinter.Tk):
             label.place(x=x, y=y, anchor=tkinter.NW)
 
     def _on_card_click(self, event: tkinter.Event, card_name: str):
+        self._table.inspect_card(card_name)
         self._cursor_x0 = event.x
         self._cursor_y0 = event.y
         card_label: tkinter.Label = event.widget
