@@ -192,6 +192,19 @@ class Game(object):
         varbox.deck = dict()
         varbox.permanent_cards = list()
 
+    def get_card_pile(self, card_name):
+        """find in which pile is located the card of the deck
+
+        :card_name:
+        :returns: on of [draw, in_play, permanent, discard]
+
+        """
+        if card_name in self.deck_card_names:
+            card = self._deck.get(card_name)
+            return card.get('pile')
+        else:
+            raise GameError('card is not in the deck')
+
     def is_card_permanent(self, card_name) -> bool:
         """determine if card is in the list of permanent cards
 

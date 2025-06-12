@@ -321,6 +321,19 @@ class TestGame(unittest.TestCase):
         game.delete_game()
         game.load(TESTNAME)
 
+    def test_get_card_pile(self):
+        """
+        :returns: TODO
+
+        """
+        game = self._game
+        game.import_card(**self._test_card)
+        card_name = self._test_card['card_name']
+        with self.assertRaises(GameError):
+            pile = self._game.get_card_pile(card_name)
+        game.discover_card(card_name)
+        self.assertEqual(pile, 'discard')
+
 
 class TestCard(unittest.TestCase):
 
