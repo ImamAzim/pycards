@@ -48,6 +48,7 @@ class Card(object):
             verso_path: str,
             orientation: int,
             is_locked: bool = False,
+            **others,
             ):
         """create a card obj and get img_file to use and rotation
 
@@ -113,6 +114,11 @@ class Game(object):
                 self.get_card(card_name)
                 for card_name in self._permanent_cards]
         return tuple(permanent_cards)
+
+    _DRAW_PILE = 'draw'
+    _IN_GAME_PILE = 'in_game'
+    _DISCARD_PILE = 'discard'
+    _PERMANENT_PILE = 'permanent'
 
     def __init__(self, name: str = TEMP_NAME):
         if name in self._saved_games.names:
@@ -343,6 +349,7 @@ class Game(object):
             new_verso_path = shutil.move(src, dst)
             card['recto_path'] = new_recto_path
             card['verso_path'] = new_verso_path
+            card['pile'] = self._DISCARD_PILE
             self._deck[card_name] = card
             self._varbox.save()
         else:
