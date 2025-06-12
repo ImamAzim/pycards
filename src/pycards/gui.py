@@ -31,6 +31,7 @@ class LoadPrompt(simpledialog.Dialog):
     def apply(self):
         self.game_name = self._save_games_list.get()
 
+
 class TkinterGUI(GUI, tkinter.Tk):
 
     """tkinter GUI for a pycards game"""
@@ -348,8 +349,12 @@ class TkinterGUI(GUI, tkinter.Tk):
                     )
             label.place(x=x, y=y, anchor=tkinter.NW)
             placed_card[self._IMG_LABEL_KEY] = label
-            label.bind("<ButtonPress-1>", lambda e: self._on_card_click(e, card_name))
-            label.bind("<B1-Motion>", lambda e: self._on_card_drop(e, card_name))
+            label.bind(
+                    "<ButtonPress-1>",
+                    lambda e: self._on_card_click(e, card_name))
+            label.bind(
+                    "<B1-Motion>",
+                    lambda e: self._on_card_drop(e, card_name))
             if is_locked:
                 label['background'] = 'blue'
             else:
@@ -433,7 +438,6 @@ class TkinterGUI(GUI, tkinter.Tk):
             img_path: str,
             is_locked: bool,
             rotated: bool = False):
-        canvas = self._canvas_table
         card: dict = self._cards_on_table.get(card_name)
         img: ImageFile.ImageFile = Image.open(img_path)
         card_width = self._table_width / self._TABLE_WIDTH_IN_CARDS
@@ -445,7 +449,6 @@ class TkinterGUI(GUI, tkinter.Tk):
         label = card[self._IMG_LABEL_KEY]
         label.configure(image=card[self._IMG_KEY])
         if is_locked:
-            color = 'blue'
             label['background'] = 'blue'
         else:
             label['background'] = 'green'
