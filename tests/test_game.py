@@ -331,7 +331,16 @@ class TestGame(unittest.TestCase):
         card_name = self._test_card['card_name']
         with self.assertRaises(GameError):
             pile = self._game.get_card_pile(card_name)
+
         game.discover_card(card_name)
+        pile = self._game.get_card_pile(card_name)
+        self.assertEqual(pile, 'discard')
+
+        game.lock_card(card_name)
+        pile = self._game.get_card_pile(card_name)
+        self.assertEqual(pile, 'permanent')
+
+        game.unlock_card(card_name)
         pile = self._game.get_card_pile(card_name)
         self.assertEqual(pile, 'discard')
 
