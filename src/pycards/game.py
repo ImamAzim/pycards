@@ -36,18 +36,12 @@ class Card(object):
         """specify if img need to be rotated by 180 deg"""
         return self._rotate
 
-    @property
-    def is_locked(self) -> bool:
-        """spec if it is a permanent card (locked)"""
-        return self._is_locked
-
     def __init__(
             self,
             card_name: str,
             recto_path: str,
             verso_path: str,
             orientation: int,
-            is_locked: bool = False,
             **others,
             ):
         """create a card obj and get img_file to use and rotation
@@ -68,7 +62,6 @@ class Card(object):
             self._rotate = True
         else:
             self._rotate = False
-        self._is_locked = is_locked
 
 
 class GameError(Exception):
@@ -112,7 +105,8 @@ class Game(object):
         """get a list of permanent cards from the deck"""
         permanent_cards = [
                 self.get_card(card_name)
-                for card_name in self._permanent_cards]
+                for card_name, card in self._deck.items()
+                if card.get('pile') == self._PERMANENT_PILE]
         return tuple(permanent_cards)
 
     _DRAW_PILE = 'draw'
@@ -169,7 +163,6 @@ class Game(object):
         self._box = self._varbox.box
         self._deck = self._varbox.deck
         self._all_cards = dict(box=self._box, deck=self._deck)
-        self._permanent_cards = self._varbox.permanent_cards
 
     def _create_varbox(self, name) -> VarBox:
         """create varbox or load an existing one and add
@@ -218,10 +211,14 @@ class Game(object):
         :returns: True if in list of permanents
 
         """
-        if card_name in self._permanent_cards:
-            return True
+        if card_name in self._deck:
+            card = self._deck[card_name]
+            if card.get('pile') == self._PERMANENT_PILE:
+                return True
+            else:
+                return False
         else:
-            return False
+            raise GameError('card is not in the deck')
 
     def delete_game(self) -> str:
         """remove all saved cards and folders from disk. a config file will
@@ -328,7 +325,6 @@ class Game(object):
         if cards:
             card_dict = cards.get(card_name)
             card = Card(
-                    is_locked=self.is_card_permanent(card_name),
                     **card_dict)
             return card
         else:
@@ -364,12 +360,8 @@ class Game(object):
         cards = self._check_card_in_game(card_name)
         if cards:
             card = cards.get(card_name)
-            if not self.is_card_permanent(card_name):
-                self._permanent_cards.append(card_name)
-                card['pile'] = self._PERMANENT_PILE
-                self._varbox.save()
-            else:
-                raise GameError('card is already marked as permanent')
+            card['pile'] = self._PERMANENT_PILE
+            self._varbox.save()
         else:
             raise GameError('card not found')
 
@@ -384,12 +376,8 @@ class Game(object):
         cards = self._check_card_in_game(card_name)
         if cards:
             card = cards.get(card_name)
-            if self.is_card_permanent(card_name):
-                self._permanent_cards.remove(card_name)
-                card['pile'] = self._DISCARD_PILE
-                self._varbox.save()
-            else:
-                raise GameError('card is already not marked as non-permanent')
+            card['pile'] = self._DISCARD_PILE
+            self._varbox.save()
         else:
             raise GameError('card not found')
 
@@ -402,7 +390,7 @@ class Game(object):
         pile = [
                 Card(**self._deck[card_name])
                 for card_name in self.deck_card_names
-                if card_name not in self._permanent_cards]
+                if not self.is_card_permanent(card_name)]
         random.shuffle(pile)
         return pile
 
@@ -435,8 +423,6 @@ class Game(object):
         """
         cards = self._check_card_in_game(card_name)
         if cards:
-            if self.is_card_permanent(card_name):
-                self.unlock_card(card_name)
             card = cards.pop(card_name)
             path = card['recto_path']
             os.remove(path)
