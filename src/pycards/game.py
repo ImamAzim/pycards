@@ -361,9 +361,12 @@ class Game(object):
         :card_name: identify card
 
         """
-        if self._check_card_in_game(card_name):
+        cards = self._check_card_in_game(card_name)
+        if cards:
+            card = cards.get(card_name)
             if not self.is_card_permanent(card_name):
                 self._permanent_cards.append(card_name)
+                card['pile'] = self._PERMANENT_PILE
                 self._varbox.save()
             else:
                 raise GameError('card is already marked as permanent')
@@ -378,9 +381,12 @@ class Game(object):
 
         """
 
-        if self._check_card_in_game(card_name):
+        cards = self._check_card_in_game(card_name)
+        if cards:
+            card = cards.get(card_name)
             if self.is_card_permanent(card_name):
                 self._permanent_cards.remove(card_name)
+                card['pile'] = self._DISCARD_PILE
                 self._varbox.save()
             else:
                 raise GameError('card is already not marked as non-permanent')
