@@ -110,7 +110,7 @@ class Game(object):
         return tuple(permanent_cards)
 
     _DRAW_PILE = 'draw'
-    _IN_GAME_PILE = 'in_game'
+    _IN_PLAY_PILE = 'in_play'
     _DISCARD_PILE = 'discard'
     _PERMANENT_PILE = 'permanent'
 
@@ -350,6 +350,24 @@ class Game(object):
             self._varbox.save()
         else:
             raise GameError(f'card {card_name} is not present in the box')
+
+    def play_card(self, card_name):
+        """put card in play pile
+
+        :card_name:
+        :returns:
+
+        """
+        pile = self.get_card_pile(card_name)
+        if not pile == self._PERMANENT_PILE:
+            if not pile == self._IN_PLAY_PILE:
+                self._deck[card_name]['pile'] = self._IN_PLAY_PILE
+            else:
+                raise GameError('card is already in play')
+        else:
+            raise GameError(
+                    'card cannot be play from permanent pile. '
+                    'make it first non permanent')
 
     def lock_card(self, card_name: str):
         """lock a card, make it permanent. Will not be reshuffled in deck
