@@ -543,6 +543,13 @@ class Game(object):
         """
         random.shuffle(self._draw_pile)
 
+    def discard_all_cards_in_play(self):
+        """
+
+        """
+        for card_name in self.in_play_cards:
+            self.discard(card_name)
+
     def forget_card(self, card_name):
         """move a card from deck to box
 
