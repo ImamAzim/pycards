@@ -197,6 +197,26 @@ class TestGame(unittest.TestCase):
         in_play = game.in_play_cards
         self.assertNotIn(card_name, in_play)
 
+    def test_draw_pile(self):
+        """test draw pile
+
+        """
+        game = self._game
+        game.import_card(**self._test_card)
+        card_name = self._test_card['card_name']
+        game.discover_card(card_name)
+        game.put_card_in_draw_pile(card_name)
+
+        draw_pile = game.draw_pile_cards
+        self.assertNotIn(card_name, draw_pile)
+        obfuscated_card_name = draw_pile[0]
+        real_card_name = game.get_real_card_name(obfuscated_card_name)
+        self.assertEqual(card_name, real_card_name)
+        game.play_card(real_card_name)
+        draw_pile = game.draw_pile_cards
+        self.assertEqual(0, len(draw_pile))
+
+
     # def test_shuffle(self):
         # """test shuffle
         # :returns: TODO

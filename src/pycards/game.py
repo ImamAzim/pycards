@@ -101,7 +101,7 @@ class Game(object):
         return sorted(self._deck.keys())
 
     @property
-    def permanent_cards(self) -> (Card):
+    def permanent_cards(self) -> dict[str, Card]:
         """get a list of permanent cards from the deck"""
         permanent_cards = {
                 card_name: self.get_card(card_name)
@@ -110,7 +110,7 @@ class Game(object):
         return permanent_cards
 
     @property
-    def in_play_cards(self) -> type:
+    def in_play_cards(self) -> dict[str, Card]:
         """get a list of in-play cards from the deck"""
         in_play = {
                 card_name: self.get_card(card_name)
@@ -119,7 +119,7 @@ class Game(object):
         return in_play
 
     @property
-    def discarded_cards(self) -> type:
+    def discarded_cards(self) -> dict[str, Card]:
         """get a list of discarded cards from the deck"""
         discarded = {
                 card_name: self.get_card(card_name)
@@ -128,9 +128,18 @@ class Game(object):
         return discarded
 
     @property
-    def draw_pile_cards(self) -> type:
+    def draw_pile_cards(self) -> list[str]:
         """doc"""
-        return self._draw_pile_cards
+        pass
+
+    def get_real_card_name(self, obfuscated_card_name: str) -> str:
+        """reveal the card name when hidden in the draw pile
+
+        :obfuscated_card_name: 
+        :returns: 
+
+        """
+        pass
 
     _DRAW_PILE = 'draw'
     _IN_PLAY_PILE = 'in_play'
