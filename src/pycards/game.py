@@ -408,15 +408,12 @@ class Game(object):
 
         """
         pile = self.get_card_pile(card_name)
-        # if not pile == self._PERMANENT_PILE:
-            # if not pile == self._DISCARD_PILE:
-                # self._deck[card_name]['pile'] = self._DISCARD_PILE
-                # self._varbox.save()
-            # else:
-                # raise GameError('card is already discarded')
-        # else:
-            # raise GameError(
-                    # 'permanent card cannot be in draw pile.')
+        if not pile == self._PERMANENT_PILE:
+            self._deck[card_name]['pile'] = self._DRAW_PILE
+            self._varbox.save()
+        else:
+            raise GameError(
+                    'permanent card cannot be in draw pile.')
 
     def shuffle_deck(self) -> [Card]:
         """shuffle cards from deck
