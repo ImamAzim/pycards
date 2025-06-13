@@ -555,7 +555,9 @@ class Game(object):
         :returns: TODO
 
         """
-        pass
+        for card_name in self.discarded_cards:
+            self.put_card_in_draw_pile(card_name)
+        self.shuffle_draw_pile()
 
     def forget_card(self, card_name):
         """move a card from deck to box
