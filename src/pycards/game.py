@@ -103,11 +103,11 @@ class Game(object):
     @property
     def permanent_cards(self) -> (Card):
         """get a list of permanent cards from the deck"""
-        permanent_cards = [
-                self.get_card(card_name)
+        permanent_cards = {
+                card_name: self.get_card(card_name)
                 for card_name, card in self._deck.items()
-                if card.get('pile') == self._PERMANENT_PILE]
-        return tuple(permanent_cards)
+                if card.get('pile') == self._PERMANENT_PILE}
+        return permanent_cards
 
     _DRAW_PILE = 'draw'
     _IN_PLAY_PILE = 'in_play'
