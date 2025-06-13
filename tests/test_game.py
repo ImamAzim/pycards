@@ -152,13 +152,13 @@ class TestGame(unittest.TestCase):
         game.lock_card(card_name)
 
         permanent_cards = game.permanent_cards
-        self.assertEqual(1, len(permanent_cards))
-        card = permanent_cards[0]
+        self.assertIn(card_name, permanent_cards)
+        card = permanent_cards[card_name]
         self.assertIsInstance(card, Card)
         self.assertEqual(card.name, card_name)
         game.unlock_card(card_name)
         permanent_cards = game.permanent_cards
-        self.assertEqual(0, len(permanent_cards))
+        self.assertNotIn(card_name, permanent_cards)
 
     # def test_shuffle(self):
         # """test shuffle
