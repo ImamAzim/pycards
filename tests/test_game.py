@@ -160,6 +160,24 @@ class TestGame(unittest.TestCase):
         permanent_cards = game.permanent_cards
         self.assertNotIn(card_name, permanent_cards)
 
+    def test_discarded_cards(self):
+        """test discarded card disct
+
+        """
+        game = self._game
+        game.import_card(**self._test_card)
+        card_name = self._test_card['card_name']
+        game.discover_card(card_name)
+
+        discarded = game.discarded_cards
+        self.assertIn(card_name, discarded)
+        card = discarded[card_name]
+        self.assertIsInstance(card, Card)
+        self.assertEqual(card.name, card_name)
+        game.put_card_in_draw_pile(card_name)
+        discarded = game.discarded_cards
+        self.assertNotIn(card_name, discarded)
+
     # def test_shuffle(self):
         # """test shuffle
         # :returns: TODO

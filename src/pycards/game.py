@@ -109,6 +109,21 @@ class Game(object):
                 if card.get('pile') == self._PERMANENT_PILE}
         return permanent_cards
 
+    @property
+    def in_play_cards(self) -> type:
+        """doc"""
+        return self._in_play_cards
+
+    @property
+    def discarded_cards(self) -> type:
+        """doc"""
+        return self._discarded_cards
+
+    @property
+    def draw_pile_cards(self) -> type:
+        """doc"""
+        return self._draw_pile_cards
+
     _DRAW_PILE = 'draw'
     _IN_PLAY_PILE = 'in_play'
     _DISCARD_PILE = 'discard'
