@@ -387,6 +387,8 @@ class Game(object):
         if not pile == self._PERMANENT_PILE:
             if not pile == self._IN_PLAY_PILE:
                 self._deck[card_name]['pile'] = self._IN_PLAY_PILE
+                if pile == self._DRAW_PILE:
+                    self._remove_from_draw(card_name)
                 self._varbox.save()
             else:
                 raise GameError('card is already in play')
@@ -404,6 +406,8 @@ class Game(object):
         pile = self.get_card_pile(card_name)
         if not pile == self._PERMANENT_PILE:
             self._deck[card_name]['pile'] = self._PERMANENT_PILE
+            if pile == self._DRAW_PILE:
+                self._remove_from_draw(card_name)
             self._varbox.save()
         else:
             raise GameError(
@@ -435,6 +439,8 @@ class Game(object):
         if not pile == self._PERMANENT_PILE:
             if not pile == self._DISCARD_PILE:
                 self._deck[card_name]['pile'] = self._DISCARD_PILE
+                if pile == self._DRAW_PILE:
+                    self._remove_from_draw(card_name)
                 self._varbox.save()
             else:
                 raise GameError('card is already discarded')
@@ -453,6 +459,7 @@ class Game(object):
             obfuscated = card_name + 'xxx'
             self._draw_cards_real_name[obfuscated] = card_name
             self._draw_cards_obfuscate_name[card_name] = obfuscated
+            self._varbox.save()
         else:
             obfuscated = self._draw_cards_obfuscate_name[card_name]
         return obfuscated
@@ -464,10 +471,11 @@ class Game(object):
         :returns:
 
         """
-        obfuscated = self._get_obfuscated_name[card_name]
+        obfuscated = self._get_obfuscated_name(card_name)
         self._draw_cards_obfuscate_name.pop(card_name)
         self._draw_cards_real_name.pop(obfuscated)
         self._draw_pile.remove(obfuscated)
+        self._varbox.save()
 
     def put_card_in_draw_pile(self, card_name, top=True):
         """move card in the draw pile
@@ -509,6 +517,9 @@ class Game(object):
 
         """
         if card_name in self.deck_card_names:
+            pile = self.get_card_pile(card_name)
+            if pile == self._DRAW_PILE:
+                self._remove_from_draw(card_name)
             card = self._deck.pop(card_name)
             src = card['recto_path']
             dst = self._box_folder
@@ -532,6 +543,9 @@ class Game(object):
         cards = self._check_card_in_game(card_name)
         if cards:
             card = cards.pop(card_name)
+            pile = card.get('pile')
+            if pile == self._DRAW_PILE:
+                self._remove_from_draw(card_name)
             path = card['recto_path']
             os.remove(path)
             path = card['verso_path']
