@@ -129,17 +129,17 @@ class Game(object):
 
     @property
     def draw_pile_cards(self) -> list[str]:
-        """doc"""
-        return self._draw_pile
+        """get a tuple of the draw pile. names are obfuscated"""
+        return tuple(self._draw_pile)
 
     def get_real_card_name(self, obfuscated_card_name: str) -> str:
         """reveal the card name when hidden in the draw pile
 
-        :obfuscated_card_name: 
-        :returns: 
+        :obfuscated_card_name:
+        :returns:
 
         """
-        pass
+        return self._draw_cards_real_name.get(obfuscated_card_name)
 
     _DRAW_PILE = 'draw'
     _IN_PLAY_PILE = 'in_play'
@@ -442,10 +442,10 @@ class Game(object):
         """
 
         :card_name: TODO
-        :returns: TODO
-
-        """
-        return card_name
+        :returns: TOD
+        obfuscated = card_name + 'xxx'
+        self._draw_cards_real_name[obfuscated] = card_name
+        return obfuscated
 
     def put_card_in_draw_pile(self, card_name, top=True):
         """move card in the draw pile
@@ -457,8 +457,11 @@ class Game(object):
         pile = self.get_card_pile(card_name)
         if not pile == self._PERMANENT_PILE:
             self._deck[card_name]['pile'] = self._DRAW_PILE
+            obfuscated = self._get_obfuscated_name(card_name)
             if top:
-                self._draw_pile.append(card_name)
+                self._draw_pile.append(obfuscated)
+            else:
+                self._draw_pile.insert(0, obfuscated)
             self._varbox.save()
         else:
             raise GameError(
