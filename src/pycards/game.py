@@ -204,22 +204,6 @@ class Game(object):
         else:
             raise GameError('card is not in the deck')
 
-    def is_card_permanent(self, card_name) -> bool:
-        """determine if card is in the list of permanent cards
-
-        :card_name:
-        :returns: True if in list of permanents
-
-        """
-        if card_name in self._deck:
-            card = self._deck[card_name]
-            if card.get('pile') == self._PERMANENT_PILE:
-                return True
-            else:
-                return False
-        else:
-            raise GameError('card is not in the deck')
-
     def delete_game(self) -> str:
         """remove all saved cards and folders from disk. a config file will
         still be present.

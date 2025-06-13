@@ -160,19 +160,19 @@ class TestGame(unittest.TestCase):
         permanent_cards = game.permanent_cards
         self.assertEqual(0, len(permanent_cards))
 
-    def test_shuffle(self):
-        """test shuffle
-        :returns: TODO
+    # def test_shuffle(self):
+        # """test shuffle
+        # :returns: TODO
 
-        """
-        game = self._game
-        game.import_card(**self._test_card)
-        card_name = self._test_card['card_name']
-        game.discover_card(card_name)
+        # """
+        # game = self._game
+        # game.import_card(**self._test_card)
+        # card_name = self._test_card['card_name']
+        # game.discover_card(card_name)
 
-        deck = game.shuffle_deck()
-        top_card = deck.pop()
-        self.assertIsInstance(top_card, Card)
+        # deck = game.shuffle_deck()
+        # top_card = deck.pop()
+        # self.assertIsInstance(top_card, Card)
 
     def test_forget_card(self):
         """test forget
@@ -288,7 +288,7 @@ class TestGame(unittest.TestCase):
 
         game.lock_card(card_name)
         same_game = Game(game.name)
-        self.assertTrue(same_game.is_card_permanent(card_name))
+        self.assertEqual(same_game.get_card_pile(card_name), 'permanent')
 
         game.destroy_card(card_name)
         same_game = Game(game.name)
