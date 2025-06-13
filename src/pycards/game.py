@@ -130,7 +130,7 @@ class Game(object):
     @property
     def draw_pile_cards(self) -> list[str]:
         """doc"""
-        pass
+        return self._draw_pile
 
     def get_real_card_name(self, obfuscated_card_name: str) -> str:
         """reveal the card name when hidden in the draw pile
@@ -195,6 +195,7 @@ class Game(object):
         self._box = self._varbox.box
         self._deck = self._varbox.deck
         self._draw_pile = self._varbox.draw_pile
+        self._draw_cards_real_name = self._varbox.draw_cards_real_name
         self._all_cards = dict(box=self._box, deck=self._deck)
 
     def _create_varbox(self, name) -> VarBox:
@@ -213,6 +214,8 @@ class Game(object):
             varbox.deck = dict()
         if not hasattr(varbox, 'draw_pile'):
             varbox.draw_pile = list()
+        if not hasattr(varbox, 'draw_cards_real_name'):
+            varbox.draw_cards_real_name = dict()
         return varbox
 
     def _reset_varbox(self):
@@ -223,6 +226,7 @@ class Game(object):
         varbox.box = dict()
         varbox.deck = dict()
         varbox.draw_pile = list()
+        varbox.draw_cards_real_name = dict()
 
     def get_card_pile(self, card_name):
         """find in which pile is located the card of the deck
@@ -434,15 +438,27 @@ class Game(object):
             raise GameError(
                     'permanent card cannot be discarded.')
 
-    def put_card_in_draw_pile(self, card_name):
+    def _get_obfuscated_name(self, card_name):
+        """
+
+        :card_name: TODO
+        :returns: TODO
+
+        """
+        return card_name
+
+    def put_card_in_draw_pile(self, card_name, top=True):
         """move card in the draw pile
 
         :card_name:
+        :top: put card on top of the pile. bottom if false
 
         """
         pile = self.get_card_pile(card_name)
         if not pile == self._PERMANENT_PILE:
             self._deck[card_name]['pile'] = self._DRAW_PILE
+            if top:
+                self._draw_pile.append(card_name)
             self._varbox.save()
         else:
             raise GameError(
