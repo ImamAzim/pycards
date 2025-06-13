@@ -376,13 +376,13 @@ class Game(object):
         :card_name: identify card
 
         """
-        cards = self._check_card_in_game(card_name)
-        if cards:
-            card = cards.get(card_name)
-            card['pile'] = self._PERMANENT_PILE
+        pile = self.get_card_pile(card_name)
+        if not pile == self._PERMANENT_PILE:
+            self._deck[card_name]['pile'] = self._PERMANENT_PILE
             self._varbox.save()
         else:
-            raise GameError('card not found')
+            raise GameError(
+                    'card is already in permanent pile.')
 
     def unlock_card(self, card_name: str):
         """unlock a card, make it no longer permanent. Will part of the next
@@ -392,13 +392,13 @@ class Game(object):
 
         """
 
-        cards = self._check_card_in_game(card_name)
-        if cards:
-            card = cards.get(card_name)
-            card['pile'] = self._DISCARD_PILE
+        pile = self.get_card_pile(card_name)
+        if pile == self._PERMANENT_PILE:
+            self._deck[card_name]['pile'] = self._DISCARD_PILE
             self._varbox.save()
         else:
-            raise GameError('card not found')
+            raise GameError(
+                    'card is not in permanent pile.')
 
     def discard(self, card_name):
         """move card in the discard pile
