@@ -456,7 +456,7 @@ class Game(object):
 
         """
         if card_name not in self._draw_cards_obfuscate_name:
-            obfuscated = card_name + 'xxx'
+            obfuscated = len(self._draw_cards_obfuscate_name)
             self._draw_cards_real_name[obfuscated] = card_name
             self._draw_cards_obfuscate_name[card_name] = obfuscated
             self._varbox.save()
