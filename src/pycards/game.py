@@ -476,7 +476,16 @@ class Game(object):
         :returns:
 
         """
-        pass
+
+        cards = self._check_card_in_game(card_name)
+        if cards:
+            card = cards.get(card_name)
+            if not card.get(self._ALWAYS_VISIBLE):
+                card[self._ALWAYS_VISIBLE] = True
+            else:
+                raise GameError('card is already always visible')
+        else:
+            raise GameError('card not found')
 
     def remove_always_visible(self, card_name):
         """the card will not be identifiable in the draw pile
@@ -485,7 +494,15 @@ class Game(object):
         :returns:
 
         """
-        pass
+        cards = self._check_card_in_game(card_name)
+        if cards:
+            card = cards.get(card_name)
+            if card.get(self._ALWAYS_VISIBLE):
+                card[self._ALWAYS_VISIBLE] = False
+            else:
+                raise GameError('card is already not always visible')
+        else:
+            raise GameError('card not found')
 
     def _remove_from_draw(self, card_name):
         """ to be called when card is removed from draw pile
