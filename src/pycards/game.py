@@ -194,6 +194,7 @@ class Game(object):
 
         self._box = self._varbox.box
         self._deck = self._varbox.deck
+        self._draw_pile = self._varbox.draw_pile
         self._all_cards = dict(box=self._box, deck=self._deck)
 
     def _create_varbox(self, name) -> VarBox:
@@ -210,8 +211,8 @@ class Game(object):
             varbox.box = dict()
         if not hasattr(varbox, 'deck'):
             varbox.deck = dict()
-        if not hasattr(varbox, 'permanent_cards'):
-            varbox.permanent_cards = list()
+        if not hasattr(varbox, 'draw_pile'):
+            varbox.draw_pile = list()
         return varbox
 
     def _reset_varbox(self):
@@ -221,7 +222,7 @@ class Game(object):
         varbox = self._varbox
         varbox.box = dict()
         varbox.deck = dict()
-        varbox.permanent_cards = list()
+        varbox.draw_pile = list()
 
     def get_card_pile(self, card_name):
         """find in which pile is located the card of the deck
