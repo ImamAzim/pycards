@@ -356,6 +356,10 @@ class TestGame(unittest.TestCase):
         pile = self._game.get_card_pile(card_name)
         self.assertEqual(pile, 'discard')
 
+        self._game.put_card_in_draw_pile(card_name)
+        pile = self._game.get_card_pile(card_name)
+        self.assertEqual(pile, 'draw')
+
 
 class TestCard(unittest.TestCase):
 
