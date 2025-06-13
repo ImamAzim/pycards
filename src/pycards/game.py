@@ -406,7 +406,16 @@ class Game(object):
         :card_name:
 
         """
-        pass
+        pile = self.get_card_pile(card_name)
+        if not pile == self._PERMANENT_PILE:
+            if not pile == self._DISCARD_PILE:
+                self._deck[card_name]['pile'] = self._DISCARD_PILE
+                self._varbox.save()
+            else:
+                raise GameError('card is already discarded')
+        else:
+            raise GameError(
+                    'permanent card cannot be discarded.')
 
     def shuffle_deck(self) -> [Card]:
         """shuffle cards from deck
