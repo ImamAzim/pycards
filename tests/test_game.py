@@ -216,6 +216,16 @@ class TestGame(unittest.TestCase):
         draw_pile = game.draw_pile_cards
         self.assertEqual(0, len(draw_pile))
 
+        game.set_always_visible(card_name)
+        game.put_card_in_draw_pile(card_name)
+        draw_pile = game.draw_pile_cards
+        self.assertIn(card_name, draw_pile)
+        obfuscated_card_name = draw_pile[0]
+        real_card_name = game.get_real_card_name(obfuscated_card_name)
+        self.assertEqual(card_name, real_card_name)
+        game.play_card(real_card_name)
+        draw_pile = game.draw_pile_cards
+        self.assertEqual(0, len(draw_pile))
 
     # def test_shuffle(self):
         # """test shuffle

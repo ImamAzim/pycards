@@ -145,6 +145,7 @@ class Game(object):
     _IN_PLAY_PILE = 'in_play'
     _DISCARD_PILE = 'discard'
     _PERMANENT_PILE = 'permanent'
+    _ALWAYS_VISIBLE = 'always_visible'
 
     def __init__(self, name: str = TEMP_NAME):
         if name in self._saved_games.names:
@@ -456,13 +457,35 @@ class Game(object):
 
         """
         if card_name not in self._draw_cards_obfuscate_name:
-            obfuscated = len(self._draw_cards_obfuscate_name)
+            card = self._deck.get(card_name)
+            if not card.get(self._ALWAYS_VISIBLE):
+                obfuscated = len(self._draw_cards_obfuscate_name)
+            else:
+                obfuscated = card_name
             self._draw_cards_real_name[obfuscated] = card_name
             self._draw_cards_obfuscate_name[card_name] = obfuscated
             self._varbox.save()
         else:
             obfuscated = self._draw_cards_obfuscate_name[card_name]
         return obfuscated
+
+    def set_always_visible(self, card_name):
+        """the card will be identifiable inside the draw pile also
+
+        :card_name:
+        :returns:
+
+        """
+        pass
+
+    def remove_always_visible(self, card_name):
+        """the card will not be identifiable in the draw pile
+
+        :card_name:
+        :returns:
+
+        """
+        pass
 
     def _remove_from_draw(self, card_name):
         """ to be called when card is removed from draw pile
