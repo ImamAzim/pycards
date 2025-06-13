@@ -537,18 +537,11 @@ class Game(object):
             raise GameError(
                     'permanent card cannot be in draw pile.')
 
-    def shuffle_deck(self) -> [Card]:
-        """shuffle cards from deck
-        :returns: tuple of all non-permanent cards
-        in the deck in random order
+    def shuffle_draw_pile(self):
+        """shuffle cards in the draw pile
 
         """
-        pile = [
-                Card(**self._deck[card_name])
-                for card_name in self.deck_card_names
-                if not self.is_card_permanent(card_name)]
-        random.shuffle(pile)
-        return pile
+        random.shuffle(self._draw_pile)
 
     def forget_card(self, card_name):
         """move a card from deck to box

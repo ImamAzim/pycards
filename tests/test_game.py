@@ -207,6 +207,8 @@ class TestGame(unittest.TestCase):
         game.discover_card(card_name)
         game.put_card_in_draw_pile(card_name)
 
+        game.shuffle_draw_pile()
+
         draw_pile = game.draw_pile_cards
         self.assertNotIn(card_name, draw_pile)
         obfuscated_card_name = draw_pile[0]
@@ -227,19 +229,7 @@ class TestGame(unittest.TestCase):
         draw_pile = game.draw_pile_cards
         self.assertEqual(0, len(draw_pile))
 
-    # def test_shuffle(self):
-        # """test shuffle
-        # :returns: TODO
-
-        # """
-        # game = self._game
-        # game.import_card(**self._test_card)
-        # card_name = self._test_card['card_name']
-        # game.discover_card(card_name)
-
-        # deck = game.shuffle_deck()
-        # top_card = deck.pop()
-        # self.assertIsInstance(top_card, Card)
+        game.shuffle_draw_pile()
 
     def test_forget_card(self):
         """test forget
