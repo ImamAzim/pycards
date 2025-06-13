@@ -116,8 +116,12 @@ class Game(object):
 
     @property
     def discarded_cards(self) -> type:
-        """doc"""
-        return self._discarded_cards
+        """get a list of discarded cards from the deck"""
+        discarded = {
+                card_name: self.get_card(card_name)
+                for card_name, card in self._deck.items()
+                if card.get('pile') == self._DISCARD_PILE}
+        return discarded
 
     @property
     def draw_pile_cards(self) -> type:
