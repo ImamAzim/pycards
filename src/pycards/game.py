@@ -362,6 +362,7 @@ class Game(object):
         if not pile == self._PERMANENT_PILE:
             if not pile == self._IN_PLAY_PILE:
                 self._deck[card_name]['pile'] = self._IN_PLAY_PILE
+                self._varbox.save()
             else:
                 raise GameError('card is already in play')
         else:
@@ -398,6 +399,14 @@ class Game(object):
             self._varbox.save()
         else:
             raise GameError('card not found')
+
+    def discard(self, card_name):
+        """move card in the discard pile
+
+        :card_name:
+
+        """
+        pass
 
     def shuffle_deck(self) -> [Card]:
         """shuffle cards from deck
