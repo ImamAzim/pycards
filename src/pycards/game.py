@@ -550,6 +550,13 @@ class Game(object):
         for card_name in self.in_play_cards:
             self.discard(card_name)
 
+    def shuffle_back_all_discarded(self):
+        """put all card from discarded pile into draw pile and shuffle
+        :returns: TODO
+
+        """
+        pass
+
     def forget_card(self, card_name):
         """move a card from deck to box
 

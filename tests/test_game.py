@@ -431,6 +431,21 @@ class TestGame(unittest.TestCase):
         discarded = game.discarded_cards
         self.assertIn(card_name, discarded)
 
+    def test_shuffle_all(self):
+        """
+        :returns: TODO
+
+        """
+        game = self._game
+        game.import_card(**self._test_card)
+        card_name = self._test_card['card_name']
+        game.discover_card(card_name)
+        game.shuffle_back_all_discarded()
+        draw_pile = game.draw_pile_cards
+        obf = draw_pile[0]
+        real_card_name = game.get_real_card_name(obf)
+        self.assertEqual(card_name, real_card_name)
+
 
 class TestCard(unittest.TestCase):
 
