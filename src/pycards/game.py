@@ -196,6 +196,7 @@ class Game(object):
         self._deck = self._varbox.deck
         self._draw_pile = self._varbox.draw_pile
         self._draw_cards_real_name = self._varbox.draw_cards_real_name
+        self._draw_cards_obfuscate_name = self._varbox.draw_cards_obfuscate_name
         self._all_cards = dict(box=self._box, deck=self._deck)
 
     def _create_varbox(self, name) -> VarBox:
@@ -216,6 +217,8 @@ class Game(object):
             varbox.draw_pile = list()
         if not hasattr(varbox, 'draw_cards_real_name'):
             varbox.draw_cards_real_name = dict()
+        if not hasattr(varbox, 'draw_cards_obfuscate_name'):
+            varbox.draw_cards_obfuscate_name = dict()
         return varbox
 
     def _reset_varbox(self):
@@ -227,6 +230,7 @@ class Game(object):
         varbox.deck = dict()
         varbox.draw_pile = list()
         varbox.draw_cards_real_name = dict()
+        varbox.draw_obfuscate_real_name = dict()
 
     def get_card_pile(self, card_name):
         """find in which pile is located the card of the deck
@@ -442,10 +446,28 @@ class Game(object):
         """
 
         :card_name: TODO
-        :returns: TOD
-        obfuscated = card_name + 'xxx'
-        self._draw_cards_real_name[obfuscated] = card_name
+        :returns: TODO
+
+        """
+        if card_name not in self._draw_cards_obfuscate_name:
+            obfuscated = card_name + 'xxx'
+            self._draw_cards_real_name[obfuscated] = card_name
+            self._draw_cards_obfuscate_name[card_name] = obfuscated
+        else:
+            obfuscated = self._draw_cards_obfuscate_name[card_name]
         return obfuscated
+
+    def _remove_from_draw(self, card_name):
+        """ to be called when card is removed from draw pile
+
+        :card_name:
+        :returns:
+
+        """
+        obfuscated = self._get_obfuscated_name[card_name]
+        self._draw_cards_obfuscate_name.pop(card_name)
+        self._draw_cards_real_name.pop(obfuscated)
+        self._draw_pile.remove(obfuscated)
 
     def put_card_in_draw_pile(self, card_name, top=True):
         """move card in the draw pile
