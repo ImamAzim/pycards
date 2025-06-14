@@ -22,7 +22,6 @@ class Table(BaseTable):
 
     def _update_gui_to_game(self):
         """
-        :returns: TODO
 
         """
         self._gui.clean_table()
@@ -40,7 +39,7 @@ class Table(BaseTable):
             self._gui.place_card_on_table(
                     card_name=card.name,
                     img_path=card.path,
-                    pile='game_zone',
+                    pile='game_zone'
                     rotated=card.rotate,
                     )
         permanent_cards = self._game.permanent_cards
@@ -52,8 +51,6 @@ class Table(BaseTable):
                     pile='permanent',
                     rotated=card.rotate,
                     )
-        
-        pass
 
     def delete_game(self):
         try:
