@@ -147,6 +147,16 @@ class GUI(metaclass=ABCMeta):
         pass
 
     @abstractmethod
+    def update_draw_pile(self, draw_pile: list[str]):
+        """update the draw pile. names are usually obfuscated
+
+        :draw_pile:
+        :returns:
+
+        """
+        pass
+
+    @abstractmethod
     def update_box_cards_list(self, card_names: list[str]):
         """update the gui to show available cards in box
 

@@ -19,19 +19,26 @@ class Table(BaseTable):
     def get_current_game(self) -> [str]:
         return self._game.name
 
+    def _update_gui_to_game(self):
+        """
+        :returns: TODO
+
+        """
+        self._gui.clean_table()
+        name = self._game.name
+        self._gui.update_title(name)
+        box_cards_names = self._game.box_card_names
+        self._gui.update_box_cards_list(box_cards_names)
+        draw_pile = self._game.draw_pile_cards
+        pass
+
     def delete_game(self):
         try:
             self._game.delete_game()
         except GameError as e:
             self._gui.showerror(e)
         else:
-            self._gui.clean_table()
-            name = self._game.name
-            self._gui.update_title(name)
-            box_cards_names = self._game.box_card_names
-            self._gui.update_box_cards_list(box_cards_names)
-            deck_cards_names = self._game.deck_card_names
-            self._gui.update_deck_cards_list(deck_cards_names)
+            self._update_gui_to_game()
 
     def new_game(self, name: str):
         try:
@@ -39,13 +46,7 @@ class Table(BaseTable):
         except GameError as e:
             self._gui.showerror(e)
         else:
-            self._gui.clean_table()
-            name = self._game.name
-            self._gui.update_title(name)
-            box_cards_names = self._game.box_card_names
-            self._gui.update_box_cards_list(box_cards_names)
-            deck_cards_names = self._game.deck_card_names
-            self._gui.update_deck_cards_list(deck_cards_names)
+            self._update_gui_to_game()
 
     def load_game(self, name: str):
         try:
@@ -53,14 +54,7 @@ class Table(BaseTable):
         except GameError as e:
             self._gui.showerror(e)
         else:
-            self._gui.clean_table()
-            name = self._game.name
-            self._gui.update_title(name)
-            box_cards_names = self._game.box_card_names
-            self._gui.update_box_cards_list(box_cards_names)
-            deck_cards_names = self._game.deck_card_names
-            self._gui.update_deck_cards_list(deck_cards_names)
-            self.shuffle_deck()
+            self._update_gui_to_game()
 
     def import_cards(self, folder_path: str):
         try:
