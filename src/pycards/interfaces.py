@@ -296,6 +296,72 @@ class BaseTable(object, metaclass=ABCMeta):
         pass
 
     @abstractmethod
+    def play_card(self, card_name: str):
+        """put card in the in_play pile
+
+        :card_name: identify card
+        :returns:
+
+        """
+        pass
+
+    @abstractmethod
+    def discard(self, card_name: str):
+        """put card in the discard pile
+
+        :card_name: identify card
+        :returns:
+
+        """
+        pass
+
+    @abstractmethod
+    def mark_card(self, card_name: str):
+        """ mark card so that it will be visible in the draw pile
+
+        :card_name: identify card
+        :returns:
+
+        """
+        pass
+
+    @abstractmethod
+    def unmark_card(self, card_name: str):
+        """ remove mark that it will not be visible in the draw pile
+
+        :card_name: identify card
+        :returns:
+
+        """
+        pass
+
+    @abstractmethod
+    def put_card_in_draw_pile(self, card_name: str):
+        """
+
+        :card_name: identify card
+        :returns:
+
+        """
+        pass
+
+    @abstractmethod
+    def discard_all(self):
+        """discard all cards from play zone
+        :returns: TODO
+
+        """
+        pass
+
+    @abstractmethod
+    def shuffle_back(self):
+        """put back all cards from discard in draw pile and shuffle
+        :returns: TODO
+
+        """
+        pass
+
+    @abstractmethod
     def inspect_card(self, card_name: str):
         """call inspect method of gui with card info to display
 
@@ -305,8 +371,8 @@ class BaseTable(object, metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def shuffle_deck(self):
-        """shuffle the cards that are not permanent and place them in the deck
+    def draw_card(self):
+        """play the first card from the draw pile
         :returns: TODO
 
         """
