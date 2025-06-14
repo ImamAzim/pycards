@@ -134,7 +134,7 @@ class GUI(metaclass=ABCMeta):
 
     @abstractmethod
     def remove_card(self, card_name: str):
-        """remove card from table, because destroyed or forgotten
+        """remove card from table, because destroyed, forgotten, or discarded
 
         :card_name: identify the card
         :returns:
