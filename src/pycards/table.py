@@ -1,5 +1,6 @@
 from pycards.game import Game, GameError
 from pycards.interfaces import GUI, BaseTable
+from pycards.game import Card
 
 
 class Table(BaseTable):
@@ -31,6 +32,26 @@ class Table(BaseTable):
         self._gui.update_box_cards_list(box_cards_names)
         draw_pile = self._game.draw_pile_cards
         self._gui.update_draw_pile(draw_pile)
+        discarded = self._game.discarded_cards
+        self._gui.update_discarded_pile
+        in_play_cards = self._game.in_play_cards
+        for card in in_play_cards:
+            card: Card
+            self._gui.place_card_on_table(
+                    card_name=card.name,
+                    img_path=card.path,
+                    pile='game_zone',
+                    rotated=card.rotate,
+                    )
+        permanent_cards = self._game.permanent_cards
+        for card in permanent_cards:
+            card: Card
+            self._gui.place_card_on_table(
+                    card_name=card.name,
+                    img_path=card.path,
+                    pile='permanent',
+                    rotated=card.rotate,
+                    )
         
         pass
 

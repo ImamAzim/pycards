@@ -1,4 +1,5 @@
 from abc import ABCMeta, abstractmethod
+from typing import Literal
 
 
 class GUI(metaclass=ABCMeta):
@@ -52,7 +53,7 @@ class GUI(metaclass=ABCMeta):
             self,
             card_name: str,
             img_path: str,
-            pile: str = 'game_zone',
+            pile: Literal['game_zone', 'permanent'] = 'game_zone',
             rotated: bool = False):
         """place the card on the table. if card is already present it will only
         move it without updating
