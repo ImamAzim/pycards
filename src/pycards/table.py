@@ -93,15 +93,8 @@ class Table(BaseTable):
         else:
             box_cards_names = self._game.box_card_names
             self._gui.update_box_cards_list(box_cards_names)
-            deck_card_names = self._game.deck_card_names
-            self._gui.update_deck_cards_list(deck_card_names)
-            card = self._game.get_card(card_name)
-            self._gui.place_card_on_table(
-                    card_name,
-                    card.path,
-                    self._game.is_card_permanent(card_name),
-                    'discard',
-                    card.rotate)
+            discarded = self._game.discarded_cards
+            self._gui.update_discarded_pile(discarded)
 
     def destroy_card(self, card_name: str):
         try:
