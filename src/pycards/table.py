@@ -30,6 +30,8 @@ class Table(BaseTable):
         box_cards_names = self._game.box_card_names
         self._gui.update_box_cards_list(box_cards_names)
         draw_pile = self._game.draw_pile_cards
+        self._gui.update_draw_pile(draw_pile)
+        
         pass
 
     def delete_game(self):

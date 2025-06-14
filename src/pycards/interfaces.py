@@ -52,8 +52,7 @@ class GUI(metaclass=ABCMeta):
             self,
             card_name: str,
             img_path: str,
-            is_locked: bool,
-            pile: str = 'deck',
+            pile: str = 'game_zone',
             rotated: bool = False):
         """place the card on the table. if card is already present it will only
         move it without updating
@@ -62,7 +61,7 @@ class GUI(metaclass=ABCMeta):
         :card_name: from file name withou recto or verso
         :img_path: path to card image
         :is_locked: for permanent card
-        :pile: one of 'deck', 'discard' or 'gamezone'
+        :pile: one of 'game_zone', 'permanent'
         :rotated: True if you want to rotate by 108 deg
 
         """
@@ -72,13 +71,11 @@ class GUI(metaclass=ABCMeta):
     def inspect_card(self,
                      card_name, str,
                      img_path: str,
-                     is_locked: bool,
                      rotated: bool = False,):
         """display card in larger frame and allow operations on it
 
         :card_name: from file name withou recto or verso
         :img_path: path to card image
-        :is_locked: for permanent card. should be visible in the gui
         :rotated: True if you want to rotate by 108 deg
 
         """
@@ -89,16 +86,6 @@ class GUI(metaclass=ABCMeta):
         """remove the image from the inspect area and deactivate operations
         in it
         :returns: TODO
-
-        """
-        pass
-
-    @abstractmethod
-    def is_card_on_table(self, card_name: str) -> bool:
-        """check if the card is present on the table
-
-        :card_name: identify card
-        :returns: True if card is on table, else False
 
         """
         pass
@@ -124,13 +111,11 @@ class GUI(metaclass=ABCMeta):
             self,
             card_name: str,
             img_path: str,
-            is_locked: bool,
             rotated: bool = False):
         """update a single card, for example when image is rotated
 
         :card_name: identify card
         :img_path: path to card image
-        :is_locked: for permanent card. should be visible in the gui
         :rotated: True if you want to rotate by 108 deg
 
         """
@@ -157,18 +142,18 @@ class GUI(metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def update_box_cards_list(self, card_names: list[str]):
-        """update the gui to show available cards in box
+    def update_discarded_pile(self, discarded: list[str]):
+        """update the discarded pile
 
-        :card_names:
+        :draw_pile:
         :returns:
 
         """
         pass
 
     @abstractmethod
-    def update_deck_cards_list(self, card_names: list[str]):
-        """update the gui to show available cards in player's deck
+    def update_box_cards_list(self, card_names: list[str]):
+        """update the gui to show available cards in box
 
         :card_names:
         :returns:
