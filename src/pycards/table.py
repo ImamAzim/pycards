@@ -1,6 +1,4 @@
 from pycards.game import Game, GameError, Card
-from pycards.game import DRAW_PILE_NAME, DISCARD_PILE_NAME
-from pycards.game import PERMANENT_PILE_NAME, IN_PLAY_PILE_NAME
 from pycards.interfaces import GUI, BaseTable
 
 
@@ -33,14 +31,14 @@ class Table(BaseTable):
         draw_pile = self._game.draw_pile_cards
         self._gui.update_draw_pile(draw_pile)
         discarded = self._game.discarded_cards
-        self._gui.update_discarded_pile
+        self._gui.update_discarded_pile(discarded)
         in_play_cards = self._game.in_play_cards
         for card in in_play_cards:
             card: Card
             self._gui.place_card_on_table(
                     card_name=card.name,
                     img_path=card.path,
-                    pile='game_zone'
+                    pile='game_zone',
                     rotated=card.rotate,
                     )
         permanent_cards = self._game.permanent_cards
@@ -204,7 +202,28 @@ class Table(BaseTable):
                         card.path,
                         card.rotate)
 
-    def shuffle_deck(self):
+    def play_card(self, card_name: str):
+        pass
+
+    def discard(self, card_name: str):
+        pass
+
+    def mark_card(self, card_name: str):
+        pass
+
+    def unmark_card(self, card_name: str):
+        pass
+
+    def put_card_in_draw_pile(self, card_name: str):
+        pass
+
+    def discard_all(self):
+        pass
+
+    def draw_card(self):
+        pass
+
+    def shuffle_back(self):
         self._gui.clean_inspect_area()
 
 
