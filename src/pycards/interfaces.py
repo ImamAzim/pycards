@@ -49,6 +49,16 @@ class GUI(metaclass=ABCMeta):
         pass
 
     @abstractmethod
+    def is_card_on_table(self, card_name) -> bool:
+        """verify is card is present on the table (permanent or game zone)
+
+        :card_name:
+        :returns:
+
+        """
+        pass
+
+    @abstractmethod
     def place_card_on_table(
             self,
             card_name: str,
