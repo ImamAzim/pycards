@@ -125,17 +125,16 @@ class Table(BaseTable):
             self._gui.showerror(e)
         else:
             card = self._game.get_card(card_name)
-            if self._gui.is_card_on_table(card_name):
+            pile = self._game.get_card_pile(card_name)
+            if pile in [IN_PLAY_PILE_NAME, PERMANENT_PILE_NAME]:
                 self._gui.update_card_image(
                         card_name,
                         card.path,
-                        self._game.is_card_permanent(card_name),
                         card.rotate,
                         )
             self._gui.inspect_card(
                     card_name,
                     card.path,
-                    self._game.is_card_permanent(card_name),
                     card.rotate)
 
     def flip(self, card_name):
