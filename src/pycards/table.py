@@ -1,6 +1,7 @@
-from pycards.game import Game, GameError
+from pycards.game import Game, GameError, Card
+from pycards.game import DRAW_PILE_NAME, DISCARD_PILE_NAME
+from pycards.game import PERMANENT_PILE_NAME, IN_PLAY_PILE_NAME
 from pycards.interfaces import GUI, BaseTable
-from pycards.game import Card
 
 
 class Table(BaseTable):
@@ -102,12 +103,19 @@ class Table(BaseTable):
         except GameError as e:
             self._gui.showerror(e)
         else:
-            deck_card_names = self._game.deck_card_names
-            self._gui.update_deck_cards_list(deck_card_names)
             box_cards_names = self._game.box_card_names
-            self._gui.update_box_cards_list(box_cards_names)
-            if self._gui.is_card_on_table(card_name):
-                self._gui.remove_card(card_name)
+            if card_name in box_cards_names:
+                self._gui.update_box_cards_list(box_cards_names)
+            else:
+                pile = self._game.get_card_pile(card_name)
+                if pile == DRAW_PILE_NAME:
+                    draw_pile = self._game.draw_pile_cards
+                    self._gui.update_draw_pile(draw_pile)
+                elif pile == DISCARD_PILE_NAME:
+                    discard_pile = self._game.discarded_cards
+                    self._gui.update_discarded_pile(discard_pile)
+                else:
+                    self._gui.remove_card(card_name)
             self._gui.clean_inspect_area()
 
     def rotate_card(self, card_name):

@@ -2,6 +2,7 @@ import os
 import shutil
 from pathlib import Path
 import random
+from typing import Literal
 
 
 import filetype
@@ -15,6 +16,11 @@ SAVED_GAME_FILE_SUFFIX = 'json'
 BOX_FOLDER = 'box'
 DECK_FOLDER = 'deck'
 TEMP_NAME = 'tmp'
+
+DRAW_PILE_NAME = 'draw'
+IN_PLAY_PILE_NAME = 'in_play'
+DISCARD_PILE_NAME = 'discard'
+PERMANENT_PILE_NAME = 'permanent'
 
 
 class Card(object):
@@ -141,10 +147,10 @@ class Game(object):
         """
         return self._draw_cards_real_name.get(obfuscated_card_name)
 
-    _DRAW_PILE = 'draw'
-    _IN_PLAY_PILE = 'in_play'
-    _DISCARD_PILE = 'discard'
-    _PERMANENT_PILE = 'permanent'
+    _DRAW_PILE = DRAW_PILE_NAME
+    _IN_PLAY_PILE = IN_PLAY_PILE_NAME
+    _DISCARD_PILE = DISCARD_PILE_NAME
+    _PERMANENT_PILE = PERMANENT_PILE_NAME
     _ALWAYS_VISIBLE = 'always_visible'
 
     def __init__(self, name: str = TEMP_NAME):
@@ -233,7 +239,8 @@ class Game(object):
         varbox.draw_cards_real_name = dict()
         varbox.draw_obfuscate_real_name = dict()
 
-    def get_card_pile(self, card_name):
+    def get_card_pile(self, card_name) -> Literal[
+            'draw', 'discard', 'permanent', 'in_play']:
         """find in which pile is located the card of the deck
 
         :card_name:
