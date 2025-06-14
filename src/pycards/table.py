@@ -109,7 +109,7 @@ class Table(BaseTable):
             self._gui.update_draw_pile(draw_pile)
             discard_pile = self._game.discarded_cards
             self._gui.update_discarded_pile(discard_pile)
-            if True:
+            if self._gui.is_card_on_table(card_name):
                 self._gui.remove_card(card_name)
             self._gui.clean_inspect_area()
 
@@ -120,8 +120,7 @@ class Table(BaseTable):
             self._gui.showerror(e)
         else:
             card = self._game.get_card(card_name)
-            pile = self._game.get_card_pile(card_name)
-            if pile in [IN_PLAY_PILE_NAME, PERMANENT_PILE_NAME]:
+            if self._gui.is_card_on_table(card_name):
                 self._gui.update_card_image(
                         card_name,
                         card.path,
