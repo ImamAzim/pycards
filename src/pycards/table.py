@@ -202,7 +202,6 @@ class Table(BaseTable):
                 self._gui.inspect_card(
                         card_name,
                         card.path,
-                        self._game.is_card_permanent(card_name),
                         card.rotate)
 
     def shuffle_deck(self):
