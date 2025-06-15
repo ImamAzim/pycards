@@ -235,7 +235,6 @@ class Table(BaseTable):
             self._gui.update_draw_pile(draw_pile, top_card)
             discard_pile = self._game.discarded_cards
             self._gui.update_discarded_pile(discard_pile)
-            card = self._game.get_card(card_name)
             if self._gui.is_card_on_table(card_name):
                 self._gui.remove_card(card_name)
 
@@ -270,12 +269,15 @@ class Table(BaseTable):
             self._gui.update_draw_pile(draw_pile, top_card)
             discard_pile = self._game.discarded_cards
             self._gui.update_discarded_pile(discard_pile)
-            card = self._game.get_card(card_name)
             if self._gui.is_card_on_table(card_name):
                 self._gui.remove_card(card_name)
 
     def discard_all(self):
-        pass
+        for card_name in self._game.in_play_cards:
+            self._game.discard(card_name)
+            self._gui.remove_card(card_name)
+        discard_pile = self._game.discarded_cards
+        self._gui.update_discarded_pile(discard_pile)
 
     def draw_card(self):
         pass
