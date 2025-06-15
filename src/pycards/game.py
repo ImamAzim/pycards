@@ -425,7 +425,12 @@ class Game(object):
         :returns:
 
         """
-        pass
+        if self.draw_pile_cards:
+            obf = self.draw_pile_cards[-1]
+            card_name = self.get_real_card_name(obf)
+            self.play_card(card_name)
+        else:
+            raise GameError('draw pile is empty')
 
     def lock_card(self, card_name: str):
         """lock a card, make it permanent. Will not be reshuffled in deck
