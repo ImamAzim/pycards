@@ -420,6 +420,13 @@ class Game(object):
                     'card cannot be play from permanent pile. '
                     'make it first non permanent')
 
+    def play_first_card(self):
+        """play the card that is on top of draw pile
+        :returns:
+
+        """
+        pass
+
     def lock_card(self, card_name: str):
         """lock a card, make it permanent. Will not be reshuffled in deck
 

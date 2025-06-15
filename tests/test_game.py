@@ -431,6 +431,10 @@ class TestGame(unittest.TestCase):
         pile = self._game.get_card_pile(card_name)
         self.assertEqual(pile, 'draw')
 
+        self._game.play_first_card()
+        pile = self._game.get_card_pile(card_name)
+        self.assertEqual(pile, 'in_play')
+
     def test_discard_all(self):
         """
         :returns: TODO
