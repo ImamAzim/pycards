@@ -250,7 +250,14 @@ class Table(BaseTable):
             self._gui.update_draw_pile(draw_pile, top_card)
 
     def unmark_card(self, card_name: str):
-        pass
+        try:
+            self._game.remove_always_visible(card_name)
+        except GameError as e:
+            self._gui.showerror(e)
+        else:
+            draw_pile = self._game.draw_pile_cards
+            top_card = self._game.get_draw_pile_top_card()
+            self._gui.update_draw_pile(draw_pile, top_card)
 
     def put_card_in_draw_pile(self, card_name: str):
         pass
