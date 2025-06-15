@@ -295,7 +295,17 @@ class Table(BaseTable):
             self._gui.showerror(e)
 
     def shuffle_back(self):
-        self._gui.clean_inspect_area()
+        try:
+            self._game.shuffle_back_all_discarded()
+        except GameError as e:
+            self._gui.showerror(e)
+        else:
+            draw_pile = self._game.draw_pile_cards
+            top_card = self._game.get_draw_pile_top_card()
+            self._gui.update_draw_pile(draw_pile, top_card)
+            discard_pile = self._game.discarded_cards
+            self._gui.update_discarded_pile(discard_pile)
+            self._gui.clean_inspect_area()
 
 
 if __name__ == '__main__':
