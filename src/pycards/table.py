@@ -207,10 +207,37 @@ class Table(BaseTable):
                         card.rotate)
 
     def play_card(self, card_name: str):
-        pass
+        try:
+            self._game.play_card(card_name)
+        except GameError as e:
+            self._gui.showerror(e)
+        else:
+            draw_pile = self._game.draw_pile_cards
+            top_card = self._game.get_draw_pile_top_card()
+            self._gui.update_draw_pile(draw_pile, top_card)
+            discard_pile = self._game.discarded_cards
+            self._gui.update_discarded_pile(discard_pile)
+            card = self._game.get_card(card_name)
+            self._gui.place_card_on_table(
+                    card.name,
+                    card.path,
+                    'game_zone',
+                    )
 
     def discard(self, card_name: str):
-        pass
+        try:
+            self._game.discard(card_name)
+        except GameError as e:
+            self._gui.showerror(e)
+        else:
+            draw_pile = self._game.draw_pile_cards
+            top_card = self._game.get_draw_pile_top_card()
+            self._gui.update_draw_pile(draw_pile, top_card)
+            discard_pile = self._game.discarded_cards
+            self._gui.update_discarded_pile(discard_pile)
+            card = self._game.get_card(card_name)
+            if self._gui.is_card_on_table(card_name):
+                self._gui.remove_card(card_name)
 
     def mark_card(self, card_name: str):
         pass
