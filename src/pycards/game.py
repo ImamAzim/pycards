@@ -146,7 +146,10 @@ class Game(object):
         :returns:
 
         """
-        return self._draw_cards_real_name.get(obfuscated_card_name)
+        if obfuscated_card_name in self._draw_cards_real_name:
+            return self._draw_cards_real_name.get(obfuscated_card_name)
+        else:
+            raise GameError('invalid obfuscated name')
 
     _DRAW_PILE = DRAW_PILE_NAME
     _IN_PLAY_PILE = IN_PLAY_PILE_NAME

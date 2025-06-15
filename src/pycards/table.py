@@ -206,17 +206,14 @@ class Table(BaseTable):
                         card.path,
                         card.rotate)
 
-    def inspect_card(self, card_name: str):
-        if card_name:
+    def inspect_obfuscated_card(self, obfuscated_name: str):
+        if obfuscated_name:
             try:
-                card = self._game.get_card(card_name)
+                card_name = self._game.get_real_card_name(obfuscated_name)
             except GameError as e:
                 self._gui.showerror(e)
             else:
-                self._gui.inspect_card(
-                        card_name,
-                        card.path,
-                        card.rotate)
+                self.inspect_card(card_name)
 
     def play_card(self, card_name: str):
         try:
