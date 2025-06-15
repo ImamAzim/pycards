@@ -280,7 +280,10 @@ class Table(BaseTable):
         self._gui.update_discarded_pile(discard_pile)
 
     def draw_card(self):
-        pass
+        try:
+            self._game.play_first_card()
+        except GameError as e:
+            self._gui.showerror(e)
 
     def shuffle_back(self):
         self._gui.clean_inspect_area()
