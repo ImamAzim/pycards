@@ -30,7 +30,7 @@ class Table(BaseTable):
         self._gui.update_box_cards_list(box_cards_names)
         draw_pile = self._game.draw_pile_cards
         top_card = self._game.get_draw_pile_top_card()
-        self._gui.update_draw_pile(draw_pile, card)
+        self._gui.update_draw_pile(draw_pile, top_card)
         discarded = self._game.discarded_cards
         self._gui.update_discarded_pile(discarded)
         in_play_cards = self._game.in_play_cards
@@ -106,7 +106,7 @@ class Table(BaseTable):
             self._gui.update_box_cards_list(box_cards_names)
             draw_pile = self._game.draw_pile_cards
             top_card = self._game.get_draw_pile_top_card()
-            self._gui.update_draw_pile(draw_pile, card)
+            self._gui.update_draw_pile(draw_pile, top_card)
             discard_pile = self._game.discarded_cards
             self._gui.update_discarded_pile(discard_pile)
             if self._gui.is_card_on_table(card_name):
@@ -159,7 +159,7 @@ class Table(BaseTable):
             self._gui.update_box_cards_list(box_cards_names)
             draw_pile = self._game.draw_pile_cards
             top_card = self._game.get_draw_pile_top_card()
-            self._gui.update_draw_pile(draw_pile, card)
+            self._gui.update_draw_pile(draw_pile, top_card)
             discard_pile = self._game.discarded_cards
             self._gui.update_discarded_pile(discard_pile)
             if self._gui.is_card_on_table(card_name):
@@ -174,7 +174,7 @@ class Table(BaseTable):
         else:
             draw_pile = self._game.draw_pile_cards
             top_card = self._game.get_draw_pile_top_card()
-            self._gui.update_draw_pile(draw_pile, card)
+            self._gui.update_draw_pile(draw_pile, top_card)
             discard_pile = self._game.discarded_cards
             self._gui.update_discarded_pile(discard_pile)
             card = self._game.get_card(card_name)
