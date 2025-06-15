@@ -186,14 +186,12 @@ class GUI(metaclass=ABCMeta):
     def update_draw_pile(
             self,
             draw_pile: list[str],
-            card,
+            card: BaseCard,
             ):
         """update the draw pile. names are usually obfuscated
 
         :draw_pile:
-        :card_name: name of card on the top
-        :img_path: image path of card on top
-        :rotated: True if you want to rotate card on top by 108 deg
+        :card:
         :returns:
 
         """

@@ -366,7 +366,7 @@ class Game(object):
 
     def get_draw_pile_top_card(self) -> Card:
         """return the first card of the draw pile if any
-        :returns: TODO
+        :returns:
 
         """
         if self.draw_pile_cards:
