@@ -29,7 +29,7 @@ class Table(BaseTable):
         box_cards_names = self._game.box_card_names
         self._gui.update_box_cards_list(box_cards_names)
         draw_pile = self._game.draw_pile_cards
-        top_card = self._game.get_card(draw_pile[-1])
+        top_card = self._game.get_draw_pile_top_card()
         self._gui.update_draw_pile(draw_pile)
         discarded = self._game.discarded_cards
         self._gui.update_discarded_pile(discarded)

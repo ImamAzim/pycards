@@ -1,5 +1,45 @@
-from abc import ABCMeta, abstractmethod
+from abc import ABCMeta, abstractmethod, abstractproperty
 from typing import Literal
+
+
+class BaseCard(metaclass=ABCMeta):
+
+    """card object for a given orientation"""
+
+    @abstractproperty
+    def name(self) -> str:
+        """card name"""
+        pass
+
+    @abstractproperty
+    def path(self) -> str:
+        """path to img file"""
+        pass
+
+    @abstractproperty
+    def rotate(self) -> bool:
+        """specify if img need to be rotated by 180 deg"""
+        pass
+
+    @abstractmethod
+    def __init__(
+            self,
+            card_name: str,
+            recto_path: str,
+            verso_path: str,
+            orientation: int,
+            **others,
+            ):
+        """create a card obj and get img_file to use and rotation
+
+        :card_name: identy card
+        :recto_path: path to recto img
+        :verso_path: path to verso img
+        :orientation: 0(top recto), 1(down recto), 2(down verso), or
+        3(top verso)
+
+        """
+        pass
 
 
 class GUI(metaclass=ABCMeta):
@@ -146,9 +186,7 @@ class GUI(metaclass=ABCMeta):
     def update_draw_pile(
             self,
             draw_pile: list[str],
-            card_name: str,
-            img_path: str,
-            rotated: bool = False,
+            card,
             ):
         """update the draw pile. names are usually obfuscated
 

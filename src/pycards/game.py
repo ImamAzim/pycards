@@ -10,6 +10,7 @@ from varboxes import VarBox
 
 
 from pycards.config import DATA_FOLDER
+from pycards.interfaces import BaseCard
 
 
 SAVED_GAME_FILE_SUFFIX = 'json'
@@ -23,7 +24,7 @@ DISCARD_PILE_NAME = 'discard'
 PERMANENT_PILE_NAME = 'permanent'
 
 
-class Card(object):
+class Card(BaseCard):
 
     """card object for a given orientation"""
 
@@ -363,7 +364,7 @@ class Game(object):
         else:
             raise GameError('missing from the game')
 
-    def get_draw_pile_top_card(self) -> Card | None:
+    def get_draw_pile_top_card(self) -> Card:
         """return the first card of the draw pile if any
         :returns: TODO
 
