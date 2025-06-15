@@ -186,7 +186,7 @@ class GUI(metaclass=ABCMeta):
     def update_draw_pile(
             self,
             draw_pile: list[str],
-            card: BaseCard,
+            card: BaseCard | None,
             ):
         """update the draw pile. names are usually obfuscated
 
