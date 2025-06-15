@@ -369,7 +369,8 @@ class Game(object):
 
         """
         if self.draw_pile_cards:
-            card_name = self.draw_pile_cards[-1]
+            obfuscated = self.draw_pile_cards[-1]
+            card_name = self.get_real_card_name(obfuscated)
             card = self.get_card(card_name)
             return card
         else:

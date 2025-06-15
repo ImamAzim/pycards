@@ -121,7 +121,7 @@ class TestGame(unittest.TestCase):
         card = game.get_card(card_name)
         game.put_card_in_draw_pile(card_name)
         card_top = game.get_draw_pile_top_card()
-        self.assertEqual(card, card_top)
+        self.assertEqual(card.name, card_top.name)
 
     def test_discover_card(self):
         """test discover
