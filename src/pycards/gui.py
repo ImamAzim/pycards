@@ -1,10 +1,12 @@
-from pycards.interfaces import GUI, BaseTable
 import tkinter
 from tkinter import simpledialog, filedialog, messagebox
 from tkinter import ttk
 
 
 from PIL import Image, ImageTk, ImageFile
+
+
+from pycards.interfaces import GUI, BaseTable, BaseCard
 
 
 class LoadPrompt(simpledialog.Dialog):
@@ -466,9 +468,19 @@ class TkinterGUI(GUI, tkinter.Tk):
         self._deckcards_list.set('')
         self._deckcards_list['values'] = card_names
 
+    def update_draw_pile(
+            self,
+            draw_pile: list[str],
+            card: BaseCard | None,
+            ):
+        pass
+
+    def update_discarded_pile(self, discarded: list[str]):
+        pass
+
 
 if __name__ == '__main__':
-    # gui = TkinterGUI()
+    gui = TkinterGUI()
     # gui.run()
-    import launchers
-    launchers.run_pycards()
+    # import launchers
+    # launchers.run_pycards()
