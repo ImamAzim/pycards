@@ -260,6 +260,19 @@ class Table(BaseTable):
             self._gui.update_draw_pile(draw_pile, top_card)
 
     def put_card_in_draw_pile(self, card_name: str):
+        try:
+            self._game.put_card_in_draw_pile(card_name)
+        except GameError as e:
+            self._gui.showerror(e)
+        else:
+            draw_pile = self._game.draw_pile_cards
+            top_card = self._game.get_draw_pile_top_card()
+            self._gui.update_draw_pile(draw_pile, top_card)
+            discard_pile = self._game.discarded_cards
+            self._gui.update_discarded_pile(discard_pile)
+            card = self._game.get_card(card_name)
+            if self._gui.is_card_on_table(card_name):
+                self._gui.remove_card(card_name)
         pass
 
     def discard_all(self):

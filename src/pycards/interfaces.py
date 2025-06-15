@@ -381,10 +381,11 @@ class BaseTable(object, metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def put_card_in_draw_pile(self, card_name: str):
+    def put_card_in_draw_pile(self, card_name: str, top=True):
         """
 
         :card_name: identify card
+        :top: if true card is on top, else on bottom
         :returns:
 
         """
