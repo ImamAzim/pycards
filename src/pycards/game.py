@@ -363,6 +363,18 @@ class Game(object):
         else:
             raise GameError('missing from the game')
 
+    def get_draw_pile_top_card(self) -> Card | None:
+        """return the first card of the draw pile if any
+        :returns: TODO
+
+        """
+        if self.draw_pile_cards:
+            card_name = self.draw_pile_cards[-1]
+            card = self.get_card(card_name)
+            return card
+        else:
+            return None
+
     def discover_card(self, card_name):
         """move a card from box to the deck (also the img file)
 

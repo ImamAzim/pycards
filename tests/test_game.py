@@ -109,6 +109,20 @@ class TestGame(unittest.TestCase):
         path = os.path.join(folder, card_fn)
         self.assertEqual(path, card.path)
 
+    def test_get_top_card(self):
+        """test draw top card
+        :returns: TODO
+
+        """
+        game = self._game
+        game.import_card(**self._test_card)
+        card_name = self._test_card['card_name']
+        game.discover_card(card_name)
+        card = game.get_card(card_name)
+        game.put_card_in_draw_pile(card_name)
+        card_top = game.get_draw_pile_top_card()
+        self.assertEqual(card, card_top)
+
     def test_discover_card(self):
         """test discover
         :returns: TODO
