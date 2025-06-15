@@ -206,6 +206,18 @@ class Table(BaseTable):
                         card.path,
                         card.rotate)
 
+    def inspect_card(self, card_name: str):
+        if card_name:
+            try:
+                card = self._game.get_card(card_name)
+            except GameError as e:
+                self._gui.showerror(e)
+            else:
+                self._gui.inspect_card(
+                        card_name,
+                        card.path,
+                        card.rotate)
+
     def play_card(self, card_name: str):
         try:
             self._game.play_card(card_name)

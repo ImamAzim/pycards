@@ -417,6 +417,15 @@ class BaseTable(object, metaclass=ABCMeta):
         pass
 
     @abstractmethod
+    def inspect_obfuscated_card(self, obfuscated_name: str):
+        """call inspect method of gui with card info to display
+
+        :obfuscated_name:
+
+        """
+        pass
+
+    @abstractmethod
     def draw_card(self):
         """play the first card from the draw pile
         :returns: TODO
