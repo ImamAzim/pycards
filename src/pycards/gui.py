@@ -52,6 +52,8 @@ class TkinterGUI(GUI, tkinter.Tk):
         self._inspected_card.set(None)
         self._cards_on_table: dict[str, dict] = dict()
         self._table_frame: tkinter.Frame
+        self._permanent_frame: tkinter.Frame
+        self._options_frame: tkinter.Frame
         self._cardlist_frame: tkinter.Frame
         self._inspect_frame: tkinter.Frame
 
@@ -89,7 +91,12 @@ class TkinterGUI(GUI, tkinter.Tk):
         self.rowconfigure(1, weight=1)
         self._cardlist_frame.grid(row=0, column=0, sticky=tkinter.EW)
         self._inspect_frame.grid(row=1, column=0, sticky=tkinter.NSEW)
-        self._table_frame.grid(row=0, column=1, rowspan=2, sticky=tkinter.NSEW)
+        self._permanent_frame.grid(
+                row=0, column=1, rowspan=2, sticky=tkinter.NSEW)
+        self._table_frame.grid(
+                row=1, column=1, rowspan=2, sticky=tkinter.NSEW)
+        self._options_frame.grid(
+                row=2, column=1, rowspan=1, sticky=tkinter.NSEW)
 
     def _create_menu(self):
         """put option in menu
