@@ -37,7 +37,7 @@ class LoadPrompt(simpledialog.Dialog):
 class TkinterGUI(GUI, tkinter.Tk):
 
     """tkinter GUI for a pycards game"""
-    TABLE_WIDTH_WEIGHT = 4  # relative wieght to menu column
+    TABLE_WIDTH_WEIGHT = 30  # relative wieght to menu column
     TABLE_REL_HEIGHT = 3  # unit of screen height
     _PERMANENT_ZONE_HEIGHT = 1 / 4 # of the screen height
     _TABLE_WIDTH_IN_CARDS = 6
@@ -88,14 +88,14 @@ class TkinterGUI(GUI, tkinter.Tk):
         """
         self.columnconfigure(0, weight=1)
         self.columnconfigure(1, weight=self.TABLE_WIDTH_WEIGHT)
-        self.rowconfigure(0, weight=1)
-        self.rowconfigure(1, weight=1)
+        # self.rowconfigure(0, weight=1)
+        # self.rowconfigure(1, weight=1)
         self._cardlist_frame.grid(row=0, column=0, sticky=tkinter.EW)
         self._inspect_frame.grid(row=1, column=0, sticky=tkinter.NSEW)
         self._permanent_frame.grid(
-                row=0, column=1, rowspan=2, sticky=tkinter.NSEW)
+                row=0, column=1, sticky=tkinter.NSEW)
         self._table_frame.grid(
-                row=1, column=1, rowspan=2, sticky=tkinter.NSEW)
+                row=1, column=1, sticky=tkinter.NSEW)
 
     def _create_menu(self):
         """put option in menu
@@ -313,7 +313,7 @@ class TkinterGUI(GUI, tkinter.Tk):
         canvas = tkinter.Canvas(
                 self._permanent_frame,
                 bg='blue',
-                height=self._height/self._PERMANENT_ZONE_HEIGHT,
+                height=self._height*self._PERMANENT_ZONE_HEIGHT,
                 scrollregion=(0, 0, self._width, self._height),
                 )
         vbar = ttk.Scrollbar(self._permanent_frame, orient=tkinter.VERTICAL)
@@ -504,7 +504,7 @@ class TkinterGUI(GUI, tkinter.Tk):
 
 
 if __name__ == '__main__':
-    gui = TkinterGUI()
+    # gui = TkinterGUI()
     # gui.run()
-    # import launchers
-    # launchers.run_pycards()
+    import launchers
+    launchers.run_pycards()
