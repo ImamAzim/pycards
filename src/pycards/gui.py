@@ -53,7 +53,6 @@ class TkinterGUI(GUI, tkinter.Tk):
         self._cards_on_table: dict[str, dict] = dict()
         self._table_frame: tkinter.Frame
         self._permanent_frame: tkinter.Frame
-        self._options_frame: tkinter.Frame
         self._cardlist_frame: tkinter.Frame
         self._inspect_frame: tkinter.Frame
 
@@ -95,8 +94,6 @@ class TkinterGUI(GUI, tkinter.Tk):
                 row=0, column=1, rowspan=2, sticky=tkinter.NSEW)
         self._table_frame.grid(
                 row=1, column=1, rowspan=2, sticky=tkinter.NSEW)
-        self._options_frame.grid(
-                row=2, column=1, rowspan=1, sticky=tkinter.NSEW)
 
     def _create_menu(self):
         """put option in menu
@@ -305,6 +302,13 @@ class TkinterGUI(GUI, tkinter.Tk):
         canvas.config(yscrollcommand=vbar.set)
         canvas.pack(side=tkinter.LEFT, expand=True, fill=tkinter.X)
         self._canvas_table = canvas
+
+    def _create_permanent_frame(self):
+        """prepare canvas where permanent cards are put
+        :returns: TODO
+
+        """
+        pass
 
     def showerror(self, msg: str):
         tkinter.messagebox.showerror(
