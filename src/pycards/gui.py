@@ -74,6 +74,7 @@ class TkinterGUI(GUI, tkinter.Tk):
         self._create_cardlist_frame()
         self._create_inspect_frame()
         self._create_table_frame()
+        self._create_permanent_frame()
 
         self._place_all_frames()
 
