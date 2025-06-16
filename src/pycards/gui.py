@@ -39,6 +39,7 @@ class TkinterGUI(GUI, tkinter.Tk):
     """tkinter GUI for a pycards game"""
     TABLE_WIDTH_WEIGHT = 4  # relative wieght to menu column
     TABLE_REL_HEIGHT = 3  # unit of screen height
+    _PERMANENT_ZONE_HEIGHT = 1 / 4 # of the screen height
     _TABLE_WIDTH_IN_CARDS = 6
     _IMG_KEY = 'img'
     _IMG_LABEL_KEY = 'img_label'
@@ -288,12 +289,11 @@ class TkinterGUI(GUI, tkinter.Tk):
         """ prepare table where cards will be put
 
         """
-        self._table_frame = ttk.LabelFrame(self, text='table')
+        self._table_frame = ttk.LabelFrame(self, text='game zone')
         canvas = tkinter.Canvas(
                 self._table_frame,
                 bg='green',
-                height=self._table_height,
-                # width=self._table_width,
+                height=self._height*(1-self._PERMANENT_ZONE_HEIGHT),
                 scrollregion=(0, 0, self._width, 3 * self._height),
                 )
         vbar = ttk.Scrollbar(self._table_frame, orient=tkinter.VERTICAL)
@@ -308,7 +308,19 @@ class TkinterGUI(GUI, tkinter.Tk):
         :returns: TODO
 
         """
-        pass
+        self._permanent_frame = ttk.LabelFrame(self, text='permanent cards')
+        canvas = tkinter.Canvas(
+                self._permanent_frame,
+                bg='blue',
+                height=self._height/self._PERMANENT_ZONE_HEIGHT,
+                scrollregion=(0, 0, self._width, self._height),
+                )
+        vbar = ttk.Scrollbar(self._permanent_frame, orient=tkinter.VERTICAL)
+        vbar.pack(side=tkinter.RIGHT, fill=tkinter.Y)
+        vbar.config(command=canvas.yview)
+        canvas.config(yscrollcommand=vbar.set)
+        canvas.pack(side=tkinter.LEFT, expand=True, fill=tkinter.X)
+        self._canvas_permanent = canvas
 
     def showerror(self, msg: str):
         tkinter.messagebox.showerror(
