@@ -521,7 +521,7 @@ class TkinterGUI(GUI, tkinter.Tk):
         pass
 
     def update_discarded_pile(self, discarded: list[str]):
-        pass
+        self._discardpile['values'] = discarded
 
 
 if __name__ == '__main__':

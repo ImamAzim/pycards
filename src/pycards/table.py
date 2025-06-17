@@ -32,6 +32,7 @@ class Table(BaseTable):
         top_card = self._game.get_draw_pile_top_card()
         self._gui.update_draw_pile(draw_pile, top_card)
         discarded = self._game.discarded_cards
+        discarded = list(discarded)
         self._gui.update_discarded_pile(discarded)
         in_play_cards = self._game.in_play_cards
         for card in in_play_cards:
@@ -94,6 +95,7 @@ class Table(BaseTable):
             box_cards_names = self._game.box_card_names
             self._gui.update_box_cards_list(box_cards_names)
             discarded = self._game.discarded_cards
+            discarded = list(discarded)
             self._gui.update_discarded_pile(discarded)
 
     def destroy_card(self, card_name: str):
@@ -108,6 +110,7 @@ class Table(BaseTable):
             top_card = self._game.get_draw_pile_top_card()
             self._gui.update_draw_pile(draw_pile, top_card)
             discard_pile = self._game.discarded_cards
+            discard_pile = list(discard_pile)
             self._gui.update_discarded_pile(discard_pile)
             if self._gui.is_card_on_table(card_name):
                 self._gui.remove_card(card_name)
@@ -161,6 +164,7 @@ class Table(BaseTable):
             top_card = self._game.get_draw_pile_top_card()
             self._gui.update_draw_pile(draw_pile, top_card)
             discard_pile = self._game.discarded_cards
+            discard_pile = list(discard_pile)
             self._gui.update_discarded_pile(discard_pile)
             if self._gui.is_card_on_table(card_name):
                 self._gui.remove_card(card_name)
@@ -176,6 +180,7 @@ class Table(BaseTable):
             top_card = self._game.get_draw_pile_top_card()
             self._gui.update_draw_pile(draw_pile, top_card)
             discard_pile = self._game.discarded_cards
+            discard_pile = list(discard_pile)
             self._gui.update_discarded_pile(discard_pile)
             card = self._game.get_card(card_name)
             self._gui.place_card_on_table(
@@ -191,6 +196,7 @@ class Table(BaseTable):
             self._gui.showerror(e)
         else:
             discard_pile = self._game.discarded_cards
+            discard_pile = list(discard_pile)
             self._gui.update_discarded_pile(discard_pile)
             self._gui.remove_card(card_name)
 
@@ -225,6 +231,7 @@ class Table(BaseTable):
             top_card = self._game.get_draw_pile_top_card()
             self._gui.update_draw_pile(draw_pile, top_card)
             discard_pile = self._game.discarded_cards
+            discard_pile = list(discard_pile)
             self._gui.update_discarded_pile(discard_pile)
             card = self._game.get_card(card_name)
             self._gui.place_card_on_table(
@@ -243,6 +250,7 @@ class Table(BaseTable):
             top_card = self._game.get_draw_pile_top_card()
             self._gui.update_draw_pile(draw_pile, top_card)
             discard_pile = self._game.discarded_cards
+            discard_pile = list(discard_pile)
             self._gui.update_discarded_pile(discard_pile)
             if self._gui.is_card_on_table(card_name):
                 self._gui.remove_card(card_name)
@@ -277,6 +285,7 @@ class Table(BaseTable):
             top_card = self._game.get_draw_pile_top_card()
             self._gui.update_draw_pile(draw_pile, top_card)
             discard_pile = self._game.discarded_cards
+            discard_pile = list(discard_pile)
             self._gui.update_discarded_pile(discard_pile)
             if self._gui.is_card_on_table(card_name):
                 self._gui.remove_card(card_name)
@@ -286,6 +295,7 @@ class Table(BaseTable):
             self._game.discard(card_name)
             self._gui.remove_card(card_name)
         discard_pile = self._game.discarded_cards
+        discard_pile = list(discard_pile)
         self._gui.update_discarded_pile(discard_pile)
 
     def draw_card(self):
@@ -304,6 +314,7 @@ class Table(BaseTable):
             top_card = self._game.get_draw_pile_top_card()
             self._gui.update_draw_pile(draw_pile, top_card)
             discard_pile = self._game.discarded_cards
+            discard_pile = list(discard_pile)
             self._gui.update_discarded_pile(discard_pile)
             self._gui.clean_inspect_area()
 
