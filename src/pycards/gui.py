@@ -200,34 +200,50 @@ class TkinterGUI(GUI, tkinter.Tk):
                     self._boxcards_list.get()),
                 ).pack(side=tkinter.LEFT)
 
-        deck_cards_frame = ttk.LabelFrame(
+        drawpile_frame = ttk.LabelFrame(
                 self._cardlist_frame,
-                text='deck cards',
+                text='draw pile',
                 )
-
-        deck_cards_frame.pack(fill=tkinter.X)
+        drawpile_frame.pack(fill=tkinter.X)
         self._drawpile = ttk.Combobox(
-                deck_cards_frame,
+                drawpile_frame,
                 state='readonly',
                 )
         self._drawpile.grid(
                 column=0,
                 row=0,)
         ttk.Button(
-                deck_cards_frame,
+                drawpile_frame,
                 text='draw...',
                 command=lambda: self._table.draw_card(),
                 ).grid(column=0, row=2, sticky=tkinter.EW)
         ttk.Button(
-                deck_cards_frame,
+                drawpile_frame,
                 text='inspect...',
                 command=lambda: self._table.inspect_obfuscated_card(
                     self._drawpile.get()),
                 ).grid(column=0, row=1, stick=tkinter.EW)
         self._top_card_label = tkinter.Label(
-                deck_cards_frame,
+                drawpile_frame,
                 )
         self._top_card_label.grid(column=1, row=0, rowspan=3)
+
+        discardpile_frame = ttk.LabelFrame(
+                self._cardlist_frame,
+                text='discard pile',
+                )
+        discardpile_frame.pack(fill=tkinter.X)
+        self._discardpile = ttk.Combobox(
+                discardpile_frame,
+                state='readonly',
+                )
+        self._discardpile.bind(
+                '<<ComboboxSelected>>',
+                lambda event: self._table.inspect_card(
+                    self._discardpile.get()),
+                )
+        self._discardpile.pack(
+                expand=True, fill=tkinter.X)
 
     def _call_discover(self):
         card_name = self._inspected_card.get()
