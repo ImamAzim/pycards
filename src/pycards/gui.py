@@ -204,25 +204,26 @@ class TkinterGUI(GUI, tkinter.Tk):
                 self._cardlist_frame,
                 text='deck cards',
                 )
+
         deck_cards_frame.pack(fill=tkinter.X)
-        self._deckcards_list = ttk.Combobox(
+        self._drawpile = ttk.Combobox(
                 deck_cards_frame,
                 state='readonly',
                 )
-        self._deckcards_list.bind(
-                '<<ComboboxSelected>>',
-                lambda event: self._table.inspect_card(
-                    self._deckcards_list.get()),
-                )
-        self._deckcards_list.pack(
-                fill=tkinter.X,
-                expand=True,
-                side=tkinter.LEFT)
+        self._drawpile.grid(
+                column=0,
+                row=0,)
         ttk.Button(
                 deck_cards_frame,
-                text='shuffle',
-                command=lambda: self._table.shuffle_deck(),
-                ).pack(side=tkinter.LEFT)
+                text='draw...',
+                command=lambda: self._table.draw_card(),
+                ).grid(column=0, row=2, sticky=tkinter.EW)
+        ttk.Button(
+                deck_cards_frame,
+                text='inspect...',
+                command=lambda: self._table.inspect_obfuscated_card(
+                    self._drawpile.get()),
+                ).grid(column=0, row=1, stick=tkinter.EW)
 
     def _call_discover(self):
         card_name = self._inspected_card.get()
