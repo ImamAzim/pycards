@@ -241,10 +241,10 @@ class TkinterGUI(GUI, tkinter.Tk):
         canvas = tkinter.Canvas(
                 self._inspect_frame,
                 bg='green',
-                width=1,
+                width=self._menu_width,
                 height=self._inspector_height,
                 )
-        canvas.pack(expand=True, fill=tkinter.X)
+        canvas.pack(expand=False, fill=tkinter.X)
         buttons_frame = ttk.Frame(self._inspect_frame)
         buttons_frame.pack()
         ttk.Button(
@@ -300,7 +300,7 @@ class TkinterGUI(GUI, tkinter.Tk):
                 self._table_frame,
                 bg='green',
                 height=self._height*(1-self._PERMANENT_ZONE_HEIGHT),
-                scrollregion=(0, 0, self._width, 3 * self._height),
+                # scrollregion=(0, 0, self._width, 3 * self._height),
                 )
         vbar = ttk.Scrollbar(self._table_frame, orient=tkinter.VERTICAL)
         vbar.pack(side=tkinter.RIGHT, fill=tkinter.Y)
