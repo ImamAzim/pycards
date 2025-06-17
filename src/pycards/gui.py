@@ -224,6 +224,10 @@ class TkinterGUI(GUI, tkinter.Tk):
                 command=lambda: self._table.inspect_obfuscated_card(
                     self._drawpile.get()),
                 ).grid(column=0, row=1, stick=tkinter.EW)
+        self._top_card_label = tkinter.Label(
+                deck_cards_frame,
+                )
+        self._top_card_label.grid(column=1, row=0, rowspan=3)
 
     def _call_discover(self):
         card_name = self._inspected_card.get()
