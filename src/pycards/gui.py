@@ -518,7 +518,15 @@ class TkinterGUI(GUI, tkinter.Tk):
             draw_pile: list[str],
             card: BaseCard | None,
             ):
-        pass
+        self._drawpile['values'] = draw_pile
+        if draw_pile:
+            self._top_card_label.img = card.path
+            img: ImageFile.ImageFile = Image.open(card.path)
+            maxsize = (self._menu_width / 2, self._height)
+            img.thumbnail(maxsize)
+            if rotated:
+                img = img.rotate(180)
+            self._top_card_label['image'] = ImageTk.PhotoImage(img)
 
     def update_discarded_pile(self, discarded: list[str]):
         self._discardpile['values'] = discarded
