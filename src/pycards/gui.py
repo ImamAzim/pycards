@@ -536,6 +536,7 @@ class TkinterGUI(GUI, tkinter.Tk):
             self._top_card_label['image'] = self._top_card_label.img
 
     def update_discarded_pile(self, discarded: list[str]):
+        self._discardpile.set('')
         self._discardpile['values'] = discarded
 
 

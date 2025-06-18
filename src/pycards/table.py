@@ -36,7 +36,7 @@ class Table(BaseTable):
         discarded = list(discarded)
         self._gui.update_discarded_pile(discarded)
         in_play_cards = self._game.in_play_cards
-        for card in in_play_cards:
+        for card_name, card in in_play_cards.items():
             card: Card
             self._gui.place_card_on_table(
                     card_name=card.name,
@@ -45,7 +45,7 @@ class Table(BaseTable):
                     rotated=card.rotate,
                     )
         permanent_cards = self._game.permanent_cards
-        for card in permanent_cards:
+        for card_name, card in permanent_cards.items():
             card: Card
             self._gui.place_card_on_table(
                     card_name=card.name,
