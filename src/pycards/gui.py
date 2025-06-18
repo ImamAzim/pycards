@@ -11,6 +11,10 @@ from pycards.interfaces import GUI, BaseTable, BaseCard
 from pycards.interfaces import IN_PLAY_PILE_NAME, PERMANENT_PILE_NAME
 
 
+class GUIError(Exception):
+    pass
+
+
 class LoadPrompt(simpledialog.Dialog):
 
     """prompt to show games that can be loaded. use a dropdown menu
@@ -372,42 +376,48 @@ class TkinterGUI(GUI, tkinter.Tk):
             pile: Literal[IN_PLAY_PILE_NAME, PERMANENT_PILE_NAME]=IN_PLAY_PILE_NAME,
             rotated: bool = False):
 
+        current_pile = self.is_card_on_table(card_name)
+        if current_pile:
+            if current_pile == pile:
+                return
+            else:
+                self.remove_card(card_name)
         card_width = self._table_width / self._TABLE_WIDTH_IN_CARDS
         y = 0
         x = 0
 
-        canvas = self._canvas_table
-        if not self.is_card_on_table(card_name):
-            self._cards_on_table[card_name] = dict()
-            placed_card = self._cards_on_table[card_name]
-            placed_card[self._PILE_KEY] = pile
-            img: ImageFile.ImageFile = Image.open(img_path)
-            maxsize = (card_width, self._table_height)
-            img.thumbnail(maxsize)
-            if rotated:
-                img = img.rotate(180)
-            placed_card[self._IMG_KEY] = ImageTk.PhotoImage(img)
-            label = tkinter.Label(
-                    canvas,
-                    image=placed_card[self._IMG_KEY],
-                    cursor='hand1',
-                    )
-            label.place(x=x, y=y, anchor=tkinter.NW)
-            placed_card[self._IMG_LABEL_KEY] = label
-            label.bind(
-                    "<ButtonPress-1>",
-                    lambda e: self._on_card_click(e, card_name))
-            label.bind(
-                    "<B1-Motion>",
-                    lambda e: self._on_card_drop(e, card_name))
-            if is_locked:
-                label['background'] = 'blue'
-            else:
-                label['background'] = 'green'
+        if pile == IN_PLAY_PILE_NAME:
+            canvas = self._canvas_table
+        elif pile == PERMANENT_PILE_NAME:
+            canvas = self._canvas_permanent
         else:
-            placed_card = self._cards_on_table[card_name]
-            label = placed_card[self._IMG_LABEL_KEY]
-            label.place(x=x, y=y, anchor=tkinter.NW)
+            raise GUIError('pile arg not known')
+        self._cards_on_table[card_name] = dict()
+        placed_card = self._cards_on_table[card_name]
+        placed_card[self._PILE_KEY] = pile
+        img: ImageFile.ImageFile = Image.open(img_path)
+        maxsize = (card_width, self._table_height)
+        img.thumbnail(maxsize)
+        if rotated:
+            img = img.rotate(180)
+        placed_card[self._IMG_KEY] = ImageTk.PhotoImage(img)
+        label = tkinter.Label(
+                canvas,
+                image=placed_card[self._IMG_KEY],
+                cursor='hand1',
+                )
+        label.place(x=x, y=y, anchor=tkinter.NW)
+        placed_card[self._IMG_LABEL_KEY] = label
+        label.bind(
+                "<ButtonPress-1>",
+                lambda e: self._on_card_click(e, card_name))
+        label.bind(
+                "<B1-Motion>",
+                lambda e: self._on_card_drop(e, card_name))
+        if is_locked:
+            label['background'] = 'blue'
+        else:
+            label['background'] = 'green'
 
     def _on_card_click(self, event: tkinter.Event, card_name: str):
         self._table.inspect_card(card_name)
