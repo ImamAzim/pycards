@@ -491,9 +491,10 @@ class TkinterGUI(GUI, tkinter.Tk):
             self,
             card_name: str,
             img_path: str,
-            is_locked: bool,
             rotated: bool = False):
         card: dict = self._cards_on_table.get(card_name)
+        if not card:
+            raise GUIError('card is not on table')
         img: ImageFile.ImageFile = Image.open(img_path)
         card_width = self._table_width / self._TABLE_WIDTH_IN_CARDS
         maxsize = (card_width, self._table_height)
@@ -503,10 +504,6 @@ class TkinterGUI(GUI, tkinter.Tk):
         card[self._IMG_KEY] = ImageTk.PhotoImage(img)
         label = card[self._IMG_LABEL_KEY]
         label.configure(image=card[self._IMG_KEY])
-        if is_locked:
-            label['background'] = 'blue'
-        else:
-            label['background'] = 'green'
 
     def remove_card(self, card_name: str):
         card: dict = self._cards_on_table.pop(card_name)
