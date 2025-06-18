@@ -8,6 +8,7 @@ from PIL import Image, ImageTk, ImageFile
 
 
 from pycards.interfaces import GUI, BaseTable, BaseCard
+from pycards.interfaces import IN_PLAY_PILE_NAME, PERMANENT_PILE_NAME
 
 
 class LoadPrompt(simpledialog.Dialog):
@@ -368,7 +369,7 @@ class TkinterGUI(GUI, tkinter.Tk):
             self,
             card_name: str,
             img_path: str,
-            pile: Literal['game_zone', 'permanent']='game_zone',
+            pile: Literal[IN_PLAY_PILE_NAME, PERMANENT_PILE_NAME]=IN_PLAY_PILE_NAME,
             rotated: bool = False):
 
         card_width = self._table_width / self._TABLE_WIDTH_IN_CARDS
@@ -379,6 +380,7 @@ class TkinterGUI(GUI, tkinter.Tk):
         if not self.is_card_on_table(card_name):
             self._cards_on_table[card_name] = dict()
             placed_card = self._cards_on_table[card_name]
+            placed_card[self._PILE_KEY] = pile
             img: ImageFile.ImageFile = Image.open(img_path)
             maxsize = (card_width, self._table_height)
             img.thumbnail(maxsize)
