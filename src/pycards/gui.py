@@ -382,9 +382,6 @@ class TkinterGUI(GUI, tkinter.Tk):
                 return
             else:
                 self.remove_card(card_name)
-        card_width = self._table_width / self._TABLE_WIDTH_IN_CARDS
-        y = 0
-        x = 0
 
         if pile == IN_PLAY_PILE_NAME:
             canvas = self._canvas_table
@@ -392,9 +389,15 @@ class TkinterGUI(GUI, tkinter.Tk):
             canvas = self._canvas_permanent
         else:
             raise GUIError('pile arg not known')
+
+        card_width = self._table_width / self._TABLE_WIDTH_IN_CARDS
+        y = 0
+        x = 0
+
         self._cards_on_table[card_name] = dict()
         placed_card = self._cards_on_table[card_name]
         placed_card[self._PILE_KEY] = pile
+
         img: ImageFile.ImageFile = Image.open(img_path)
         maxsize = (card_width, self._table_height)
         img.thumbnail(maxsize)
@@ -414,10 +417,6 @@ class TkinterGUI(GUI, tkinter.Tk):
         label.bind(
                 "<B1-Motion>",
                 lambda e: self._on_card_drop(e, card_name))
-        if is_locked:
-            label['background'] = 'blue'
-        else:
-            label['background'] = 'green'
 
     def _on_card_click(self, event: tkinter.Event, card_name: str):
         self._table.inspect_card(card_name)
