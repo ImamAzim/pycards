@@ -1,6 +1,7 @@
 import tkinter
 from tkinter import simpledialog, filedialog, messagebox
 from tkinter import ttk
+from typing import Literal
 
 
 from PIL import Image, ImageTk, ImageFile
@@ -43,6 +44,7 @@ class TkinterGUI(GUI, tkinter.Tk):
     _TABLE_WIDTH_IN_CARDS = 6
     _IMG_KEY = 'img'
     _IMG_LABEL_KEY = 'img_label'
+    _PILE_KEY = 'pile'
 
     def __init__(self):
         tkinter.Tk.__init__(self)
@@ -366,18 +368,12 @@ class TkinterGUI(GUI, tkinter.Tk):
             self,
             card_name: str,
             img_path: str,
-            is_locked: bool = False,
-            pile: str = 'deck',
+            pile: Literal['game_zone', 'permanent']='game_zone',
             rotated: bool = False):
 
         card_width = self._table_width / self._TABLE_WIDTH_IN_CARDS
-        y = self._height / 2
-        if pile == 'deck':
-            x = 0
-        elif pile == 'discard':
-            x = self._table_width - card_width
-        else:
-            x = self._table_width / 2
+        y = 0
+        x = 0
 
         canvas = self._canvas_table
         if not self.is_card_on_table(card_name):
@@ -466,7 +462,8 @@ class TkinterGUI(GUI, tkinter.Tk):
 
     def is_card_on_table(self, card_name: str) -> bool:
         if card_name in self._cards_on_table:
-            return True
+            pile = self._cards_on_table[card_name][self._PILE_KEY]
+            return pile
         else:
             return False
 

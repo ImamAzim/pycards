@@ -89,11 +89,12 @@ class GUI(metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def is_card_on_table(self, card_name) -> bool:
+    def is_card_on_table(self, card_name) -> Literal[
+            'game_zone', 'permanent'] | bool:
         """verify is card is present on the table (permanent or game zone)
 
         :card_name:
-        :returns:
+        :returns: pile where the card is or else if card is not on table.
 
         """
         pass
