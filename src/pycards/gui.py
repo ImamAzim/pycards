@@ -45,7 +45,7 @@ class TkinterGUI(GUI, tkinter.Tk):
     """tkinter GUI for a pycards game"""
     TABLE_WIDTH_WEIGHT = 30  # relative wieght to menu column
     TABLE_REL_HEIGHT = 3  # unit of screen height
-    _PERMANENT_ZONE_HEIGHT = 1 / 4 # of the screen height
+    _PERMANENT_ZONE_HEIGHT = 1 / 4  # of the screen height
     _TABLE_WIDTH_IN_CARDS = 6
     _IMG_KEY = 'img'
     _IMG_LABEL_KEY = 'img_label'
@@ -373,7 +373,8 @@ class TkinterGUI(GUI, tkinter.Tk):
             self,
             card_name: str,
             img_path: str,
-            pile: Literal[IN_PLAY_PILE_NAME, PERMANENT_PILE_NAME]=IN_PLAY_PILE_NAME,
+            pile: Literal[
+                IN_PLAY_PILE_NAME, PERMANENT_PILE_NAME] = IN_PLAY_PILE_NAME,
             rotated: bool = False):
 
         current_pile = self.is_card_on_table(card_name)
@@ -525,13 +526,13 @@ class TkinterGUI(GUI, tkinter.Tk):
             ):
         self._drawpile['values'] = draw_pile
         if draw_pile:
-            self._top_card_label.img = card.path
             img: ImageFile.ImageFile = Image.open(card.path)
             maxsize = (self._menu_width / 2, self._height)
             img.thumbnail(maxsize)
-            if rotated:
+            if card.rotate:
                 img = img.rotate(180)
-            self._top_card_label['image'] = ImageTk.PhotoImage(img)
+            self._top_card_label.img = ImageTk.PhotoImage(img)
+            self._top_card_label['image'] = self._top_card_label.img
 
     def update_discarded_pile(self, discarded: list[str]):
         self._discardpile['values'] = discarded
