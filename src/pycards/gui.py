@@ -524,6 +524,7 @@ class TkinterGUI(GUI, tkinter.Tk):
             draw_pile: list[str],
             card: BaseCard | None,
             ):
+        self._drawpile.set('')
         self._drawpile['values'] = draw_pile
         if draw_pile:
             img: ImageFile.ImageFile = Image.open(card.path)
