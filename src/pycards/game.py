@@ -11,17 +11,14 @@ from varboxes import VarBox
 
 from pycards.config import DATA_FOLDER
 from pycards.interfaces import BaseCard
+from pycards.interfaces import PERMANENT_PILE_NAME, IN_PLAY_PILE_NAME
+from pycards.interfaces import DRAW_PILE_NAME, DISCARD_PILE_NAME
 
 
 SAVED_GAME_FILE_SUFFIX = 'json'
 BOX_FOLDER = 'box'
 DECK_FOLDER = 'deck'
 TEMP_NAME = 'tmp'
-
-DRAW_PILE_NAME = 'draw'
-IN_PLAY_PILE_NAME = 'in_play'
-DISCARD_PILE_NAME = 'discard'
-PERMANENT_PILE_NAME = 'permanent'
 
 
 class Card(BaseCard):

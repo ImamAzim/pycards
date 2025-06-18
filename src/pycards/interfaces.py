@@ -2,6 +2,12 @@ from abc import ABCMeta, abstractmethod, abstractproperty
 from typing import Literal
 
 
+DRAW_PILE_NAME = 'draw'
+IN_PLAY_PILE_NAME = 'in_play'
+DISCARD_PILE_NAME = 'discard'
+PERMANENT_PILE_NAME = 'permanent'
+
+
 class BaseCard(metaclass=ABCMeta):
 
     """card object for a given orientation"""
@@ -90,7 +96,7 @@ class GUI(metaclass=ABCMeta):
 
     @abstractmethod
     def is_card_on_table(self, card_name) -> Literal[
-            'game_zone', 'permanent'] | bool:
+            IN_PLAY_PILE_NAME, PERMANENT_PILE_NAME] | bool:
         """verify is card is present on the table (permanent or game zone)
 
         :card_name:
@@ -104,7 +110,7 @@ class GUI(metaclass=ABCMeta):
             self,
             card_name: str,
             img_path: str,
-            pile: Literal['game_zone', 'permanent'] = 'game_zone',
+            pile: Literal[IN_PLAY_PILE_NAME, PERMANENT_PILE_NAME] = 'in_play',
             rotated: bool = False):
         """place the card on the table. if card is already present it will only
         move it without updating
@@ -113,7 +119,7 @@ class GUI(metaclass=ABCMeta):
         :card_name: from file name withou recto or verso
         :img_path: path to card image
         :is_locked: for permanent card
-        :pile: one of 'game_zone', 'permanent'
+        :pile: one of 'in_play', 'permanent'
         :rotated: True if you want to rotate by 108 deg
 
         """
