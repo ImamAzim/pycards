@@ -1,5 +1,6 @@
 from pycards.game import Game, GameError, Card
 from pycards.interfaces import GUI, BaseTable
+from pycards.interfaces import IN_PLAY_PILE_NAME, PERMANENT_PILE_NAME
 
 
 class Table(BaseTable):
@@ -40,7 +41,7 @@ class Table(BaseTable):
             self._gui.place_card_on_table(
                     card_name=card.name,
                     img_path=card.path,
-                    pile='game_zone',
+                    pile=IN_PLAY_PILE_NAME,
                     rotated=card.rotate,
                     )
         permanent_cards = self._game.permanent_cards
@@ -49,7 +50,7 @@ class Table(BaseTable):
             self._gui.place_card_on_table(
                     card_name=card.name,
                     img_path=card.path,
-                    pile='permanent',
+                    pile=PERMANENT_PILE_NAME,
                     rotated=card.rotate,
                     )
 
@@ -186,7 +187,7 @@ class Table(BaseTable):
             self._gui.place_card_on_table(
                     card.name,
                     card.path,
-                    'permanent',
+                    PERMANENT_PILE_NAME,
                     )
 
     def unlock_card(self, card_name: str):
@@ -237,7 +238,7 @@ class Table(BaseTable):
             self._gui.place_card_on_table(
                     card.name,
                     card.path,
-                    'game_zone',
+                    IN_PLAY_PILE_NAME,
                     )
 
     def discard(self, card_name: str):
