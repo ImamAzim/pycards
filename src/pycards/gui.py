@@ -319,6 +319,18 @@ class TkinterGUI(GUI, tkinter.Tk):
                 command=lambda: self._table.mark_or_unmark(
                     self._inspected_card.get()),
                 ).grid(row=1, column=3)
+        ttk.Button(
+                buttons_frame,
+                text='top',
+                command=lambda: self._table.put_card_in_draw_pile(
+                    self._inspected_card.get(), True),
+                ).grid(row=0, column=4)
+        ttk.Button(
+                buttons_frame,
+                text='bottom',
+                command=lambda: self._table.put_card_in_draw_pile(
+                    self._inspected_card.get(), False),
+                ).grid(row=1, column=4)
         self._canvas_inspector = canvas
 
     def _create_table_frame(self):
