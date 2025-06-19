@@ -327,6 +327,19 @@ class Table(BaseTable):
             self._game.play_first_card()
         except GameError as e:
             self._gui.showerror(e)
+        else:
+            draw_pile = self._game.draw_pile_cards
+            top_card = self._game.get_draw_pile_top_card()
+            self._gui.update_draw_pile(draw_pile, top_card)
+            discard_pile = self._game.discarded_cards
+            discard_pile = list(discard_pile)
+            self._gui.update_discarded_pile(discard_pile)
+            card = self._game.get_card(card_name)
+            self._gui.place_card_on_table(
+                    card.name,
+                    card.path,
+                    IN_PLAY_PILE_NAME,
+                    )
 
     def shuffle_back(self):
         try:
