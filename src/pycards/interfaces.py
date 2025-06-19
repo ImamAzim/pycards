@@ -292,6 +292,16 @@ class BaseTable(object, metaclass=ABCMeta):
         pass
 
     @abstractmethod
+    def discover_or_forget(self, card_name: str):
+        """call discover or forget, depending of what is relevant
+
+        :card_name:
+        :returns:
+
+        """
+        pass
+
+    @abstractmethod
     def destroy_card(self, card_name: str):
         """remove from box or deck and rm img file
 

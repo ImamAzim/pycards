@@ -273,16 +273,10 @@ class TkinterGUI(GUI, tkinter.Tk):
         buttons_frame.pack()
         ttk.Button(
                 buttons_frame,
-                text='discover',
-                command=lambda: self._table.discover_card(
+                text='discover/forget',
+                command=lambda: self._table.discover_or_forget(
                     self._inspected_card.get()),
                 ).grid(row=0, column=0)
-        ttk.Button(
-                buttons_frame,
-                text='forget',
-                command=lambda: self._table.forget_card(
-                    self._inspected_card.get()),
-                ).grid(row=0, column=1)
         ttk.Button(
                 buttons_frame,
                 text='destroy',

@@ -87,6 +87,12 @@ class Table(BaseTable):
             box_cards_names = self._game.box_card_names
             self._gui.update_box_cards_list(box_cards_names)
 
+    def discover_or_forget(self, card_name):
+        if card_name in self._game.box_card_names:
+            self.discover_card(card_name)
+        else:
+            self.forget_card(card_name)
+
     def discover_card(self, card_name: str):
         try:
             self._game.discover_card(card_name)
