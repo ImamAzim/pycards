@@ -184,7 +184,7 @@ class TkinterGUI(GUI, tkinter.Tk):
         """list of box and deck cards, options with cards
 
         """
-        self._cardlist_frame = ttk.LabelFrame(self, text='cards')
+        self._cardlist_frame = ttk.Frame(self)
 
         box_cards_frame = ttk.LabelFrame(
                 self._cardlist_frame,
@@ -318,6 +318,18 @@ class TkinterGUI(GUI, tkinter.Tk):
                 command=lambda: self._table.unlock_card(
                     self._inspected_card.get()),
                 ).grid(row=1, column=3)
+        ttk.Button(
+                buttons_frame,
+                text='discard',
+                command=lambda: self._table.discard(
+                    self._inspected_card.get()),
+                ).grid(row=2, column=0)
+        # ttk.Button(
+                # buttons_frame,
+                # text='mark',
+                # command=lambda: self._table.mark_card(
+                    # self._inspected_card.get()),
+                # ).grid(row=2, column=1)
         self._canvas_inspector = canvas
 
     def _create_table_frame(self):
