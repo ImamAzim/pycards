@@ -88,6 +88,7 @@ class TkinterGUI(GUI, tkinter.Tk):
         self.update()
         self._table_width = self._canvas_table.winfo_width()
         self._inspector_width = self._canvas_inspector.winfo_width()
+        self.geometry(geometry)
 
     def _place_all_frames(self):
         """position all frames in root window
@@ -97,7 +98,7 @@ class TkinterGUI(GUI, tkinter.Tk):
         self.columnconfigure(1, weight=self.TABLE_WIDTH_WEIGHT)
         # self.rowconfigure(0, weight=1)
         # self.rowconfigure(1, weight=1)
-        self._cardlist_frame.grid(row=0, column=0, sticky=tkinter.EW)
+        self._cardlist_frame.grid(row=0, column=0, sticky=tkinter.NSEW)
         self._inspect_frame.grid(row=1, column=0, sticky=tkinter.NSEW)
         self._permanent_frame.grid(
                 row=0, column=1, sticky=tkinter.NSEW)
@@ -323,7 +324,7 @@ class TkinterGUI(GUI, tkinter.Tk):
                 text='discard',
                 command=lambda: self._table.discard(
                     self._inspected_card.get()),
-                ).grid(row=2, column=0)
+                ).grid(row=0, column=4)
         # ttk.Button(
                 # buttons_frame,
                 # text='mark',
