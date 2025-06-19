@@ -313,12 +313,12 @@ class TkinterGUI(GUI, tkinter.Tk):
                 command=lambda: self._table.discard(
                     self._inspected_card.get()),
                 ).grid(row=1, column=2)
-        # ttk.Button(
-                # buttons_frame,
-                # text='mark',
-                # command=lambda: self._table.mark_card(
-                    # self._inspected_card.get()),
-                # ).grid(row=2, column=1)
+        ttk.Button(
+                buttons_frame,
+                text='mark',
+                command=lambda: self._table.mark_card(
+                    self._inspected_card.get()),
+                ).grid(row=2, column=1)
         self._canvas_inspector = canvas
 
     def _create_table_frame(self):

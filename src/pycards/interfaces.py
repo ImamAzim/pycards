@@ -388,6 +388,16 @@ class BaseTable(object, metaclass=ABCMeta):
         pass
 
     @abstractmethod
+    def mark_or_unmark(self, card_name: str):
+        """ mark or unmark, depending of current status
+
+        :card_name: identify card
+        :returns:
+
+        """
+        pass
+
+    @abstractmethod
     def mark_card(self, card_name: str):
         """ mark card so that it will be visible in the draw pile
 

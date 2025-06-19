@@ -268,6 +268,10 @@ class Table(BaseTable):
             if self._gui.is_card_on_table(card_name):
                 self._gui.remove_card(card_name)
 
+    def mark_or_unmark(self, card_name):
+        if 
+        pass
+
     def mark_card(self, card_name: str):
         try:
             self._game.set_always_visible(card_name)

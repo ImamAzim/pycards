@@ -540,6 +540,20 @@ class Game(object):
         else:
             raise GameError('card not found')
 
+    def is_card_marked(self, card_name) -> bool:
+        """determineif card is marked as always visible or not
+
+        :card_name:
+        :returns: True if marked always visible
+
+        """
+        cards = self._check_card_in_game(card_name)
+        if cards:
+            card = cards.get(card_name)
+            return card.get(self._ALWAYS_VISIBLE)
+        else:
+            raise GameError('card not found')
+
     def _remove_from_draw(self, card_name):
         """ to be called when card is removed from draw pile
 
