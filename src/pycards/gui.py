@@ -290,6 +290,12 @@ class TkinterGUI(GUI, tkinter.Tk):
                 ).grid(row=0, column=2)
         ttk.Button(
                 buttons_frame,
+                text='play',
+                command=lambda: self._table.play_card(
+                    self._inspected_card.get()),
+                ).grid(row=0, column=3)
+        ttk.Button(
+                buttons_frame,
                 text='rotate',
                 command=lambda: self._table.rotate_card(
                     self._inspected_card.get()),
