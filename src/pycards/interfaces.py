@@ -348,6 +348,16 @@ class BaseTable(object, metaclass=ABCMeta):
         pass
 
     @abstractmethod
+    def lock_unlock(self, card_name: str):
+        """lock or unlock, depending of what is relevant
+
+        :card_name: identify card
+        :returns:
+
+        """
+        pass
+
+    @abstractmethod
     def unlock_card(self, card_name: str):
         """unlock a card, make it permanent. Will not be reshuffled in deck
 

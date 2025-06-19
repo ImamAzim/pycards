@@ -177,6 +177,12 @@ class Table(BaseTable):
                 self._gui.remove_card(card_name)
             self._gui.clean_inspect_area()
 
+    def lock_unlock(self, card_name):
+        if card_name in self._game.permanent_cards:
+            self.unlock_card(card_name)
+        else:
+            self.lock_card(card_name)
+
     def lock_card(self, card_name: str):
         try:
             self._game.lock_card(card_name)

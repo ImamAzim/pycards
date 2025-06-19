@@ -282,43 +282,37 @@ class TkinterGUI(GUI, tkinter.Tk):
                 text='destroy',
                 command=lambda: self._table.destroy_card(
                     self._inspected_card.get()),
-                ).grid(row=0, column=2)
-        ttk.Button(
-                buttons_frame,
-                text='play',
-                command=lambda: self._table.play_card(
-                    self._inspected_card.get()),
-                ).grid(row=0, column=3)
-        ttk.Button(
-                buttons_frame,
-                text='rotate',
-                command=lambda: self._table.rotate_card(
-                    self._inspected_card.get()),
-                ).grid(row=1, column=0)
+                ).grid(row=0, column=1)
         ttk.Button(
                 buttons_frame,
                 text='flip',
                 command=lambda: self._table.flip(
                     self._inspected_card.get()),
+                ).grid(row=0, column=2)
+        ttk.Button(
+                buttons_frame,
+                text='rotate',
+                command=lambda: self._table.rotate_card(
+                    self._inspected_card.get()),
+                ).grid(row=0, column=3)
+        ttk.Button(
+                buttons_frame,
+                text='lock/unlock',
+                command=lambda: self._table.lock_unlock(
+                    self._inspected_card.get()),
+                ).grid(row=1, column=0)
+        ttk.Button(
+                buttons_frame,
+                text='play',
+                command=lambda: self._table.play_card(
+                    self._inspected_card.get()),
                 ).grid(row=1, column=1)
-        ttk.Button(
-                buttons_frame,
-                text='lock',
-                command=lambda: self._table.lock_card(
-                    self._inspected_card.get()),
-                ).grid(row=1, column=2)
-        ttk.Button(
-                buttons_frame,
-                text='unlock',
-                command=lambda: self._table.unlock_card(
-                    self._inspected_card.get()),
-                ).grid(row=1, column=3)
         ttk.Button(
                 buttons_frame,
                 text='discard',
                 command=lambda: self._table.discard(
                     self._inspected_card.get()),
-                ).grid(row=0, column=4)
+                ).grid(row=1, column=2)
         # ttk.Button(
                 # buttons_frame,
                 # text='mark',
