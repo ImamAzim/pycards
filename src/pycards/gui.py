@@ -315,10 +315,10 @@ class TkinterGUI(GUI, tkinter.Tk):
                 ).grid(row=1, column=2)
         ttk.Button(
                 buttons_frame,
-                text='mark',
-                command=lambda: self._table.mark_card(
+                text='mark/unmark',
+                command=lambda: self._table.mark_or_unmark(
                     self._inspected_card.get()),
-                ).grid(row=2, column=1)
+                ).grid(row=1, column=3)
         self._canvas_inspector = canvas
 
     def _create_table_frame(self):

@@ -269,8 +269,15 @@ class Table(BaseTable):
                 self._gui.remove_card(card_name)
 
     def mark_or_unmark(self, card_name):
-        if 
-        pass
+        try:
+            is_card_marked = self._game.is_card_marked(card_name)
+        except GameError as e:
+            self._gui.showerror(e)
+        else:
+            if not is_card_marked:
+                self.mark_card(card_name)
+            else:
+                self.unmark_card(card_name)
 
     def mark_card(self, card_name: str):
         try:
