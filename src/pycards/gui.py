@@ -43,7 +43,7 @@ class LoadPrompt(simpledialog.Dialog):
 class TkinterGUI(GUI, tkinter.Tk):
 
     """tkinter GUI for a pycards game"""
-    TABLE_WIDTH_WEIGHT = 30  # relative wieght to menu column
+    TABLE_WIDTH_WEIGHT = 4  # relative wieght to menu column
     TABLE_REL_HEIGHT = 3  # unit of screen height
     _PERMANENT_ZONE_HEIGHT = 1 / 4  # of the screen height
     _TABLE_WIDTH_IN_CARDS = 6
@@ -66,16 +66,16 @@ class TkinterGUI(GUI, tkinter.Tk):
 
         width = self.winfo_screenwidth()
         height = self.winfo_screenheight()
-        self._table_width = int(
-                width * self.TABLE_WIDTH_WEIGHT / (self.TABLE_WIDTH_WEIGHT + 1)
-                )
-        self._table_height = self.TABLE_REL_HEIGHT * height
-        self._menu_width = width / (self.TABLE_WIDTH_WEIGHT + 1)
         geometry = f'{width}x{height}'
         self.geometry(geometry)
-        self._width = width
-        self._height = height
+        self._width = width * 0.93
+        self._height = height * 0.8
         self._inspector_height = self._height / 2
+        self._table_width = int(
+                self._width * self.TABLE_WIDTH_WEIGHT / (self.TABLE_WIDTH_WEIGHT + 1)
+                )
+        self._table_height = self.TABLE_REL_HEIGHT * self._height
+        self._menu_width = self._width / (self.TABLE_WIDTH_WEIGHT + 1)
 
         self._create_menu()
         self._create_cardlist_frame()
@@ -94,8 +94,8 @@ class TkinterGUI(GUI, tkinter.Tk):
         """position all frames in root window
 
         """
-        self.columnconfigure(0, weight=1)
-        self.columnconfigure(1, weight=self.TABLE_WIDTH_WEIGHT)
+        # self.columnconfigure(0, weight=1)
+        # self.columnconfigure(1, weight=self.TABLE_WIDTH_WEIGHT)
         # self.rowconfigure(0, weight=1)
         # self.rowconfigure(1, weight=1)
         self._cardlist_frame.grid(row=0, column=0, sticky=tkinter.NSEW)
@@ -294,43 +294,43 @@ class TkinterGUI(GUI, tkinter.Tk):
                 text='rotate',
                 command=lambda: self._table.rotate_card(
                     self._inspected_card.get()),
-                ).grid(row=0, column=3)
+                ).grid(row=1, column=0)
         ttk.Button(
                 buttons_frame,
                 text='lock/unlock',
                 command=lambda: self._table.lock_unlock(
                     self._inspected_card.get()),
-                ).grid(row=1, column=0)
+                ).grid(row=1, column=1)
         ttk.Button(
                 buttons_frame,
                 text='play',
                 command=lambda: self._table.play_card(
                     self._inspected_card.get()),
-                ).grid(row=1, column=1)
+                ).grid(row=1, column=2)
         ttk.Button(
                 buttons_frame,
                 text='discard',
                 command=lambda: self._table.discard(
                     self._inspected_card.get()),
-                ).grid(row=1, column=2)
+                ).grid(row=2, column=0)
         ttk.Button(
                 buttons_frame,
                 text='mark/unmark',
                 command=lambda: self._table.mark_or_unmark(
                     self._inspected_card.get()),
-                ).grid(row=1, column=3)
+                ).grid(row=2, column=1)
         ttk.Button(
                 buttons_frame,
                 text='top',
                 command=lambda: self._table.put_card_in_draw_pile(
                     self._inspected_card.get(), True),
-                ).grid(row=0, column=4)
+                ).grid(row=2, column=2)
         ttk.Button(
                 buttons_frame,
                 text='bottom',
                 command=lambda: self._table.put_card_in_draw_pile(
                     self._inspected_card.get(), False),
-                ).grid(row=1, column=4)
+                ).grid(row=3, column=0)
         self._canvas_inspector = canvas
 
     def _create_table_frame(self):
@@ -342,6 +342,7 @@ class TkinterGUI(GUI, tkinter.Tk):
                 self._table_frame,
                 bg='green',
                 height=self._height*(1-self._PERMANENT_ZONE_HEIGHT),
+                width=self._table_width,
                 # scrollregion=(0, 0, self._width, 3 * self._height),
                 )
         vbar = ttk.Scrollbar(self._table_frame, orient=tkinter.VERTICAL)
