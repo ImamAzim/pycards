@@ -429,6 +429,7 @@ class Game(object):
             obf = self.draw_pile_cards[-1]
             card_name = self.get_real_card_name(obf)
             self.play_card(card_name)
+            return card_name
         else:
             raise GameError('draw pile is empty')
 

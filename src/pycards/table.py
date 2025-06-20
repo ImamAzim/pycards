@@ -324,7 +324,7 @@ class Table(BaseTable):
 
     def draw_card(self):
         try:
-            self._game.play_first_card()
+            card_name = self._game.play_first_card()
         except GameError as e:
             self._gui.showerror(e)
         else:
@@ -334,9 +334,10 @@ class Table(BaseTable):
             discard_pile = self._game.discarded_cards
             discard_pile = list(discard_pile)
             self._gui.update_discarded_pile(discard_pile)
+            card = self._game.get_card(card_name)
             self._gui.place_card_on_table(
-                    top_card.name,
-                    top_card.path,
+                    card.name,
+                    card.path,
                     IN_PLAY_PILE_NAME,
                     )
 
