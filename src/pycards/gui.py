@@ -553,6 +553,10 @@ class TkinterGUI(GUI, tkinter.Tk):
                 img = img.rotate(180)
             self._top_card_label.img = ImageTk.PhotoImage(img)
             self._top_card_label['image'] = self._top_card_label.img
+        else:
+            self._top_card_label.img = None
+            self._top_card_label['image'] = None
+            self._top_card_label.update()
 
     def update_discarded_pile(self, discarded: list[str]):
         self._discardpile.set('')
