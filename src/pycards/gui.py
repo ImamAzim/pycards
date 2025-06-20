@@ -544,7 +544,7 @@ class TkinterGUI(GUI, tkinter.Tk):
             card: BaseCard | None,
             ):
         self._drawpile.set('')
-        self._drawpile['values'] = draw_pile
+        self._drawpile['values'] = draw_pile[-1::-1]
         if draw_pile:
             img: ImageFile.ImageFile = Image.open(card.path)
             maxsize = (self._menu_width / 2, self._height)
