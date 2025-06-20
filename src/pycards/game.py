@@ -495,7 +495,7 @@ class Game(object):
             card = self._deck.get(card_name)
             if not card.get(self._ALWAYS_VISIBLE):
                 obfuscated = len(self._draw_cards_obfuscate_name)
-                while obfuscated in self._draw_cards_real_name:
+                while str(obfuscated) in self._draw_cards_real_name:
                     obfuscated += 1
                 obfuscated = str(obfuscated)
             else:
