@@ -43,10 +43,16 @@ class LoadPrompt(simpledialog.Dialog):
 class TkinterGUI(GUI, tkinter.Tk):
 
     """tkinter GUI for a pycards game"""
-    TABLE_WIDTH_WEIGHT = 4  # relative wieght to menu column
-    TABLE_REL_HEIGHT = 3  # unit of screen height
-    _PERMANENT_ZONE_HEIGHT = 1 / 4  # of the screen height
-    _TABLE_WIDTH_IN_CARDS = 6
+    # TABLE_WIDTH_WEIGHT = 4  # relative wieght to menu column
+    # TABLE_REL_HEIGHT = 3  # unit of screen height
+    # _PERMANENT_ZONE_HEIGHT = 1 / 4  # of the screen height
+    # _TABLE_WIDTH_IN_CARDS = 6
+    _NCARDS_PER_TABLE = 6
+    _TABLE_WIDTH = 4 / 5
+    _TABLE_HEIGHT = 3 / 4
+    _INSPECTOR_HEIGHT = 1 / 3
+    _TOPCARD_HEIGHT = (1 - _INSPECTOR_HEIGHT) / 4
+    _TOPCARD_WIDTH = (1 - _TABLE_WIDTH) / 2
     _IMG_KEY = 'img'
     _IMG_LABEL_KEY = 'img_label'
     _PILE_KEY = 'pile'
@@ -59,7 +65,7 @@ class TkinterGUI(GUI, tkinter.Tk):
         self._inspected_card = tkinter.StringVar(self)
         self._inspected_card.set(None)
         self._cards_on_table: dict[str, dict] = dict()
-        self._table_frame: tkinter.Frame
+        self._gamezone_frame: tkinter.Frame
         self._permanent_frame: tkinter.Frame
         self._cardlist_frame: tkinter.Frame
         self._inspect_frame: tkinter.Frame
@@ -68,42 +74,37 @@ class TkinterGUI(GUI, tkinter.Tk):
         height = self.winfo_screenheight()
         geometry = f'{width}x{height}'
         self.geometry(geometry)
-        self._width = width * 0.93
-        self._height = height * 0.8
-        self._inspector_height = self._height / 2
-        self._table_width = int(
-                self._width * self.TABLE_WIDTH_WEIGHT / (self.TABLE_WIDTH_WEIGHT + 1)
-                )
-        self._table_height = self.TABLE_REL_HEIGHT * self._height
-        self._menu_width = self._width / (self.TABLE_WIDTH_WEIGHT + 1)
+        self._width = width * 0.93  # available width
+        self._height = height * 0.8  # available height
+
+        self._gamezone_height = self._height * self._TABLE_HEIGHT
+        self._gamezone_width = self._width * self._TABLE_WIDTH
+        self._inspector_height = self._height * self._INSPECTOR_HEIGHT
+        self._inspector_width = self._width * (1-self._TABLE_WIDTH)
 
         self._create_menu()
         self._create_cardlist_frame()
         self._create_inspect_frame()
-        self._create_table_frame()
+        self._create_gamezone_frame()
         self._create_permanent_frame()
 
         self._place_all_frames()
 
         self.update()
-        self._table_width = self._canvas_table.winfo_width()
-        self._inspector_width = self._canvas_inspector.winfo_width()
-        self.geometry(geometry)
+        # self._table_width = self._canvas_table.winfo_width()
+        # self._inspector_width = self._canvas_inspector.winfo_width()
+        # self.geometry(geometry)
 
     def _place_all_frames(self):
         """position all frames in root window
 
         """
-        # self.columnconfigure(0, weight=1)
-        # self.columnconfigure(1, weight=self.TABLE_WIDTH_WEIGHT)
-        # self.rowconfigure(0, weight=1)
-        # self.rowconfigure(1, weight=1)
-        self._cardlist_frame.grid(row=0, column=0, sticky=tkinter.NSEW)
-        self._inspect_frame.grid(row=1, column=0, sticky=tkinter.NSEW)
+        self._cardlist_frame.grid(row=0, column=0)
+        self._inspect_frame.grid(row=1, column=0)
         self._permanent_frame.grid(
-                row=0, column=1, sticky=tkinter.NSEW)
-        self._table_frame.grid(
-                row=1, column=1, sticky=tkinter.NSEW)
+                row=0, column=1)
+        self._gamezone_frame.grid(
+                row=1, column=1)
 
     def _create_menu(self):
         """put option in menu
@@ -191,15 +192,13 @@ class TkinterGUI(GUI, tkinter.Tk):
                 self._cardlist_frame,
                 text='box cards',
                 )
-        box_cards_frame.pack(fill=tkinter.X)
+        box_cards_frame.pack()
         self._boxcards_list = ttk.Combobox(
                 box_cards_frame,
                 state='readonly'
                 )
         self._boxcards_list.pack(
                 side=tkinter.LEFT,
-                expand=True,
-                fill=tkinter.X,
                 )
         ttk.Button(
                 box_cards_frame,
@@ -224,13 +223,13 @@ class TkinterGUI(GUI, tkinter.Tk):
                 drawpile_frame,
                 text='draw...',
                 command=lambda: self._table.draw_card(),
-                ).grid(column=0, row=2, sticky=tkinter.EW)
+                ).grid(column=0, row=2)
         ttk.Button(
                 drawpile_frame,
                 text='inspect...',
                 command=lambda: self._table.inspect_obfuscated_card(
                     self._drawpile.get()),
-                ).grid(column=0, row=1, stick=tkinter.EW)
+                ).grid(column=0, row=1)
         self._top_card_label = tkinter.Label(
                 drawpile_frame,
                 )
@@ -250,8 +249,7 @@ class TkinterGUI(GUI, tkinter.Tk):
                 lambda event: self._table.inspect_card(
                     self._discardpile.get()),
                 )
-        self._discardpile.pack(
-                expand=True, fill=tkinter.X)
+        self._discardpile.pack()
 
     def _call_discover(self):
         card_name = self._inspected_card.get()
@@ -265,10 +263,11 @@ class TkinterGUI(GUI, tkinter.Tk):
         canvas = tkinter.Canvas(
                 self._inspect_frame,
                 bg='green',
-                width=self._menu_width,
+                width=self._inspector_width,
                 height=self._inspector_height,
                 )
-        canvas.pack(expand=False, fill=tkinter.X)
+        canvas.pack()
+        self._canvas_inspector = canvas
         buttons_frame = ttk.Frame(self._inspect_frame)
         buttons_frame.pack()
         ttk.Button(
@@ -331,44 +330,45 @@ class TkinterGUI(GUI, tkinter.Tk):
                 command=lambda: self._table.put_card_in_draw_pile(
                     self._inspected_card.get(), False),
                 ).grid(row=3, column=0)
-        self._canvas_inspector = canvas
 
-    def _create_table_frame(self):
-        """ prepare table where cards will be put
+    def _create_gamezone_frame(self):
+        """ prepare zone where cards will be in play
 
         """
-        self._table_frame = ttk.LabelFrame(self, text='game zone')
+        self._gamezone_frame = ttk.LabelFrame(self, text='game zone')
         canvas = tkinter.Canvas(
-                self._table_frame,
+                self._gamezone_frame,
                 bg='green',
-                height=self._height*(1-self._PERMANENT_ZONE_HEIGHT),
-                width=self._table_width,
+                height=self._gamezone_height,
+                width=self._gamezone_width,
                 # scrollregion=(0, 0, self._width, 3 * self._height),
                 )
-        vbar = ttk.Scrollbar(self._table_frame, orient=tkinter.VERTICAL)
+        vbar = ttk.Scrollbar(self._gamezone_frame, orient=tkinter.VERTICAL)
         vbar.pack(side=tkinter.RIGHT, fill=tkinter.Y)
         vbar.config(command=canvas.yview)
         canvas.config(yscrollcommand=vbar.set)
-        canvas.pack(side=tkinter.LEFT, expand=True, fill=tkinter.X)
-        self._canvas_table = canvas
+        canvas.pack(side=tkinter.LEFT)
+        self._canvas_gamezone = canvas
 
     def _create_permanent_frame(self):
         """prepare canvas where permanent cards are put
-        :returns: TODO
 
         """
         self._permanent_frame = ttk.LabelFrame(self, text='permanent cards')
+        width = self._gamezone_width
+        height = self._height - self._gamezone_height
         canvas = tkinter.Canvas(
                 self._permanent_frame,
                 bg='blue',
-                height=self._height*self._PERMANENT_ZONE_HEIGHT,
-                scrollregion=(0, 0, self._width, self._height),
+                height=height,
+                width=width,
+                # scrollregion=(0, 0, self._width, self._height),
                 )
         vbar = ttk.Scrollbar(self._permanent_frame, orient=tkinter.VERTICAL)
         vbar.pack(side=tkinter.RIGHT, fill=tkinter.Y)
         vbar.config(command=canvas.yview)
         canvas.config(yscrollcommand=vbar.set)
-        canvas.pack(side=tkinter.LEFT, expand=True, fill=tkinter.X)
+        canvas.pack(side=tkinter.LEFT)
         self._canvas_permanent = canvas
 
     def showerror(self, msg: str):
@@ -405,13 +405,13 @@ class TkinterGUI(GUI, tkinter.Tk):
                 self.remove_card(card_name)
 
         if pile == IN_PLAY_PILE_NAME:
-            canvas = self._canvas_table
+            canvas = self._canvas_gamezone
         elif pile == PERMANENT_PILE_NAME:
             canvas = self._canvas_permanent
         else:
             raise GUIError('pile arg not known')
 
-        card_width = self._table_width / self._TABLE_WIDTH_IN_CARDS
+        card_width = self._gamezone_width / self._NCARDS_PER_TABLE
         y = 0
         x = 0
 
@@ -420,7 +420,7 @@ class TkinterGUI(GUI, tkinter.Tk):
         placed_card[self._PILE_KEY] = pile
 
         img: ImageFile.ImageFile = Image.open(img_path)
-        maxsize = (card_width, self._table_height)
+        maxsize = (card_width, self._gamezone_height)
         img.thumbnail(maxsize)
         if rotated:
             img = img.rotate(180)
@@ -501,11 +501,11 @@ class TkinterGUI(GUI, tkinter.Tk):
 
     def update_title(
             self, name: str):
-        self._table_frame['text'] = f'current game: {name}'
+        self._gamezone_frame['text'] = f'current game: {name}'
 
     def clean_table(self):
         self.clean_inspect_area()
-        self._canvas_table.delete(tkinter.ALL)
+        self._canvas_gamezone.delete(tkinter.ALL)
         self._cards_on_table = dict()
 
     def update_card_image(
@@ -517,7 +517,7 @@ class TkinterGUI(GUI, tkinter.Tk):
         if not card:
             raise GUIError('card is not on table')
         img: ImageFile.ImageFile = Image.open(img_path)
-        card_width = self._table_width / self._TABLE_WIDTH_IN_CARDS
+        card_width = self._table_width / self._NCARDS_PER_TABLE
         maxsize = (card_width, self._table_height)
         img.thumbnail(maxsize)
         if rotated:
@@ -548,7 +548,9 @@ class TkinterGUI(GUI, tkinter.Tk):
         self._drawpile['values'] = draw_pile[-1::-1]
         if draw_pile:
             img: ImageFile.ImageFile = Image.open(card.path)
-            maxsize = (self._menu_width / 2, self._height)
+            width = self._width * self._TOPCARD_WIDTH
+            height = self._height * self._TOPCARD_HEIGHT
+            maxsize = (width, height)
             img.thumbnail(maxsize)
             if card.rotate:
                 img = img.rotate(180)
