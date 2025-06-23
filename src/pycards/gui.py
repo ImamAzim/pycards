@@ -82,6 +82,11 @@ class TkinterGUI(GUI, tkinter.Tk):
         self._inspector_height = self._height * self._INSPECTOR_HEIGHT
         self._inspector_width = self._width * (1-self._TABLE_WIDTH)
 
+        self._left_pannel = ttk.Frame(self)
+        self._right_pannel = ttk.Frame(self)
+        self._left_pannel.pack(side=tkinter.LEFT)
+        self._right_pannel.pack(side=tkinter.RIGHT)
+
         self._create_menu()
         self._create_cardlist_frame()
         self._create_inspect_frame()
@@ -99,12 +104,10 @@ class TkinterGUI(GUI, tkinter.Tk):
         """position all frames in root window
 
         """
-        self._cardlist_frame.grid(row=0, column=0)
-        self._inspect_frame.grid(row=1, column=0)
-        self._permanent_frame.grid(
-                row=0, column=1)
-        self._gamezone_frame.grid(
-                row=1, column=1)
+        self._cardlist_frame.pack()
+        self._inspect_frame.pack()
+        self._permanent_frame.pack()
+        self._gamezone_frame.pack()
 
     def _create_menu(self):
         """put option in menu
@@ -186,7 +189,7 @@ class TkinterGUI(GUI, tkinter.Tk):
         """list of box and deck cards, options with cards
 
         """
-        self._cardlist_frame = ttk.Frame(self)
+        self._cardlist_frame = ttk.Frame(self._left_pannel)
 
         box_cards_frame = ttk.LabelFrame(
                 self._cardlist_frame,
@@ -259,7 +262,9 @@ class TkinterGUI(GUI, tkinter.Tk):
         """canvas and options
 
         """
-        self._inspect_frame = ttk.LabelFrame(self, text='inspector')
+        self._inspect_frame = ttk.LabelFrame(
+                self._left_pannel,
+                text='inspector')
         canvas = tkinter.Canvas(
                 self._inspect_frame,
                 bg='green',
@@ -335,7 +340,9 @@ class TkinterGUI(GUI, tkinter.Tk):
         """ prepare zone where cards will be in play
 
         """
-        self._gamezone_frame = ttk.LabelFrame(self, text='game zone')
+        self._gamezone_frame = ttk.LabelFrame(
+                self._right_pannel,
+                text='game zone')
         canvas = tkinter.Canvas(
                 self._gamezone_frame,
                 bg='green',
@@ -354,7 +361,9 @@ class TkinterGUI(GUI, tkinter.Tk):
         """prepare canvas where permanent cards are put
 
         """
-        self._permanent_frame = ttk.LabelFrame(self, text='permanent cards')
+        self._permanent_frame = ttk.LabelFrame(
+                self._right_pannel,
+                text='permanent cards')
         width = self._gamezone_width
         height = self._height - self._gamezone_height
         canvas = tkinter.Canvas(
