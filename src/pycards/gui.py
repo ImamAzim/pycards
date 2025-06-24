@@ -273,7 +273,7 @@ class TkinterGUI(GUI, tkinter.Tk):
         buttons_frame.pack()
         self._discover_forget_button = ttk.Button(
                 buttons_frame,
-                text='discover/forget',
+                text='discover',
                 command=lambda: self._table.discover_or_forget(
                     self._inspected_card.get()),
                 )
@@ -298,7 +298,7 @@ class TkinterGUI(GUI, tkinter.Tk):
                 ).grid(row=1, column=0)
         self._lock_unlock_button = ttk.Button(
                 buttons_frame,
-                text='lock/unlock',
+                text='lock',
                 command=lambda: self._table.lock_unlock(
                     self._inspected_card.get()),
                 )
@@ -317,7 +317,7 @@ class TkinterGUI(GUI, tkinter.Tk):
                 ).grid(row=2, column=0)
         self._mark_unmark_button = ttk.Button(
                 buttons_frame,
-                text='mark/unmark',
+                text='mark',
                 command=lambda: self._table.mark_or_unmark(
                     self._inspected_card.get()),
                 )
@@ -466,6 +466,9 @@ class TkinterGUI(GUI, tkinter.Tk):
     def inspect_card(self,
                      card_name: str,
                      img_path: str,
+                     to_discover: bool,
+                     to_mark: bool,
+                     to_lock: bool,
                      rotated: bool = False,):
 
         self._inspected_card.set(card_name)
@@ -479,6 +482,13 @@ class TkinterGUI(GUI, tkinter.Tk):
             img = img.rotate(180)
         label.img = ImageTk.PhotoImage(img)
         label['image'] = label.img
+
+        text = 'discover' if to_discover else 'forget'
+        self._discover_forget_button['text'] = text
+        text = 'mark' if to_mark else 'unmark'
+        self._mark_unmark_button['text'] = text
+        text = 'lock' if to_lock else 'unlock'
+        self._lock_unlock_button['text'] = text
 
     def clean_inspect_area(self):
         self._inspected_card.set(None)
