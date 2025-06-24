@@ -494,6 +494,7 @@ class TkinterGUI(GUI, tkinter.Tk):
         self._inspected_card.set(None)
         self._inspect_frame['text'] = 'inspect:'
         self._inspected_card_label['image'] = None
+        self._inspected_card_label.img = None
         self._inspect_frame.update()
 
     def is_card_on_table(self, card_name: str) -> bool:
