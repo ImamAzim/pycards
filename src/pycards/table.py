@@ -104,6 +104,18 @@ class Table(BaseTable):
             discarded = self._game.discarded_cards
             discarded = list(discarded)
             self._gui.update_discarded_pile(discarded)
+            in_box = card_name in self._game.box_card_names
+            not_marked = not self._game.is_card_marked(card_name)
+            not_permanent = card_name not in self._game.permanent_cards
+            card = self._game.get_card(card_name)
+            self._gui.inspect_card(
+                    card_name,
+                    card.path,
+                    in_box,
+                    not_marked,
+                    not_permanent,
+                    card.rotate,
+                    )
 
     def destroy_card(self, card_name: str):
         try:
