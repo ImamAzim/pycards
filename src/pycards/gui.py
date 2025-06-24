@@ -256,7 +256,7 @@ class TkinterGUI(GUI, tkinter.Tk):
                 lambda event: self._table.inspect_card(
                     self._discardpile.get()),
                 )
-        self._discardpile.pack()
+        self._discardpile.pack(fill=tkinter.X)
 
     def _call_discover(self):
         card_name = self._inspected_card.get()
