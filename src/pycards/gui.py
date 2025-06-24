@@ -265,14 +265,6 @@ class TkinterGUI(GUI, tkinter.Tk):
         self._inspect_frame = ttk.LabelFrame(
                 self._left_pannel,
                 text='inspector')
-
-        # canvas = tkinter.Canvas(
-                # self._inspect_frame,
-                # bg='green',
-                # width=self._inspector_width,
-                # height=self._inspector_height,
-                # )
-        # canvas.pack()
         self._inspected_card_label = ttk.Label(
                 self._inspect_frame,
                 )
@@ -516,8 +508,8 @@ class TkinterGUI(GUI, tkinter.Tk):
         if not card:
             raise GUIError('card is not on table')
         img: ImageFile.ImageFile = Image.open(img_path)
-        card_width = self._table_width / self._NCARDS_PER_TABLE
-        maxsize = (card_width, self._table_height)
+        card_width = self._gamezone_width / self._NCARDS_PER_TABLE
+        maxsize = (card_width, self._gamezone_height)
         img.thumbnail(maxsize)
         if rotated:
             img = img.rotate(180)
