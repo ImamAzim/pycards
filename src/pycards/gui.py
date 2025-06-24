@@ -51,7 +51,7 @@ class TkinterGUI(GUI, tkinter.Tk):
     _TABLE_WIDTH = 4 / 5
     _TABLE_HEIGHT = 3 / 4
     _INSPECTOR_HEIGHT = 1 / 2
-    _TOPCARD_HEIGHT = (1 - _INSPECTOR_HEIGHT) / 4
+    _TOPCARD_HEIGHT = (1 - _INSPECTOR_HEIGHT) / 2
     _TOPCARD_WIDTH = (1 - _TABLE_WIDTH) / 2
     _IMG_KEY = 'img'
     _IMG_LABEL_KEY = 'img_label'
