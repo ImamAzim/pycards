@@ -467,7 +467,6 @@ class TkinterGUI(GUI, tkinter.Tk):
     def inspect_card(self,
                      card_name: str,
                      img_path: str,
-                     is_locked: bool,
                      rotated: bool = False,):
 
         self._inspected_card.set(card_name)
@@ -487,14 +486,6 @@ class TkinterGUI(GUI, tkinter.Tk):
                 x, y,
                 image=canvas.img,
                 )
-        if is_locked:
-            w, h = img.size
-            canvas.create_rectangle(
-                    (x-w/2, y-h/2),
-                    (x+w/2, y+h/2),
-                    outline='blue',
-                    width=2,
-                    )
 
     def clean_inspect_area(self):
         self._inspected_card.set(None)
