@@ -138,7 +138,7 @@ class Table(BaseTable):
                         )
             in_box = card_name in self._game.box_card_names
             not_marked = not self._game.is_card_marked(card_name)
-            not_permanent = card_name in self._game.permanent_cards
+            not_permanent = card_name not in self._game.permanent_cards
             self._gui.inspect_card(
                     card_name,
                     card.path,
@@ -163,7 +163,7 @@ class Table(BaseTable):
                         )
             in_box = card_name in self._game.box_card_names
             not_marked = not self._game.is_card_marked(card_name)
-            not_permanent = card_name in self._game.permanent_cards
+            not_permanent = card_name not in self._game.permanent_cards
             self._gui.inspect_card(
                     card_name,
                     card.path,
@@ -235,7 +235,7 @@ class Table(BaseTable):
             else:
                 in_box = card_name in self._game.box_card_names
                 not_marked = not self._game.is_card_marked(card_name)
-                not_permanent = card_name in self._game.permanent_cards
+                not_permanent = card_name not in self._game.permanent_cards
                 self._gui.inspect_card(
                         card_name,
                         card.path,
@@ -307,6 +307,18 @@ class Table(BaseTable):
             draw_pile = self._game.draw_pile_cards
             top_card = self._game.get_draw_pile_top_card()
             self._gui.update_draw_pile(draw_pile, top_card)
+            in_box = card_name in self._game.box_card_names
+            not_marked = not self._game.is_card_marked(card_name)
+            not_permanent = card_name not in self._game.permanent_cards
+            card = self._game.get_card(card_name)
+            self._gui.inspect_card(
+                    card_name,
+                    card.path,
+                    in_box,
+                    not_marked,
+                    not_permanent,
+                    card.rotate,
+                    )
 
     def unmark_card(self, card_name: str):
         try:
@@ -317,6 +329,18 @@ class Table(BaseTable):
             draw_pile = self._game.draw_pile_cards
             top_card = self._game.get_draw_pile_top_card()
             self._gui.update_draw_pile(draw_pile, top_card)
+            in_box = card_name in self._game.box_card_names
+            not_marked = not self._game.is_card_marked(card_name)
+            not_permanent = card_name not in self._game.permanent_cards
+            card = self._game.get_card(card_name)
+            self._gui.inspect_card(
+                    card_name,
+                    card.path,
+                    in_box,
+                    not_marked,
+                    not_permanent,
+                    card.rotate,
+                    )
 
     def put_card_in_draw_pile(self, card_name: str, top: bool):
         try:
