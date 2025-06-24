@@ -265,14 +265,18 @@ class TkinterGUI(GUI, tkinter.Tk):
         self._inspect_frame = ttk.LabelFrame(
                 self._left_pannel,
                 text='inspector')
-        canvas = tkinter.Canvas(
+
+        # canvas = tkinter.Canvas(
+                # self._inspect_frame,
+                # bg='green',
+                # width=self._inspector_width,
+                # height=self._inspector_height,
+                # )
+        # canvas.pack()
+        self._inspected_card_label = ttk.Label(
                 self._inspect_frame,
-                bg='green',
-                width=self._inspector_width,
-                height=self._inspector_height,
                 )
-        canvas.pack()
-        self._canvas_inspector = canvas
+        self._inspected_card_label.pack()
         buttons_frame = ttk.Frame(self._inspect_frame)
         buttons_frame.pack()
         ttk.Button(
@@ -472,25 +476,20 @@ class TkinterGUI(GUI, tkinter.Tk):
         self._inspected_card.set(card_name)
         self._inspect_frame['text'] = f'inspect: {card_name}'
 
-        canvas = self._canvas_inspector
-        canvas.delete(tkinter.ALL)
+        label = self._inspected_card_label
         img: ImageFile.ImageFile = Image.open(img_path)
         maxsize = (self._inspector_width, self._inspector_height)
         img.thumbnail(maxsize)
         if rotated:
             img = img.rotate(180)
-        canvas.img = ImageTk.PhotoImage(img)
-        x = self._inspector_width / 2
-        y = self._inspector_height / 2
-        canvas.create_image(
-                x, y,
-                image=canvas.img,
-                )
+        label.img = ImageTk.PhotoImage(img)
+        label['image'] = label.img
 
     def clean_inspect_area(self):
         self._inspected_card.set(None)
         self._inspect_frame['text'] = 'inspect:'
-        self._canvas_inspector.delete(tkinter.ALL)
+        self._inspected_card_label['image'] = None
+        self._inspect_frame.update()
 
     def is_card_on_table(self, card_name: str) -> bool:
         if card_name in self._cards_on_table:
