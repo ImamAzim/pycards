@@ -106,7 +106,7 @@ class Game(object):
 
     @property
     def permanent_cards(self) -> dict[str, Card]:
-        """get a list of permanent cards from the deck"""
+        """get a dict of permanent cards from the deck"""
         permanent_cards = {
                 card_name: self.get_card(card_name)
                 for card_name, card in self._deck.items()

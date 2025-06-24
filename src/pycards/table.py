@@ -136,10 +136,15 @@ class Table(BaseTable):
                         card.path,
                         card.rotate,
                         )
-            to_discover = card_name in self._game.box_card_names
+            in_box = card_name in self._game.box_card_names
+            not_marked = not self._game.is_card_marked(card_name)
+            not_permanent = card_name in self._game.permanent_cards
             self._gui.inspect_card(
                     card_name,
                     card.path,
+                    in_box,
+                    not_marked,
+                    not_permanent,
                     card.rotate,
                     )
 
@@ -156,9 +161,15 @@ class Table(BaseTable):
                         card.path,
                         card.rotate,
                         )
+            in_box = card_name in self._game.box_card_names
+            not_marked = not self._game.is_card_marked(card_name)
+            not_permanent = card_name in self._game.permanent_cards
             self._gui.inspect_card(
                     card_name,
                     card.path,
+                    in_box,
+                    not_marked,
+                    not_permanent,
                     card.rotate)
 
     def forget_card(self, card_name: str):
@@ -222,9 +233,15 @@ class Table(BaseTable):
             except GameError as e:
                 self._gui.showerror(e)
             else:
+                in_box = card_name in self._game.box_card_names
+                not_marked = not self._game.is_card_marked(card_name)
+                not_permanent = card_name in self._game.permanent_cards
                 self._gui.inspect_card(
                         card_name,
                         card.path,
+                        in_box,
+                        not_marked,
+                        not_permanent,
                         card.rotate)
 
     def inspect_obfuscated_card(self, obfuscated_name: str):
