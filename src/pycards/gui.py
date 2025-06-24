@@ -223,18 +223,20 @@ class TkinterGUI(GUI, tkinter.Tk):
                 )
         self._drawpile.grid(
                 column=0,
-                row=0,)
+                row=0,
+                sticky=tkinter.EW,
+                )
         ttk.Button(
                 drawpile_frame,
                 text='draw...',
                 command=lambda: self._table.draw_card(),
-                ).grid(column=0, row=2)
+                ).grid(column=0, row=2, sticky='NSEW')
         ttk.Button(
                 drawpile_frame,
                 text='inspect...',
                 command=lambda: self._table.inspect_obfuscated_card(
                     self._drawpile.get()),
-                ).grid(column=0, row=1)
+                ).grid(column=0, row=1, sticky=tkinter.NSEW)
         self._top_card_label = tkinter.Label(
                 drawpile_frame,
                 )
