@@ -271,12 +271,13 @@ class TkinterGUI(GUI, tkinter.Tk):
         self._inspected_card_label.pack()
         buttons_frame = ttk.Frame(self._inspect_frame)
         buttons_frame.pack()
-        ttk.Button(
+        self._discover_forget_button = ttk.Button(
                 buttons_frame,
                 text='discover/forget',
                 command=lambda: self._table.discover_or_forget(
                     self._inspected_card.get()),
-                ).grid(row=0, column=0)
+                )
+        self._discover_forget_button.grid(row=0, column=0)
         ttk.Button(
                 buttons_frame,
                 text='destroy',
@@ -295,12 +296,13 @@ class TkinterGUI(GUI, tkinter.Tk):
                 command=lambda: self._table.rotate_card(
                     self._inspected_card.get()),
                 ).grid(row=1, column=0)
-        ttk.Button(
+        self._lock_unlock_button = ttk.Button(
                 buttons_frame,
                 text='lock/unlock',
                 command=lambda: self._table.lock_unlock(
                     self._inspected_card.get()),
-                ).grid(row=1, column=1)
+                )
+        self._lock_unlock_button.grid(row=1, column=1)
         ttk.Button(
                 buttons_frame,
                 text='play',
@@ -313,12 +315,13 @@ class TkinterGUI(GUI, tkinter.Tk):
                 command=lambda: self._table.discard(
                     self._inspected_card.get()),
                 ).grid(row=2, column=0)
-        ttk.Button(
+        self._mark_unmark_button = ttk.Button(
                 buttons_frame,
                 text='mark/unmark',
                 command=lambda: self._table.mark_or_unmark(
                     self._inspected_card.get()),
-                ).grid(row=2, column=1)
+                )
+        self._mark_unmark_button.grid(row=2, column=1)
         ttk.Button(
                 buttons_frame,
                 text='top',
