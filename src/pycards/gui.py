@@ -412,14 +412,17 @@ class TkinterGUI(GUI, tkinter.Tk):
             else:
                 self.remove_card(card_name)
 
+        card_width = self._gamezone_width / self._NCARDS_PER_TABLE
+
         if pile == IN_PLAY_PILE_NAME:
             canvas = self._canvas_gamezone
+            card_height = self._gamezone_height
         elif pile == PERMANENT_PILE_NAME:
             canvas = self._canvas_permanent
+            card_height = self._height - self._gamezone_height
         else:
             raise GUIError('pile arg not known')
 
-        card_width = self._gamezone_width / self._NCARDS_PER_TABLE
         y = 0
         x = 0
 
@@ -428,7 +431,7 @@ class TkinterGUI(GUI, tkinter.Tk):
         placed_card[self._PILE_KEY] = pile
 
         img: ImageFile.ImageFile = Image.open(img_path)
-        maxsize = (card_width, self._gamezone_height)
+        maxsize = (card_width, card_height)
         img.thumbnail(maxsize)
         if rotated:
             img = img.rotate(180)
