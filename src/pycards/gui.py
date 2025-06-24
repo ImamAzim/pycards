@@ -295,45 +295,45 @@ class TkinterGUI(GUI, tkinter.Tk):
                 text='rotate',
                 command=lambda: self._table.rotate_card(
                     self._inspected_card.get()),
-                ).grid(row=1, column=0)
+                ).grid(row=0, column=3)
         self._lock_unlock_button = ttk.Button(
                 buttons_frame,
                 text='lock',
                 command=lambda: self._table.lock_unlock(
                     self._inspected_card.get()),
                 )
-        self._lock_unlock_button.grid(row=1, column=1)
+        self._lock_unlock_button.grid(row=1, column=0)
         ttk.Button(
                 buttons_frame,
                 text='play',
                 command=lambda: self._table.play_card(
                     self._inspected_card.get()),
-                ).grid(row=1, column=2)
+                ).grid(row=1, column=1)
         ttk.Button(
                 buttons_frame,
                 text='discard',
                 command=lambda: self._table.discard(
                     self._inspected_card.get()),
-                ).grid(row=2, column=0)
+                ).grid(row=1, column=2)
         self._mark_unmark_button = ttk.Button(
                 buttons_frame,
                 text='mark',
                 command=lambda: self._table.mark_or_unmark(
                     self._inspected_card.get()),
                 )
-        self._mark_unmark_button.grid(row=2, column=1)
+        self._mark_unmark_button.grid(row=1, column=3)
         ttk.Button(
                 buttons_frame,
                 text='top',
                 command=lambda: self._table.put_card_in_draw_pile(
                     self._inspected_card.get(), True),
-                ).grid(row=2, column=2)
+                ).grid(row=2, column=0)
         ttk.Button(
                 buttons_frame,
                 text='bottom',
                 command=lambda: self._table.put_card_in_draw_pile(
                     self._inspected_card.get(), False),
-                ).grid(row=3, column=0)
+                ).grid(row=2, column=1)
 
     def _create_gamezone_frame(self):
         """ prepare zone where cards will be in play
