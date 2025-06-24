@@ -226,6 +226,17 @@ class Table(BaseTable):
                     card.path,
                     PERMANENT_PILE_NAME,
                     )
+            in_box = card_name in self._game.box_card_names
+            not_marked = not self._game.is_card_marked(card_name)
+            not_permanent = card_name not in self._game.permanent_cards
+            self._gui.inspect_card(
+                    card_name,
+                    card.path,
+                    in_box,
+                    not_marked,
+                    not_permanent,
+                    card.rotate,
+                    )
 
     def unlock_card(self, card_name: str):
         try:
@@ -237,6 +248,18 @@ class Table(BaseTable):
             discard_pile = list(discard_pile)
             self._gui.update_discarded_pile(discard_pile)
             self._gui.remove_card(card_name)
+            card = self._game.get_card(card_name)
+            in_box = card_name in self._game.box_card_names
+            not_marked = not self._game.is_card_marked(card_name)
+            not_permanent = card_name not in self._game.permanent_cards
+            self._gui.inspect_card(
+                    card_name,
+                    card.path,
+                    in_box,
+                    not_marked,
+                    not_permanent,
+                    card.rotate,
+                    )
 
     def inspect_card(self, card_name: str):
         if card_name:
