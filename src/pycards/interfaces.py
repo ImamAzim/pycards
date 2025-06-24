@@ -129,11 +129,17 @@ class GUI(metaclass=ABCMeta):
     def inspect_card(self,
                      card_name, str,
                      img_path: str,
+                     in_box: bool,
+                     not_marked: bool,
+                     not_permanent: bool,
                      rotated: bool = False,):
         """display card in larger frame and allow operations on it
 
         :card_name: from file name withou recto or verso
         :img_path: path to card image
+        :in_box: True if card is still in the box
+        :not_marked: True if card is not marked
+        :not_permanent: True if card is not permanent
         :rotated: True if you want to rotate by 108 deg
 
         """

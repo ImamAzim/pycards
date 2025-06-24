@@ -466,9 +466,9 @@ class TkinterGUI(GUI, tkinter.Tk):
     def inspect_card(self,
                      card_name: str,
                      img_path: str,
-                     to_discover: bool,
-                     to_mark: bool,
-                     to_lock: bool,
+                     in_box: bool,
+                     not_marked: bool,
+                     not_permanent: bool,
                      rotated: bool = False,):
 
         self._inspected_card.set(card_name)
@@ -483,11 +483,11 @@ class TkinterGUI(GUI, tkinter.Tk):
         label.img = ImageTk.PhotoImage(img)
         label['image'] = label.img
 
-        text = 'discover' if to_discover else 'forget'
+        text = 'discover' if in_box else 'forget'
         self._discover_forget_button['text'] = text
-        text = 'mark' if to_mark else 'unmark'
+        text = 'mark' if not_marked else 'unmark'
         self._mark_unmark_button['text'] = text
-        text = 'lock' if to_lock else 'unlock'
+        text = 'lock' if not_permanent else 'unlock'
         self._lock_unlock_button['text'] = text
 
     def clean_inspect_area(self):

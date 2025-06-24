@@ -136,10 +136,12 @@ class Table(BaseTable):
                         card.path,
                         card.rotate,
                         )
+            to_discover = card_name in self._game.box_card_names
             self._gui.inspect_card(
                     card_name,
                     card.path,
-                    card.rotate)
+                    card.rotate,
+                    )
 
     def flip(self, card_name):
         try:
