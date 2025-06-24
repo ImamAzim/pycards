@@ -104,7 +104,7 @@ class TkinterGUI(GUI, tkinter.Tk):
         """position all frames in root window
 
         """
-        self._cardlist_frame.pack()
+        self._cardlist_frame.pack(fill=tkinter.X)
         self._inspect_frame.pack()
         self._permanent_frame.pack()
         self._gamezone_frame.pack()
@@ -195,13 +195,15 @@ class TkinterGUI(GUI, tkinter.Tk):
                 self._cardlist_frame,
                 text='box cards',
                 )
-        box_cards_frame.pack()
+        box_cards_frame.pack(fill=tkinter.X)
         self._boxcards_list = ttk.Combobox(
                 box_cards_frame,
                 state='readonly'
                 )
         self._boxcards_list.pack(
                 side=tkinter.LEFT,
+                fill=tkinter.X,
+                expand=True,
                 )
         ttk.Button(
                 box_cards_frame,
