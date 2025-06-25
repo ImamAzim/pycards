@@ -548,6 +548,7 @@ class TkinterGUI(GUI, tkinter.Tk):
     def clean_table(self):
         self.clean_inspect_area()
         self._canvas_gamezone.delete(tkinter.ALL)
+        self._canvas_permanent.delete(tkinter.ALL)
         self._cards_on_table = dict()
 
     def update_card_image(
