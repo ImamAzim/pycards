@@ -141,6 +141,20 @@ class TkinterGUI(GUI, tkinter.Tk):
                 menu=file_menu,
                 underline=0,
                 )
+        game_menu = tkinter.Menu(menubar)
+        game_menu.add_command(
+                label='discard all',
+                command=lambda: self._table.discard_all(),
+                )
+        game_menu.add_command(
+                label='shuffle',
+                command=lambda: self._table.shuffle_back(),
+                )
+        menubar.add_cascade(
+                label='Game',
+                menu=game_menu,
+                underline=0,
+                )
 
     def _prompt_new_game(self):
         """ask for a new game name
