@@ -459,14 +459,18 @@ class TkinterGUI(GUI, tkinter.Tk):
                 image=placed_card[self._IMG_KEY],
                 cursor='hand1',
                 )
-        label.place(x=x, y=y, anchor=tkinter.NW)
+        window_id = canvas.create_window(
+                (x, y),
+                anchor=tkinter.NW,
+                window=label,
+                )
         placed_card[self._IMG_LABEL_KEY] = label
         label.bind(
                 "<ButtonPress-1>",
                 lambda e: self._on_card_click(e, card_name))
         label.bind(
                 "<B1-Motion>",
-                lambda e: self._on_card_drop(e, card_name))
+                lambda e: self._on_card_drop(e, card_name, window_id))
 
     def _on_card_click(self, event: tkinter.Event, card_name: str):
         self._table.inspect_card(card_name)
@@ -475,14 +479,20 @@ class TkinterGUI(GUI, tkinter.Tk):
         card_label: tkinter.Label = event.widget
         card_label.lift()
 
-    def _on_card_drop(self, event: tkinter.Event, card_name: str):
+    def _on_card_drop(self, event: tkinter.Event, card_name: str, window_id):
+        placed_card = self._cards_on_table[card_name]
+        pile = placed_card[self._PILE_KEY]
+        if pile == IN_PLAY_PILE_NAME:
+            canvas = self._canvas_gamezone
+        elif pile == PERMANENT_PILE_NAME:
+            canvas = self._canvas_permanent
         cursor_x = event.x
         cursor_y = event.y
         dx = cursor_x - self._cursor_x0
         dy = cursor_y - self._cursor_y0
         x = event.widget.winfo_x() + dx
         y = event.widget.winfo_y() + dy
-        event.widget.place(x=x, y=y)
+        canvas.move(window_id, dx, dy)
 
     def inspect_card(self,
                      card_name: str,
