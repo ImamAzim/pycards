@@ -365,7 +365,11 @@ class TkinterGUI(GUI, tkinter.Tk):
                 bg='green',
                 height=self._gamezone_height,
                 width=self._gamezone_width,
-                # scrollregion=(0, 0, self._width, 3 * self._height),
+                scrollregion=(
+                    0,
+                    0,
+                    self._gamezone_width,
+                    3 * self._gamezone_height),
                 )
         vbar = ttk.Scrollbar(self._gamezone_frame, orient=tkinter.VERTICAL)
         vbar.pack(side=tkinter.RIGHT, fill=tkinter.Y)
@@ -388,7 +392,11 @@ class TkinterGUI(GUI, tkinter.Tk):
                 bg='blue',
                 height=height,
                 width=width,
-                # scrollregion=(0, 0, self._width, self._height),
+                scrollregion=(
+                    0,
+                    0,
+                    width,
+                    3 * height),
                 )
         vbar = ttk.Scrollbar(self._permanent_frame, orient=tkinter.VERTICAL)
         vbar.pack(side=tkinter.RIGHT, fill=tkinter.Y)
@@ -490,8 +498,6 @@ class TkinterGUI(GUI, tkinter.Tk):
         cursor_y = event.y
         dx = cursor_x - self._cursor_x0
         dy = cursor_y - self._cursor_y0
-        x = event.widget.winfo_x() + dx
-        y = event.widget.winfo_y() + dy
         canvas.move(window_id, dx, dy)
 
     def inspect_card(self,
