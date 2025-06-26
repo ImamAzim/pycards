@@ -480,7 +480,7 @@ class TkinterGUI(GUI, tkinter.Tk):
                 "<B1-Motion>",
                 lambda e: self._on_card_drop(e, card_name, window_id))
 
-    def _is_position_occupied(
+    def _is_overlapping(
             self,
             canvas: tkinter.Canvas,
             x: int,
