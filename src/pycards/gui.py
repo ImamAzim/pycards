@@ -509,9 +509,9 @@ class TkinterGUI(GUI, tkinter.Tk):
         max_rows = self._gamezone_height // card_height + 1
         max_columns = self._gamezone_width // card_width + 1
         for row in range(max_rows):
-            y = row * card_height
+            y = int(row * card_height)
             for column in range(max_columns):
-                x = column * card_width
+                x = int(column * card_width)
                 overlapping = self._is_overlapping(
                         canvas,
                         x,
