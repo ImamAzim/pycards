@@ -449,8 +449,6 @@ class TkinterGUI(GUI, tkinter.Tk):
         else:
             raise GUIError('pile arg not known')
 
-        y = 0
-        x = 0
 
         self._cards_on_table[card_name] = dict()
         placed_card = self._cards_on_table[card_name]
@@ -497,6 +495,34 @@ class TkinterGUI(GUI, tkinter.Tk):
         y2 = y + height
         overlapping = canvas.find_overlapping(x1, y1, x2, y2)
         return bool(overlapping)
+
+    def _find_free_space(
+            self,
+            card_width,
+            card_height,
+            canvas: tkinter.Canvas,
+            ) -> tuple[int, int]:
+        """find a position where the table is free of other cards
+
+        """
+        max_rows = self._gamezone_height // card_height + 1
+        max_columns = self._gamezone_width // card_width + 1
+        for row in range(max_rows):
+            y = row * card_height
+            for column in range(max_columns)
+                x = column * card_width
+                overlapping = self._is_overlapping(
+                        canvas,
+                        x,
+                        y,
+                        card_width,
+                        card_height,
+                        )
+                if not overlapping:
+                    break
+            if not overlapping:
+                break
+        return x, y
 
     def _on_card_click(self, event: tkinter.Event, card_name: str):
         self._table.inspect_card(card_name)
