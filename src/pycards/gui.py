@@ -489,7 +489,7 @@ class TkinterGUI(GUI, tkinter.Tk):
             y: int,
             width: int,
             height: int,
-            tolerance: int=5) -> bool:
+            tolerance: int = 5) -> bool:
         """check if there is already a card in this area of the table
         assuming x and y are at NW
 
@@ -513,8 +513,9 @@ class TkinterGUI(GUI, tkinter.Tk):
         if canvas == self._canvas_gamezone:
             height = self._gamezone_height * self._EXTENDED_HEIGHT
         else:
-            height = (self._height - self._gamezone_height) *
-            self._EXTENDED_HEIGHT
+            height = (
+                    self._height - self._gamezone_height
+                    ) * self._EXTENDED_HEIGHT
         max_rows = int(height // card_height + 1)
         max_columns = int(self._gamezone_width // card_width + 1)
         for row in range(max_rows):
