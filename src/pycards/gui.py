@@ -627,7 +627,7 @@ class TkinterGUI(GUI, tkinter.Tk):
             canvas = self._canvas_gamezone
         elif pile == PERMANENT_PILE_NAME:
             canvas = self._canvas_permanent
-        window_id = placed_card[self._WINDOW_ID_KEY]
+        window_id = card[self._WINDOW_ID_KEY]
         canvas.delete(window_id)
 
     def update_box_cards_list(self, card_names: list[str]):
