@@ -57,6 +57,7 @@ class TkinterGUI(GUI, tkinter.Tk):
     _IMG_LABEL_KEY = 'img_label'
     _PILE_KEY = 'pile'
     _WINDOW_ID_KEY = 'window_id'
+    _EXTENDED_HEIGHT = 3  # for scroll region
 
     def __init__(self):
         tkinter.Tk.__init__(self)
@@ -370,7 +371,7 @@ class TkinterGUI(GUI, tkinter.Tk):
                     0,
                     0,
                     self._gamezone_width,
-                    3 * self._gamezone_height),
+                    self._EXTENDED_HEIGHT * self._gamezone_height),
                 )
         vbar = ttk.Scrollbar(self._gamezone_frame, orient=tkinter.VERTICAL)
         vbar.pack(side=tkinter.RIGHT, fill=tkinter.Y)
@@ -397,7 +398,7 @@ class TkinterGUI(GUI, tkinter.Tk):
                     0,
                     0,
                     width,
-                    3 * height),
+                    self._EXTENDED_HEIGHT * height),
                 )
         vbar = ttk.Scrollbar(self._permanent_frame, orient=tkinter.VERTICAL)
         vbar.pack(side=tkinter.RIGHT, fill=tkinter.Y)
@@ -509,7 +510,12 @@ class TkinterGUI(GUI, tkinter.Tk):
         """find a position where the table is free of other cards
 
         """
-        max_rows = int(self._gamezone_height // card_height + 1)
+        if canvas == self._canvas_gamezone:
+            height = self._gamezone_height * self._EXTENDED_HEIGHT
+        else:
+            height = (self._height - self._gamezone_height) *
+            self._EXTENDED_HEIGHT
+        max_rows = int(height // card_height + 1)
         max_columns = int(self._gamezone_width // card_width + 1)
         for row in range(max_rows):
             y = int(row * card_height)
