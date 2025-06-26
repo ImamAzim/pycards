@@ -487,15 +487,16 @@ class TkinterGUI(GUI, tkinter.Tk):
             x: int,
             y: int,
             width: int,
-            height: int,) -> bool:
+            height: int,
+            tolerance: int=5) -> bool:
         """check if there is already a card in this area of the table
         assuming x and y are at NW
 
         """
-        x1 = x
-        x2 = x1 + width
-        y1 = y
-        y2 = y + height
+        x1 = x + tolerance
+        x2 = x1 + width - tolerance
+        y1 = y + tolerance
+        y2 = y + height - tolerance
         overlapping = canvas.find_overlapping(x1, y1, x2, y2)
         return bool(overlapping)
 
