@@ -480,6 +480,24 @@ class TkinterGUI(GUI, tkinter.Tk):
                 "<B1-Motion>",
                 lambda e: self._on_card_drop(e, card_name, window_id))
 
+    def _is_position_occupied(
+            self,
+            canvas: tkinter.Canvas,
+            x: int,
+            y: int,
+            width: int,
+            height: int,) -> bool:
+        """check if there is already a card in this area of the table
+        assuming x and y are at NW
+
+        """
+        x1 = x
+        x2 = x1 + width
+        y1 = y
+        y2 = y + height
+        overlapping = canvas.find_overlapping(x1, y1, x2, y2)
+        return bool(overlapping)
+
     def _on_card_click(self, event: tkinter.Event, card_name: str):
         self._table.inspect_card(card_name)
         self._cursor_x0 = event.x
