@@ -621,6 +621,14 @@ class TkinterGUI(GUI, tkinter.Tk):
         card: dict = self._cards_on_table.pop(card_name)
         label: tkinter.Label = card[self._IMG_LABEL_KEY]
         label.destroy()
+        window_id = card[self._WINDOW_ID_KEY]
+        pile = card[self._PILE_KEY]
+        if pile == IN_PLAY_PILE_NAME:
+            canvas = self._canvas_gamezone
+        elif pile == PERMANENT_PILE_NAME:
+            canvas = self._canvas_permanent
+        window_id = placed_card[self._WINDOW_ID_KEY]
+        canvas.delete(window_id)
 
     def update_box_cards_list(self, card_names: list[str]):
         self._boxcards_list.set('')
