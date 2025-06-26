@@ -479,7 +479,7 @@ class TkinterGUI(GUI, tkinter.Tk):
                 lambda e: self._on_card_click(e, card_name))
         label.bind(
                 "<B1-Motion>",
-                lambda e: self._on_card_drop(e, card_name, window_id))
+                lambda e: self._on_card_drop(e, card_name))
 
     def _is_overlapping(
             self,
@@ -534,9 +534,10 @@ class TkinterGUI(GUI, tkinter.Tk):
         card_label: tkinter.Label = event.widget
         card_label.lift()
 
-    def _on_card_drop(self, event: tkinter.Event, card_name: str, window_id):
+    def _on_card_drop(self, event: tkinter.Event, card_name: str):
         placed_card = self._cards_on_table[card_name]
         pile = placed_card[self._PILE_KEY]
+        window_id = placed_card[self._WINDOW_ID_KEY]
         if pile == IN_PLAY_PILE_NAME:
             canvas = self._canvas_gamezone
         elif pile == PERMANENT_PILE_NAME:
