@@ -506,8 +506,8 @@ class TkinterGUI(GUI, tkinter.Tk):
         """find a position where the table is free of other cards
 
         """
-        max_rows = self._gamezone_height // card_height + 1
-        max_columns = self._gamezone_width // card_width + 1
+        max_rows = int(self._gamezone_height // card_height + 1)
+        max_columns = int(self._gamezone_width // card_width + 1)
         for row in range(max_rows):
             y = int(row * card_height)
             for column in range(max_columns):
