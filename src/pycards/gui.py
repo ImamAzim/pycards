@@ -56,6 +56,7 @@ class TkinterGUI(GUI, tkinter.Tk):
     _IMG_KEY = 'img'
     _IMG_LABEL_KEY = 'img_label'
     _PILE_KEY = 'pile'
+    _WINDOW_ID_KEY = 'window_id'
 
     def __init__(self):
         tkinter.Tk.__init__(self)
@@ -466,12 +467,13 @@ class TkinterGUI(GUI, tkinter.Tk):
                 image=placed_card[self._IMG_KEY],
                 cursor='hand1',
                 )
+        placed_card[self._IMG_LABEL_KEY] = label
         window_id = canvas.create_window(
                 (x, y),
                 anchor=tkinter.NW,
                 window=label,
                 )
-        placed_card[self._IMG_LABEL_KEY] = label
+        placed_card[self._WINDOW_ID_KEY] = window_id
         label.bind(
                 "<ButtonPress-1>",
                 lambda e: self._on_card_click(e, card_name))
