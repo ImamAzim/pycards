@@ -449,6 +449,7 @@ class TkinterGUI(GUI, tkinter.Tk):
         else:
             raise GUIError('pile arg not known')
 
+        x, y = self._find_free_space(card_width, card_height, canvas)
 
         self._cards_on_table[card_name] = dict()
         placed_card = self._cards_on_table[card_name]
@@ -509,7 +510,7 @@ class TkinterGUI(GUI, tkinter.Tk):
         max_columns = self._gamezone_width // card_width + 1
         for row in range(max_rows):
             y = row * card_height
-            for column in range(max_columns)
+            for column in range(max_columns):
                 x = column * card_width
                 overlapping = self._is_overlapping(
                         canvas,
