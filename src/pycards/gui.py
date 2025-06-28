@@ -517,7 +517,8 @@ class TkinterGUI(GUI, tkinter.Tk):
                     self._height - self._gamezone_height
                     ) * self._EXTENDED_HEIGHT
         max_rows = int(height // card_height + 1)
-        max_columns = int(self._gamezone_width // card_width + 1)
+        max_columns = int(
+                (self._gamezone_width + card_width / 4) // card_width)
         for row in range(max_rows):
             y = int(row * card_height)
             for column in range(max_columns):
