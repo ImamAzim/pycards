@@ -225,6 +225,7 @@ class Table(BaseTable):
                     card.name,
                     card.path,
                     PERMANENT_PILE_NAME,
+                    rotated=card.rotate,
                     )
             in_box = card_name in self._game.box_card_names
             not_marked = not self._game.is_card_marked(card_name)
@@ -305,6 +306,7 @@ class Table(BaseTable):
                     card.name,
                     card.path,
                     IN_PLAY_PILE_NAME,
+                    rotated=card.rotate,
                     )
 
     def discard(self, card_name: str):
@@ -417,6 +419,7 @@ class Table(BaseTable):
                     card.name,
                     card.path,
                     IN_PLAY_PILE_NAME,
+                    rotated=card.rotate,
                     )
 
     def shuffle_back(self):
