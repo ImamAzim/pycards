@@ -440,6 +440,9 @@ class TkinterGUI(GUI, tkinter.Tk):
             else:
                 self.remove_card(card_name)
 
+        self._cards_on_table[card_name] = dict()
+        placed_card = self._cards_on_table[card_name]
+
         card_width = self._gamezone_width / self._NCARDS_PER_TABLE
 
         if pile == IN_PLAY_PILE_NAME:
@@ -451,18 +454,19 @@ class TkinterGUI(GUI, tkinter.Tk):
         else:
             raise GUIError('pile arg not known')
 
-        x, y = self._find_free_space(card_width, card_height, canvas)
-
-        self._cards_on_table[card_name] = dict()
-        placed_card = self._cards_on_table[card_name]
-        placed_card[self._PILE_KEY] = pile
-
-        img: ImageFile.ImageFile = Image.open(img_path)
         maxsize = (card_width, card_height)
+        img: ImageFile.ImageFile = Image.open(img_path)
         img.thumbnail(maxsize)
         if rotated:
             img = img.rotate(180)
         placed_card[self._IMG_KEY] = ImageTk.PhotoImage(img)
+        card_width = img.width
+        card_height = img.height
+
+        x, y = self._find_free_space(card_width, card_height, canvas)
+
+        placed_card[self._PILE_KEY] = pile
+
         label = tkinter.Label(
                 canvas,
                 image=placed_card[self._IMG_KEY],
