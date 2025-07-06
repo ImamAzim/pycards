@@ -2,6 +2,7 @@ import tkinter
 from tkinter import simpledialog, filedialog, messagebox
 from tkinter import ttk
 from typing import Literal
+from pathlib import Path
 
 
 from PIL import Image, ImageTk, ImageFile
@@ -13,6 +14,29 @@ from pycards.interfaces import IN_PLAY_PILE_NAME, PERMANENT_PILE_NAME
 
 class GUIError(Exception):
     pass
+
+
+class EditorWindow(simpledialog.Dialog):
+
+    """open a prompt window to edit card image"""
+
+    def __init__(self, parent, card_name: str, img_path: Path, rotated: bool):
+        """
+
+        :img_path: TODO
+        :rotated: TODO
+
+        """
+        super().__init__(parent)
+
+        self._img_path = img_path
+        self._rotated = rotated
+
+    def body(self, master):
+        pass
+
+    def apply(self):
+        pass
 
 
 class LoadPrompt(simpledialog.Dialog):
