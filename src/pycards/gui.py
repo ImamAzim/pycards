@@ -31,9 +31,11 @@ class EditorWindow(simpledialog.Dialog):
 
         self._img_path = img_path
         self._rotated = rotated
+        self._card_name = card_name
 
     def body(self, master):
-        pass
+        frame = ttk.Labelframe(master, text=self._card_name)
+        frame.pack()
 
     def apply(self):
         pass
@@ -378,6 +380,19 @@ class TkinterGUI(GUI, tkinter.Tk):
                 command=lambda: self._table.put_card_in_draw_pile(
                     self._inspected_card.get(), False),
                 ).grid(row=2, column=1)
+
+    def prompt_editor(
+            self,
+            card_name: str,
+            img_path: str,
+            rotated: bool,):
+        """TODO: Docstring for _prompt_editor.
+
+        :card_name: TODO
+        :returns: TODO
+
+        """
+        EditorWindow(self, card_name, img_path, rotated)
 
     def _create_gamezone_frame(self):
         """ prepare zone where cards will be in play

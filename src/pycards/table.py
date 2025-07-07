@@ -117,6 +117,15 @@ class Table(BaseTable):
                     card.rotate,
                     )
 
+    def prompt_editor(self, card_name):
+        """TODO: Docstring for prompt_editor.
+
+        :card_name: TODO
+        :returns: TODO
+
+        """
+        pass
+
     def destroy_card(self, card_name: str):
         try:
             self._game.destroy_card(card_name)
