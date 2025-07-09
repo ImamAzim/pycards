@@ -27,11 +27,11 @@ class EditorWindow(simpledialog.Dialog):
         :rotated: TODO
 
         """
-        super().__init__(parent)
-
         self._img_path = img_path
         self._rotated = rotated
         self._card_name = card_name
+
+        super().__init__(parent)
 
     def body(self, master):
         frame = ttk.Labelframe(master, text=self._card_name)
@@ -380,6 +380,12 @@ class TkinterGUI(GUI, tkinter.Tk):
                 command=lambda: self._table.put_card_in_draw_pile(
                     self._inspected_card.get(), False),
                 ).grid(row=2, column=1)
+        ttk.Button(
+                buttons_frame,
+                text='edit',
+                command=lambda: self._table.prompt_editor(
+                    self._inspected_card.get()),
+                ).grid(row=2, column=2)
 
     def prompt_editor(
             self,
