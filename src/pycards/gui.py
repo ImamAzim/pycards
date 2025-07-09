@@ -24,7 +24,7 @@ class EditorWindow(simpledialog.Dialog):
             self,
             parent,
             card_name: str,
-            img_path: Path,
+            img_path: Path|str,
             rotated: bool,
             max_width: int,
             max_height: int,
@@ -37,9 +37,10 @@ class EditorWindow(simpledialog.Dialog):
         """
         self._max_canvas_width = max_width
         self._max_canvas_height = max_height
-        self._img_path = img_path
+        self._img_path = Path(img_path)
         self._rotated = rotated
         self._card_name = card_name
+        self._save_img = False
 
         super().__init__(parent)
 
@@ -65,9 +66,14 @@ class EditorWindow(simpledialog.Dialog):
                 anchor=tkinter.NW,
                 image=self._img,
                 )
+        canvas.pack()
+        self._canvas = canvas
 
     def apply(self):
-        pass
+        canvas = self._canvas
+        path = self._img_path
+        new_path = path.parent / (path.stem + '.ps')
+        canvas.postscript(file=new_path)
 
 
 class LoadPrompt(simpledialog.Dialog):
@@ -421,9 +427,9 @@ class TkinterGUI(GUI, tkinter.Tk):
             card_name: str,
             img_path: str,
             rotated: bool,):
-        max_width = self.winfo_screenwidth() // 4
-        max_height = self.winfo_screenheight() // 4
-        EditorWindow(
+        max_width = self.winfo_screenwidth() // 2
+        max_height = self.winfo_screenheight() // 2
+        editor = EditorWindow(
                 self,
                 card_name,
                 img_path,
