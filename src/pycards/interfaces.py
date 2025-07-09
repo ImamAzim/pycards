@@ -146,6 +146,20 @@ class GUI(metaclass=ABCMeta):
         pass
 
     @abstractmethod
+    def prompt_editor(
+            self,
+            card_name: str,
+            img_path: str,
+            rotated: bool,):
+        """open editor window
+
+        :card_name: from file name withou recto or verso
+        :img_path: path to card image
+        :rotated: True if you want to rotate by 108 deg
+        """
+        pass
+
+    @abstractmethod
     def clean_inspect_area(self):
         """remove the image from the inspect area and deactivate operations
         in it
@@ -453,6 +467,15 @@ class BaseTable(object, metaclass=ABCMeta):
     @abstractmethod
     def inspect_card(self, card_name: str):
         """call inspect method of gui with card info to display
+
+        :card_name:
+
+        """
+        pass
+
+    @abstractmethod
+    def prompt_editor(self, card_name: str):
+        """call prompt editor method of gui to edit card
 
         :card_name:
 

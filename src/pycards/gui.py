@@ -389,6 +389,8 @@ class TkinterGUI(GUI, tkinter.Tk):
         """TODO: Docstring for _prompt_editor.
 
         :card_name: TODO
+        :img_path:
+        :rotated:
         :returns: TODO
 
         """
