@@ -72,8 +72,11 @@ class EditorWindow(simpledialog.Dialog):
     def apply(self):
         canvas = self._canvas
         path = self._img_path
-        new_path = path.parent / (path.stem + '.ps')
-        canvas.postscript(file=new_path)
+        path_ps = path.parent / (path.stem + '.ps')
+        canvas.postscript(file=path_ps)
+        img = Image.open(path_ps)
+        new_path_jpg = path.parent / (path.stem + '_copy.jpg')
+        img.save(new_path_jpg)
 
 
 class LoadPrompt(simpledialog.Dialog):
