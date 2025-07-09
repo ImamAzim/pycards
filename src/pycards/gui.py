@@ -20,13 +20,23 @@ class EditorWindow(simpledialog.Dialog):
 
     """open a prompt window to edit card image"""
 
-    def __init__(self, parent, card_name: str, img_path: Path, rotated: bool):
+    def __init__(
+            self,
+            parent,
+            card_name: str,
+            img_path: Path,
+            rotated: bool,
+            max_width: int,
+            max_height: int,
+            ):
         """
 
         :img_path: TODO
         :rotated: TODO
 
         """
+        self._max_canvas_width = max_width
+        self._max_canvas_height = max_height
         self._img_path = img_path
         self._rotated = rotated
         self._card_name = card_name
@@ -36,6 +46,25 @@ class EditorWindow(simpledialog.Dialog):
     def body(self, master):
         frame = ttk.Labelframe(master, text=self._card_name)
         frame.pack()
+
+        maxsize = (self._max_canvas_width, self._max_canvas_height)
+        img: ImageFile.ImageFile = Image.open(self._img_path)
+        img.thumbnail(maxsize)
+        width, height = img.width, img.height
+        if self._rotated:
+            img = img.rotate(180)
+        self._img = ImageTk.PhotoImage(img)
+        canvas = tkinter.Canvas(
+                frame,
+                bg='green',
+                height=height,
+                width=width,
+                )
+        canvas.create_image(
+                (0, 0),
+                anchor=tkinter.NW,
+                image=self._img,
+                )
 
     def apply(self):
         pass
@@ -392,7 +421,15 @@ class TkinterGUI(GUI, tkinter.Tk):
             card_name: str,
             img_path: str,
             rotated: bool,):
-        EditorWindow(self, card_name, img_path, rotated)
+        max_width = self.winfo_screenwidth() // 4
+        max_height = self.winfo_screenheight() // 4
+        EditorWindow(
+                self,
+                card_name,
+                img_path,
+                rotated,
+                max_width,
+                max_height,)
 
     def _create_gamezone_frame(self):
         """ prepare zone where cards will be in play
