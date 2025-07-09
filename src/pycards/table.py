@@ -118,15 +118,7 @@ class Table(BaseTable):
                     )
 
     def prompt_editor(self, card_name: str):
-        """TODO: Docstring for prompt_editor.
-
-        :card_name: TODO
-        :returns: TODO
-
-        """
         card = self._game.get_card(card_name)
-        self._gui.
-        pass
 
     def destroy_card(self, card_name: str):
         try:

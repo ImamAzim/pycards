@@ -386,14 +386,6 @@ class TkinterGUI(GUI, tkinter.Tk):
             card_name: str,
             img_path: str,
             rotated: bool,):
-        """TODO: Docstring for _prompt_editor.
-
-        :card_name: TODO
-        :img_path:
-        :rotated:
-        :returns: TODO
-
-        """
         EditorWindow(self, card_name, img_path, rotated)
 
     def _create_gamezone_frame(self):
