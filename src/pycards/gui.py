@@ -3,6 +3,7 @@ from tkinter import simpledialog, filedialog, messagebox
 from tkinter import ttk
 from typing import Literal
 from pathlib import Path
+from io import BytesIO
 
 
 from PIL import Image, ImageTk, ImageFile
@@ -72,11 +73,19 @@ class EditorWindow(simpledialog.Dialog):
     def apply(self):
         canvas = self._canvas
         path = self._img_path
-        path_ps = path.parent / (path.stem + '.ps')
-        canvas.postscript(file=path_ps)
-        img = Image.open(path_ps)
-        new_path_jpg = path.parent / (path.stem + '_copy.jpg')
-        img.save(new_path_jpg)
+        # path_ps = path.parent / (path.stem + '.ps')
+        # canvas.postscript(file=path_ps)
+        width = self._img.width()
+        height = self._img.height()
+        eps = canvas.postscript(
+                colormode='color',
+                width=width,
+                height=height,
+                pagewidth=width,
+                pageheight=height,
+                )
+        img = Image.open(BytesIO(bytes(eps, 'ascii')))
+        img.save(path)
 
 
 class LoadPrompt(simpledialog.Dialog):
