@@ -68,6 +68,8 @@ class EditorWindow(simpledialog.Dialog):
                 image=self._img,
                 )
         canvas.pack()
+        canvas.bind("<Button-1>", self._save_position)
+        self.bind("<B1-Motion>", self._add_line)
         self._canvas = canvas
 
     def apply(self):
@@ -86,6 +88,18 @@ class EditorWindow(simpledialog.Dialog):
                 )
         img = Image.open(BytesIO(bytes(eps, 'ascii')))
         img.save(path)
+
+    def _save_position(self, event):
+        self._lastx, self._lasty = event.x, event.y
+
+    def _add_line(self, event):
+        canvas = self._canvas
+        x1 = self._lastx
+        x2 = event.x
+        y1 = self._lasty
+        y2 = event.y
+        canvas.create_line((x1, y1, x2, y2))
+        self._save_position(event)
 
 
 class LoadPrompt(simpledialog.Dialog):
