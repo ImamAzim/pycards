@@ -462,6 +462,8 @@ class TkinterGUI(GUI, tkinter.Tk):
                 rotated,
                 max_width,
                 max_height,)
+        self._table.inspect_card(card_name)
+        self.update_card_image(card_name, img_path, rotated)
 
     def _create_gamezone_frame(self):
         """ prepare zone where cards will be in play
