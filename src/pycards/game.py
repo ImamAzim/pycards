@@ -283,6 +283,22 @@ class Game(object):
         """
         pass
 
+    def import_sticker_folders(self, folder_path: Path):
+        """import all stickers present in the folder. name will be same as filenames, without suffixes
+
+        :folder_path: path to folder containing sticker images
+
+        """
+        pass
+
+    def delete_sticker(self, sticker_name):
+        """remove img file of sticker. will not be present in property of object
+
+        :sticker_name: name as it was imported
+
+        """
+        pass
+
     def import_card(
             self,
             recto_path: str,
