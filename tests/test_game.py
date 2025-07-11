@@ -3,7 +3,6 @@ test game models
 """
 
 import unittest
-import os
 from pathlib import Path
 
 
@@ -68,15 +67,15 @@ class TestGame(unittest.TestCase):
         game.import_card(**self._test_card)
         card_name = self._test_card['card_name']
 
-        folder = os.path.join(DATA_FOLDER, TESTNAME, BOX_FOLDER)
+        folder = DATA_FOLDER / TESTNAME / BOX_FOLDER
         suffix = Path(RECTO_CARD).suffix
         card_fn = f'{card_name}_recto{suffix}'
-        path = os.path.join(folder, card_fn)
-        self.assertTrue(os.path.exists(path))
+        path = folder / card_fn
+        self.assertTrue(path.exists())
         suffix = Path(VERSO_CARD).suffix
         card_fn = f'{card_name}_verso{suffix}'
-        path = os.path.join(folder, card_fn)
-        self.assertTrue(os.path.exists(path))
+        path = folder / card_fn
+        self.assertTrue(path.exists())
 
         self.assertIn(card_name, game.box_card_names)
 
@@ -118,11 +117,11 @@ class TestGame(unittest.TestCase):
         card = game.get_card(card_name)
         self.assertIsInstance(card, Card)
 
-        folder = os.path.join(DATA_FOLDER, TESTNAME, BOX_FOLDER)
+        folder = DATA_FOLDER / TESTNAME / BOX_FOLDER
         suffix = Path(RECTO_CARD).suffix
         card_fn = f'{card_name}_recto{suffix}'
-        path = os.path.join(folder, card_fn)
-        self.assertEqual(path, card.path)
+        path = folder / card_fn
+        self.assertTrue(path.samefile(card.path))
 
     def test_get_top_card(self):
         """test draw top card
@@ -148,26 +147,26 @@ class TestGame(unittest.TestCase):
         card_name = self._test_card['card_name']
         game.discover_card(card_name)
 
-        folder = os.path.join(DATA_FOLDER, TESTNAME, BOX_FOLDER)
+        folder = DATA_FOLDER / TESTNAME / BOX_FOLDER
         suffix = Path(RECTO_CARD).suffix
         card_fn = f'{card_name}_recto{suffix}'
-        path = os.path.join(folder, card_fn)
-        self.assertFalse(os.path.exists(path))
+        path = folder / card_fn
+        self.assertFalse(path.exists())
         suffix = Path(VERSO_CARD).suffix
         card_fn = f'{card_name}_verso{suffix}'
-        path = os.path.join(folder, card_fn)
-        self.assertFalse(os.path.exists(path))
+        path = folder / card_fn
+        self.assertFalse(path.exists())
         self.assertNotIn(card_name, game.box_card_names)
 
-        folder = os.path.join(DATA_FOLDER, TESTNAME, DECK_FOLDER)
+        folder = DATA_FOLDER / TESTNAME / DECK_FOLDER
         suffix = Path(RECTO_CARD).suffix
         card_fn = f'{card_name}_recto{suffix}'
-        path = os.path.join(folder, card_fn)
-        self.assertTrue(os.path.exists(path))
+        path = folder / card_fn
+        self.assertTrue(path.exists())
         suffix = Path(VERSO_CARD).suffix
         card_fn = f'{card_name}_verso{suffix}'
-        path = os.path.join(folder, card_fn)
-        self.assertTrue(os.path.exists(path))
+        path = folder / card_fn
+        self.assertTrue(path.exists())
         self.assertIn(card_name, game.deck_card_names)
 
     def test_permanent_cards(self):
@@ -270,26 +269,26 @@ class TestGame(unittest.TestCase):
         game.discover_card(card_name)
         game.forget_card(card_name)
 
-        folder = os.path.join(DATA_FOLDER, TESTNAME, BOX_FOLDER)
+        folder = DATA_FOLDER / TESTNAME / BOX_FOLDER
         suffix = Path(RECTO_CARD).suffix
         card_fn = f'{card_name}_recto{suffix}'
-        path = os.path.join(folder, card_fn)
-        self.assertTrue(os.path.exists(path))
+        path = folder / card_fn
+        self.assertTrue(path.exists())
         suffix = Path(VERSO_CARD).suffix
         card_fn = f'{card_name}_verso{suffix}'
-        path = os.path.join(folder, card_fn)
-        self.assertTrue(os.path.exists(path))
+        path = folder / card_fn
+        self.assertTrue(path.exists())
         self.assertIn(card_name, game.box_card_names)
 
-        folder = os.path.join(DATA_FOLDER, TESTNAME, DECK_FOLDER)
+        folder = DATA_FOLDER / TESTNAME / DECK_FOLDER
         suffix = Path(RECTO_CARD).suffix
         card_fn = f'{card_name}_recto{suffix}'
-        path = os.path.join(folder, card_fn)
-        self.assertFalse(os.path.exists(path))
+        path = folder / card_fn
+        self.assertFalse(path.exists())
         suffix = Path(VERSO_CARD).suffix
         card_fn = f'{card_name}_verso{suffix}'
-        path = os.path.join(folder, card_fn)
-        self.assertFalse(os.path.exists(path))
+        path = folder / card_fn
+        self.assertFalse(path.exists())
         self.assertNotIn(card_name, game.deck_card_names)
 
     def test_destroy(self):
@@ -301,15 +300,15 @@ class TestGame(unittest.TestCase):
         card_name = self._test_card['card_name']
         game.destroy_card(card_name)
 
-        folder = os.path.join(DATA_FOLDER, TESTNAME, BOX_FOLDER)
+        folder = DATA_FOLDER / TESTNAME / BOX_FOLDER
         suffix = Path(RECTO_CARD).suffix
         card_fn = f'{card_name}_recto{suffix}'
-        path = os.path.join(folder, card_fn)
-        self.assertFalse(os.path.exists(path))
+        path = folder / card_fn
+        self.assertFalse(path.exists())
         suffix = Path(VERSO_CARD).suffix
         card_fn = f'{card_name}_verso{suffix}'
-        path = os.path.join(folder, card_fn)
-        self.assertFalse(os.path.exists(path))
+        path = folder / card_fn
+        self.assertFalse(path.exists())
         self.assertNotIn(card_name, game.box_card_names)
 
     def test_rotate(self):
@@ -323,11 +322,11 @@ class TestGame(unittest.TestCase):
         card = game.get_card(card_name)
         self.assertTrue(card.rotate)
 
-        folder = os.path.join(DATA_FOLDER, TESTNAME, BOX_FOLDER)
+        folder = DATA_FOLDER / TESTNAME / BOX_FOLDER
         suffix = Path(RECTO_CARD).suffix
         card_fn = f'{card_name}_recto{suffix}'
-        path = os.path.join(folder, card_fn)
-        self.assertEqual(path, card.path)
+        path = folder / card_fn
+        self.assertTrue(path.samefile(card.path))
 
     def test_flip(self):
         """test flip card
@@ -340,11 +339,11 @@ class TestGame(unittest.TestCase):
         card = game.get_card(card_name)
         self.assertFalse(card.rotate)
 
-        folder = os.path.join(DATA_FOLDER, TESTNAME, BOX_FOLDER)
+        folder= DATA_FOLDER / TESTNAME  / BOX_FOLDER
         suffix = Path(VERSO_CARD).suffix
         card_fn = f'{card_name}_verso{suffix}'
-        path = os.path.join(folder, card_fn)
-        self.assertEqual(path, card.path)
+        path = folder / card_fn
+        self.assertTrue(path.samefile(card.path))
 
     def test_delete(self):
         """test delete
@@ -354,8 +353,8 @@ class TestGame(unittest.TestCase):
         game.import_card(**self._test_card)
         game.delete_game()
 
-        folder = os.path.join(DATA_FOLDER, TESTNAME)
-        self.assertFalse(os.path.exists(folder))
+        folder = DATA_FOLDER / TESTNAME
+        self.assertFalse(folder.exists())
 
     def test_data_persistance(self):
         """ test if data are preserved between session (autosave) """
@@ -493,22 +492,22 @@ class TestCard(unittest.TestCase):
 
         card = Card(name, recto, verso, 0)
         self.assertEqual(card.name, name)
-        self.assertEqual(card.path, recto)
+        self.assertTrue(recto.samefile(card.path))
         self.assertFalse(card.rotate)
 
         card = Card(name, recto, verso, 1)
         self.assertEqual(card.name, name)
-        self.assertEqual(card.path, recto)
+        self.assertTrue(recto.samefile(card.path))
         self.assertTrue(card.rotate)
 
         card = Card(name, recto, verso, 2)
         self.assertEqual(card.name, name)
-        self.assertEqual(card.path, verso)
+        self.assertTrue(verso.samefile(card.path))
         self.assertTrue(card.rotate)
 
         card = Card(name, recto, verso, 3)
         self.assertEqual(card.name, name)
-        self.assertEqual(card.path, verso)
+        self.assertTrue(verso.samefile(card.path))
         self.assertFalse(card.rotate)
 
 
