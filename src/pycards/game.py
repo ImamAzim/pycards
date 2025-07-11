@@ -274,6 +274,15 @@ class Game(object):
             self._saved_games.save()
         self._change_name(TEMP_NAME)
 
+    def import_sticker(self, img_path: Path, sticker_name: str):
+        """import image of a sticker, put in game folder and store in object
+
+        :img_path: path to img file
+        :sticker_name: name. should be different from others
+
+        """
+        pass
+
     def import_card(
             self,
             recto_path: str,
