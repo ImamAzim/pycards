@@ -282,14 +282,31 @@ class Game(object):
             self._saved_games.save()
         self._change_name(TEMP_NAME)
 
-    def import_sticker(self, img_path: Path, sticker_name: str):
+    def import_sticker(self, img_path: Path, sticker_name: str=None):
         """import image of a sticker, put in game folder and store in object
 
         :img_path: path to img file
-        :sticker_name: name. should be different from others
+        :sticker_name: name. should be different from others. if none, take fn
 
         """
-        pass
+        if not filetype.is_image(img_path):
+            raise GameError('sticker file is not an image')
+
+        if sticker_name is None:
+            sticker_name = img_path.stem
+
+        if sticker_name in self._stickers:
+            raise GameError('there is already a sticker with that name')
+
+        src = img_path
+        dst_fn = sticker_name + img_path.suffix
+        dst = Path(self._box_folder) / dst_fn
+        if dst.exists:
+            raise GameError('there is already an img file for this sticker')
+        dst.write_bytes(src.read_bytes())
+
+        self._stickers[sticker_name] = dst
+        self._varbox.save()
 
     def import_sticker_folders(self, folder_path: Path):
         """import all stickers present in the folder. name will be same as filenames, without suffixes
