@@ -25,7 +25,7 @@ class EditorWindow(simpledialog.Dialog):
             self,
             parent,
             card_name: str,
-            img_path: Path|str,
+            img_path: Path | str,
             rotated: bool,
             max_width: int,
             max_height: int,
@@ -272,7 +272,7 @@ class TkinterGUI(GUI, tkinter.Tk):
         """
         path = filedialog.askdirectory(title='select a folder with cards')
         if path:
-            self._table.import_cards(path)
+            self._table.import_cards(Path(path))
 
     def _prompt_load_game(self):
         """present games that can be loaded

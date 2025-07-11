@@ -1,3 +1,6 @@
+from pathlib import Path
+
+
 from pycards.game import Game, GameError, Card
 from pycards.interfaces import GUI, BaseTable
 from pycards.interfaces import IN_PLAY_PILE_NAME, PERMANENT_PILE_NAME
@@ -78,7 +81,7 @@ class Table(BaseTable):
         else:
             self._update_gui_to_game()
 
-    def import_cards(self, folder_path: str):
+    def import_cards(self, folder_path: Path):
         try:
             self._game.import_cards_folder(folder_path)
         except GameError as e:
