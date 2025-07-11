@@ -357,7 +357,7 @@ class Game(object):
         dst_recto = self._box_folder / recto_name
         src_verso = verso_path
         dst_verso = self._box_folder / verso_name
-        if os.path.exists(dst_recto) | os.path.exists(dst_verso):
+        if dst_recto.exists() | dst_verso.exists():
             raise GameError('there is already an img file for this card')
         shutil.copy(src_recto, dst_recto)
         shutil.copy(src_verso, dst_verso)
