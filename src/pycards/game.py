@@ -106,6 +106,11 @@ class Game(object):
         return sorted(self._deck.keys())
 
     @property
+    def stickers(self) -> dict[str, Path]:
+        """return a list of sticker. key is name, el is path to img file"""
+        return self._stickers
+
+    @property
     def permanent_cards(self) -> dict[str, Card]:
         """get a dict of permanent cards from the deck"""
         permanent_cards = {
