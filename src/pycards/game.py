@@ -382,25 +382,21 @@ class Game(object):
                 return cards
         return False
 
-    def import_cards_folder(self, folder_path):
+    def import_cards_folder(self, folder_path: Path):
         """import all img file in the folder as cards. Every two file
         (in alhabetic order) will be the verso of the precedent card
 
         :folder_path: point to a folder of img file
 
         """
-        filenames = os.listdir(folder_path)
-        img_files = [
-                fn for fn in filenames
-                if filetype.is_image(os.path.join(folder_path, fn))]
+        img_files = [fp for fp in folder_path.glob('*') if filetype.is_image(fp)]
         img_files.sort()
         cardlot_name = os.path.basename(folder_path)
-        for recto, verso in zip(img_files[::2], img_files[1::2]):
-            recto_path = os.path.join(folder_path, recto)
-            verso_path = os.path.join(folder_path, verso)
-            cardname = Path(recto_path).stem
+        cardlot_name = folder_path.parent.name
+        for recto_fp, verso_fp in zip(img_files[::2], img_files[1::2]):
+            cardname = recto_fp.stem
             full_card_name = f'{cardlot_name}_{cardname}'
-            self.import_card(recto_path, verso_path, full_card_name)
+            self.import_card(recto_fp, verso_fp, full_card_name)
 
     def get_card(self, card_name: str) -> Card:
         """get any card present in the game
