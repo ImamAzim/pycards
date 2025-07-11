@@ -279,10 +279,14 @@ class TkinterGUI(GUI, tkinter.Tk):
 
         """
         games = self._table.get_saved_games()
-        prompt = LoadPrompt(self, games)
-        game = prompt.game_name
-        if game:
-            self._table.load_game(game)
+        if games:
+            prompt = LoadPrompt(self, games)
+            game = prompt.game_name
+            if game:
+                self._table.load_game(game)
+        else:
+            msg = 'there is no saved game on disk'
+            self.showinfo(msg)
 
     def _prompt_delete(self):
         """ask if you are sure to delete this game
