@@ -90,6 +90,7 @@ class TestGame(unittest.TestCase):
         expected_fp: Path = Path(DATA_FOLDER) / BOX_FOLDER / expected_fn
         self.assertTrue(expected_fp.exists())
         self.assertIn(sticker_name, game.stickers)
+        self.assertEqual(game.stickers[sticker_name], expected_fp)
 
     def test_import_error(self):
         """ check raise error if file is not an img """
