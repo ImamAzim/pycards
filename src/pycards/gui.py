@@ -747,8 +747,15 @@ class TkinterGUI(GUI, tkinter.Tk):
         if not card:
             raise GUIError('card is not on table')
         img: ImageFile.ImageFile = Image.open(img_path)
+
+        pile = self.is_card_on_table(card_name)
+        if pile == IN_PLAY_PILE_NAME:
+            card_height = self._gamezone_height
+        elif pile == PERMANENT_PILE_NAME:
+            card_height = self._height - self._gamezone_height
         card_width = self._gamezone_width / self._NCARDS_PER_TABLE
-        maxsize = (card_width, self._gamezone_height)
+
+        maxsize = (card_width, card_height)
         img.thumbnail(maxsize)
         if rotated:
             img = img.rotate(180)
