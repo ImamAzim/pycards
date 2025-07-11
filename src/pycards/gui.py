@@ -83,7 +83,8 @@ class EditorWindow(simpledialog.Dialog):
         """add sticker
 
         """
-        print('add sticker')
+        path = tkinter.filedialog.askopenfile()
+        print(path)
 
     def apply(self):
         canvas = self._canvas
