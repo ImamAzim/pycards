@@ -301,11 +301,11 @@ class Game(object):
         src = img_path
         dst_fn = sticker_name + img_path.suffix
         dst = Path(self._box_folder) / dst_fn
-        if dst.exists:
+        if dst.exists():
             raise GameError('there is already an img file for this sticker')
         dst.write_bytes(src.read_bytes())
 
-        self._stickers[sticker_name] = dst
+        self._stickers[sticker_name] = dst.as_posix()
         self._varbox.save()
 
     def import_sticker_folders(self, folder_path: Path):
