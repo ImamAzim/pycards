@@ -19,6 +19,10 @@ CARD_FOLDER_PATH = os.path.join(os.path.dirname(__file__), CARD_FOLDER)
 RECTO_CARD = 'carreau.png'
 VERSO_CARD = 'pic.png'
 FALSE_CARD = 'falsecard'
+STICKER_FN = 'sticker_test.jpg'
+
+TEST_FOLDER_PATH = Path(__file__).parent / CARD_FOLDER
+STICKER_FP = TEST_FOLDER_PATH / STICKER_FN
 
 
 class TestGame(unittest.TestCase):
@@ -76,6 +80,16 @@ class TestGame(unittest.TestCase):
         self.assertTrue(os.path.exists(path))
 
         self.assertIn(card_name, game.box_card_names)
+
+    def test_import_sticker(self):
+        game = self._game
+        sticker_name = 'sticker_test_name'
+        game.import_sticker(STICKER_FP, sticker_name)
+        suffix = STICKER_FP.suffix
+        expected_fn = sticker_name + suffix
+        expected_fp: Path = Path(DATA_FOLDER) / BOX_FOLDER / expected_fn
+        self.assertTrue(expected_fp.exists)
+        self.assertIn(sticker_name, game.stickers)
 
     def test_import_error(self):
         """ check raise error if file is not an img """
