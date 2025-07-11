@@ -15,7 +15,6 @@ from pycards.config import DATA_FOLDER
 TESTNAME = 'test_game'
 TESTNAME2 = 'test_game2'
 CARD_FOLDER = 'cards'
-CARD_FOLDER_PATH = os.path.join(os.path.dirname(__file__), CARD_FOLDER)
 RECTO_CARD = 'carreau.png'
 VERSO_CARD = 'pic.png'
 FALSE_CARD = 'falsecard'
@@ -488,8 +487,8 @@ class TestCard(unittest.TestCase):
     def test_init(self):
         """test if it create Card object with correct parameters
         """
-        recto = os.path.join(CARD_FOLDER_PATH, RECTO_CARD)
-        verso = os.path.join(CARD_FOLDER_PATH, VERSO_CARD)
+        recto = TEST_FOLDER_PATH / RECTO_CARD
+        verso = TEST_FOLDER_PATH / VERSO_CARD
         name = 'test_card'
 
         card = Card(name, recto, verso, 0)
