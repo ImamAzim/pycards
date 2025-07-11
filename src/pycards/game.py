@@ -198,11 +198,13 @@ class Game(object):
 
         """
         self._name = name
-        self._game_data_folder = os.path.join(DATA_FOLDER, self.name)
-        self._box_folder = os.path.join(self._game_data_folder, BOX_FOLDER)
-        os.makedirs(self._box_folder, exist_ok=True)
+        self._game_data_folder = DATA_FOLDER / self.name
+        self._game_data_folder.mkdir(exist_ok=True)
+        self._box_folder = self._game_data_folder / BOX_FOLDER
+        self._box_folder.mkdir(exist_ok=True)
         self._deck_folder = os.path.join(self._game_data_folder, DECK_FOLDER)
-        os.makedirs(self._deck_folder, exist_ok=True)
+        self._deck_folder = self._game_data_folder / DECK_FOLDER
+        self._deck_folder.mkdir(exist_ok=True)
 
         self._varbox = self._create_varbox(name)
 
@@ -271,7 +273,7 @@ class Game(object):
 
         """
         path = self._game_data_folder
-        if os.path.exists(path):
+        if path.exists():
             shutil.rmtree(path)
         self._reset_varbox()
         varbox_path = self._varbox.get_path()
@@ -300,7 +302,7 @@ class Game(object):
 
         src = img_path
         dst_fn = sticker_name + img_path.suffix
-        dst = Path(self._box_folder) / dst_fn
+        dst = self._box_folder / dst_fn
         if dst.exists():
             raise GameError('there is already an img file for this sticker')
         dst.write_bytes(src.read_bytes())
@@ -352,16 +354,16 @@ class Game(object):
         recto_name = f'{card_name}_recto{ext}'
         verso_name = f'{card_name}_verso{ext}'
         src_recto = recto_path
-        dst_recto = os.path.join(self._box_folder, recto_name)
+        dst_recto = self._box_folder / recto_name
         src_verso = verso_path
-        dst_verso = os.path.join(self._box_folder, verso_name)
+        dst_verso = self._box_folder / verso_name
         if os.path.exists(dst_recto) | os.path.exists(dst_verso):
             raise GameError('there is already an img file for this card')
         shutil.copy(src_recto, dst_recto)
         shutil.copy(src_verso, dst_verso)
 
-        card = dict(recto_path=dst_recto,
-                    verso_path=dst_verso,
+        card = dict(recto_path=dst_recto.as_posix(),
+                    verso_path=dst_verso.as_posix(),
                     orientation=0,
                     card_name=card_name,
                     )
