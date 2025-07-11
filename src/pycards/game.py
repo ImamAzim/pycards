@@ -10,6 +10,7 @@ from varboxes import VarBox
 
 
 from pycards.config import DATA_FOLDER
+from pycards import config
 from pycards.interfaces import BaseCard
 from pycards.interfaces import PERMANENT_PILE_NAME, IN_PLAY_PILE_NAME
 from pycards.interfaces import DRAW_PILE_NAME, DISCARD_PILE_NAME
@@ -76,7 +77,7 @@ class Game(object):
 
     """Game class to handle the deck and the cards box"""
 
-    _saved_games = VarBox(app_name='saved_games')
+    _saved_games = VarBox(project_name=config.APP, app_name='saved_games')
     if not hasattr(_saved_games, 'names'):
         _saved_games.names = list()
 
@@ -216,7 +217,7 @@ class Game(object):
         :returns: varbox
 
         """
-        varbox = VarBox(app_name=name)
+        varbox = VarBox(project_name=config.APP, app_name=name)
 
         if not hasattr(varbox, 'box'):
             varbox.box = dict()
