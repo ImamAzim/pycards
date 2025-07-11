@@ -339,7 +339,7 @@ class TestGame(unittest.TestCase):
         card = game.get_card(card_name)
         self.assertFalse(card.rotate)
 
-        folder= DATA_FOLDER / TESTNAME  / BOX_FOLDER
+        folder = DATA_FOLDER / TESTNAME / BOX_FOLDER
         suffix = Path(VERSO_CARD).suffix
         card_fn = f'{card_name}_verso{suffix}'
         path = folder / card_fn
