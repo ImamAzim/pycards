@@ -208,6 +208,7 @@ class Game(object):
 
         self._box = self._varbox.box
         self._deck = self._varbox.deck
+        self._stickers = self._varbox.stickers
         self._draw_pile = self._varbox.draw_pile
         self._draw_cards_real_name = self._varbox.draw_cards_real_name
         varboxobf = self._varbox.draw_cards_obfuscate_name
@@ -234,6 +235,8 @@ class Game(object):
             varbox.draw_cards_real_name = dict()
         if not hasattr(varbox, 'draw_cards_obfuscate_name'):
             varbox.draw_cards_obfuscate_name = dict()
+        if not hasattr(varbox, 'stickers'):
+            varbox.stickers = dict()
         return varbox
 
     def _reset_varbox(self):
