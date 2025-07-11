@@ -35,8 +35,8 @@ class TestGame(unittest.TestCase):
         """
         self._game = Game(TESTNAME)
         card_name = 'testcard'
-        recto = os.path.join(CARD_FOLDER_PATH, RECTO_CARD)
-        verso = os.path.join(CARD_FOLDER_PATH, VERSO_CARD)
+        recto = TEST_FOLDER_PATH / RECTO_CARD
+        verso = TEST_FOLDER_PATH / VERSO_CARD
         self._test_card = dict(
                 recto_path=recto,
                 verso_path=verso,
@@ -95,7 +95,7 @@ class TestGame(unittest.TestCase):
     def test_import_error(self):
         """ check raise error if file is not an img """
         game = self._game
-        path = os.path.join(CARD_FOLDER_PATH, FALSE_CARD)
+        path = TEST_FOLDER_PATH / FALSE_CARD
         with self.assertRaises(GameError):
             game.import_card(path, path)
 
