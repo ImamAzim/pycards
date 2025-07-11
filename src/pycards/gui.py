@@ -46,12 +46,12 @@ class EditorWindow(simpledialog.Dialog):
         super().__init__(parent)
 
     def body(self, master):
+
         frame = ttk.Labelframe(master, text=self._card_name)
         frame.pack()
 
         maxsize = (self._max_canvas_width, self._max_canvas_height)
         img: ImageFile.ImageFile = Image.open(self._img_path)
-        img.thumbnail(maxsize)
         width, height = img.width, img.height
         if self._rotated:
             img = img.rotate(180)
@@ -71,12 +71,23 @@ class EditorWindow(simpledialog.Dialog):
         canvas.bind("<Button-1>", self._save_position)
         self.bind("<B1-Motion>", self._add_line)
         self._canvas = canvas
+        button_frame = ttk.Frame(master)
+        button_frame.pack()
+        ttk.Button(
+                button_frame,
+                text='add sticker...',
+                command=self._add_sticker,
+                ).pack()
+
+    def _add_sticker(self):
+        """add sticker
+
+        """
+        print('add sticker')
 
     def apply(self):
         canvas = self._canvas
         path = self._img_path
-        # path_ps = path.parent / (path.stem + '.ps')
-        # canvas.postscript(file=path_ps)
         width = self._img.width()
         height = self._img.height()
         eps = canvas.postscript(
