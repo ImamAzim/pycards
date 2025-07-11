@@ -55,6 +55,7 @@ class TestGame(unittest.TestCase):
         self.assertEqual(game.name, TESTNAME)
         self.assertSequenceEqual(game.box_card_names, ())
         self.assertSequenceEqual(game.deck_card_names, ())
+        self.assertEqual(game.stickers, dict())
 
     def test_import(self):
         """test if image file is imported
