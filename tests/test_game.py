@@ -88,7 +88,7 @@ class TestGame(unittest.TestCase):
         suffix = STICKER_FP.suffix
         expected_fn = sticker_name + suffix
         expected_fp: Path = Path(DATA_FOLDER) / BOX_FOLDER / expected_fn
-        self.assertTrue(expected_fp.exists)
+        self.assertTrue(expected_fp.exists())
         self.assertIn(sticker_name, game.stickers)
 
     def test_import_error(self):
@@ -516,4 +516,5 @@ class TestCard(unittest.TestCase):
 
 
 if __name__ == '__main__':
+    unittest.main()
     pass
