@@ -284,7 +284,7 @@ class Game(object):
             self._saved_games.save()
         self._change_name(TEMP_NAME)
 
-    def import_sticker(self, img_path: Path, sticker_name: str=None):
+    def import_sticker(self, img_path: Path, sticker_name: str = None):
         """import image of a sticker, put in game folder and store in object
 
         :img_path: path to img file
@@ -311,7 +311,8 @@ class Game(object):
         self._varbox.save()
 
     def import_sticker_folders(self, folder_path: Path):
-        """import all stickers present in the folder. name will be same as filenames, without suffixes
+        """import all stickers present in the folder. name will be same as
+        filenames, without suffixes
 
         :folder_path: path to folder containing sticker images
 
@@ -319,7 +320,8 @@ class Game(object):
         pass
 
     def delete_sticker(self, sticker_name):
-        """remove img file of sticker. will not be present in property of object
+        """remove img file of sticker. will not be present in property of
+        object
 
         :sticker_name: name as it was imported
 
@@ -389,7 +391,8 @@ class Game(object):
         :folder_path: point to a folder of img file
 
         """
-        img_files = [fp for fp in folder_path.glob('*') if filetype.is_image(fp)]
+        img_files = [
+                fp for fp in folder_path.glob('*') if filetype.is_image(fp)]
         img_files.sort()
         cardlot_name = os.path.basename(folder_path)
         cardlot_name = folder_path.parent.name
