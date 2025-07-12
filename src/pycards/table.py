@@ -92,7 +92,7 @@ class Table(BaseTable):
 
     def import_stickers(self, folder_path: Path):
         try:
-            self._game.import_sticker(folder_path)
+            self._game.import_sticker_folders(folder_path)
         except GameError as e:
             self._gui.showerror(e)
 
