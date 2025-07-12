@@ -1,4 +1,3 @@
-import os
 import shutil
 from pathlib import Path
 import random
@@ -202,7 +201,6 @@ class Game(object):
         self._game_data_folder.mkdir(exist_ok=True)
         self._box_folder = self._game_data_folder / BOX_FOLDER
         self._box_folder.mkdir(exist_ok=True)
-        self._deck_folder = os.path.join(self._game_data_folder, DECK_FOLDER)
         self._deck_folder = self._game_data_folder / DECK_FOLDER
         self._deck_folder.mkdir(exist_ok=True)
 
@@ -277,7 +275,7 @@ class Game(object):
             shutil.rmtree(path)
         self._reset_varbox()
         varbox_path = self._varbox.get_path()
-        os.remove(varbox_path)
+        Path(varbox_path).unlink()
         saved_games: list = self._saved_games.names
         if self.name != TEMP_NAME:
             saved_games.remove(self.name)
@@ -400,7 +398,6 @@ class Game(object):
         img_files = [
                 fp for fp in folder_path.glob('*') if filetype.is_image(fp)]
         img_files.sort()
-        cardlot_name = os.path.basename(folder_path)
         cardlot_name = folder_path.parent.name
         for recto_fp, verso_fp in zip(img_files[::2], img_files[1::2]):
             cardname = recto_fp.stem
