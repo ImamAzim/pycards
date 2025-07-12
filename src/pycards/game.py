@@ -317,7 +317,9 @@ class Game(object):
         :folder_path: path to folder containing sticker images
 
         """
-        pass
+        for fp in folder_path.glob('*'):
+            if filetype.is_image(fp):
+                self.import_sticker(fp)
 
     def delete_sticker(self, sticker_name):
         """remove img file of sticker. will not be present in property of
