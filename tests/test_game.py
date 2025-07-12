@@ -20,6 +20,7 @@ FALSE_CARD = 'falsecard'
 STICKER_FN = 'sticker_test.jpg'
 
 TEST_FOLDER_PATH = Path(__file__).parent / CARD_FOLDER
+NIMAGES_IN_TEST_FOLDER = 3
 STICKER_FP = TEST_FOLDER_PATH / STICKER_FN
 
 
@@ -105,6 +106,12 @@ class TestGame(unittest.TestCase):
         folder = TEST_FOLDER_PATH
         game.import_cards_folder(folder)
         self.assertEqual(len(game.box_card_names), 1)
+
+    def test_import_stickers_folder(self):
+        game = self._game
+        folder = TEST_FOLDER_PATH
+        game.import_sticker_folders(folder)
+        self.assertEqual(len(game.stickers), NIMAGES_IN_TEST_FOLDER)
 
     def test_getcard(self):
         """test get card
