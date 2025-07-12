@@ -298,6 +298,19 @@ class TestGame(unittest.TestCase):
         self.assertFalse(path.exists())
         self.assertNotIn(card_name, game.deck_card_names)
 
+    def test_delete_sticker(self):
+        game = self._game
+        sticker_name = 'sticker_test_name'
+        game.import_sticker(STICKER_FP, sticker_name)
+
+        game.delete_sticker(sticker_name)
+
+        suffix = STICKER_FP.suffix
+        expected_fn = sticker_name + suffix
+        expected_fp: Path = DATA_FOLDER / TESTNAME / BOX_FOLDER / expected_fn
+        self.assertFalse(expected_fp.exists())
+        self.assertNotIn(sticker_name, game.stickers)
+
     def test_destroy(self):
         """test destroy
 
