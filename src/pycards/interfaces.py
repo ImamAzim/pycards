@@ -1,5 +1,6 @@
 from abc import ABCMeta, abstractmethod, abstractproperty
 from typing import Literal
+from pathlib import Path
 
 
 DRAW_PILE_NAME = 'draw'
@@ -302,6 +303,14 @@ class BaseTable(object, metaclass=ABCMeta):
         pass
 
     @abstractmethod
+    def import_stickers(self, folder_path: str):
+        """import stickers. each img file in folder represent a sticker.
+        :folder_path: contains the img file of the stickers
+
+        """
+        pass
+
+    @abstractmethod
     def discover_card(self, card_name: str):
         """move the cards from box to deck
 
@@ -327,6 +336,24 @@ class BaseTable(object, metaclass=ABCMeta):
 
         :card_name: identify card
         :returns:
+
+        """
+        pass
+
+    @abstractmethod
+    def delete_stickers(self, sticker_name: str):
+        """remove sticker from game and from disk
+
+        :sticker_name:
+        :returns:
+
+        """
+        pass
+
+    @abstractmethod
+    def get_stickers(self) -> dict[str, Path]:
+        """ask the game for all stickers availables
+        :returns: dict with sticker name and img path
 
         """
         pass

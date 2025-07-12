@@ -90,6 +90,12 @@ class Table(BaseTable):
             box_cards_names = self._game.box_card_names
             self._gui.update_box_cards_list(box_cards_names)
 
+    def import_stickers(self, folder_path: Path):
+        try:
+            self._game.import_sticker(folder_path)
+        except GameError as e:
+            self._gui.showerror(e)
+
     def discover_or_forget(self, card_name):
         if card_name in self._game.box_card_names:
             self.discover_card(card_name)
