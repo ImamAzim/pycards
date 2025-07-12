@@ -134,6 +134,9 @@ class Table(BaseTable):
                 card.rotate,
                 )
 
+    def get_stickers(self):
+        return self._game.stickers
+
     def delete_stickers(self, sticker_name: str):
         try:
             self._game.delete_sticker(sticker_name)
