@@ -23,7 +23,7 @@ class EditorWindow(simpledialog.Dialog):
 
     def __init__(
             self,
-            parent,
+            parent: GUI,
             card_name: str,
             img_path: Path | str,
             rotated: bool,
@@ -42,6 +42,8 @@ class EditorWindow(simpledialog.Dialog):
         self._rotated = rotated
         self._card_name = card_name
         self._save_img = False
+
+        self._GUI = parent
 
         super().__init__(parent)
 
@@ -83,8 +85,7 @@ class EditorWindow(simpledialog.Dialog):
         """add sticker
 
         """
-        path = tkinter.filedialog.askopenfile()
-        print(path)
+        pass
 
     def apply(self):
         canvas = self._canvas
@@ -157,6 +158,14 @@ class TkinterGUI(GUI, tkinter.Tk):
     _PILE_KEY = 'pile'
     _WINDOW_ID_KEY = 'window_id'
     _EXTENDED_HEIGHT = 3  # for scroll region
+
+    @property
+    def table(self) -> BaseTable:
+        return self._table
+
+    @table.setter
+    def table(self, table: BaseTable):
+        self._table = table
 
     def __init__(self):
         tkinter.Tk.__init__(self)

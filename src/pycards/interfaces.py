@@ -53,6 +53,11 @@ class GUI(metaclass=ABCMeta):
 
     """GUI interface for a pycards game"""
 
+    @abstractproperty
+    @property
+    def table(self) -> BaseTable:
+        """table"""
+
     @abstractmethod
     def __init__(self):
         """gui interface for pycard game. a controller must be set after init
