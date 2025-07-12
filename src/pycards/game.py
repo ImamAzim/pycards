@@ -315,7 +315,7 @@ class Game(object):
         :folder_path: path to folder containing sticker images
 
         """
-        for fp in folder_path.glob('*'):
+        for fp in folder_path.iterdir():
             if filetype.is_image(fp):
                 self.import_sticker(fp)
 
@@ -396,7 +396,7 @@ class Game(object):
 
         """
         img_files = [
-                fp for fp in folder_path.glob('*') if filetype.is_image(fp)]
+                fp for fp in folder_path.iterdir() if filetype.is_image(fp)]
         img_files.sort()
         cardlot_name = folder_path.parent.name
         for recto_fp, verso_fp in zip(img_files[::2], img_files[1::2]):
