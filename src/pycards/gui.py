@@ -234,6 +234,10 @@ class TkinterGUI(GUI, tkinter.Tk):
                 command=self._prompt_import,
                 )
         file_menu.add_command(
+                label='import stickers',
+                command=self._prompt_import_stickers,
+                )
+        file_menu.add_command(
                 label='quit',
                 command=self.destroy,
                 )
@@ -273,6 +277,14 @@ class TkinterGUI(GUI, tkinter.Tk):
         path = filedialog.askdirectory(title='select a folder with cards')
         if path:
             self._table.import_cards(Path(path))
+
+    def _prompt_import_stickers(self):
+        """ask for a folder to import stickers
+
+        """
+        path = filedialog.askdirectory(title='select a folder with stickers')
+        if path:
+            self._table.import_stickers(Path(path))
 
     def _prompt_load_game(self):
         """present games that can be loaded
