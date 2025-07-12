@@ -74,15 +74,6 @@ class GUI(metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def set_table(self, table):
-        """set the controller of the view
-
-        :table: controller of pycards
-
-        """
-        pass
-
-    @abstractmethod
     def showinfo(self, msg: str):
         """display a msg, for example from controller
 

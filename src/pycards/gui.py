@@ -566,9 +566,6 @@ class TkinterGUI(GUI, tkinter.Tk):
                 message=msg,
                 )
 
-    def set_table(self, table: BaseTable):
-        self._table = table
-
     def run(self):
         self.mainloop()
 
