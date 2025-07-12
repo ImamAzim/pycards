@@ -43,7 +43,7 @@ class EditorWindow(simpledialog.Dialog):
         self._card_name = card_name
         self._save_img = False
 
-        self._GUI = parent
+        self._gui = parent
 
         super().__init__(parent)
 
@@ -75,6 +75,7 @@ class EditorWindow(simpledialog.Dialog):
         self._canvas = canvas
         button_frame = ttk.Frame(master)
         button_frame.pack()
+        stickers = self._gui.table.
         ttk.Button(
                 button_frame,
                 text='add sticker...',
