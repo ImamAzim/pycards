@@ -134,6 +134,12 @@ class Table(BaseTable):
                 card.rotate,
                 )
 
+    def delete_stickers(self, sticker_name: str):
+        try:
+            self._game.delete_sticker(sticker_name)
+        except GameError as e:
+            self._gui.showerror(e)
+
     def destroy_card(self, card_name: str):
         try:
             self._game.destroy_card(card_name)
