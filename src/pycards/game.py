@@ -706,9 +706,9 @@ class Game(object):
             if pile == self._DRAW_PILE:
                 self._remove_from_draw(card_name)
             path = card['recto_path']
-            os.remove(path)
+            Path(path).unlink()
             path = card['verso_path']
-            os.remove(path)
+            Path(path).unlink()
             self._varbox.save()
         else:
             raise GameError('card is neither in deck, nor in box')
