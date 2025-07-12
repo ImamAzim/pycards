@@ -328,7 +328,11 @@ class Game(object):
         :sticker_name: name as it was imported
 
         """
-        pass
+        if sticker_name in self._stickers:
+            img_path = self.stickers.pop(sticker_name)
+            Path(img_path).unlink()
+        else:
+            raise GameError('sticker not present in game')
 
     def import_card(
             self,
