@@ -11,7 +11,7 @@ class PycarApp(object):
         """init mvc model """
         self._gui:  GUI | TkinterGUI = TkinterGUI()
         table: BaseTable = Table(self._gui)
-        self._gui.set_table(table)
+        self._gui.table = table
         self._gui.place_card_on_table
 
     def start(self):

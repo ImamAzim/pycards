@@ -55,7 +55,7 @@ class GUI(metaclass=ABCMeta):
 
     @abstractproperty
     @property
-    def table(self) -> BaseTable:
+    def table(self):
         """table"""
 
     @abstractmethod
