@@ -75,7 +75,13 @@ class EditorWindow(simpledialog.Dialog):
         self._canvas = canvas
         button_frame = ttk.Frame(master)
         button_frame.pack()
-        stickers = self._gui.table.
+        stickers = self._gui.table.get_stickers()
+        self._stickers_list = ttk.Combobox(
+                master,
+                state='readonly',
+                values=list(stickers),
+                )
+        self._stickers_list.pack()
         ttk.Button(
                 button_frame,
                 text='add sticker...',
