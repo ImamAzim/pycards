@@ -131,7 +131,9 @@ class EditorWindow(simpledialog.Dialog):
         cursor_y = event.y
         dx = cursor_x - self._cursor_x0
         dy = cursor_y - self._cursor_y0
-        self._canvas.move(window_id, dx, dy)
+        x = event.widget.winfo_x() + dx
+        y = event.widget.winfo_y() + dy
+        self._canvas.moveto(window_id, x=x, y=y)
 
     def apply(self):
         canvas = self._canvas
