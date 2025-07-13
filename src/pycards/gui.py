@@ -74,7 +74,8 @@ class EditorWindow(simpledialog.Dialog):
         self._canvas = canvas
         button_frame = ttk.Frame(master)
         button_frame.pack()
-        self._stickers = self._gui.table.get_stickers()
+        table: BaseTable = self._gui.table
+        self._stickers = table.get_stickers()
         sticker_names = list(self._stickers)
         self._stickers_list = ttk.Combobox(
                 master,
@@ -93,6 +94,7 @@ class EditorWindow(simpledialog.Dialog):
         """add sticker
 
         """
+        sticker_name = self._stickers_list.get()
         pass
 
     def apply(self):
