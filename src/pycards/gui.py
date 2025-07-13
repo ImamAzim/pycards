@@ -52,7 +52,6 @@ class EditorWindow(simpledialog.Dialog):
         frame = ttk.Labelframe(master, text=self._card_name)
         frame.pack()
 
-        maxsize = (self._max_canvas_width, self._max_canvas_height)
         img: ImageFile.ImageFile = Image.open(self._img_path)
         width, height = img.width, img.height
         if self._rotated:
@@ -75,12 +74,14 @@ class EditorWindow(simpledialog.Dialog):
         self._canvas = canvas
         button_frame = ttk.Frame(master)
         button_frame.pack()
-        stickers = self._gui.table.get_stickers()
+        self._stickers = self._gui.table.get_stickers()
+        sticker_names = list(self._stickers)
         self._stickers_list = ttk.Combobox(
                 master,
                 state='readonly',
-                values=list(stickers),
+                values=sticker_names,
                 )
+        self._stickers_list.set(sticker_names[0])
         self._stickers_list.pack()
         ttk.Button(
                 button_frame,
