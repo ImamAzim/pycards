@@ -20,6 +20,8 @@ class GUIError(Exception):
 class EditorWindow(simpledialog.Dialog):
 
     """open a prompt window to edit card image"""
+    _WINDOW_ID_KEY = 'window_id'
+    _IMG_KEY = 'img'
 
     def __init__(
             self,
@@ -107,12 +109,29 @@ class EditorWindow(simpledialog.Dialog):
 
         img_path = self._stickers[sticker_name]
         img: ImageFile.ImageFile = Image.open(img_path)
-        self._used_stickers[sticker_name] = ImageTk.PhotoImage(img)
-        self._canvas.create_image(
+        self._used_stickers[sticker_name] = dict()
+        used_sticker = self._used_stickers[sticker_name]
+        used_sticker[self._IMG_KEY] = ImageTk.PhotoImage(img)
+        window_id = self._canvas.create_image(
                 (0, 0),
                 anchor=tkinter.NW,
                 image=self._used_stickers[sticker_name],
                 )
+        used_sticker[self._WINDOW_ID_KEY] = window_id
+
+    def _on_sticker_click(self, event: tkinter.Event):
+        self._cursor_x0 = event.x
+        self._cursor_y0 = event.y
+        event.widget.lift()
+
+    def _on_sticker_drop(self, event: tkinter.Event, sticker_name: str):
+        used_sticker = self._used_stickers[sticker_name]
+        window_id = used_sticker[self._WINDOW_ID_KEY]
+        cursor_x = event.x
+        cursor_y = event.y
+        dx = cursor_x - self._cursor_x0
+        dy = cursor_y - self._cursor_y0
+        self._canvas.move(window_id, dx, dy)
 
     def apply(self):
         canvas = self._canvas
