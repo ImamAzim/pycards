@@ -42,6 +42,7 @@ class EditorWindow(simpledialog.Dialog):
         self._rotated = rotated
         self._card_name = card_name
         self._save_img = False
+        self._used_stickers = list()
 
         self._gui = parent
 
@@ -82,7 +83,8 @@ class EditorWindow(simpledialog.Dialog):
                 state='readonly',
                 values=sticker_names,
                 )
-        self._stickers_list.set(sticker_names[0])
+        if sticker_names:
+            self._stickers_list.set(sticker_names[0])
         self._stickers_list.pack()
         ttk.Button(
                 button_frame,
@@ -95,7 +97,15 @@ class EditorWindow(simpledialog.Dialog):
 
         """
         sticker_name = self._stickers_list.get()
-        pass
+        table = self._gui.table
+        sticker_names = list(self._stickers_list['values'])
+        sticker_names.remove(sticker_name)
+        self._stickers_list['values'] = sticker_names
+        if sticker_names:
+            self._stickers_list.set(sticker_names[0])
+        else:
+            self._stickers_list.set('')
+        self._used_stickers.append(sticker_name)
 
     def apply(self):
         canvas = self._canvas
