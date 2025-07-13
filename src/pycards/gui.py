@@ -97,7 +97,6 @@ class EditorWindow(simpledialog.Dialog):
 
         """
         sticker_name = self._stickers_list.get()
-        table = self._gui.table
         sticker_names = list(self._stickers_list['values'])
         sticker_names.remove(sticker_name)
         self._stickers_list['values'] = sticker_names
@@ -106,7 +105,6 @@ class EditorWindow(simpledialog.Dialog):
         else:
             self._stickers_list.set('')
 
-        table: BaseTable = self._gui.table
         img_path = self._stickers[sticker_name]
         img: ImageFile.ImageFile = Image.open(img_path)
         self._used_stickers[sticker_name] = ImageTk.PhotoImage(img)
@@ -521,7 +519,7 @@ class TkinterGUI(GUI, tkinter.Tk):
             rotated: bool,):
         max_width = self.winfo_screenwidth() // 2
         max_height = self.winfo_screenheight() // 2
-        editor = EditorWindow(
+        EditorWindow(
                 self,
                 card_name,
                 img_path,
