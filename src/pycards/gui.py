@@ -42,7 +42,7 @@ class EditorWindow(simpledialog.Dialog):
         self._rotated = rotated
         self._card_name = card_name
         self._save_img = False
-        self._used_stickers = list()
+        self._used_stickers = dict()
 
         self._gui = parent
 
@@ -105,7 +105,16 @@ class EditorWindow(simpledialog.Dialog):
             self._stickers_list.set(sticker_names[0])
         else:
             self._stickers_list.set('')
-        self._used_stickers.append(sticker_name)
+
+        table: BaseTable = self._gui.table
+        img_path = self._stickers[sticker_name]
+        img: ImageFile.ImageFile = Image.open(img_path)
+        self._used_stickers[sticker_name] = ImageTk.PhotoImage(img)
+        self._canvas.create_image(
+                (0, 0),
+                anchor=tkinter.NW,
+                image=self._used_stickers[sticker_name],
+                )
 
     def apply(self):
         canvas = self._canvas
