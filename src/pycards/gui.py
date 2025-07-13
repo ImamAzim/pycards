@@ -147,6 +147,9 @@ class EditorWindow(simpledialog.Dialog):
                 )
         img = Image.open(BytesIO(bytes(eps, 'ascii')))
         img.save(path)
+        table: BaseTable = self._gui.table
+        for sticker_name in self._used_stickers:
+            table.delete_stickers(sticker_name)
 
     def _save_position(self, event):
         self._lastx, self._lasty = event.x, event.y
