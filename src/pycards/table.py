@@ -127,7 +127,7 @@ class Table(BaseTable):
                     )
 
     def prompt_editor(self, card_name: str):
-        if card_name:
+        if not card_name == 'None':
             card = self._game.get_card(card_name)
             self._gui.prompt_editor(
                     card_name,
