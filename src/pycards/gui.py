@@ -97,30 +97,31 @@ class EditorWindow(simpledialog.Dialog):
 
         """
         sticker_name = self._stickers_list.get()
-        sticker_names = list(self._stickers_list['values'])
-        sticker_names.remove(sticker_name)
-        self._stickers_list['values'] = sticker_names
-        if sticker_names:
-            self._stickers_list.set(sticker_names[0])
-        else:
-            self._stickers_list.set('')
+        if sticker_name:
+            sticker_names = list(self._stickers_list['values'])
+            sticker_names.remove(sticker_name)
+            self._stickers_list['values'] = sticker_names
+            if sticker_names:
+                self._stickers_list.set(sticker_names[0])
+            else:
+                self._stickers_list.set('')
 
-        img_path = self._stickers[sticker_name]
-        img: ImageFile.ImageFile = Image.open(img_path)
-        self._used_stickers[sticker_name] = ImageTk.PhotoImage(img)
-        window_id = self._canvas.create_image(
-                (0, 0),
-                anchor=tkinter.NW,
-                image=self._used_stickers[sticker_name],
-                )
-        self._canvas.tag_bind(
-                window_id,
-                "<ButtonPress-1>",
-                lambda e: self._on_sticker_click(e))
-        self._canvas.tag_bind(
-                window_id,
-                "<B1-Motion>",
-                lambda e: self._on_sticker_drop(e, window_id))
+            img_path = self._stickers[sticker_name]
+            img: ImageFile.ImageFile = Image.open(img_path)
+            self._used_stickers[sticker_name] = ImageTk.PhotoImage(img)
+            window_id = self._canvas.create_image(
+                    (0, 0),
+                    anchor=tkinter.NW,
+                    image=self._used_stickers[sticker_name],
+                    )
+            self._canvas.tag_bind(
+                    window_id,
+                    "<ButtonPress-1>",
+                    lambda e: self._on_sticker_click(e))
+            self._canvas.tag_bind(
+                    window_id,
+                    "<B1-Motion>",
+                    lambda e: self._on_sticker_drop(e, window_id))
 
     def _on_sticker_click(self, event: tkinter.Event):
         self._cursor_x0 = event.x
