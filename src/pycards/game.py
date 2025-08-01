@@ -329,6 +329,7 @@ class Game(object):
         if sticker_name in self._stickers:
             img_path = self.stickers.pop(sticker_name)
             Path(img_path).unlink()
+            self._varbox.save()
         else:
             raise GameError('sticker not present in game')
 
