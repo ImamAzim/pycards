@@ -117,23 +117,24 @@ class EditorWindow(simpledialog.Dialog):
             self._canvas.tag_bind(
                     window_id,
                     "<ButtonPress-1>",
-                    lambda e: self._on_sticker_click(e))
+                    lambda e: self._on_sticker_click(e, window_id))
             self._canvas.tag_bind(
                     window_id,
                     "<B1-Motion>",
                     lambda e: self._on_sticker_drop(e, window_id))
 
-    def _on_sticker_click(self, event: tkinter.Event):
+    def _on_sticker_click(self, event: tkinter.Event, window_id: int):
         self._cursor_x0 = event.x
         self._cursor_y0 = event.y
+        self._coords0 = self._canvas.coords(window_id)
 
     def _on_sticker_drop(self, event: tkinter.Event, window_id: int):
         cursor_x = event.x
         cursor_y = event.y
         dx = cursor_x - self._cursor_x0
         dy = cursor_y - self._cursor_y0
-        x = event.widget.winfo_x() + dx
-        y = event.widget.winfo_y() + dy
+        x = self._coords0[0] + dx
+        y = self._coords0[1] + dy
         self._canvas.moveto(window_id, x=x, y=y)
 
     def apply(self):
