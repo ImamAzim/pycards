@@ -71,7 +71,7 @@ class EditorWindow(simpledialog.Dialog):
                 )
         canvas.pack()
         canvas.bind("<Button-1>", self._save_position)
-        self.bind("<B1-Motion>", self._add_line)
+        canvas.bind("<B1-Motion>", self._add_line)
         self._canvas = canvas
         button_frame = ttk.Frame(master)
         button_frame.pack()
