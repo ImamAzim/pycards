@@ -96,8 +96,11 @@ class EditorWindow(simpledialog.Dialog):
         """add sticker
 
         """
+        canvas = self._canvas
         sticker_name = self._stickers_list.get()
         if sticker_name:
+            canvas.unbind("<Button-1>")
+            canvas.unbind("<B1-Motion>")
             sticker_names = list(self._stickers_list['values'])
             sticker_names.remove(sticker_name)
             self._stickers_list['values'] = sticker_names
@@ -109,16 +112,16 @@ class EditorWindow(simpledialog.Dialog):
             img_path = self._stickers[sticker_name]
             img: ImageFile.ImageFile = Image.open(img_path)
             self._used_stickers[sticker_name] = ImageTk.PhotoImage(img)
-            window_id = self._canvas.create_image(
+            window_id = canvas.create_image(
                     (0, 0),
                     anchor=tkinter.NW,
                     image=self._used_stickers[sticker_name],
                     )
-            self._canvas.tag_bind(
+            canvas.tag_bind(
                     window_id,
                     "<ButtonPress-1>",
                     lambda e: self._on_sticker_click(e, window_id))
-            self._canvas.tag_bind(
+            canvas.tag_bind(
                     window_id,
                     "<B1-Motion>",
                     lambda e: self._on_sticker_drop(e, window_id))
