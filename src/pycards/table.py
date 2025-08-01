@@ -127,12 +127,13 @@ class Table(BaseTable):
                     )
 
     def prompt_editor(self, card_name: str):
-        card = self._game.get_card(card_name)
-        self._gui.prompt_editor(
-                card_name,
-                card.path,
-                card.rotate,
-                )
+        if card_name:
+            card = self._game.get_card(card_name)
+            self._gui.prompt_editor(
+                    card_name,
+                    card.path,
+                    card.rotate,
+                    )
 
     def get_stickers(self):
         return self._game.stickers
