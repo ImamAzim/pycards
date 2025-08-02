@@ -77,7 +77,7 @@ class EditorWindow(simpledialog.Dialog):
         button_frame.pack()
         table: BaseTable = self._gui.table
         self._stickers = table.get_stickers()
-        sticker_names = list(self._stickers)
+        sticker_names = list(sorted(self._stickers))
         self._stickers_list = ttk.Combobox(
                 master,
                 state='readonly',
