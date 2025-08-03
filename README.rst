@@ -31,13 +31,19 @@ and to run the game:
 
     pycards
 
-Usage
-=====
+How to play
+=============
 
-.. code-block:: bash
-    pycards
+* start a new game (or load a previous one) with the file menu on top
+* at the beginning, there are no cards, you need to import some with the file menu (as if you were buying them). There are no cards included, so you need to create them or download from other sources.
+* when the cards are imported, they are in the "box" and you can inspect them but are not yet part of your deck. You need to "discover" them, so that they will be part of your your deck
+* cards from your deck will be either in the draw pile, discard pile, game zone or permanent zone.
+* with the inspector, your can manipulate your cards (change pile, rotate, flip, edit, etc...)
+* when cards are in the game or permanent zone, they can be moved with drag and drop.
+* the first card on the draw pile is immediately visible, not the rest. (but you can inspect them if you want).
+* with the Game menu, you can put all the cards from the discard pile in the draw pile and shuffle them.
 
-Features
+options
 ========
 
 * import a set cards (image files, recto verso), as if you "buy" them
