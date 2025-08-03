@@ -68,11 +68,20 @@ options to manipulate all cards at once:
 Box cards
 ----------
 
+Here, there is a list of all the cards from your box. In the list you can only see the name, but not the image. When you click on *inspect*, the selected card will be visible in the **inspector** (see below) and you can manipulate it or transfer it to your deck.
+
 Draw pile
 ----------
 
+this represent your draw pile. the list contains all the cards, but with an obfuscated name, since they are hidden in the pile. Only the first card is visible (right). There also 2 action buttons:
+
+* **draw**: put the first card of the pile in the game zone.
+* **inspect**: make the slected card visible in the **inspector** (see below)
+
 Discard Pile
 -------------
+
+a list of discarded cards. when you select one from the list, it is automaticelly visible in the **inspector**
 
 inspector
 ----------
