@@ -51,12 +51,12 @@ File Menu
 
 all general options to modify your game:
 
-* **new game**:
-* **load game**:
-* **delete active game**:
-* **import cards**:
-* **import stickers**:
-* **quit**:
+* **new game**: enter your name and new game will be created
+* **load game**: select from the list a previous game to load (note: there is no save options, because every changes are always saved. you cannot undo permanent change, as in a legay game)
+* **delete active game**: delete the current game from disk
+* **import cards**: select a folder that contains all your cards to be imported. it needs to be image files. filename will be used to name cards. There is always a recto and a verso, so you need 2 image file for each card. alphabetic order is used to guess the verso, so you can name it *card_1.png* and *card_1_verso.png* for example.
+* **import stickers**: select a folder containing stickers that can be sticked on cards later. it must be image files. you need multiple copy of the same image if you are going to stick it several times
+* **quit**: quit the GUI.
 
 
 Game Menu
