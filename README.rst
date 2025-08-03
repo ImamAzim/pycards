@@ -115,6 +115,9 @@ you can see in detail the inspected cards and use the following actions on it:
 Editor
 ---------
 
+* you can draw anything on the card with the mouse
+* press ok or cancel to confirm or cancel the changes
+* if you have imported stickers, you can select one from the list and add it (*add sticker...*). the sticker appears in the corner and you can drag and drop it on the card. 
 
 License
 =======
