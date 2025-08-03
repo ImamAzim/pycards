@@ -1,5 +1,3 @@
-under development...
-
 pycards
 ===================
 
@@ -64,8 +62,8 @@ Game Menu
 
 options to manipulate all cards at once:
 
-* **discard all**:
-* **shuffle**:
+* **discard all**: put all the cards from the game zone in the discard pile
+* **shuffle**: put all the cards from the discard pile in the draw pile and shuffle the order.
 
 Box cards
 ----------
