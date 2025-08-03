@@ -4,9 +4,10 @@ pycards
 ===================
 
 GUI to play your favorite card game. The rules are not coded, but it allows to manipulate a deck of card, shuffle them, discover, destroy or lock single cards. You can import any set of cards (not included here).
-The idea is to reset a legacy card game, instead of buying a new one and you still keep the legacy part. Here is how it looks:
+The idea is to reset a legacy card game, instead of buying a new one and you still keep the legacy part. Here is how it could look (with sample cards from arcmage as an example):
 
-img
+.. image:: pycards_screenshot.png
+   :width: 600
 
 Requirements
 ===============
