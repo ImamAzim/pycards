@@ -43,18 +43,47 @@ How to play
 * the first card on the draw pile is immediately visible, not the rest. (but you can inspect them if you want).
 * with the Game menu, you can put all the cards from the discard pile in the draw pile and shuffle them.
 
-options
-========
+Documentation of all options in the GUI
+=======================================
 
-* import a set cards (image files, recto verso), as if you "buy" them
-* save/load a game
-* discover card from the deck
-* forget cards 
-* destroy cards
-* move cards on a table
-* rotate cards
-* shuffle
-* make permanent card (will no be shuffled)
+File Menu
+-----------
+
+all general options to modify your game:
+
+* **new game**:
+* **load game**:
+* **delete active game**:
+* **import cards**:
+* **import stickers**:
+* **quit**:
+
+
+Game Menu
+----------
+
+options to manipulate all cards at once:
+
+* **discard all**:
+* **shuffle**:
+
+Box cards
+----------
+
+Draw pile
+----------
+
+Discard Pile
+-------------
+
+inspector
+----------
+
+game zone
+----------
+
+permanent card zone
+--------------------
 
 
 License
