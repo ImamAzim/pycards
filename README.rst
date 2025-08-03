@@ -65,6 +65,18 @@ options to manipulate all cards at once:
 * **discard all**: put all the cards from the game zone in the discard pile
 * **shuffle**: put all the cards from the discard pile in the draw pile and shuffle the order.
 
+game zone
+----------
+
+in this green zone, the card can be drag and dropped. when you click on one, it is visible in the **inspector**
+a slider on the right allows to move the view.
+
+permanent card zone
+--------------------
+
+in this blue zone, the card can be drag and dropped. when you click on one, it is visible in the **inspector**.
+a slider on the right allows to move the view.
+
 Box cards
 ----------
 
@@ -86,11 +98,22 @@ a list of discarded cards. when you select one from the list, it is automaticell
 inspector
 ----------
 
-game zone
-----------
+you can see in detail the inspected cards and use the following actions on it:
 
-permanent card zone
---------------------
+* **discover/forget**: move the card from the box to the deck, or vice-versa
+* **destroy**: remove the card from the game completely. it cannot be recovered again. (unless you *import* it again).
+* **flip**: flip the card between recto and verso
+* **rotate**: rotate by 180 degrees the cards
+* **lock/unlock**: put the card in the permanent cards zone (or remove it from). When a card is permanent, is cannot be placed into the draw pile nor cannot it be discarded.
+* **play**: put the card in the game zone
+* **discard**: put the card in the discard pile
+* **mark/unmark**: put/remove a marker on the card. When marked, a card can always be identified, even inside the draw pile.
+* **top**: put the card on the top of the draw pile.
+* **bottom**: put the card in the bottom of the draw pile
+* **edit**: open *editor* for the card. (see below)
+
+Editor
+---------
 
 
 License
