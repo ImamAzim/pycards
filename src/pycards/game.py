@@ -399,7 +399,7 @@ class Game(object):
         img_files = [
                 fp for fp in folder_path.iterdir() if filetype.is_image(fp)]
         img_files.sort()
-        cardlot_name = folder_path.parent.name
+        cardlot_name = folder_path.name
         for recto_fp, verso_fp in zip(img_files[::2], img_files[1::2]):
             cardname = recto_fp.stem
             full_card_name = f'{cardlot_name}_{cardname}'
