@@ -17,13 +17,22 @@ Requirements
 Installation
 ============
 
-preferably in a virtual environement, simply do:
+pycards can be run directly via `uvx <https://docs.astral.sh/uv/getting-started/installation/>`__:
+
+.. code-block:: bash
+   uvx git+https://github.com/ImamAzim/pycards.git
+
+or installed with uv (recommended) or pip:
 
 .. code-block:: bash
 
+    # with uv:
+    uv tool install git+https://github.com/ImamAzim/pycards.git
+
+    # or with pip:
     pip install git+https://github.com/ImamAzim/pycards.git
 
-and to run the game:
+once installed, you can run pycards with the command:
 
 .. code-block:: bash
 
