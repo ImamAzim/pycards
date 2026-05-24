@@ -26,20 +26,22 @@ pycards can be run directly via `uvx <https://docs.astral.sh/uv/getting-started/
 or installed globally first:
 
 either with uv (recommended)
+
 .. code-block:: bash
 
-    uv tool install git+https://github.com/ImamAzim/pycards.git
+   uv tool install git+https://github.com/ImamAzim/pycards.git
 
 or with pip:
+
 .. code-block:: bash
 
-    pip install git+https://github.com/ImamAzim/pycards.git
+   pip install git+https://github.com/ImamAzim/pycards.git
 
 once installed, you can run pycards with the command:
 
 .. code-block:: bash
 
-    pycards
+   pycards
 
 How to play
 =============
