@@ -40,5 +40,10 @@ dev = [
 pycards = "pycards.launchers:run_pycards"
 
 [project.urls]
+
+[dependency-groups]
+dev = [
+    "pytest>=7.4.4",
+]
 #"Source Code" = "https://github.com/ImamAzim/pyproject"
 #"Documentation" = "https://pyproject.readthedocs.io/en/latest/index.html"
