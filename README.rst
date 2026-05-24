@@ -20,6 +20,7 @@ Installation
 pycards can be run directly via `uvx <https://docs.astral.sh/uv/getting-started/installation/>`__:
 
 .. code-block:: bash
+
    uvx git+https://github.com/ImamAzim/pycards.git
 
 or installed globally first:
